@@ -9,7 +9,7 @@ import routes from './routes';
 import App from './components/app';
 import createStore from './redux/create';
 
-import './stylesheets/main.less';
+import './stylesheets/main.scss';
 
 const APP = (
   <Provider store={createStore()}>
