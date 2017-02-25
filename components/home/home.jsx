@@ -22,7 +22,7 @@ class Home extends Component {
     const View = isLoggedIn ? LoggedInHome : LoggedOutHome;
     return (
       <div>
-        hey there user id {user.id}
+        hey there user {user.id}
         <View />
       </div>
     );

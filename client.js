@@ -21,6 +21,4 @@ const APP = (
   </Provider>
 );
 
-/* eslint-disable*/
 ReactDOM.render(APP, document.getElementById('fund'));
-/* eslint-enable */
