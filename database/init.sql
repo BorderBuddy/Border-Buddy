@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS scholarship;
-CREATE DATABASE scholarship;
