@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import TravelerRow from './TravelerRow'
 
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-import { phoneStyle, nationalityStyle, flightStyle, idStyle } from './styles'
+import { nameStyle, phoneStyle, nationalityStyle, flightStyle, idStyle } from './styles'
 
 export default ({ travelers, selectTraveler }) => (
 	
@@ -11,7 +11,7 @@ export default ({ travelers, selectTraveler }) => (
 	    <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
 	      <TableRow>
 	        <TableHeaderColumn style={idStyle}>ID</TableHeaderColumn>
-	        <TableHeaderColumn>Name</TableHeaderColumn>
+	        <TableHeaderColumn style={nameStyle}>Name</TableHeaderColumn>
 	        <TableHeaderColumn style={phoneStyle}>Phone</TableHeaderColumn>
 	        <TableHeaderColumn style={nationalityStyle} >Nationality</TableHeaderColumn>
 	        <TableHeaderColumn style={flightStyle}>Flight #</TableHeaderColumn>
