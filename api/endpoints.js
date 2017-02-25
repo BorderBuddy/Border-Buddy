@@ -6,7 +6,7 @@ import twilio from './twilio/twilio.route';
 const routes = [
   user,
   auth,
-  traveler
+  traveler,
   twilio,
 ];
 
