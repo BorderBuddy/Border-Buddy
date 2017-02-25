@@ -1,6 +1,6 @@
 // import something from db
-import db from '../../database/db';
-import Traveler from '../../database/models/travelers'
+import db from '../../database';
+import Traveler from '../../database/models/travelers';
 
 export function show(req, res) {
   const someDatabaseFxn = () => Promise.resolve();
@@ -11,5 +11,6 @@ export function show(req, res) {
   //     console.log('err', err);
   //     res.status(400).json(err);
   //   });
+
   console.log("Hello")
 }

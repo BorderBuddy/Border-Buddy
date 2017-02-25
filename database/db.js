@@ -17,4 +17,4 @@ const db = new Sequelize(url, {
   logging: false
 })
 
-module.exports = db
+module.exports = db;
