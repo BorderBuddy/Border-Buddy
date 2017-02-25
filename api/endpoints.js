@@ -1,8 +1,9 @@
 import user from './user/user.route';
-
+import auth from './auth/auth.route';
 
 const routes = [
-  user
+  user,
+  auth
 ];
 
 export function addRoutes(app) {
