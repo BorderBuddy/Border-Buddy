@@ -2,25 +2,28 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Traveler = db.define('traveler', {
-  Name: {
+  name: {
     type: Sequelize.STRING,
     allowNull: false,
     validate : {
       notEmpty: true
     }
   },
-  Phone : {
+  phone : {
     type: Sequelize.INTEGER,
     allowNull: false,
     validate:{
       notEmpty:true
     }
   },
-  Connectivity : {
+  connectivity : {
     type: Sequelize.BOOLEAN
   },
-  Nationality: {
+  nationality: {
     type: Sequelize.STRING
+  },
+  secondaryContact: {
+    type: Sequelize.INTEGER
   },
   status: {
     type: Sequelize.ENUM,

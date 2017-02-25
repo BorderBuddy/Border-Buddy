@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Flight = db.define('flight', {
-  FlightID: {
+  flightNumber: {
     type: Sequelize.STRING,
     allowNull: false,
     validate : {
