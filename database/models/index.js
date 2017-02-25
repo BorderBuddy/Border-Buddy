@@ -1,12 +1,12 @@
 // Require our models.
 const Traveler = require('./travelers');
 const Flight = require('./flights');
-
+//const User = require('./user');
 
 // -=-=-=-=-=-= ASSOCIATIONS =-=-=-=-=-=-
 // http://docs.sequelizejs.com/en/latest/docs/associations/
 
-Flight.hasMany(Traveler); //  or traveler has one flight?
+Flight.hasOne(Traveler, {foreignKey : 'flight_id'}); //  or traveler has one flight?
 
 
 
