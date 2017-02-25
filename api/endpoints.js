@@ -1,8 +1,10 @@
 import user from './user/user.route';
+import traveler from './traveler/traveler.route';
 
 
 const routes = [
-  user
+  user,
+  traveler
 ];
 
 export function addRoutes(app) {
