@@ -11,13 +11,20 @@ import createStore from './redux/create';
 
 import './stylesheets/main.scss';
 
+// needed for Material-UI and onTouchTap events
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 const APP = (
   <Provider store={createStore()}>
-    <BrowserRouter>
-      <App>
-        {routes}
-      </App>
-    </BrowserRouter>
+  	<MuiThemeProvider>
+	    <BrowserRouter>
+	      <App>
+	        {routes}
+	      </App>
+	    </BrowserRouter>
+    </MuiThemeProvider>
   </Provider>
 );
 
