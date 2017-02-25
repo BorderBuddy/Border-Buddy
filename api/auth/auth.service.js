@@ -1,12 +1,11 @@
 import jwt from 'jsonwebtoken';
 import expressJwt from 'express-jwt';
 import compose from 'composable-middleware';
-// import {User} from'../sqldb';
-
-var SECRET_SESSION_KEY = 'some secret';
+import { User } from'../../database/models/user';
+import { config } from '../config';
 
 var validateJwt = expressJwt({
-  secret: SECRET_SESSION_KEY
+  secret: config.secrets.session
 });
 
 export function isAuthenticated() {
@@ -38,7 +37,7 @@ export function isAuthenticated() {
 }
 
 export function signToken(id) {
-  return jwt.sign({ _id: id }, SECRET_SESSION_KEY, {
+  return jwt.sign({ _id: id }, config.secrets.session, {
     expiresIn: 60 * 60 * 5
   });
 }
