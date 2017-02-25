@@ -21,8 +21,10 @@ export function respondToText(req, res) {
 	var phoneStrTo = req.body.To.substring(req.body.To.length - 11);
 	var phoneStrFrom = req.body.From.substring(req.body.From.length - 10);
 
-	// if (response.toLowerCase() === 'ok') {
-		
-	// }
-	return res.status(200).json(req.body);
+	if (response.toLowerCase() !== 'ok') {
+		// Send an alert?
+		// TODO: Scheduler for sending a text again to user prompting status if ok
+	}
+
+	return res.status(200).json({});
 }
