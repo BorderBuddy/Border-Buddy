@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import AllTravelers from '../components/Admin/AllTravelers';
-import SingleTraveler from '../components/Admin/SingleTraveler';
 
 const dummyFlight = {
 	number: 'UA88',
@@ -14,22 +13,13 @@ const dummyTravelers = [
 ]
 
 
-class AdminContainer extends Component {
+class AllTravelersContainer extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			travelers: [],
-			selectedTraveler: null
 		};
-
-		this.selectTraveler = this.selectTraveler.bind(this);
-	}
-
-	selectTraveler(index) {
-		console.log('ran and index is ', index)
-		const selectedTraveler = this.state.travelers[index];
-		this.setState({ selectedTraveler })
 	}
 
 	componentDidMount() {
@@ -38,17 +28,11 @@ class AdminContainer extends Component {
 	}
 
 	render() {
-		const {selectedTraveler, travelers} = this.state;
-		return(
-			<div>
-				{
-					selectedTraveler ?
-					<SingleTraveler traveler={selectedTraveler} /> :
-					<AllTravelers travelers={travelers} selectTraveler={this.selectTraveler} />
-				}
-			</div>
-		)
+		const { travelers} = this.state;
+		return (
+			<AllTravelers travelers={travelers} selectTraveler={this.selectTraveler} />
+		);
 	}
 }
 
-export default AdminContainer;
+export default AllTravelersContainer;
