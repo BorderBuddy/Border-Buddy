@@ -21,8 +21,8 @@ export default ({ travelers, selectTraveler }) => (
 	    </TableHeader>
 	    <TableBody>
 	      {
-					travelers && travelers.map((traveler, index) =>
-						<TravelerRow selectTraveler={selectTraveler} traveler={traveler} key={index} index={index} />)
+					travelers && travelers.map((traveler) =>
+						<TravelerRow traveler={traveler} key={traveler.id} />)
 	      }
 	    </TableBody>
 	  </Table>
