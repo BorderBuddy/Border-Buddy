@@ -15,3 +15,14 @@ export function sendText(req, res){
     	return res.status(200).json(result);
     });
 };
+
+export function respondToText(req, res) {
+	var response = req.body.Body;
+	var phoneStrTo = req.body.To.substring(req.body.To.length - 11);
+	var phoneStrFrom = req.body.From.substring(req.body.From.length - 10);
+
+	// if (response.toLowerCase() === 'ok') {
+		
+	// }
+	return res.status(200).json(req.body);
+}
