@@ -27,8 +27,8 @@ const Traveler = db.define('traveler', {
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['transit', 'uncomfirmed','detained','cleared'],
-    defaultValue: 'uncomfirmed'
+    values: ['transit', 'unconfirmed','detained','cleared'],
+    defaultValue: 'unconfirmed'
   },
 }, {
   underscored: true
