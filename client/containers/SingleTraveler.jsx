@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SingleTraveler from '../components/Admin/SingleTraveler';
+import {browserHistory} from 'react-router';
 
 const dummyFlight = {
 	number: 'UA88',
@@ -8,6 +9,7 @@ const dummyFlight = {
 };
 
 const dummyTraveler = { id: 1, phone: '8081980892', name: 'Dirron Pewers', status: 'in transit', connectivity: true, nationality: 'Syria', flight: dummyFlight};
+import {dummyTravelers} from './AllTravelers';
 
 
 class SingleTravelerContainer extends Component {
@@ -25,7 +27,9 @@ class SingleTravelerContainer extends Component {
 	}
 
 	componentDidMount() {
-		this.setState({ selectedTraveler: dummyTraveler });
+
+    const { id } = this.props.routeParams
+		this.setState({ selectedTraveler: dummyTravelers[id-1] });
     this.setState({ flight: dummyFlight })
 		// TODO: fetch single traveler from backend and put on local state
 	}
@@ -50,6 +54,7 @@ class SingleTravelerContainer extends Component {
     e.preventDefault();
     // TODO: axios put to backend
     console.log("SAVED DATA!", this.state);
+    browserHistory.push('/admin')
   }
 
 	render() {

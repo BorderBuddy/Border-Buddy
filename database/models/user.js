@@ -16,13 +16,15 @@ export const User = db.define('user', {
     },
     validate: {
       isEmail: true
-    }
+    },
+    allowNull: false
   },
   password: {
     type: Sequelize.DataTypes.STRING,
     validate: {
       notEmpty: true
-    }
+    },
+    allowNull: false
   },
   salt: Sequelize.DataTypes.STRING
 }, {
