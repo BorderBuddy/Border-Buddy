@@ -2,6 +2,12 @@ import webpack from 'webpack';
 import { resolve } from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+const configPlugin = new webpack.DefinePlugin({
+  'process.env': {
+    'NODE_ENV': JSON.stringify(process.env.NODE_ENV || "development")
+  }
+});
+
 export default {
   context: resolve(__dirname),
 
@@ -37,7 +43,7 @@ export default {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loaders: ['react-hot-loader', 'babel-loader']
+        loaders: ['babel-loader']
       },
       {
         test: /\.js?$/,
@@ -62,6 +68,7 @@ export default {
   },
 
   plugins: [
+    configPlugin,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new ExtractTextPlugin('stylesheets/fund.compiled.css'),
