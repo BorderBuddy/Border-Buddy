@@ -8,19 +8,21 @@ export function sendText(req, res){
 		return res.status(404).json({});
 	}
 
-    Twilio.messages.create({
+    Twilio.sendMessage({
         to: req.body.to,
-        from: config.twilio.adminPhone,
+        messagingServiceSid: config.twilio.messagingSid,
         body: req.body.message,
     }, function(err, result) {
     	return res.status(200).json(result);
     });
 };
 
-export function respondToText(req, res) {
+export function respondToText(req, res, next) {
 	var response = req.body.Body;
 	var phoneStrTo = req.body.To.substring(req.body.To.length - 11);
 	var phoneStrFrom = req.body.From.substring(req.body.From.length - 10);
+	
+	console.log('USER RESPOND:', response);
 
 	if (response.toLowerCase() === 'ok') {
 		return Traveler.find({
@@ -40,7 +42,9 @@ export function respondToText(req, res) {
 
 		    return res.status(200).end();
 		})
-		.catch(err => next(err));
+		.catch(function(err) {
+			return res.status(404).json(err);
+		});
 	} else {
 		// TODO: Scheduler for sending a text again to user prompting status if ok
 	}
