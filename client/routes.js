@@ -11,6 +11,7 @@ const getRoutes = () => (
 	  <Route path='/admin' component={AllTravelers} />
     <Route path='/admin/:id' component={SingleTraveler} />
     <Route path='/admin/login' component={Login} />
+	</div>
 );
 
 export default getRoutes;
