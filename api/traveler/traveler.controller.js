@@ -4,15 +4,15 @@ import Traveler from '../../database/models/travelers';
 import Flight from '../../database/models/flights';
 const Chalk = require('chalk');
 
-const fakeTraveler = {
-  name : "Tom",
-  phone : 1234567879,
-  nationality: 'something',
-  connectivity: true,
-  secondaryContact: 1234567894,
-  status: 'unconfirmed',
-  flightNum: "JE342"
-};
+// const fakeTraveler = {
+//   name : "Tom",
+//   phone : 1234567879,
+//   nationality: 'something',
+//   connectivity: true,
+//   secondaryContact: 1234567894,
+//   status: 'unconfirmed',
+//   flightNum: "JE342"
+// };
 
 
 export function createNewTraveler(req, res) {
@@ -42,5 +42,18 @@ export function createNewTraveler(req, res) {
   .catch(err => {
     console.log(Chalk.red("Create Unsuccessful"), err);
   });
+
+}
+
+export function getAllTraveler(req,res){
+  return Traveler.findAll()
+  .then(allTravelers => {
+    res.status(200).json(allTravelers);
+  }).catch(err => {
+  console.log(err);
+}
+);
+
+
 
 }
