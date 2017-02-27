@@ -3,7 +3,11 @@ import { reduxForm, Field } from 'redux-form';
 import { RaisedButton } from 'material-ui';
 import { TextField, DatePicker } from 'redux-form-material-ui';
 
-const required = value => value == null ? 'Required' : undefined;
+const required = value => value === null ? 'Required' : undefined;
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+  'Invalid email address' : undefined;
+
 
 const SignUp = ({ handleSubmit, pristine, reset, submitting }) => {
   const style = {
@@ -76,7 +80,7 @@ const SignUp = ({ handleSubmit, pristine, reset, submitting }) => {
       <div>
         <RaisedButton
           type="submit"
-          label="Primary"
+          label="Submit"
           disabled={pristine || submitting}
           primary={true}
           style={style.button}

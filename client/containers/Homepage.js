@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import SignUp from '../components/SignUp';
-import { signup } from '../actions/signUp';
+import { signUp } from '../actions/signUp';
+
+const mapStateToProps = ({form}) => ({form});
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ signup }, dispatch);
-}
+  return bindActionCreators({ signUp }, dispatch);
+};
+
 
 class Homepage extends Component {
   constructor() {
@@ -14,8 +17,10 @@ class Homepage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
-    signup();
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log('form data is ', this.props.form.signUp.values)
+    signUp();
   }
 
   render() {
@@ -28,5 +33,6 @@ class Homepage extends Component {
 }
 
 export default connect(
+  mapStateToProps,
   mapDispatchToProps
 )(Homepage);

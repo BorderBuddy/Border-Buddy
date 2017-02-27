@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "build": "webpack --config webpack.prod.babel.js",
     "test": "./node_modules/.bin/mocha",
-    "seed": "babel-node database/seed.js"
+    "seed": "NODE_ENV=seeding babel-node database/seed.js"
   },
   "engines": {
     "node": "~5.10.1",
@@ -36,8 +36,8 @@
     "babel-preset-stage-2": "^6.22.0",
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
-    "composable-middleware": "^0.3.0",
     "chalk": "^1.1.3",
+    "composable-middleware": "^0.3.0",
     "cors": "^2.8.1",
     "es6-promise": "^4.0.5",
     "eslint-loader": "^1.6.1",

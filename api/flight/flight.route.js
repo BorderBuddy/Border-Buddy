@@ -5,5 +5,5 @@ import {
 const base = '/api/flight';
 
 export default app => {
-	app.post(base + '/', verifyFlight);
+	app.get(base + '/verify', verifyFlight);
 }

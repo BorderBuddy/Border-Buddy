@@ -1,17 +1,16 @@
-import { post } from "../utils/request";
 import {
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
   USER_SIGNUP_FAILURE
 } from '../constants';
 
+import axios from 'axios';
 
-function signup(params) {
-  return (dispatch) => {
-    dispatch({type: USER_SIGNUP_REQUEST});
 
-    return post(`/travelers/add`, params)
-      .then((res)  => dispatch({type: USER_SIGNUP_SUCCESS, data: res}))
-      .catch((res) => dispatch({type: USER_SIGNUP_FAILURE, data: res}));
+export const signUp = traveler => {
+  return dispatch => {
+		axios.post('/api/traveler/', traveler)
+		.then(traveler => console.log('added a traveler to the db!', traveler))
+		.catch(console.error)
   };
 }

@@ -2,21 +2,32 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Traveler = db.define('traveler', {
-  name: {
+  firstName: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate : {
+    validate: {
       notEmpty: true
     }
   },
-  phone : {
+  lastName: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate:{
-      notEmpty:true
+    validate: {
+      notEmpty: true
     }
   },
-  connectivity : {
+
+  email: {
+    type: Sequelize.STRING
+  },
+  phone: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  connectivity: {
     type: Sequelize.BOOLEAN
   },
   nationality: {
@@ -27,11 +38,17 @@ const Traveler = db.define('traveler', {
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['transit', 'unconfirmed','detained','cleared'],
+    values: ['transit', 'unconfirmed', 'detained', 'cleared'],
     defaultValue: 'unconfirmed'
   },
 }, {
-  underscored: true
+  underscored: true,
+
+  getterMethods: {
+    name: function() {
+      return this.firstName + ' ' + this.lastName;
+    }
+  }
 });
 
 module.exports = Traveler;
