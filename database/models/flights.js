@@ -14,6 +14,13 @@ const Flight = db.define('flight', {
     values: ['arrived', 'delayed','scheduled'],
     defaultValue: 'scheduled'
   },
+  arrivalDate: {
+    type: Sequelize.DATE,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  }
 }, {
   underscored: true
 });
