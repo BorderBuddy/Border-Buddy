@@ -10,7 +10,7 @@ const Traveler = db.define('traveler', {
     }
   },
   phone : {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     validate:{
       notEmpty:true
@@ -23,7 +23,7 @@ const Traveler = db.define('traveler', {
     type: Sequelize.STRING
   },
   secondaryContact: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING
   },
   status: {
     type: Sequelize.ENUM,

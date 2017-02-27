@@ -1,6 +1,6 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { RadioButton, RaisedButton } from 'material-ui';
+import { RaisedButton } from 'material-ui';
 import { TextField, DatePicker } from 'redux-form-material-ui';
 
 const required = value => value == null ? 'Required' : undefined;
@@ -10,7 +10,6 @@ const SignUp = ({ handleSubmit, pristine, reset, submitting }) => {
     form: {
       display: 'block',
       width: '75%',
-      margin: '0 auto',
       margin: '4rem auto'
     },
     input: {

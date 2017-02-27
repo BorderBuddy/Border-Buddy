@@ -1,11 +1,15 @@
 import {
   createNewTraveler,
-  getAllTraveler
+  getAllTravelers,
+  getById,
+  updateOne
 } from './traveler.controller';
 
 const base = '/api/traveler';
 
 export default  (app) => {
-  app.post(base + '/add', createNewTraveler);
-  app.get(base + '/getAll', getAllTraveler);
+  app.post(base + '/', createNewTraveler);
+  app.get(base + '/', getAllTravelers);
+  app.get(base + '/:id', getById);
+  app.put(base + '/:id', updateOne)
 };

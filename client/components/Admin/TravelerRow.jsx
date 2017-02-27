@@ -10,8 +10,8 @@ export default ({ traveler }) => (
 			<TableRowColumn style={nameStyle}>{traveler.name}</TableRowColumn>
 			<TableRowColumn style={phoneStyle}>{traveler.phone}</TableRowColumn>
 			<TableRowColumn style={nationalityStyle}>{traveler.nationality}</TableRowColumn>
-			<TableRowColumn style={flightStyle}>{traveler.flight.number}</TableRowColumn>
-			<TableRowColumn>{traveler.flight.date} {traveler.flight.time}</TableRowColumn>
+			<TableRowColumn style={flightStyle}>{traveler.flight.flightNum}</TableRowColumn>
+			<TableRowColumn>{traveler.flight.arrivalDate}</TableRowColumn>
 			<TableRowColumn>{traveler.status}</TableRowColumn>
 		</TableRow>
 

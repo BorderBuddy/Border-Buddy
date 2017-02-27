@@ -45,15 +45,27 @@ export function createNewTraveler(req, res) {
 
 }
 
-export function getAllTraveler(req,res){
-  return Traveler.findAll()
+export function getAllTravelers(req, res, next){
+  return Traveler.findAll({include: [{all: true}]})
   .then(allTravelers => {
     res.status(200).json(allTravelers);
-  }).catch(err => {
-  console.log(err);
+  })
+  .catch(next);
 }
-);
 
+export function getById(req, res, next){
+  return Traveler.findById(req.params.id, {include: [{all: true}]})
+  .then(traveler => {
+    res.status(200).json(traveler);
+  })
+  .catch(next);
+}
 
-
+// TODO: handling update flight for one traveler
+export function updateOne(req, res, next) {
+  return Traveler.update(req.body)
+  .then(traveler => {
+    res.status(201).json(traveler)
+  })
+  .catch(next)
 }
