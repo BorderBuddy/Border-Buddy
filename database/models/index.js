@@ -6,9 +6,8 @@ const Flight = require('./flights');
 // -=-=-=-=-=-= ASSOCIATIONS =-=-=-=-=-=-
 // http://docs.sequelizejs.com/en/latest/docs/associations/
 
-Flight.hasOne(Traveler, {foreignKey : 'flight_id'}); //  or traveler has one flight?
-
-
+Flight.hasOne(Traveler, {foreignKey : 'flight_id'});
+Traveler.belongsTo(Flight) // for eager loading
 
 // Examples
 // Therapist.hasMany(Patient) // patient << therapist_id // therapist.getPatients/setPatients

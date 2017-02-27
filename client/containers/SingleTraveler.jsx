@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import SingleTraveler from '../components/Admin/SingleTraveler';
 import {browserHistory} from 'react-router';
+import axios from 'axios';
 
-const dummyFlight = {
-	number: 'UA88',
-	date: 'June 11, 2017',
-	time: Date.now()
-};
+// const dummyFlight = {
+// 	number: 'UA88',
+// 	date: 'June 11, 2017',
+// 	time: Date.now()
+// };
 
-const dummyTraveler = { id: 1, phone: '8081980892', name: 'Dirron Pewers', status: 'in transit', connectivity: true, nationality: 'Syria', flight: dummyFlight};
-import {dummyTravelers} from './AllTravelers';
 
 
 class SingleTravelerContainer extends Component {
@@ -27,11 +26,10 @@ class SingleTravelerContainer extends Component {
 	}
 
 	componentDidMount() {
-
-    const { id } = this.props.routeParams
-		this.setState({ selectedTraveler: dummyTravelers[id-1] });
-    this.setState({ flight: dummyFlight })
-		// TODO: fetch single traveler from backend and put on local state
+    const { id } = this.props.routeParams;
+    axios.get(`/api/traveler/${id}`)
+    .then(traveler => this.setState({selectedTraveler: traveler.data, flight: traveler.data.flight}))
+    .catch(console.error)
 	}
 
   updateTraveler(key, value) {
