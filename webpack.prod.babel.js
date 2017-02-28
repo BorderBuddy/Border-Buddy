@@ -34,7 +34,6 @@ export default {
           resolve(__dirname, 'node_modules'),
           resolve(__dirname, 'dist')
         ],
-        use: [{ loader: 'eslint-loader' }]
       },
       {
         test: /\.scss$/,
