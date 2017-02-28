@@ -4,7 +4,7 @@
   "description": "Your Border Buddy",
   "main": "index.js",
   "scripts": {
-    "start": "webpack && babel-node index.js --exec babel-node --presets es2015,stage-2",
+    "start": "nodemon index.js --exec babel-node --presets es2015,stage-2",
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "build": "webpack --config webpack.prod.babel.js",
     "test": "./node_modules/.bin/mocha",
@@ -51,7 +51,6 @@
     "less": "^2.7.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.17.0",
-    "nodemon": "^1.11.0",
     "node-emoji": "^1.5.1",
     "node-sass": "^4.5.0",
     "passport": "^0.3.2",
@@ -77,8 +76,7 @@
     "style-loader": "^0.13.1",
     "superagent": "^3.4.1",
     "tachyons-sass": "^4.7.1",
-    "twilio": "^2.11.1",
-    "webpack": "^2.2.1"
+    "twilio": "^2.11.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -92,7 +90,9 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
     "react-hot-loader": "^3.0.0-beta.0",
+    "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
   }
 }
