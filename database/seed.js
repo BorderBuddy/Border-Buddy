@@ -2,9 +2,10 @@ const db = require('./index');
 const chalk = require('chalk')
 
 const dummyFlights = [{
-	flightNum: 'UA88',
+	flightNum: '88',
+	airlineCode: 'UA'
 	status: 'scheduled',
-	arrivalDate: Date.now()
+	arrivalTime: Date.now()
 }]
 
 const dummyTravelers = [

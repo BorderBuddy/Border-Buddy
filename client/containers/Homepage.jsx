@@ -19,8 +19,9 @@ class Homepage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const { signUp } = this.props;
     console.log('form data is ', this.props.form.signUp.values)
-    signUp();
+    signUp(this.props.form.signUp.values);
   }
 
   render() {

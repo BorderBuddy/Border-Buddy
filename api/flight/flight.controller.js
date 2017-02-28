@@ -2,31 +2,32 @@ const axios = require('axios');
 import db from '../../database';
 import Traveler from '../../database/models/travelers';
 import Flight from '../../database/models/flights';
-import { airlineByCode, flightByCodeAndDate, flightById } from './flight.query'
+import { airlineByCode, statusByCodeAndDate, scheduleByCodeAndDate } from './flight.query'
 
 
 export const getCode = (req, res, next) => {
 	const { code } = req.query;
 
-	axios.get(airlineByCode(code))
+	return axios.get(airlineByCode(code))
 	.then(results => {
 		const { airlines } = results.data;
 		if (!airlines.length) {
-			res.status(404).json('Airline not found!')
+			res.status(404).json(null)
 		} else {
 			res.status(200).json(airlines[0])
 		}
 	})
+	.catch(next)
 }
 
 
 export const verifyFlight = (req, res, next) => {
 	const { code, flightNum, year, month, day } = req.query;
 
-	axios.get(flightByCodeAndDate(code, flightNum, year, month, day))
+	return axios.get(scheduleByCodeAndDate(code, flightNum, year, month, day))
 	.then(flight => {
 		if (flight.data.error) {
-			res.status(404).json('Flight not found!')
+			res.status(404).json(null)
 		} else {
 			res.status(200).json(flight.data)
 		}
@@ -37,9 +38,9 @@ export const verifyFlight = (req, res, next) => {
 
 /*------------ HELPER FUNCTION FOR CRON JOB ONLY -------------*/
 
-export const getFlightStatus = flightId => {
+export const getFlightStatus = (...args) => {
 
-	return axios.get(flightById(flightId))
+	return axios.get(statusByCodeAndDate(...args))
 	.then(flight => {
 		if (flight.data.error) {
 			const err = new Error('Error from API provider')
@@ -51,7 +52,7 @@ export const getFlightStatus = flightId => {
 	})
 	.catch(err => {
 		console.error(err)
-		return false;
+		return null;
 	})
 }
 

@@ -9,6 +9,9 @@ const Traveler = db.define('traveler', {
       notEmpty: true
     }
   },
+  nationality: {
+    type: Sequelize.STRING
+  },
   email: {
     type: Sequelize.STRING
   },
@@ -21,9 +24,6 @@ const Traveler = db.define('traveler', {
   },
   connectivity: {
     type: Sequelize.BOOLEAN
-  },
-  nationality: {
-    type: Sequelize.STRING
   },
   secondaryContact: {
     type: Sequelize.STRING
