@@ -1,16 +1,19 @@
 import {
-  USER_SIGNUP_REQUEST,
-  USER_SIGNUP_SUCCESS,
-  USER_SIGNUP_FAILURE
+  SET_TRAVELER
 } from '../constants';
 
 import axios from 'axios';
 
 
+const setTraveler = traveler => ({
+	type: SET_TRAVELER,
+	traveler
+})
+
 export const signUp = traveler => {
   return dispatch => {
 		axios.post('/api/traveler/', traveler)
-		.then(traveler => console.log('added a traveler to the db!', traveler))
+		.then(traveler => setTraveler(traveler))
 		.catch(console.error)
   };
 }

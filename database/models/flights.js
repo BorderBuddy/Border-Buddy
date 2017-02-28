@@ -2,10 +2,25 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Flight = db.define('flight', {
+  id: {
+    type: Sequelize.STRING,
+    primaryKey: true,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   flightNum: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate : {
+    validate: {
+      notEmpty: true
+    }
+  },
+  airlineCode: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
       notEmpty: true
     }
   },
@@ -14,12 +29,13 @@ const Flight = db.define('flight', {
     values: ['arrived', 'delayed','scheduled'],
     defaultValue: 'scheduled'
   },
-  arrivalDate: {
+  departureDate: {
+    type: Sequelize.DATEONLY,
+    allowNull: false,
+  },
+  arrivalTime: {
     type: Sequelize.DATE,
     allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   }
 }, {
   underscored: true
