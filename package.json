@@ -40,6 +40,7 @@
     "composable-middleware": "^0.3.0",
     "cors": "^2.8.1",
     "es6-promise": "^4.0.5",
+    "eslint-config-fullstack": "^2.7.0",
     "eslint-loader": "^1.6.1",
     "express": "^4.14.1",
     "express-jwt": "^5.1.0",

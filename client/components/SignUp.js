@@ -1,23 +1,19 @@
 import React from 'react';
-import axios from 'axios';
 import { reduxForm, Field } from 'redux-form';
 import { RaisedButton, MenuItem } from 'material-ui';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 
-const required = value => value === null ? 'Required' : undefined;
-const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
-  'Invalid email address' : undefined;
 
-const validateCode = code => {
-  return axios.get(`/api/flight/code?code=${code}`)
-  .then(airline => {
-    if (!airline) throw new Error
-  })
-}
+import { required, email, validateCode, uppercase } from '../utils/validations'
 
 
-const SignUp = ({ handleSubmit, pristine, submitting }) => {
+const airlinePicker = ({ input, label, style, type, meta: { asyncValidating, touched, error }}) => (
+    <div className={asyncValidating ? 'async-validating' : ''}>
+      <TextField {...input} type={type} floatingLabelText={label} style={style} errorText={touched && error && `${error}`} />
+    </div>
+);
+
+const SignUp = ({handleSubmit, valid}) => {
   const style = {
     form: {
       display: 'block',
@@ -35,7 +31,7 @@ const SignUp = ({ handleSubmit, pristine, submitting }) => {
 
   return (
     <form style={style.form} onSubmit={handleSubmit}>
-      <legend>Sign Up for Border Budddy</legend>
+      <legend>Sign Up for Border Buddy</legend>
       <div>
         <Field
           name="name"
@@ -82,7 +78,7 @@ const SignUp = ({ handleSubmit, pristine, submitting }) => {
         <Field
           name="secondaryContact"
           component={TextField}
-          floatingLabelText="Name/contact of friend or family"
+          floatingLabelText="Name/contact of friend or family in US"
           style={style.input}
         />
       </div>
@@ -97,10 +93,10 @@ const SignUp = ({ handleSubmit, pristine, submitting }) => {
         />
         <Field
           name="airlineCode"
-          component={TextField}
-          validate={required}
+          component={airlinePicker}
+          validate={[uppercase, required]}
           format={null}
-          floatingLabelText="Airline code"
+          label="Airline code"
           style={style.input}
         />
         <Field
@@ -116,7 +112,7 @@ const SignUp = ({ handleSubmit, pristine, submitting }) => {
         <RaisedButton
           type="submit"
           label="Register"
-          disabled={pristine || submitting}
+          disabled={!valid}
           primary={true}
           style={style.button}
         />
@@ -126,5 +122,7 @@ const SignUp = ({ handleSubmit, pristine, submitting }) => {
 }
 
 export default reduxForm({
-  form: 'signUp'  // a unique identifier for this form
+  form: 'signUp',  // a unique identifier for this form
+  asyncValidate: validateCode,
+  asyncBlurFields: ['airlineCode']
 })(SignUp);

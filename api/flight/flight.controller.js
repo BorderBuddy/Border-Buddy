@@ -12,12 +12,12 @@ export const getCode = (req, res, next) => {
 	.then(results => {
 		const { airlines } = results.data;
 		if (!airlines.length) {
-			res.status(404).json(null)
+			res.status(404).json('code not found')
 		} else {
 			res.status(200).json(airlines[0])
 		}
 	})
-	.catch(next)
+	.catch(next);
 }
 
 
@@ -27,9 +27,9 @@ export const verifyFlight = (req, res, next) => {
 	return axios.get(scheduleByCodeAndDate(code, flightNum, year, month, day))
 	.then(flight => {
 		if (flight.data.error) {
-			res.status(404).json(null)
+			res.status(404).json('flight not found');
 		} else {
-			res.status(200).json(flight.data)
+			res.status(200).json(flight.data);
 		}
 	})
 	.catch(next);
