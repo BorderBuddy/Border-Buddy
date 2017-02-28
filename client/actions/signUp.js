@@ -4,7 +4,6 @@ import {
 
 import axios from 'axios';
 
-
 const setTraveler = traveler => ({
 	type: SET_TRAVELER,
 	traveler

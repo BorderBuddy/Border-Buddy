@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/EmilyDev/Hack-The-Ban.png?label=ready&title=Ready)](https://waffle.io/EmilyDev/Hack-The-Ban)
 # Hack The Ban - Border Buddy
 ## Getting Started
 

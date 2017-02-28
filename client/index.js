@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Root from "./containers/Root";
 import configureStore from './store';
 const { store, history } = configureStore();
+export { store };
 
 require("./stylesheets/index.scss");
 
