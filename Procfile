@@ -1,1 +1,1 @@
-web: nodemon index.js --exec babel-node --presets es2015,stage-2 && babel-node database/seed.js
+web: nodemon index.js --exec babel-node --presets es2015,stage-2 && npm run seed
