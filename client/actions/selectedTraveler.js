@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SET_SELECTED_TRAVELER, SET_FLIGHT } from '../constants';
+import { SET_SELECTED_TRAVELER } from '../constants';
 import { setFlight } from './flight';
 
 export const setSelectedTraveler = selectedTraveler => ({ type: SET_SELECTED_TRAVELER, selectedTraveler });

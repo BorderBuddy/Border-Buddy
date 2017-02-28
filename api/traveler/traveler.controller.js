@@ -62,13 +62,6 @@ export function getById(req, res, next) {
 export function updateOne(req, res, next) {
   return Traveler.findById(req.params.id)
   .then(traveler => traveler.update(req.body))
-  .then(traveler => Flight.findOrCreate({
-    id: req.body.flight_id,
-    flightNum: req.body.traveler.flight.flightNum,
-    status: req.body.traveler.flight.status,
-    arrivalDate: req.body.traveler.flight.arrivalDate
-  }))
-  .then(flight => traveler.set)
   .then(updatedTraveler => res.status(201).json(updatedTraveler))
   .catch(next);
 }

@@ -4,7 +4,7 @@ import axios from 'axios';
 import SingleTraveler from '../components/Admin/SingleTraveler';
 import {browserHistory} from 'react-router';
 import { setSelectedTraveler, updateTraveler } from '../actions/selectedTraveler';
-import { setFlight } from '../actions/flight';
+import { setFlight, updateFlight } from '../actions/flight';
 
 
 class SingleTravelerContainer extends Component {
@@ -39,7 +39,6 @@ class SingleTravelerContainer extends Component {
     const { updateTraveler, updateFlight, selectedTraveler, flight } = this.props;
     Promise.all([updateTraveler(selectedTraveler), updateFlight(flight)])
     .then(res => {
-      console.log(res);
       browserHistory.push('/admin');
     })
     // TODO: axios put to backend
@@ -78,7 +77,8 @@ const mapStateToProps = ({ selectedTraveler, flight }) => ({
 const mapDispatchToProps = dispatch => ({
   setSelectedTraveler: (selectedTraveler) => dispatch(setSelectedTraveler(selectedTraveler)),
   setFlight: (flight) => dispatch(setFlight(flight)),
-  updateTraveler: (traveler) => dispatch(updateTraveler(traveler))
+  updateTraveler: (traveler) => dispatch(updateTraveler(traveler)),
+  updateFlight: (flight) => dispatch(updateFlight(flight))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTravelerContainer);
