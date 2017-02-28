@@ -16,56 +16,59 @@ const Chalk = require('chalk');
 
 
 export function createNewTraveler(req, res) {
-
   console.log(Chalk.blue('create Traveler Route Hit!'));
- return Flight.findOne({
-   flightNum : fakeTraveler.flightNum})
- .then(flight => {
-   console.log("FLIGHT",flight);
-   let flight_id = flight.id;
-   return   Traveler.create({
-       name : fakeTraveler.name,
-       phone : fakeTraveler.phone,
-       nationality : fakeTraveler.nationality,
-       connectivity : fakeTraveler.connectivity,
-       secondaryContact : fakeTraveler.secondaryContact,
-       status : fakeTraveler.status,
-       flight_id : fakeTraveler.flightid
-     });
- })
-  .then(createdTraveler => {
-      let traveler = { traveler : createdTraveler };
-      res.status(201).json(traveler);
-      console.log(Chalk.green("Successfully Created Traveler"));
-
+  return Flight.findOne({
+    flightNum: fakeTraveler.flightNum
     })
-  .catch(err => {
-    console.log(Chalk.red("Create Unsuccessful"), err);
-  });
-
+    .then(flight => {
+      console.log("FLIGHT", flight);
+      let flight_id = flight.id;
+      return Traveler.create({
+        name: fakeTraveler.name,
+        phone: fakeTraveler.phone,
+        nationality: fakeTraveler.nationality,
+        connectivity: fakeTraveler.connectivity,
+        secondaryContact: fakeTraveler.secondaryContact,
+        status: fakeTraveler.status,
+        flight_id: fakeTraveler.flightid
+        });
+      })
+      .then(createdTraveler => {
+        let traveler = { traveler: createdTraveler };
+        res.status(201).json(traveler);
+        console.log(Chalk.green("Successfully Created Traveler"));
+      })
+      .catch(err => {
+        console.log(Chalk.red("Create Unsuccessful"), err);
+      });
 }
 
-export function getAllTravelers(req, res, next){
-  return Traveler.findAll({include: [{all: true}]})
+export function getAllTravelers(req, res, next) {
+  return Traveler.findAll({ include: [{ all: true }] })
   .then(allTravelers => {
     res.status(200).json(allTravelers);
   })
   .catch(next);
 }
 
-export function getById(req, res, next){
-  return Traveler.findById(req.params.id, {include: [{all: true}]})
+export function getById(req, res, next) {
+  return Traveler.findById(req.params.id, { include: [{ all: true }] })
   .then(traveler => {
     res.status(200).json(traveler);
   })
   .catch(next);
 }
 
-// TODO: handling update flight for one traveler
 export function updateOne(req, res, next) {
-  return Traveler.update(req.body)
-  .then(traveler => {
-    res.status(201).json(traveler)
-  })
-  .catch(next)
+  return Traveler.findById(req.params.id)
+  .then(traveler => traveler.update(req.body))
+  .then(traveler => Flight.findOrCreate({
+    id: req.body.flight_id,
+    flightNum: req.body.traveler.flight.flightNum,
+    status: req.body.traveler.flight.status,
+    arrivalDate: req.body.traveler.flight.arrivalDate
+  }))
+  .then(flight => traveler.set)
+  .then(updatedTraveler => res.status(201).json(updatedTraveler))
+  .catch(next);
 }

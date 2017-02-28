@@ -28,5 +28,6 @@ class Homepage extends Component {
 }
 
 export default connect(
+  null,
   mapDispatchToProps
 )(Homepage);

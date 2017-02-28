@@ -1,23 +1,18 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import SingleTraveler from '../components/Admin/SingleTraveler';
 import {browserHistory} from 'react-router';
-import axios from 'axios';
-
-// const dummyFlight = {
-// 	number: 'UA88',
-// 	date: 'June 11, 2017',
-// 	time: Date.now()
-// };
-
+import { setSelectedTraveler, updateTraveler } from '../actions/selectedTraveler';
+import { setFlight } from '../actions/flight';
 
 
 class SingleTravelerContainer extends Component {
 	constructor(props) {
 		super(props);
 
+    console.log(props);
 		this.state = {
-			selectedTraveler: {},
-      flight: {},
       changed: false
 		};
     this.updateTraveler = this.updateTraveler.bind(this);
@@ -25,48 +20,65 @@ class SingleTravelerContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	componentDidMount() {
-    const { id } = this.props.routeParams;
-    axios.get(`/api/traveler/${id}`)
-    .then(traveler => this.setState({selectedTraveler: traveler.data, flight: traveler.data.flight}))
-    .catch(console.error)
-	}
-
   updateTraveler(key, value) {
     const newState = {[key]: value};
-    this.setState({
-      selectedTraveler: Object.assign({}, this.state.selectedTraveler, newState),
-      changed: true
-    });
+    const { setSelectedTraveler, selectedTraveler } = this.props;
+    setSelectedTraveler(Object.assign({}, selectedTraveler, newState));
+    this.setState({ changed: true })
   }
 
   updateFlight(key, value) {
     const newState = {[key]: value};
-    this.setState({
-      flight: Object.assign({}, this.state.flight, newState),
-      changed: true
-    });
+    const { setFlight, flight } = this.props;
+    setFlight(Object.assign({}, flight, newState));
+    this.setState({ changed: true })
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    const { updateTraveler, updateFlight, selectedTraveler, flight } = this.props;
+    Promise.all([updateTraveler(selectedTraveler), updateFlight(flight)])
+    .then(res => {
+      console.log(res);
+      browserHistory.push('/admin');
+    })
     // TODO: axios put to backend
-    console.log("SAVED DATA!", this.state);
-    browserHistory.push('/admin')
+    // const { selectedTraveler, flight } = this.state;
+    // const updatingTraveler = axios.put(`http://localhost:3000/api/traveler/${selectedTraveler.id}`, selectedTraveler)
+    // const updatingFlight = axios.put(`http://localhost:3000/api/flight/${flight.id}`, flight)
+    // Promise.all[updatingTraveler, updatingFlight]
+    // .then(res => {
+    //   console.log('User Updated!', res)
+    //   browserHistory.push('/admin')
+    // })
+    console.log(this.props);
+
   }
 
 	render() {
-		const { selectedTraveler, flight, changed } = this.state;
+		const { selectedTraveler, flight } = this.props;
 		return (
-		 <SingleTraveler 
+		 <SingleTraveler
       traveler={selectedTraveler} 
       flight={flight} 
       updateTraveler={this.updateTraveler} 
       updateFlight={this.updateFlight} 
       handleSubmit={this.handleSubmit}
-      changed={changed} />
+      changed={this.state.changed} />
 		);
 	}
 }
 
-export default SingleTravelerContainer;
+
+const mapStateToProps = ({ selectedTraveler, flight }) => ({
+  selectedTraveler,
+  flight
+})
+
+const mapDispatchToProps = dispatch => ({
+  setSelectedTraveler: (selectedTraveler) => dispatch(setSelectedTraveler(selectedTraveler)),
+  setFlight: (flight) => dispatch(setFlight(flight)),
+  updateTraveler: (traveler) => dispatch(updateTraveler(traveler))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTravelerContainer);
