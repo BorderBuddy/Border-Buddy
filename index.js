@@ -1,8 +1,8 @@
-import { emoji } from 'node-emoji'
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import path from 'path';
+const emoji = require('node-emoji').emoji
+const express = require('express');
+const bodyParser = require('body-parser')
+const corse = require('corse');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
