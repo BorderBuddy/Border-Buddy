@@ -76,9 +76,7 @@
     "style-loader": "^0.13.1",
     "superagent": "^3.4.1",
     "tachyons-sass": "^4.7.1",
-    "twilio": "^2.11.1"
-  },
-  "devDependencies": {
+    "twilio": "^2.11.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
     "chai": "^3.5.0",
@@ -94,5 +92,7 @@
     "react-hot-loader": "^3.0.0-beta.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
+  },
+  "devDependencies": {
   }
 }
