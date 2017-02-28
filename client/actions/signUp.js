@@ -6,7 +6,7 @@ import {
 } from '../constants';
 
 
-function signup(params) {
+export function signup(params) {
   return (dispatch) => {
     dispatch({type: USER_SIGNUP_REQUEST});
 

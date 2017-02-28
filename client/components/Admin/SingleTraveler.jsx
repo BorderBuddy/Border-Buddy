@@ -27,12 +27,12 @@ export default ({ traveler, flight, updateTraveler, updateFlight, handleSubmit, 
 					floatingLabelText="flight number"
 					value={flight.flightNum}
 					floatingLabelFixed={true}
-					onChange={(evt) => updateFlight('number', evt.target.value)} />
+					onChange={(evt) => updateFlight('flightNum', evt.target.value)} />
 				<TextField
 					floatingLabelText="flight date"
 					value={flight.arrivalDate}
 					floatingLabelFixed={true}
-					onChange={(evt) => updateFlight('date', evt.target.value)} />
+					onChange={(evt) => updateFlight('arrivalDate', evt.target.value)} />
 				<TextField
 					floatingLabelText="status"
 					value={traveler.status}
