@@ -24,6 +24,7 @@ const seedFlights = () => db.Promise.each(dummyFlights, flight => db.model('flig
 const seedTravelers = () => db.Promise.each(dummyTravelers, traveler => db.model('traveler').create(traveler))
 
 db.didSync
+	.then(() => db.sync({ force: true }))
 	.then(seedFlights)
 	.then(flights => console.log(chalk.blue(`Seeded ${flights.length} flights...`)))
 	.then(seedTravelers)
