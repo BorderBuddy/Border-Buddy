@@ -16,7 +16,7 @@ export default {
     path: resolve(__dirname, 'dist')
   },
 
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
 
   resolve: {
     extensions: ['.js', '.jsx']
