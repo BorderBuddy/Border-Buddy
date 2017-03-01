@@ -7,7 +7,7 @@ import Homepage from "./containers/Homepage";
 import AllTravelers from "./containers/AllTravelers";
 import SingleTraveler from "./containers/SingleTraveler";
 import Login from './containers/Login';
-import AdminSignup from './containers/AdminSignup';
+import AdminSignup from './containers/AdminSignUp';
 
 // thunk action creators
 import { fetchAllTravelers } from './actions/travelers';

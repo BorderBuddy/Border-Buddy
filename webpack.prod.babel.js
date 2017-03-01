@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import { resolve } from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+
 export default {
 
   context: resolve(__dirname),
