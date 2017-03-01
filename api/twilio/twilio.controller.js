@@ -22,8 +22,6 @@ export function respondToText(req, res, next) {
 	var phoneStrTo = req.body.To.substring(req.body.To.length - 11);
 	var phoneStrFrom = req.body.From.substring(req.body.From.length - 10);
 	
-	console.log('USER RESPOND:', response);
-
 	if (response.toLowerCase() === 'ok') {
 		return Traveler.find({
 		    where: {

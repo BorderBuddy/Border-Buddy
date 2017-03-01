@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Login from "../components/Admin/Login";
-import { login } from '../actions/auth';
+import AdminSignUp from "../components/Admin/AdminSignUp";
+import { signup } from '../actions/auth';
 
-class LoginContainer extends Component {
+class SignupContainer extends Component {
 	constructor(props) {
 		super(props);
 
@@ -26,7 +26,7 @@ class LoginContainer extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.login({
+		this.props.signup({
 			email: this.state.email,
 			password: this.state.password
 		})
@@ -34,7 +34,7 @@ class LoginContainer extends Component {
 
 	render() {
 		return(
-			<Login 
+			<AdminSignUp 
 				handleEmailChange={this.handleEmailChange}
 				handlePasswordChange={this.handlePasswordChange}
 				handleSubmit={this.handleSubmit} />
@@ -43,7 +43,7 @@ class LoginContainer extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-	login: (user) => dispatch(login(user))
+	signup: (user) => dispatch(signup(user))
 })
 
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default connect(null, mapDispatchToProps)(SignupContainer);
