@@ -4,12 +4,12 @@
   "description": "Your Border Buddy",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js --exec babel-node --presets es2015,stage-2",
+    "start": "babel-node index.js",
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "build": "webpack --config webpack.prod.babel.js",
     "test": "./node_modules/.bin/mocha",
     "seed": "NODE_ENV=seeding babel-node database/seed.js",
-    "heroku-prebuild": "npm run build"
+    "heroku-postbuild": "npm run build"
   },
   "engines": {
     "node": "6.9.5",
