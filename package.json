@@ -13,7 +13,7 @@
     "seed": "NODE_ENV=seeding babel-node database/seed.js"
   },
   "engines": {
-    "node": "~5.10.1",
+    "node": "6.9.5",
     "npm": "3.8.3"
   },
   "repository": {
