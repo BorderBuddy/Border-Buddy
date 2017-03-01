@@ -5,30 +5,33 @@ const Traveler = db.define('traveler', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate : {
+    validate: {
       notEmpty: true
     }
   },
-  phone : {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate:{
-      notEmpty:true
-    }
-  },
-  connectivity : {
-    type: Sequelize.BOOLEAN
-  },
   nationality: {
     type: Sequelize.STRING
+  },
+  email: {
+    type: Sequelize.STRING
+  },
+  phone: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  connectivity: {
+    type: Sequelize.BOOLEAN
   },
   secondaryContact: {
     type: Sequelize.STRING
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['transit', 'unconfirmed','detained','cleared'],
-    defaultValue: 'unconfirmed'
+    values: ['transit', 'unconfirmed', 'detained', 'cleared'],
+    defaultValue: 'transit'
   },
 }, {
   underscored: true
