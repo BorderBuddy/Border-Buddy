@@ -7,7 +7,7 @@ import {
 
 const base = '/api/traveler';
 
-export default  (app) => {
+export default app => {
   app.post(base + '/', createNewTraveler);
   app.get(base + '/', getAllTravelers);
   app.get(base + '/:id', getById);
