@@ -5,21 +5,25 @@ const Flight = db.define('flight', {
   flightNum: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate : {
+    validate: {
+      notEmpty: true
+    }
+  },
+  airlineCode: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
       notEmpty: true
     }
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['arrived', 'delayed','scheduled'],
+    values: ['arrived', 'delayed', 'scheduled'],
     defaultValue: 'scheduled'
   },
-  arrivalDate: {
+  arrivalTime: {
     type: Sequelize.DATE,
     allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   }
 }, {
   underscored: true

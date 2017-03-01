@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "build": "webpack --config webpack.prod.babel.js",
     "test": "./node_modules/.bin/mocha",
-    "seed": "babel-node database/seed.js"
+    "seed": "NODE_ENV=seeding babel-node database/seed.js"
   },
   "engines": {
     "node": "~5.10.1",

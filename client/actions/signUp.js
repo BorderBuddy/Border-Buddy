@@ -1,17 +1,18 @@
-import { post } from "../utils/request";
 import {
-  USER_SIGNUP_REQUEST,
-  USER_SIGNUP_SUCCESS,
-  USER_SIGNUP_FAILURE
+  SET_SIGNUP_TRAVELER
 } from '../constants';
 
+import axios from 'axios';
 
-export function signup(params) {
-  return (dispatch) => {
-    dispatch({type: USER_SIGNUP_REQUEST});
+const setSignupTraveler = traveler => ({
+	type: SET_SIGNUP_TRAVELER,
+	traveler
+})
 
-    return post(`/travelers/add`, params)
-      .then((res)  => dispatch({type: USER_SIGNUP_SUCCESS, data: res}))
-      .catch((res) => dispatch({type: USER_SIGNUP_FAILURE, data: res}));
+export const signUpTraveler = traveler => {
+  return dispatch => {
+		axios.post('http://localhost:3000/api/traveler/', traveler)
+		.then(res => dispatch(setSignupTraveler(res.data)))
+		.catch(console.error)
   };
 }

@@ -1,11 +1,19 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { RaisedButton } from 'material-ui';
-import { TextField, DatePicker } from 'redux-form-material-ui';
+import { RaisedButton, MenuItem } from 'material-ui';
+import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 
-const required = value => value == null ? 'Required' : undefined;
 
-const SignUp = ({ handleSubmit, pristine, reset, submitting }) => {
+import { required, phone, email, validateCode, uppercase } from '../utils/validations'
+
+
+const airlinePicker = ({ input, label, style, type, meta: { asyncValidating, touched, error }}) => (
+    <div className={asyncValidating ? 'async-validating' : ''}>
+      <TextField {...input} type={type} floatingLabelText={label} style={style} errorText={touched && error && `${error}`} />
+    </div>
+);
+
+const SignUp = ({handleSubmit, valid}) => {
   const style = {
     form: {
       display: 'block',
@@ -23,61 +31,88 @@ const SignUp = ({ handleSubmit, pristine, reset, submitting }) => {
 
   return (
     <form style={style.form} onSubmit={handleSubmit}>
-      <legend>Sign Up for Border Budddy</legend>
+      <legend>Sign Up for Border Buddy</legend>
       <div>
         <Field
-          name="firstName"
-          component={TextField}
-          hintText="First Name"
-          validate={required}
-          style={style.input}
-        />
-        <Field
-          name="lastName"
+          name="name"
           component={TextField}
           validate={required}
-          hintText="Last Name"
+          floatingLabelText="Name"
           style={style.input}
         />
-      </div>
-      <div>
-        <Field
-          name="flightNumber"
-          component={TextField}
-          validate={required}
-          hintText="Flight Number"
-          style={style.input}
-        />
-        <Field
-          name="phoneNumber"
-          component={TextField}
-          hintText="Phone Number"
-          validate={required}
-          style={style.input}
-        />
-      </div>
-      <div>
         <Field
           name="nationality"
           component={TextField}
           validate={required}
-          hintText="Nationality"
+          floatingLabelText="Nationality"
+          style={style.input}
+        />
+      </div>
+      <div>
+        <Field
+          name="email"
+          component={TextField}
+          validate={[required, email]}
+          floatingLabelText="Email"
           style={style.input}
         />
         <Field
-          name="arrivalDate"
+          name="phone"
+          component={TextField}
+          floatingLabelText="Phone Number"
+          validate={[required, phone]}
+          style={style.input}
+        />
+      </div>
+      <div>
+        <Field
+          name="connectivity"
+          component={SelectField}
+          floatingLabelText="Do you have a smartphone?"
+          validate={required}
+          style={style.input}
+        >
+          <MenuItem value="true" primaryText="Yes" />
+          <MenuItem value="false" primaryText="No" />
+        </Field>
+        <Field
+          name="secondaryContact"
+          component={TextField}
+          floatingLabelText="Name/contact of friend or family in US"
+          style={style.input}
+        />
+      </div>
+      <div>
+        <Field
+          name="arrivalTime"
           component={DatePicker}
           validate={required}
           format={null}
-          hintText="What day do you arrive?"
+          floatingLabelText="What day do you arrive?"
+          style={style.input}
+        />
+        <Field
+          name="airlineCode"
+          component={airlinePicker}
+          validate={[uppercase, required]}
+          format={null}
+          label="Airline code"
+          style={style.input}
+        />
+        <Field
+          name="flightNum"
+          component={TextField}
+          validate={required}
+          format={null}
+          floatingLabelText="Flight number"
           style={style.input}
         />
       </div>
       <div>
         <RaisedButton
           type="submit"
-          label="Primary"
-          disabled={pristine || submitting}
+          label="Register"
+          disabled={!valid}
           primary={true}
           style={style.button}
         />
@@ -87,5 +122,7 @@ const SignUp = ({ handleSubmit, pristine, reset, submitting }) => {
 }
 
 export default reduxForm({
-  form: 'signUp'  // a unique identifier for this form
+  form: 'signUp',  // a unique identifier for this form
+  asyncValidate: validateCode,
+  asyncBlurFields: ['airlineCode']
 })(SignUp);

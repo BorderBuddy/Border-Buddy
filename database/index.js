@@ -5,9 +5,9 @@ const db = require('./db')
 require('./models')
 
 // Sync the db, creating it if necessary
-const isTest = process.env.NODE_ENV === 'testing';
+const testOrSeed = process.env.NODE_ENV === 'testing' || process.env.NODE_ENV === 'seeding';
 
-const sync = (force = isTest) => {
+const sync = (force = testOrSeed) => {
   return db.sync({ force }) 
     .then(ok => console.log(chalk.green(`Synced ${db.config.database} database`)))
     .catch(fail => {
