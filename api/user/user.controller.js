@@ -33,7 +33,6 @@ export function index(req, res) {
 export function create(req, res) {
   return User.create(req.body)
     .then(function(user) {
-      console.log("USER!!!", user);
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
       });

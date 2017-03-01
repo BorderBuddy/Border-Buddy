@@ -11,7 +11,6 @@ class SingleTravelerContainer extends Component {
 	constructor(props) {
 		super(props);
 
-    console.log(props);
 		this.state = {
       changed: false
 		};
@@ -41,17 +40,6 @@ class SingleTravelerContainer extends Component {
     .then(res => {
       browserHistory.push('/admin');
     })
-    // TODO: axios put to backend
-    // const { selectedTraveler, flight } = this.state;
-    // const updatingTraveler = axios.put(`http://localhost:3000/api/traveler/${selectedTraveler.id}`, selectedTraveler)
-    // const updatingFlight = axios.put(`http://localhost:3000/api/flight/${flight.id}`, flight)
-    // Promise.all[updatingTraveler, updatingFlight]
-    // .then(res => {
-    //   console.log('User Updated!', res)
-    //   browserHistory.push('/admin')
-    // })
-    console.log(this.props);
-
   }
 
 	render() {

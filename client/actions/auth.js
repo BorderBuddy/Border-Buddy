@@ -7,7 +7,6 @@ export const setAuth = auth => ({ type: SET_AUTH, auth });
 export const login = (user) => dispatch => {
   return axios.post('http://localhost:3000/api/auth/local', user)
   .then(user => {
-    console.log(user);
     dispatch(setAuth(user.data));
     browserHistory.push('/admin');
   })
@@ -15,7 +14,6 @@ export const login = (user) => dispatch => {
 }
 
 export const signup = (user) => dispatch => {
-  console.log(user)
   return axios.post('http://localhost:3000/api/user', user)
   .then(user => {
     dispatch(setAuth(user.data));
