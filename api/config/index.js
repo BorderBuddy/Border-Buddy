@@ -13,8 +13,8 @@ export var config = {
 	  password: 'root'
   },
   twilio: {
-    adminPhone: '+16467604992',
-    messagingSid: 'MGf13fd7032263f8f5e2c734bade0803c5',
+    adminPhone: process.env.TWILIO_PHONE_NUM || '+16467604992',
+    messagingSid: process.env.TWILIO_MESSAGING_SID || 'MGf13fd7032263f8f5e2c734bade0803c5',
     accountSid: process.env.TWILIO_ACCOUNT_SID || 'ACde926fde88fb151e8e1ef78ae455c857',
     authToken: process.env.TWILIO_AUTH_TOKEN || '6e55da4fe90cbeaa74a981819dfaef38'
   }

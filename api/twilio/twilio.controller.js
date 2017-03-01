@@ -1,20 +1,32 @@
 import { config } from '../config';
 import Traveler from '../../database/models/travelers';
 import _ from 'lodash';
-const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);     
+const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
 
-export function sendText(req, res){
+export const sendText = (req, res, next) => {
+	console.log('hit sendText route')
 	if (_.isEmpty(req.body)) {
 		return res.status(404).json({});
-	}
+	}	
 
-    Twilio.sendMessage({
-        to: req.body.to,
-        messagingServiceSid: config.twilio.messagingSid,
-        body: req.body.message,
-    }, function(err, result) {
-    	return res.status(200).json(result);
-    });
+	Twilio.sendMessage({
+	    to: req.body.to,
+	    messagingServiceSid: config.twilio.messagingSid,
+	    body: req.body.message,
+	}, (err, result) => {
+		if (err) next(err)
+		return res.status(200).json(result);
+	});
+
+	// Twilio.messages.create({
+	// 	to: req.body.to,
+	// 	messagingServiceSid: config.twilio.messagingServiceSid,
+	// 	body: req.body.message
+	// }, (err, result) => {
+	// 	if (err) next(err);
+	// 	res.status(200).json(result)
+	// })
+
 };
 
 export function respondToText(req, res, next) {
