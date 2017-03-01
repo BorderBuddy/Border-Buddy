@@ -1,4 +1,5 @@
-import { FLIGHT_STATS_ID, FLIGHT_STATS_KEY } from './apiKeys';
+const FLIGHT_STATS_ID = process.env.FLIGHT_STATS_ID || require('./apiKeys').FLIGHT_STATS_ID
+const FLIGHT_STATS_KEY = process.env.FLIGHT_STATS_KEY || require('./apiKeys').FLIGHT_STATS_KEY
 
 const baseline = 'https://api.flightstats.com/flex'
 const keys = `?appId=${FLIGHT_STATS_ID}&appKey=${FLIGHT_STATS_KEY}`
