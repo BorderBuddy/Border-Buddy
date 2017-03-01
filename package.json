@@ -4,7 +4,7 @@
   "description": "Your Border Buddy",
   "main": "index.js",
   "scripts": {
-    "start": "npm run start-server && npm run build",
+    "start": "npm run build && npm run start-server",
     "start-server": "babel-node index.js",
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "dev-server": "nodemon index.js --exec babel-node --presets es2015,stage-2",
