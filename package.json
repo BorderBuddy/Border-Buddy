@@ -12,7 +12,7 @@
     "heroku-postbuild": "npm run build"
   },
   "engines": {
-    "node": "7.1.0",
+    "node": "6.9.5",
     "npm": "4.3.0"
   },
   "repository": {
