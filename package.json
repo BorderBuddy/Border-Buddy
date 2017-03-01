@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run start-server",
-    "start-server": "nodemon index.js --exec babel-node --presets es2015,stage-2",
+    "start-server": "babel-node index.js",
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
+    "dev-server": "nodemon index.js --exec babel-node --presets es2015,stage-2",
     "build": "webpack --config webpack.prod.babel.js",
     "test": "./node_modules/.bin/mocha",
     "seed": "NODE_ENV=seeding babel-node database/seed.js"
