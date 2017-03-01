@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 const required = value => value == null ? 'Required' : undefined;
 
-const AdminLogin = ({ handleSubmit, pristine, reset, submitting, handleEmailChange, handlePasswordChange }) => {
+const AdminSignUp = ({ handleSubmit, pristine, reset, submitting, handleEmailChange, handlePasswordChange }) => {
 
 	const style = {
 		"margin": "5em auto",
@@ -15,7 +15,7 @@ const AdminLogin = ({ handleSubmit, pristine, reset, submitting, handleEmailChan
 
 	return (
 		<div style={style}>
-			<legend>Admin Login</legend>
+			<legend>Admin SignUp</legend>
 			<form onSubmit={handleSubmit}>
 				<Field 
 					name="email" 
@@ -31,15 +31,15 @@ const AdminLogin = ({ handleSubmit, pristine, reset, submitting, handleEmailChan
 					validate={required}
 					onChange={handlePasswordChange}
 				/>
-				<RaisedButton 
+				<RaisedButton
 					type="submit"
-					label="Login"
+					label="Sign Up"
 					disabled={pristine || submitting}
 					primary={true} 
 				/>
 			</form>
-			<h3>I don't have an account</h3>
-			<Link to='/signup'><RaisedButton label="Signup"/></Link>
+			<h3>I have an account</h3>
+			<Link to='/login'><RaisedButton label="Login"/></Link>
 		</div>
 	)
 
@@ -47,5 +47,5 @@ const AdminLogin = ({ handleSubmit, pristine, reset, submitting, handleEmailChan
 
 
 export default reduxForm({
-	form: "adminLogin"
-})(AdminLogin);
+	form: "adminSignup"
+})(AdminSignUp);
