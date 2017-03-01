@@ -52,7 +52,7 @@ export const getFlightStatus = (...args) => {
 	})
 	.catch(err => {
 		console.error(err)
-		return null;
+		return err;
 	})
 }
 

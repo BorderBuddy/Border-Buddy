@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Dialog, FlatButton, RaisedButton } from 'material-ui';
 import SignUp from '../components/SignUp';
 import FlightConfirmation from '../components/FlightConfirmation';
-import { signUp } from '../actions/signUp';
+import { signUpTraveler } from '../actions/signUp';
 
 
 class Homepage extends Component {
@@ -26,10 +25,10 @@ class Homepage extends Component {
   }
 
   confirmSubmit() {
-    // const { signUp } = this.props;
+    const { createTraveler } = this.props;
     const { values } = this.props.form.signUp;
-    console.log('values are ', values);
-    // signUp(values);
+    createTraveler(values);
+    this.handleClose();
   }
 
   handleSubmit(e) {
@@ -46,7 +45,7 @@ class Homepage extends Component {
     .then(response => {
       this.setState({ flight: response.data, open: true});
     })
-    .catch(() => {
+    .catch((e) => {
       this.setState({ flight: null, open: true });
     });
   }
@@ -86,7 +85,7 @@ class Homepage extends Component {
             this.state.flight ?
             <FlightConfirmation flight={this.state.flight} />
             :
-            <h3>'Sorry, we could not find your flight'</h3>
+            <h4>Sorry, we could not find your flight</h4>
           }
         </Dialog>
       </div>
@@ -98,9 +97,9 @@ class Homepage extends Component {
 
 const mapStateToProps = ({form}) => ({form});
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ signUp }, dispatch);
-};
+const mapDispatchToProps = dispatch => ({
+  createTraveler: traveler => dispatch(signUpTraveler(traveler))
+});
 
 export default connect(
   mapStateToProps,

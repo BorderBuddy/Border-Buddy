@@ -4,7 +4,7 @@ import { RaisedButton, MenuItem } from 'material-ui';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 
 
-import { required, email, validateCode, uppercase } from '../utils/validations'
+import { required, phone, email, validateCode, uppercase } from '../utils/validations'
 
 
 const airlinePicker = ({ input, label, style, type, meta: { asyncValidating, touched, error }}) => (
@@ -60,7 +60,7 @@ const SignUp = ({handleSubmit, valid}) => {
           name="phone"
           component={TextField}
           floatingLabelText="Phone Number"
-          validate={required}
+          validate={[required, phone]}
           style={style.input}
         />
       </div>

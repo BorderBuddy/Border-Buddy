@@ -18,7 +18,7 @@ const Flight = db.define('flight', {
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['arrived', 'delayed','scheduled'],
+    values: ['arrived', 'delayed', 'scheduled'],
     defaultValue: 'scheduled'
   },
   arrivalTime: {
