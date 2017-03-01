@@ -40,7 +40,6 @@ class SingleTravelerContainer extends Component {
     .then(res => {
       browserHistory.push('/admin');
     })
-  }
 
 	render() {
 		const { selectedTraveler, flight } = this.props;
