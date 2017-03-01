@@ -8,7 +8,7 @@ require('./models')
 const testOrSeed = process.env.NODE_ENV === 'testing' || process.env.NODE_ENV === 'seeding';
 
 const sync = (force = testOrSeed) => {
-  return db.sync({ force: true }) 
+  return db.sync({ force }) 
     .then(ok => console.log(chalk.green(`Synced ${db.config.database} database`)))
     .catch(fail => {
       console.log(chalk.yellow(`Creating ${db.config.database} database...`))
