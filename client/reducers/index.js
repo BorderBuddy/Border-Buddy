@@ -5,6 +5,7 @@ import signUpTravelerReducer from './signUpTraveler'
 import travelersReducer from './travelers';
 import selectedTravelerReducer from './selectedTraveler';
 import flightReducer from './flight';
+import authReducer from './auth';
 
 
 const reducer = combineReducers({
@@ -13,7 +14,8 @@ const reducer = combineReducers({
   signUpTraveler: signUpTravelerReducer,
   travelers: travelersReducer,
   selectedTraveler: selectedTravelerReducer,
-  flight: flightReducer
+  flight: flightReducer,
+  auth: authReducer
 });
 
 export default reducer;
