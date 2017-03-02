@@ -10,30 +10,38 @@ var validateJwt = expressJwt({
 
 export function isAuthenticated() {
   return compose()
-    .use(function(req, res, next) {
+    .use(
+      function(req, res, next) {
       // in cases token passed through query params
       if (req.query && req.query.hasOwnProperty('access_token')) {
         req.headers.authorization = 'Bearer ' + req.query.access_token;
       }
-     
-      validateJwt(req, res, next);
+      if(req.headers.authorization === 'undefined') {
+        res.sendStatus(401)
+      }
+      else {
+        jwt.verify(req.headers.authorization, config.secrets.session, (err, user) => {
+          if(err) next(err)
+          else {
+            User.find({
+              _id: user._id
+            })
+            .then(user => {
+              if(!user) {
+                res.status(401).end();
+              }
+              req.user = user;
+              console.log("YO", user);
+              let token = signToken(user._id)
+              res.json({ token })
+              next();
+            })
+            .catch(err => next(err));
+          }
+        })
+      }
+      // validateJwt(req, res, next)
     })
-    .use(function(req, res, next) {
-      User
-        .find({
-          where: {
-            _id: req.user._id
-          }
-        })
-        .then(user => {
-          if (!user) {
-            return res.status(401).end();
-          }
-          req.user = user;
-          next();
-        })
-        .catch(err => next(err));
-    });
 }
 
 export function signToken(id) {
