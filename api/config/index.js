@@ -13,9 +13,10 @@ export var config = {
 	  password: 'root'
   },
   twilio: {
-    adminPhone: process.env.TWILIO_PHONE_NUM || '+16467604992',
-    messagingSid: process.env.TWILIO_MESSAGING_SID || 'MGf13fd7032263f8f5e2c734bade0803c5',
-    accountSid: process.env.TWILIO_ACCOUNT_SID || 'ACde926fde88fb151e8e1ef78ae455c857',
-    authToken: process.env.TWILIO_AUTH_TOKEN || '6e55da4fe90cbeaa74a981819dfaef38'
+    adminPhone: process.env.TWILIO_PHONE_NUM || '+15005550006', // test num only https://www.twilio.com/docs/api/rest/test-credentials
+    messagingSid: process.env.TWILIO_MESSAGING_SID || 'MGba927c2be4ce4dceff68aa24b4e85a32',
+    accountSid: process.env.TWILIO_ACCOUNT_SID || 'ACdf9040cbb781f0eb315a6ef0bd4def99', // test version hard-coded
+    authToken: process.env.TWILIO_AUTH_TOKEN || '246e9034039a5bdfeb5e8fd2027f42c9' // test version hard-coded
   }
 };
+
