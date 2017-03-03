@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import AppBarMenu from '../components/admin/AppBarMenu';
+import AppBarMenu from '../components/Admin/AppBarMenu';
 import { signout } from '../actions/auth';
 
 class AppBarMenuContainer extends Component {
@@ -9,7 +9,7 @@ class AppBarMenuContainer extends Component {
     super(props)
     this.onCreateUserClick = this.onCreateUserClick.bind(this);
     this.onSignoutClick = this.onSignoutClick.bind(this);
-  };
+  }
 
   onCreateUserClick() {
     browserHistory.push('/admin/createuser')

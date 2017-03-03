@@ -9,7 +9,8 @@
     "build": "webpack --config webpack.prod.babel.js",
     "test": "./node_modules/.bin/mocha",
     "seed": "NODE_ENV=seeding babel-node database/seed.js",
-    "heroku-postbuild": "npm run build"
+    "deploy-seed": "NODE_ENV=seeding babel-node database/deploymentSeed.js",
+    "heroku-postbuild": "npm run build && npm run deploy-seed"
   },
   "engines": {
     "node": "6.9.5",

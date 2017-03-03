@@ -2,8 +2,17 @@ import React, {Component} from 'react';
 import TravelerRow from './TravelerRow'
 
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-import { nameStyle, phoneStyle, nationalityStyle, flightStyle, idStyle } from './styles'
-
+import { 
+	nameStyle, 
+	phoneStyle, 
+	nationalityStyle, 
+	idStyle, 
+	flightCodeStyle,
+	flightNumStyle,
+	flightStatusStyle,
+	arrivalTimeStyle,
+	travelerStatusStyle
+} from './styles';
 export default ({ travelers, selectTraveler }) => (
 	
 	
@@ -14,9 +23,11 @@ export default ({ travelers, selectTraveler }) => (
 	        <TableHeaderColumn style={nameStyle}>Name</TableHeaderColumn>
 	        <TableHeaderColumn style={phoneStyle}>Phone</TableHeaderColumn>
 	        <TableHeaderColumn style={nationalityStyle} >Nationality</TableHeaderColumn>
-	        <TableHeaderColumn style={flightStyle}>Flight #</TableHeaderColumn>
-	        <TableHeaderColumn>Arrival Time</TableHeaderColumn>
-	        <TableHeaderColumn>Status</TableHeaderColumn>
+	        <TableHeaderColumn style={flightCodeStyle}>Airline Code</TableHeaderColumn>
+	        <TableHeaderColumn style={flightNumStyle}>Flight #</TableHeaderColumn>
+	        <TableHeaderColumn style={arrivalTimeStyle}>Arrival Time</TableHeaderColumn>
+	        <TableHeaderColumn style={flightStatusStyle}>Flight Status</TableHeaderColumn>
+	        <TableHeaderColumn style={travelerStatusStyle}>Traveler Status</TableHeaderColumn>
 	      </TableRow>
 	    </TableHeader>
 	    <TableBody>

@@ -1,5 +1,9 @@
 export const idStyle = { width: '4vw' };
-export const flightStyle = { width: '10vw', textAlign: 'left' };
-export const nationalityStyle = { width: '8vw', textAlign: 'left' };
-export const phoneStyle = { width: '15vw', textAlign: 'left' };
-export const nameStyle = { width: '20vw', textAlign: 'left' };
+export const nameStyle = { width: '15vw', textAlign: 'left' };
+export const phoneStyle = { width: '14vw', textAlign: 'left' };
+export const nationalityStyle = { width: '12vw', textAlign: 'left' };
+export const flightCodeStyle = { width: '7vw', textAlign: 'left' };
+export const flightNumStyle = { width: '7vw', textAlign: 'left' };
+export const arrivalTimeStyle = {width: '20vw', textAlighn: 'left' };
+export const flightStatusStyle = {width: '10vw', textAlign: 'left' };
+export const travelerStatusStyle = {width: '10vw', textAlign: 'left' };
