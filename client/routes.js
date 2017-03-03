@@ -1,50 +1,31 @@
-import React from "react";
-import { Route, browserHistory } from "react-router";
-import {store} from './index';
+import React from 'react';
+import { Route, IndexRoute } from 'react-router';
 
 // Components
-import Homepage from "./containers/Homepage";
+import Homepage from './containers/Homepage';
 import AdminContainer from './containers/AdminContainer';
-import AllTravelers from "./containers/AllTravelers";
-import SingleTraveler from "./containers/SingleTraveler";
+import AllTravelers from './containers/AllTravelers';
+import SingleTraveler from './containers/SingleTraveler';
 import Login from './containers/Login';
-import AdminSignup from './containers/AdminSignUp';
+import AdminSignUp from './containers/AdminSignUp';
+import Success from './containers/Success';
+import SignUp from './containers/SignUp';
 
-// thunk action creators
-import { fetchAllTravelers } from './actions/travelers';
-import { fetchSelectedTraveler } from './actions/selectedTraveler';
-import { checkToken } from './actions/auth';
-
-const onAdminEnter = () => {
-	store.dispatch(checkToken())
-	.then(() => {
-		if(!window.localStorage.accessToken) {
-			browserHistory.push('/login');
-		}
-	})
-	.catch(err => {
-		console.error("Cookie Expired", err);
-		browserHistory.push('/login');
-	})
-}
-
-const onTravelersListEnter = () => {
-	store.dispatch(fetchAllTravelers())
-}
-
-const onSingleTravelerEnter = ({ params }) => {
-	store.dispatch(fetchSelectedTraveler(params.id))
-}
+// Router Hooks
+import { onSuccessEnter, onSuccessLeave, onAdminEnter, onTravelersListEnter, onSingleTravelerEnter } from './utils/hooks';
 
 const getRoutes = () => (
 	<div>
-	  <Route path='/' component={Homepage} />
-		<Route path='/admin' component={AdminContainer} onEnter={onAdminEnter}>
-	  	<Route path='travelers' component={AllTravelers} onEnter={onTravelersListEnter} />
-    	<Route path='travelers/:id' component={SingleTraveler} onEnter={onSingleTravelerEnter} />
-			<Route path='createuser' component={AdminSignup} />
+	  <Route path="/" component={Homepage}>
+			<IndexRoute component={SignUp} />
+		  <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} />
 		</Route>
-    <Route path='/login' component={Login} />
+		<Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
+			<Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
+			<Route path="travelers/:id" component={SingleTraveler} onEnter={onSingleTravelerEnter} />
+			<Route path="createuser" component={AdminSignUp} />
+		</Route>
+    <Route path="/login" component={Login} />
 	</div>
 );
 
