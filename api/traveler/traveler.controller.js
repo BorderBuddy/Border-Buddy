@@ -1,6 +1,11 @@
 import Traveler from '../../database/models/travelers';
 import Flight from '../../database/models/flights';
 
+import chalk from 'chalk';
+
+import { Twilio } from '../twilio/twilio.controller';
+import { config  } from '../config';
+
 
 export const createNewTraveler = (req, res, next) => {
   const { flightNum, airlineCode, arrivalTime,
@@ -23,13 +28,25 @@ export const createNewTraveler = (req, res, next) => {
     });
   })
   .then(traveler => {
-    return traveler.setFlight(globalFlight)
+    return traveler.setFlight(globalFlight);
   })
-  .then(finalTraveler => { // does not include flight object
-    res.status(201).json(finalTraveler)
+  .then(finalTraveler => {
+    res.status(201).json(finalTraveler);
+
+    // not chaining as promise
+    // in future, maybe confirm user phone num before persisting
+    Twilio.sendMessage({
+      to: finalTraveler.phone,
+      from: config.twilio.adminPhone,
+      body: `Thanks for registering with BorderBuddy, ${finalTraveler.name}! Safe travels, and text OK to this number when have passed through customs and immigration.`
+    }, (err, result) => {
+      if (err) console.error(chalk.red(err));
+      else return;
+    });
+
   })
   .catch(next);
-}
+};
 
 export function getAllTravelers(req, res, next) {
   return Traveler.findAll({ include: [{ all: true }] })

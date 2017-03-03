@@ -1,7 +1,7 @@
 import { config } from '../config';
 import Traveler from '../../database/models/travelers';
 import _ from 'lodash';
-const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
+export const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
 
 // admin hits this api to send text to users
 export const sendText = (req, res, next) => {
