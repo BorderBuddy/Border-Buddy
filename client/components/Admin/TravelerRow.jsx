@@ -5,7 +5,7 @@ import { nameStyle, phoneStyle, nationalityStyle, flightStyle, idStyle } from '.
 
 
 export default ({ traveler }) => (
-		<TableRow onTouchTap={() => browserHistory.push(`/admin/${traveler.id}`)}>
+		<TableRow onTouchTap={() => browserHistory.push(`/admin/travelers/${traveler.id}`)}>
 			<TableRowColumn style={idStyle}>{traveler.id}</TableRowColumn>
 			<TableRowColumn style={nameStyle}>{traveler.name}</TableRowColumn>
 			<TableRowColumn style={phoneStyle}>{traveler.phone}</TableRowColumn>

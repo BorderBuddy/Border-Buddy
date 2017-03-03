@@ -9,7 +9,7 @@ export const login = (user) => dispatch => {
   .then(response => {
     window.localStorage.setItem('accessToken', response.data.token);
     dispatch(setAuth(response.data));
-    browserHistory.push('/admin');
+    browserHistory.push('/admin/travelers');
   })
   .catch(err => console.error("ERROR!!!", err));
 }
@@ -19,20 +19,29 @@ export const signup = (user) => dispatch => {
   .then(response => {
     window.localStorage.setItem('accessToken', response.data.token);
     dispatch(setAuth(response.data));
-    browserHistory.push('/admin');
+    browserHistory.push('/admin/travelers');
   })
   .catch(err => console.error("ERROR!", err));
 }
 
-export const tokenQuery = axios.create({
-  baseURL: 'http://localhost:3000/api/auth/checkToken',
-  timeout: 1000,
-  headers: { 'Authorization': window.localStorage.accessToken }
-})
-
 export const checkToken = () => dispatch => {
-  return tokenQuery.post('')
+  return axios.get('http://localhost:3000/api/auth/checkToken', {
+    headers: {
+      'Authorization': window.localStorage.accessToken
+    }
+  })
   .then(response => {
     dispatch(setAuth(response.data));
   })
+}
+
+export const signout = () => dispatch => {
+  axios.post('http://localhost:3000/api/auth/logout')
+  .then(() => {
+    console.log("HI HI HI")
+    window.localStorage.clear()
+    dispatch(setAuth(null));
+    browserHistory.push('/login')
+  })
+  .catch(err => console.error(err));
 }

@@ -38,8 +38,6 @@ const AdminSignUp = ({ handleSubmit, pristine, reset, submitting, handleEmailCha
 					primary={true} 
 				/>
 			</form>
-			<h3>I have an account</h3>
-			<Link to='/login'><RaisedButton label="Login"/></Link>
 		</div>
 	)
 
