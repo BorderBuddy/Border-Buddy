@@ -20,6 +20,7 @@ class SingleTravelerContainer extends Component {
 	}
 
   updateTraveler(key, value) {
+    console.log(key, value);
     const newState = {[key]: value};
     const { setSelectedTraveler, selectedTraveler } = this.props;
     setSelectedTraveler(Object.assign({}, selectedTraveler, newState));
@@ -38,7 +39,7 @@ class SingleTravelerContainer extends Component {
     const { updateTraveler, updateFlight, selectedTraveler, flight } = this.props;
     Promise.all([updateTraveler(selectedTraveler), updateFlight(flight)])
     .then(res => {
-      browserHistory.push('/admin');
+      browserHistory.push('/admin/travelers');
     })
   }
 

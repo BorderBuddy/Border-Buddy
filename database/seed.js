@@ -1,5 +1,12 @@
 const db = require('./index');
 const chalk = require('chalk')
+import { User } from './models/user';
+
+const users = [
+  { email: 'andrew@borderBuddy.us', password: '1234' },
+  { email: 'dillon@borderBuddy.us', password: '1234' },
+  { email: 'admin@borderBuddy.us', password: '1234' }
+]
 
 const dummyFlights = [{
 	flightNum: '88',
@@ -23,6 +30,7 @@ const dummyTravelers = [
 
 const seedFlights = () => db.Promise.each(dummyFlights, flight => db.model('flight').create(flight))
 const seedTravelers = () => db.Promise.each(dummyTravelers, traveler => db.model('traveler').create(traveler))
+const seedUsers = () => db.Promise.each(users, user => User.create(user));
 
 db.didSync
 	.then(() => db.sync({ force: true }))
@@ -30,5 +38,7 @@ db.didSync
 	.then(flights => console.log(chalk.blue(`Seeded ${flights.length} flights...`)))
 	.then(seedTravelers)
 	.then(travelers => console.log(chalk.blue(`Seeded ${travelers.length} travelers...`)))
-	.catch(error => console.error(chalk.red(error)))
+	.then(seedUsers)
+	.then(users => console.log(chalk.blue(`Seeded ${users.length} users...`)))
+	.catch(error => console.error(chalk.red(error.stack)))
 	
