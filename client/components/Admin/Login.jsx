@@ -38,8 +38,6 @@ const AdminLogin = ({ handleSubmit, pristine, reset, submitting, handleEmailChan
 					primary={true} 
 				/>
 			</form>
-			<h3>I don't have an account</h3>
-			<Link to='/signup'><RaisedButton label="Signup"/></Link>
 		</div>
 	)
 

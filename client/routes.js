@@ -4,6 +4,7 @@ import {store} from './index';
 
 // Components
 import Homepage from "./containers/Homepage";
+import AdminContainer from './containers/AdminContainer';
 import AllTravelers from "./containers/AllTravelers";
 import SingleTraveler from "./containers/SingleTraveler";
 import Login from './containers/Login';
@@ -14,33 +15,36 @@ import { fetchAllTravelers } from './actions/travelers';
 import { fetchSelectedTraveler } from './actions/selectedTraveler';
 import { checkToken } from './actions/auth';
 
+const onAdminEnter = () => {
+	store.dispatch(checkToken())
+	.then(() => {
+		if(!window.localStorage.accessToken) {
+			browserHistory.push('/login');
+		}
+	})
+	.catch(err => {
+		console.error("Cookie Expired", err);
+		browserHistory.push('/login');
+	})
+}
+
 const onTravelersListEnter = () => {
-	if(!window.localStorage.accessToken) {
-		browserHistory.push('/login')
-	} else {
-		store.dispatch(fetchAllTravelers())
-	}
+	store.dispatch(fetchAllTravelers())
 }
 
 const onSingleTravelerEnter = ({ params }) => {
-	if(!store.getState().auth.token) {
-		browserHistory.push('/login')
-	} else {
-		store.dispatch(fetchSelectedTraveler(params.id))
-	}
-}
-
-const onLoginEnter = () => {
-	store.dispatch(checkToken())
+	store.dispatch(fetchSelectedTraveler(params.id))
 }
 
 const getRoutes = () => (
 	<div>
 	  <Route path='/' component={Homepage} />
-	  <Route path='/admin' component={AllTravelers} onEnter={onTravelersListEnter} />
-    <Route path='/admin/:id' component={SingleTraveler} onEnter={onSingleTravelerEnter} />
-    <Route path='/login' component={Login} onEnter={onLoginEnter} />
-		<Route path='/signup' component={AdminSignup} />
+		<Route path='/admin' component={AdminContainer} onEnter={onAdminEnter}>
+	  	<Route path='travelers' component={AllTravelers} onEnter={onTravelersListEnter} />
+    	<Route path='travelers/:id' component={SingleTraveler} onEnter={onSingleTravelerEnter} />
+			<Route path='createuser' component={AdminSignup} />
+		</Route>
+    <Route path='/login' component={Login} />
 	</div>
 );
 
