@@ -21,10 +21,15 @@ $break-medium: 750px;
 	.link-external {
 		display: block;
 		color: black;
+		text-decoration: none;
+		transition: all ease 0.5s;
+		-webkit-transition: all ease 0.5s;
+		-moz-transition: all ease 0.5s;
+		-o-transition: all ease 0.5s;
 
 		&:hover {
 			color: #bd1c11;
-		}
+		}		
 	}
 
 
