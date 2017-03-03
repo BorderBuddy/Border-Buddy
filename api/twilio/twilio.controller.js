@@ -1,51 +1,74 @@
 import { config } from '../config';
 import Traveler from '../../database/models/travelers';
 import _ from 'lodash';
-const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);     
+const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
 
-export function sendText(req, res){
+// admin hits this api to send text to users
+export const sendText = (req, res, next) => {
 	if (_.isEmpty(req.body)) {
-		return res.status(404).json({});
+		return res.status(404).end();
 	}
 
-    Twilio.sendMessage({
-        to: req.body.to,
-        messagingServiceSid: config.twilio.messagingSid,
-        body: req.body.message,
-    }, function(err, result) {
-    	return res.status(200).json(result);
-    });
+	Twilio.sendMessage({
+	    to: req.body.to,
+	    from: config.twilio.adminPhone,
+	    body: req.body.message,
+	}, (err, result) => {
+		if (err) next(err);
+		return res.status(200).json(result);
+	});
+
 };
 
-export function respondToText(req, res, next) {
-	var response = req.body.Body;
-	var phoneStrTo = req.body.To.substring(req.body.To.length - 11);
-	var phoneStrFrom = req.body.From.substring(req.body.From.length - 10);
-	
-	if (response.toLowerCase() === 'ok') {
-		return Traveler.find({
-		    where: {
-		    	phone: phoneStrTo 
-		    }
-		})
-		.then(traveler => {
-		    if (!traveler) {
-		    	return res.status(404).end();
-		    }
-		    traveler.status = 'cleared';
-		    traveler.save()
-		    	.then(function(traveler) {
-				    return res.json(traveler);
-			    });
+// webhook from twilio will hit this route
+export const respondToText = (req, res, next) => {
+	const msgBody = req.body.Body;
+	const travelerPhone = req.body.From.slice(2, req.body.From.length); // remove +1
 
-		    return res.status(200).end();
-		})
-		.catch(function(err) {
-			return res.status(404).json(err);
-		});
-	} else {
-		// TODO: Scheduler for sending a text again to user prompting status if ok
+	if (req.body.AccountSid !== config.twilio.accountSid) {
+		return res.status(403).end();
 	}
 
-	return res.status(200).json({});
-}
+	if (msgBody.toLowerCase() !== 'ok') {
+		return res.status(400).end();
+	}
+
+	Traveler.findOne({
+    where: {
+			phone: travelerPhone
+    }
+	})
+	.then(traveler => {
+    if (!traveler) {
+			return res.status(404).end();
+    }
+    traveler.status = 'cleared';
+    return traveler.save();
+	})
+	.then(traveler => {
+		const xml = `
+		<?xml version="1.0" encoding="UTF-8"?>
+		<Response>
+		    <Message>Welcome home, ${traveler.name}! You have been marked as cleared. Thanks for using BorderBuddy.</Message>
+		</Response>`;
+		res.status(200).send(xml);
+	})
+	.catch(next);
+};
+
+
+/*------------ HELPER FUNCTION FOR CRON JOB ONLY -------------*/
+
+export const sendVerification = (body, user) => {
+	return new Promise((resolve, reject) => {
+		Twilio.sendMessage({
+			to: user.phone,
+			from: config.twilio.adminPhone,
+			body
+		}, (err, result) => {
+			if (err) reject(err);
+			else resolve(result);
+		});
+	});
+};
+
