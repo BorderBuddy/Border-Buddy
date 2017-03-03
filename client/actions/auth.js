@@ -7,7 +7,7 @@ export const setAuth = auth => ({ type: SET_AUTH, auth });
 export const login = (user) => dispatch => {
   return axios.post('http://localhost:3000/api/auth/local', user)
   .then(response => {
-    window.sessionStorage.accessToken = response.data.token;
+    window.localStorage.setItem('accessToken', response.data.token);
     dispatch(setAuth(response.data));
     browserHistory.push('/admin');
   })
@@ -17,7 +17,7 @@ export const login = (user) => dispatch => {
 export const signup = (user) => dispatch => {
   return axios.post('http://localhost:3000/api/user', user)
   .then(response => {
-    Storage.setItem(accessToken, response.data.token);
+    window.localStorage.setItem('accessToken', response.data.token);
     dispatch(setAuth(response.data));
     browserHistory.push('/admin');
   })
@@ -27,11 +27,10 @@ export const signup = (user) => dispatch => {
 export const tokenQuery = axios.create({
   baseURL: 'http://localhost:3000/api/auth/checkToken',
   timeout: 1000,
-  headers: { 'Authorization': window.sessionStorage.accessToken }
+  headers: { 'Authorization': window.localStorage.accessToken }
 })
 
 export const checkToken = () => dispatch => {
-  console.log('yo');
   return tokenQuery.post('')
   .then(response => {
     dispatch(setAuth(response.data));

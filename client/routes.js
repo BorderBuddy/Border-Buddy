@@ -15,7 +15,7 @@ import { fetchSelectedTraveler } from './actions/selectedTraveler';
 import { checkToken } from './actions/auth';
 
 const onTravelersListEnter = () => {
-	if(!window.sessionStorage.accessToken) {
+	if(!window.localStorage.accessToken) {
 		browserHistory.push('/login')
 	} else {
 		store.dispatch(fetchAllTravelers())
