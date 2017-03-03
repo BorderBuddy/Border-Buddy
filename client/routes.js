@@ -23,6 +23,7 @@ const onAdminEnter = () => {
 		}
 	})
 	.catch(err => {
+		console.error("Cookie Expired", err);
 		browserHistory.push('/login');
 	})
 }

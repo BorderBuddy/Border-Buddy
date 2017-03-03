@@ -16,7 +16,11 @@ export default class AdminContainer extends Component {
       <div>
         <AppBar
           title="Border Buddy"
-          iconElementLeft={<IconButton><ActionFlightTakeoff /></IconButton>}
+          iconElementLeft={
+            <IconButton onClick={() => browserHistory.push('/admin/travelers')}>
+              <ActionFlightTakeoff />
+            </IconButton>
+          }
           iconElementRight={<AppBarMenu />}
         />
         {this.props.children}
