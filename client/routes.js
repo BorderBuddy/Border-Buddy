@@ -12,9 +12,10 @@ import AdminSignup from './containers/AdminSignUp';
 // thunk action creators
 import { fetchAllTravelers } from './actions/travelers';
 import { fetchSelectedTraveler } from './actions/selectedTraveler';
+import { checkToken } from './actions/auth';
 
 const onTravelersListEnter = () => {
-	if(!store.getState().auth.token) {
+	if(!window.sessionStorage.accessToken) {
 		browserHistory.push('/login')
 	} else {
 		store.dispatch(fetchAllTravelers())
@@ -29,12 +30,16 @@ const onSingleTravelerEnter = ({ params }) => {
 	}
 }
 
+const onLoginEnter = () => {
+	store.dispatch(checkToken())
+}
+
 const getRoutes = () => (
 	<div>
 	  <Route path='/' component={Homepage} />
 	  <Route path='/admin' component={AllTravelers} onEnter={onTravelersListEnter} />
     <Route path='/admin/:id' component={SingleTraveler} onEnter={onSingleTravelerEnter} />
-    <Route path='/login' component={Login} />
+    <Route path='/login' component={Login} onEnter={onLoginEnter} />
 		<Route path='/signup' component={AdminSignup} />
 	</div>
 );
