@@ -31,7 +31,6 @@ export function isAuthenticated() {
                 res.status(401).end();
               }
               req.user = user;
-              console.log("YO", user);
               let token = signToken(user._id)
               res.json({ token })
               next();
