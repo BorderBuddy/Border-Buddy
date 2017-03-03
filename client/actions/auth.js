@@ -38,7 +38,6 @@ export const checkToken = () => dispatch => {
 export const signout = () => dispatch => {
   axios.post('http://localhost:3000/api/auth/logout')
   .then(() => {
-    console.log("HI HI HI")
     window.localStorage.clear()
     dispatch(setAuth(null));
     browserHistory.push('/login')

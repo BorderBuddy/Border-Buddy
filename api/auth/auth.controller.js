@@ -52,7 +52,6 @@ export function isAuthenticated (req, res, next) {
 }
 
 export function logout(req, res, next) {
-  console.log("HI HI HI")
   req.logout();
   res.redirect('/')
 }
