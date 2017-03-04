@@ -26,7 +26,8 @@ const Flight = db.define('flight', {
     allowNull: false,
   }
 }, {
-  underscored: true
+  underscored: true,
+
 });
 
 module.exports = Flight;

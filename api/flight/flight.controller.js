@@ -1,7 +1,4 @@
 const axios = require('axios');
-import db from '../../database';
-import Traveler from '../../database/models/travelers';
-import Flight from '../../database/models/flights';
 import { airlineByCode, statusByCodeAndDate, scheduleByCodeAndDate } from './flight.query'
 
 
