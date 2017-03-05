@@ -7,9 +7,17 @@ import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 import { required, phone, email, validateCode, uppercase } from '../utils/validations'
 
 
-const airlinePicker = ({ input, label, style, type, meta: { asyncValidating, touched, error }}) => (
+const airlinePicker = ({ input, label, style, floatingLabelStyle, underlineFocusStyle, errorStyle, type, meta: { asyncValidating, touched, error }}) => (
     <div className={asyncValidating ? 'async-validating' : ''}>
-      <TextField {...input} type={type} floatingLabelText={label} style={style} errorText={touched && error && `${error}`} />
+      <TextField
+        {...input}
+        type={type}
+        floatingLabelText={label}
+        style={style}
+        floatingLabelStyle={floatingLabelStyle}
+        underlineFocusStyle={underlineFocusStyle}
+        errorStyle={errorStyle}
+        errorText={touched && error && `${error}`} />
     </div>
 );
 
@@ -17,105 +25,157 @@ const SignUp = ({handleSubmit, valid}) => {
   const style = {
     form: {
       display: 'block',
-      width: '75%',
-      margin: '4rem auto'
+      width: '80%',
+      margin: '0 auto'
     },
     input: {
-      width: '46%',
-      margin: '1%'
+      width: '80%',
+      margin: '1%',
+      color: 'black',
+    },
+    error: {
+      color: '#bd1c11'
+    },
+    label: {
+      color: '#526B5C'
+    },
+    underline: {
+      color: '#526B5C'
     },
     button: {
-      margin: '1%'
+      margin: '0 auto',
+      display: 'block',
+      marginBottom: '2em',
+      width: '80%'
     }
   };
 
   return (
     <form style={style.form} onSubmit={handleSubmit}>
-      <legend>Sign Up for Border Buddy</legend>
-      <div>
-        <Field
-          name="name"
-          component={TextField}
-          validate={required}
-          floatingLabelText="Name"
-          style={style.input}
-        />
-        <Field
-          name="nationality"
-          component={TextField}
-          validate={required}
-          floatingLabelText="Nationality"
-          style={style.input}
-        />
-      </div>
-      <div>
-        <Field
-          name="email"
-          component={TextField}
-          validate={[required, email]}
-          floatingLabelText="Email"
-          style={style.input}
-        />
-        <Field
-          name="phone"
-          component={TextField}
-          floatingLabelText="Phone Number"
-          validate={[required, phone]}
-          style={style.input}
-        />
-      </div>
-      <div>
-        <Field
-          name="connectivity"
-          component={SelectField}
-          floatingLabelText="Do you have a smartphone?"
-          validate={required}
-          style={style.input}
-        >
-          <MenuItem value="true" primaryText="Yes" />
-          <MenuItem value="false" primaryText="No" />
-        </Field>
-        <Field
-          name="secondaryContact"
-          component={TextField}
-          floatingLabelText="Name/contact of friend or family in US"
-          style={style.input}
-        />
-      </div>
-      <div>
-        <Field
-          name="arrivalTime"
-          component={DatePicker}
-          validate={required}
-          format={null}
-          floatingLabelText="What day do you arrive?"
-          style={style.input}
-        />
-        <Field
-          name="airlineCode"
-          component={airlinePicker}
-          validate={[uppercase, required]}
-          format={null}
-          label="Airline code"
-          style={style.input}
-        />
-        <Field
-          name="flightNum"
-          component={TextField}
-          validate={required}
-          format={null}
-          floatingLabelText="Flight number"
-          style={style.input}
-        />
-      </div>
-      <div>
-        <RaisedButton
-          type="submit"
-          label="Register"
-          disabled={!valid}
-          primary={true}
-          style={style.button}
-        />
+      <legend className="mx-auto h1 subtitle">Register Your Trip</legend>
+      <div className="clearfix">
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="name"
+            component={TextField}
+            validate={required}
+            floatingLabelText="Name"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="nationality"
+            component={TextField}
+            validate={required}
+            floatingLabelText="Nationality"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="email"
+            component={TextField}
+            validate={[required, email]}
+            floatingLabelText="Email"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="phone"
+            component={TextField}
+            floatingLabelText="Phone Number"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            validate={[required, phone]}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="connectivity"
+            component={SelectField}
+            floatingLabelText="Do you have a smartphone?"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            validate={required}
+            style={style.input}
+          >
+            <MenuItem value="true" primaryText="Yes" />
+            <MenuItem value="false" primaryText="No" />
+          </Field>
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="arrivalTime"
+            component={DatePicker}
+            validate={required}
+            format={null}
+            floatingLabelText="What day do you arrive?"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="airlineCode"
+            component={airlinePicker}
+            validate={[uppercase, required]}
+            format={null}
+            label="Airline code"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="flightNum"
+            component={TextField}
+            validate={required}
+            format={null}
+            floatingLabelText="Flight number"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="col-12">
+          <Field
+            name="secondaryContact"
+            component={TextField}
+            floatingLabelText="Emergency contact"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="col-12">
+          <RaisedButton
+            type="submit"
+            label="Register"
+            disabled={!valid}
+            primary={true}
+            style={style.button}
+          />
+        </div>
       </div>
     </form>
   );
