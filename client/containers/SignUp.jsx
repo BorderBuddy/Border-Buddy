@@ -71,8 +71,8 @@ class SignUpContainer extends Component {
       <div id="signup-container">
         <SignUp handleSubmit={this.handleSubmit} handleFlightChange={this.handleFlightChange} />
         <Dialog
-          title="Confirm Submission"
-          actions={(this.props.flight) ? confirmActions : cancelActions}
+          title={(this.state.flight) ? 'Please confirm your flight info' : 'Whoops!'}
+          actions={(this.state.flight) ? confirmActions : cancelActions}
           modal={true}
           open={this.state.open}
         >
