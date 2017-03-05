@@ -26,6 +26,7 @@ const AdminSignUp = ({ handleSubmit, pristine, reset, submitting, handleEmailCha
 				/>
 				<Field 
 					name="password" 
+					type="password"
 					component={TextField}
 					hintText="Password" 
 					validate={required}

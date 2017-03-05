@@ -30,11 +30,24 @@ const Traveler = db.define('traveler', {
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['transit', 'unconfirmed', 'detained', 'cleared'],
+    values: ['transit', 'unconfirmed', 'detained', 'at risk', 'cleared'],
     defaultValue: 'transit'
   },
 }, {
-  underscored: true
+  underscored: true,
+
+  classMethods: {
+    setToAtRisk: function() {
+      Traveler.update(
+        { status: 'at risk' },
+        { where: { status: 'unconfirmed' }, returning: true }
+      )
+      .spread((count, travelers) => travelers)
+      .catch(err => console.error(err));
+    },
+
+  }
 });
 
 module.exports = Traveler;
+

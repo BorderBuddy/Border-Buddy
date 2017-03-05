@@ -11,22 +11,20 @@ export default ({ flight }) => {
 	if (arrMins.length !== 2) arrMins = `0${arrMins}`;
 
 	return (
-		<div>
-		  <h3>Please confirm your flight info:</h3>
-		  <div>
-				<h4>Departing</h4>
-				<h5>{flight.appendix.airports[0].cityCode} - {flight.appendix.airports[0].name}</h5>
-				<h5>{departureDate.getYear() + 1900} / {departureDate.getMonth() + 1} / {departureDate.getDate()}</h5>
-				<h5>At: {departureDate.getHours()}:{depMins}</h5>
+		<div id="flight-confirmation-container" className="clearfix">
+		  <div className="col-12">
+				<h3 className="center m1">Departing</h3>
+				<h4 className="m1">From:  {flight.appendix.airports[0].cityCode} - {flight.appendix.airports[0].name}</h4>
+				<h4 className="m1">Date:  {departureDate.getYear() + 1900} / {departureDate.getMonth() + 1} / {departureDate.getDate()}</h4>
+				<h4 className="m1">Time:  {departureDate.getHours()}:{depMins}</h4>
 		  </div>
-		  <div>
-				<h4>Arriving</h4>
-				<h5>{flight.appendix.airports[1].cityCode} - {flight.appendix.airports[1].name}</h5>
-				<h5>On: {arrivalDate.getYear() + 1900} / {arrivalDate.getMonth() + 1} / {arrivalDate.getDate()}</h5>
-				<h5>At: {arrivalDate.getHours()}:{arrMins}</h5>
+		  <div className="col-12">
+				<h3 className="center m1">Arriving</h3>
+				<h4 className="m1">To:  {flight.appendix.airports[1].cityCode} - {flight.appendix.airports[1].name}</h4>
+				<h4 className="m1">Date:  {arrivalDate.getYear() + 1900} / {arrivalDate.getMonth() + 1} / {arrivalDate.getDate()}</h4>
+				<h4 className="m1">Time:  {arrivalDate.getHours()}:{arrMins}</h4>
 		  </div>
 
 		</div>
-	)
-}
-	
+	);
+};

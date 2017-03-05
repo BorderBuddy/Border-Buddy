@@ -2,6 +2,8 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import Card from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 export default ({ traveler, flight, updateTraveler, updateFlight, handleSubmit, changed }) => (
 
@@ -33,11 +35,18 @@ export default ({ traveler, flight, updateTraveler, updateFlight, handleSubmit, 
 					value={flight.arrivalDate}
 					floatingLabelFixed={true}
 					onChange={(evt) => updateFlight('arrivalDate', evt.target.value)} />
-				<TextField
+				<SelectField
 					floatingLabelText="status"
 					value={traveler.status}
 					floatingLabelFixed={true}
-					onChange={(evt) => updateTraveler('status', evt.target.value)} />
+					onChange={(evt, index, value) => updateTraveler('status', value)}
+				>
+					<MenuItem value={'transit'} primaryText="In Transit"/>
+					<MenuItem value={'unconfirmed'} primaryText="Unconfirmed"/>
+					<MenuItem value={'detained'} primaryText="Detained"/>
+					<MenuItem value={'at risk'} primaryText="At Risk"/>
+					<MenuItem value={'cleared'} primaryText="Cleared"/>
+				</SelectField>
 				<RaisedButton disabled={!changed} type="submit" label="Save Changes" />
 			</form>
 		</Card>

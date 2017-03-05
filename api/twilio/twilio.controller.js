@@ -1,7 +1,7 @@
 import { config } from '../config';
 import Traveler from '../../database/models/travelers';
 import _ from 'lodash';
-const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
+export const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
 
 // admin hits this api to send text to users
 export const sendText = (req, res, next) => {
@@ -29,7 +29,7 @@ export const respondToText = (req, res, next) => {
 		return res.status(403).end();
 	}
 
-	if (msgBody.toLowerCase() !== 'ok') {
+	if (msgBody.toLowerCase() !== 'ok') { // TODO:  handle 'sos' responses
 		return res.status(400).end();
 	}
 
@@ -54,21 +54,5 @@ export const respondToText = (req, res, next) => {
 		res.status(200).send(xml);
 	})
 	.catch(next);
-};
-
-
-/*------------ HELPER FUNCTION FOR CRON JOB ONLY -------------*/
-
-export const sendVerification = (body, user) => {
-	return new Promise((resolve, reject) => {
-		Twilio.sendMessage({
-			to: user.phone,
-			from: config.twilio.adminPhone,
-			body
-		}, (err, result) => {
-			if (err) reject(err);
-			else resolve(result);
-		});
-	});
 };
 
