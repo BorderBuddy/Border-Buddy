@@ -1,7 +1,7 @@
 import path from 'path';
 import _ from 'lodash';
 
-export var config = {
+export const config = {
   env: process.env.NODE_ENV,
   root: path.normalize(`${__dirname}/../../..`),
   port: _.get(process.env, 'PORT', 3000),

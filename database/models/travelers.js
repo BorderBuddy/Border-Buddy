@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-const Flight = require('./flights');
 
 const Traveler = db.define('traveler', {
   name: {
@@ -38,35 +37,17 @@ const Traveler = db.define('traveler', {
   underscored: true,
 
   classMethods: {
-
     setToAtRisk: function() {
-      return Traveler.update(
+      Traveler.update(
         { status: 'at risk' },
         { where: { status: 'unconfirmed' }, returning: true }
       )
-      .spread((count, travelers) => travelers) // TODO: email this info to admins / lawyers
+      .spread((count, travelers) => travelers)
       .catch(err => console.error(err));
     },
 
-    getAllRecentArrivals: function() {
-      
-      const currTime = new Date();
-
-      return Traveler.findAll({
-        include: [
-          { model: Flight,
-            where: {
-              arrivalTime: {
-
-              }
-            }
-          }
-        ]
-      })
-      .then(travelers => console.log('-------------------LOOGIT ', travelers))
-      .catch(err => console.error(err));
-    }
   }
 });
 
 module.exports = Traveler;
+
