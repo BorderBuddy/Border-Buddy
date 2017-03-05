@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import Sequelize from 'sequelize';
-import db from '../../database';
+const db = require('../db');
 
 export const User = db.define('user', {
   _id: {

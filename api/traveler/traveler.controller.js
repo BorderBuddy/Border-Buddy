@@ -40,7 +40,7 @@ export const createNewTraveler = (req, res, next) => {
       from: config.twilio.adminPhone,
       body: `Thanks for registering with BorderBuddy, ${finalTraveler.name}! Safe travels, and text OK to this number when have passed through customs and immigration.`
     }, (err, result) => {
-      if (err) console.error(chalk.red(err));
+      if (err) console.error(chalk.red('ERROR SENDING CONFIRMATION TEXT', err));
       else return;
     });
 

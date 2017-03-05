@@ -34,7 +34,20 @@ const Traveler = db.define('traveler', {
     defaultValue: 'transit'
   },
 }, {
-  underscored: true
+  underscored: true,
+
+  classMethods: {
+    setToAtRisk: function() {
+      Traveler.update(
+        { status: 'at risk' },
+        { where: { status: 'unconfirmed' }, returning: true }
+      )
+      .spread((count, travelers) => travelers)
+      .catch(err => console.error(err));
+    },
+
+  }
 });
 
 module.exports = Traveler;
+

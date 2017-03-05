@@ -18,6 +18,7 @@ const db = new Sequelize(url, {
   define: {
     freezeTableName: true   // don't go changing our table names, Sequelize
   },
+  dialect: 'postgres',
   logging: false
 })
 
