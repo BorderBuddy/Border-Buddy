@@ -41,7 +41,7 @@ class SignUpContainer extends Component {
   }
 
   checkFlight(code, flightNum, year, month, day) {
-    axios.get(`http://localhost:3000/api/flight/verify?code=${code}&flightNum=${flightNum}&year=${year}&month=${month}&day=${day}`)
+    axios.get(`/api/flight/verify?code=${code}&flightNum=${flightNum}&year=${year}&month=${month}&day=${day}`)
     .then(response => {
       this.setState({ flight: response.data, open: true});
     })
