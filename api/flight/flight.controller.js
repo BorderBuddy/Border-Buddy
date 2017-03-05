@@ -23,9 +23,11 @@ export const getCode = (req, res, next) => {
 
 export const verifyFlight = (req, res, next) => {
 	const { code, flightNum, year, month, day } = req.query;
+	console.log(req.query);
 
 	return axios.get(scheduleByCodeAndDate(code, flightNum, year, month, day))
 	.then(flight => {
+			console.log(flight);
 		if (flight.data.error || !flight.data.scheduledFlights.length) {
 			res.status(404).json('flight not found');
 		} else {

@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
 import SingleTraveler from '../components/Admin/SingleTraveler';
+import FlightConfirmation from '../components/FlightConfirmation';
 import {browserHistory} from 'react-router';
 import { setSelectedTraveler, updateTraveler } from '../actions/selectedTraveler';
-import { setFlight, updateFlight } from '../actions/flight';
+import { setFlight, checkFlight } from '../actions/flight';
 
 
 class SingleTravelerContainer extends Component {
@@ -12,12 +16,18 @@ class SingleTravelerContainer extends Component {
 		super(props);
 
 		this.state = {
-      changed: false
+      changed: false,
+      open: false
 		};
     this.updateTraveler = this.updateTraveler.bind(this);
     this.updateFlight = this.updateFlight.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
+  confirmSubmit() {
+    const { traveler, flight } = this.props;
+    
+  }
 
   updateTraveler(key, value) {
     console.log(key, value);
@@ -36,38 +46,75 @@ class SingleTravelerContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { updateTraveler, updateFlight, selectedTraveler, flight } = this.props;
-    Promise.all([updateTraveler(selectedTraveler), updateFlight(flight)])
-    .then(res => {
-      browserHistory.push('/admin/travelers');
-    })
+    const { flightNum, airlineCode, arrivalTime } = this.props.form.signUp.values;
   }
 
 	render() {
-		const { selectedTraveler, flight } = this.props;
+    const confirmActions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+      <RaisedButton
+        label="Submit"
+        primary={true}
+        onTouchTap={this.confirmSubmit}
+      />
+    ];
+
+    const cancelActions = [
+      <FlatButton
+        label="OK"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />
+    ];
+		const { initialValues } = this.props;
 		return (
-		 <SingleTraveler
-      traveler={selectedTraveler} 
-      flight={flight} 
-      updateTraveler={this.updateTraveler} 
-      updateFlight={this.updateFlight} 
-      handleSubmit={this.handleSubmit}
-      changed={this.state.changed} />
-		);
+    <div>
+      <SingleTraveler
+        updateTraveler={this.updateTraveler} 
+        updateFlight={this.updateFlight} 
+        handleSubmit={this.handleSubmit}
+        changed={this.state.changed} 
+        id={this.props.params.id}/>
+      
+      <Dialog
+        title="Confirm Submission"
+        actions={(this.props.flight) ? confirmActions : cancelActions}
+        modal={true}
+        open={this.state.open}
+      >
+        {
+          this.props.flight ?
+            <FlightConfirmation flight={this.props.flight} />
+            :
+            <h4>Sorry, we could not find your flight</h4>
+        }
+      </Dialog>
+    </div>
+    )
 	}
 }
 
 
-const mapStateToProps = ({ selectedTraveler, flight }) => ({
-  selectedTraveler,
-  flight
-})
+// const mapStateToProps = ({ selectedTraveler }) => {
+//   const { name, nationality, email, phone, connectivity, secondaryContact, status } = selectedTraveler;
+//   const { arrivalTime, airlineCode, flightNum } = selectedTraveler.flight;
+//   return { 
+//     initialValues: {
+//       name, nationality, email, phone, connectivity, secondaryContact, status, arrivalTime, airlineCode, flightNum
+//     }
+//   }
+  
+// }
 
 const mapDispatchToProps = dispatch => ({
   setSelectedTraveler: (selectedTraveler) => dispatch(setSelectedTraveler(selectedTraveler)),
   setFlight: (flight) => dispatch(setFlight(flight)),
   updateTraveler: (traveler) => dispatch(updateTraveler(traveler)),
-  updateFlight: (flight) => dispatch(updateFlight(flight))
+  checkFlight: (flight) => dispatch(checkFlight(flight))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleTravelerContainer);
+export default connect(null, mapDispatchToProps)(SingleTravelerContainer);
