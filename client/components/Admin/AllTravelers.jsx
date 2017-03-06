@@ -4,7 +4,8 @@ import TravelerRow from './TravelerRow'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import { 
 	nameStyle, 
-	phoneStyle, 
+	phoneStyle,
+	emailStyle,
 	nationalityStyle, 
 	idStyle, 
 	flightCodeStyle,
@@ -22,6 +23,7 @@ export default ({ travelers, selectTraveler }) => (
 	        <TableHeaderColumn style={idStyle}>ID</TableHeaderColumn>
 	        <TableHeaderColumn style={nameStyle}>Name</TableHeaderColumn>
 	        <TableHeaderColumn style={phoneStyle}>Phone</TableHeaderColumn>
+					<TableHeaderColumn style={emailStyle}>Email</TableHeaderColumn>
 	        <TableHeaderColumn style={nationalityStyle} >Nationality</TableHeaderColumn>
 	        <TableHeaderColumn style={flightCodeStyle}>Airline Code</TableHeaderColumn>
 	        <TableHeaderColumn style={flightNumStyle}>Flight #</TableHeaderColumn>

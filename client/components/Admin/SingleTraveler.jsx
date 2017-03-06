@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 import AirlinePicker from '../AirlinePicker';
+import { fetchSelectedTraveler } from '../../actions/selectedTraveler';
 
 
 import { required, phone, email, validateCode, uppercase } from '../../utils/validations';
@@ -16,11 +17,14 @@ class SingleTraveler extends Component {
 	}
 
 	componentDidMount() {
-		this.props.initialize();
+		this.props.fetchSelectedTraveler(this.props.id)
+		.then(() => {
+			this.props.initialize(this.props.initialValues);
+		})
 	}
 
 	render() {
-		const { handleSubmit, changed, valid } = this.props;
+		const { handleSubmit, changed, valid, sendText } = this.props;
 		const style = {
 			form: {
 				display: 'block',
@@ -40,6 +44,10 @@ class SingleTraveler extends Component {
 			},
 			underline: {
 				color: '#526B5C'
+			},
+			button: {
+				display: 'block',
+				margin: '1em auto'
 			}
 		};
 		return (
@@ -47,159 +55,169 @@ class SingleTraveler extends Component {
 				<div>
 					<legend className="mx-auto h1 subtitle">Update Traveler</legend>
 					<div className="clearfix">
-					<div className="field-container col-12 md-col md-col-6">
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="name"
+								floatingLabelText="Name"
+								component={TextField}
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="nationality"
+								floatingLabelText="Nationality"
+								component={TextField}
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
 						<Field
-							name="name"
-							floatingLabelText="Name"
+							name="email"
+							floatingLabelText="Email"
 							component={TextField}
-							validate={required}
-							style={style.input}
-							errorStyle={style.error}
-	            floatingLabelStyle={style.label}
-	            underlineFocusStyle={style.underline}
-						/>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-						<Field
-							name="nationality"
-							floatingLabelText="Nationality"
-							component={TextField}
-							validate={required}
-							style={style.input}
-							errorStyle={style.error}
-	            floatingLabelStyle={style.label}
-	            underlineFocusStyle={style.underline}
-						/>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-					<Field
-						name="email"
-						floatingLabelText="Email"
-						component={TextField}
-            validate={[required, email]}
-						style={style.input}
-						errorStyle={style.error}
-	            floatingLabelStyle={style.label}
-	            underlineFocusStyle={style.underline}
-					/>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-						<Field
-							name="phone"
-							floatingLabelText="Phone"
-							component={TextField}
-            	validate={[required, phone]}
-							style={style.input}
-							errorStyle={style.error}
-	            floatingLabelStyle={style.label}
-	            underlineFocusStyle={style.underline}
-						/>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-						<Field
-							name="connectivity"
-							component={SelectField}
-							floatingLabelText="Smartphone?"
-							validate={required}
-							style={style.input}
-							errorStyle={style.error}
-							floatingLabelStyle={style.label}
-							underlineFocusStyle={style.underline}
-						>
-							<MenuItem value={true} primaryText="Yes" />
-							<MenuItem value={false} primaryText="No" />
-						</Field>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-						<Field
-							name="passengerStatus"
-							component={SelectField}
-							floatingLabelText="Passenger Status"
-							validate={required}
-							style={style.input}
-							errorStyle={style.error}
-							floatingLabelStyle={style.label}
-							underlineFocusStyle={style.underline}
-						>
-							<MenuItem value={'transit'} primaryText="In Transit"/>
-							<MenuItem value={'unconfirmed'} primaryText="Unconfirmed"/>
-							<MenuItem value={'detained'} primaryText="Detained"/>
-							<MenuItem value={'at risk'} primaryText="At Risk"/>
-							<MenuItem value={'cleared'} primaryText="Cleared"/>
-						</Field>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-						<Field
-							name="secondaryContact"
-							component={TextField}
-							floatingLabelText="secondary contact"
+							validate={[required, email]}
 							style={style.input}
 							errorStyle={style.error}
 							floatingLabelStyle={style.label}
 							underlineFocusStyle={style.underline}
 						/>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-						<Field
-							name="arrivalTime"
-							component={DatePicker}
-							validate={required}
-							format={null}
-							floatingLabelText="Date of Arrival"
-							style={style.input}
-							errorStyle={style.error}
-							floatingLabelStyle={style.label}
-							underlineFocusStyle={style.underline}
-						/>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-						<Field
-							name="airlineCode"
-							component={AirlinePicker}
-							validate={[uppercase, required]}
-							label="Airline Code"
-							style={style.input}
-							errorStyle={style.error}
-							floatingLabelStyle={style.label}
-							underlineFocusStyle={style.underline}
-						/>
-					</div>
-					<div className="field-container col-12 md-col md-col-6">
-						<Field
-							name="flightNum"
-							component={TextField}
-							floatingLabelText="Flight Number"
-							validate={required}
-							style={style.input}
-							errorStyle={style.error}
-							floatingLabelStyle={style.label}
-							underlineFocusStyle={style.underline}
-						/>
-					</div>
-					<div className="col-12">
-						<Field
-							name="flightStatus"
-							component={SelectField}
-							floatingLabelText="Flight Status"
-							validate={required}
-							style={style.input}
-							errorStyle={style.error}
-							floatingLabelStyle={style.label}
-							underlineFocusStyle={style.underline}
-						>
-							<MenuItem value={'scheduled'} primaryText="Scheduled"/>
-							<MenuItem value={'delayed'} primaryText="Delayed"/>
-							<MenuItem value={'arrived'} primaryText="Arrived"/>
-						</Field>
-					</div>
-					<div className="col-12">
-						<RaisedButton 
-							type="submit" 
-							label="Save Changes" 
-							disabled={!valid}
-							primary={true}
-						/>
-					</div>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="phone"
+								floatingLabelText="Phone"
+								component={TextField}
+								validate={[required, phone]}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="connectivity"
+								component={SelectField}
+								floatingLabelText="Smartphone?"
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							>
+								<MenuItem value={true} primaryText="Yes" />
+								<MenuItem value={false} primaryText="No" />
+							</Field>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="passengerStatus"
+								component={SelectField}
+								floatingLabelText="Passenger Status"
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							>
+								<MenuItem value={'transit'} primaryText="In Transit"/>
+								<MenuItem value={'unconfirmed'} primaryText="Unconfirmed"/>
+								<MenuItem value={'detained'} primaryText="Detained"/>
+								<MenuItem value={'at risk'} primaryText="At Risk"/>
+								<MenuItem value={'cleared'} primaryText="Cleared"/>
+							</Field>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="secondaryContact"
+								component={TextField}
+								floatingLabelText="secondary contact"
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="arrivalTime"
+								component={DatePicker}
+								validate={required}
+								format={null}
+								floatingLabelText="Date of Arrival"
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="airlineCode"
+								component={AirlinePicker}
+								validate={[uppercase, required]}
+								label="Airline Code"
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="flightNum"
+								component={TextField}
+								floatingLabelText="Flight Number"
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="col-12">
+							<Field
+								name="flightStatus"
+								component={SelectField}
+								floatingLabelText="Flight Status"
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+								disabled={true}
+							>
+								<MenuItem value={'scheduled'} primaryText="Scheduled"/>
+								<MenuItem value={'delayed'} primaryText="Delayed"/>
+								<MenuItem value={'arrived'} primaryText="Arrived"/>
+							</Field>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<RaisedButton 
+								type="submit" 
+								label="Save Changes" 
+								disabled={!valid}
+								primary={true}
+								style={style.button}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<RaisedButton 
+								label="Text Traveler" 
+								secondary={true}
+								style={style.button}
+								onClick={sendText}
+							/>
+						</div>
 					</div>
 				</div>
 			</form>
@@ -224,4 +242,10 @@ const mapStateToProps = ({ selectedTraveler }) => {
   }  
 }
 
-export default connect(mapStateToProps)(SingleTraveler)
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchSelectedTraveler: (id) => dispatch(fetchSelectedTraveler(id))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTraveler)

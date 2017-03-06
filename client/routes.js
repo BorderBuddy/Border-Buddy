@@ -28,6 +28,7 @@ const getRoutes = () => (
 		  <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} />
 		</Route>
 		<Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
+			<IndexRedirect to="/admin/travelers" />
 			<Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
 			<Route path="travelers/:id" component={SingleTraveler} onEnter={onSingleTravelerEnter} />
 			<Route path="createuser" component={AdminSignUp} />
