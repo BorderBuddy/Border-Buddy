@@ -21,7 +21,7 @@ import { onSuccessEnter, onSuccessLeave, onAdminEnter,
 const getRoutes = () => (
 	<div>
 	  <Route path="/" component={Homepage}>
-			<IndexRedirect to="/register" />
+			<IndexRedirect to="/why" />
 			<Route path="why" component={WhyBorderBuddy} />
 			<Route path="register" component={SignUp} />
 			<Route path="about" component={About} />
