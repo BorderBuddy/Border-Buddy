@@ -23,7 +23,6 @@ export const onAdminEnter = () => {
 };
 
 export const onTravelersListEnter = () => {
-	console.log("YO YO YO")
 	store.dispatch(fetchAllTravelers());
 };
 
