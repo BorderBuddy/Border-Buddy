@@ -14,7 +14,7 @@ export const sendText = (req, res, next) => {
 	    from: config.twilio.adminPhone,
 	    body: req.body.message,
 	}, (err, result) => {
-		if (err) next(err);
+		if (err) console.error(err);
 		return res.status(200).json(result);
 	});
 
