@@ -7,7 +7,7 @@ import Dialog from 'material-ui/Dialog';
 import SingleTraveler from '../components/Admin/SingleTraveler';
 import FlightConfirmation from '../components/FlightConfirmation';
 import {browserHistory} from 'react-router';
-import { updateTraveler } from '../actions/selectedTraveler';
+import { updateTraveler, sendText } from '../actions/selectedTraveler';
 import { checkFlight } from '../actions/flight';
 
 
@@ -22,6 +22,7 @@ class SingleTravelerContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.confirmSubmit = this.confirmSubmit.bind(this);
+    this.sendText = this.sendText.bind(this);
 	}
 
   handleClose() {
@@ -33,6 +34,11 @@ class SingleTravelerContainer extends Component {
     const { values } = this.props.form.singleTraveler;
     updateTraveler(values, routeParams.id);
     this.handleClose();
+    browserHistory.push('/admin/travelers');
+  }
+
+  sendText() {
+    this.props.sendText(this.props.form.singleTraveler.values);
   }
 
 
@@ -74,7 +80,12 @@ class SingleTravelerContainer extends Component {
     ];
 		return (
     <div>
-      <SingleTraveler handleSubmit={this.handleSubmit} changed={this.state.changed} id={this.props.params.id}/>
+      <SingleTraveler 
+        handleSubmit={this.handleSubmit} 
+        changed={this.state.changed} 
+        id={this.props.params.id}
+        sendText={this.sendText}
+      />
       <Dialog
         title={(this.props.flight) ? 'Please confirm your flight info' : 'Whoops!'}
         actions={(this.props.flight) ? confirmActions : cancelActions}
@@ -99,7 +110,8 @@ const mapStateToProps = ({ form, flight }) => ({ form, flight })
 
 const mapDispatchToProps = dispatch => ({
   updateTraveler: (traveler, id) => dispatch(updateTraveler(traveler, id)),
-  checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
+  checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day)),
+  sendText: (traveler) => dispatch(sendText(traveler))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTravelerContainer);

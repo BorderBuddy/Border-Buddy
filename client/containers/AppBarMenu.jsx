@@ -7,12 +7,7 @@ import { signout } from '../actions/auth';
 class AppBarMenuContainer extends Component {
   constructor(props) {
     super(props)
-    this.onCreateUserClick = this.onCreateUserClick.bind(this);
     this.onSignoutClick = this.onSignoutClick.bind(this);
-  }
-
-  onCreateUserClick() {
-    browserHistory.push('/admin/createuser')
   }
 
   onSignoutClick() {
@@ -22,7 +17,6 @@ class AppBarMenuContainer extends Component {
   render() {
     return (
       <AppBarMenu 
-        onCreateUserClick={this.onCreateUserClick}
         onSignoutClick={this.onSignoutClick}
       />
     )
