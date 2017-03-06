@@ -5,6 +5,8 @@ export const setAllTravelers = (travelers) => ({ type: SET_ALL_TRAVELERS, travel
 
 export const fetchAllTravelers = () => dispatch => {
   return axios.get('http://localhost:3000/api/traveler')
-  .then(travelers => dispatch(setAllTravelers(travelers.data)))
+  .then(travelers => {
+    dispatch(setAllTravelers(travelers.data))
+  })
   .catch(err => console.error(err));
 }
