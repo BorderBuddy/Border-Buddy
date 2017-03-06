@@ -2,24 +2,13 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { RaisedButton, MenuItem } from 'material-ui';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
+import AirlinePicker from './AirlinePicker';
 
 
 import { required, phone, email, validateCode, uppercase } from '../utils/validations'
 
 
-const airlinePicker = ({ input, label, style, floatingLabelStyle, underlineFocusStyle, errorStyle, type, meta: { asyncValidating, touched, error }}) => (
-    <div className={asyncValidating ? 'async-validating' : ''}>
-      <TextField
-        {...input}
-        type={type}
-        floatingLabelText={label}
-        style={style}
-        floatingLabelStyle={floatingLabelStyle}
-        underlineFocusStyle={underlineFocusStyle}
-        errorStyle={errorStyle}
-        errorText={touched && error && `${error}`} />
-    </div>
-);
+
 
 const SignUp = ({handleSubmit, valid}) => {
   const style = {
@@ -133,7 +122,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="airlineCode"
-            component={airlinePicker}
+            component={AirlinePicker}
             validate={[uppercase, required]}
             format={null}
             label="Airline code"

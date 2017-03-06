@@ -14,8 +14,8 @@ export const fetchSelectedTraveler = (id) => dispatch => {
   .catch(err => console.error(err));
 }
 
-export const updateTraveler = (traveler) => dispatch => {
-  return axios.put(`http://localhost:3000/api/traveler/${traveler.id}`, traveler)
+export const updateTraveler = (traveler, id) => dispatch => {
+  return axios.put(`http://localhost:3000/api/traveler/${id}`, traveler)
   .then(traveler => {
     traveler = traveler.data;
     dispatch(setSelectedTraveler(traveler));

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const required = value => value == null ? 'Required' : undefined;
+export const required = value => value == null || value == "" ? 'Required' : undefined;
 
 export const phone = value =>
 	value && !/^\d{10}$/.test(value) ?

@@ -7,8 +7,8 @@ import Dialog from 'material-ui/Dialog';
 import SingleTraveler from '../components/Admin/SingleTraveler';
 import FlightConfirmation from '../components/FlightConfirmation';
 import {browserHistory} from 'react-router';
-import { setSelectedTraveler, updateTraveler } from '../actions/selectedTraveler';
-import { setFlight, checkFlight } from '../actions/flight';
+import { updateTraveler } from '../actions/selectedTraveler';
+import { checkFlight } from '../actions/flight';
 
 
 class SingleTravelerContainer extends Component {
@@ -19,34 +19,36 @@ class SingleTravelerContainer extends Component {
       changed: false,
       open: false
 		};
-    this.updateTraveler = this.updateTraveler.bind(this);
-    this.updateFlight = this.updateFlight.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.confirmSubmit = this.confirmSubmit.bind(this);
 	}
 
+  handleClose() {
+    this.setState({open: false});
+  }
+
   confirmSubmit() {
-    const { traveler, flight } = this.props;
-    
+    const { updateTraveler, routeParams } = this.props;
+    const { values } = this.props.form.singleTraveler;
+    updateTraveler(values, routeParams.id);
+    this.handleClose();
   }
 
-  updateTraveler(key, value) {
-    console.log(key, value);
-    const newState = {[key]: value};
-    const { setSelectedTraveler, selectedTraveler } = this.props;
-    setSelectedTraveler(Object.assign({}, selectedTraveler, newState));
-    this.setState({ changed: true })
-  }
-
-  updateFlight(key, value) {
-    const newState = {[key]: value};
-    const { setFlight, flight } = this.props;
-    setFlight(Object.assign({}, flight, newState));
-    this.setState({ changed: true })
-  }
 
   handleSubmit(e) {
     e.preventDefault();
-    const { flightNum, airlineCode, arrivalTime } = this.props.form.signUp.values;
+    const { flightNum, airlineCode, arrivalTime } = this.props.form.singleTraveler.values;
+    const day = arrivalTime.getDate();
+    const year = arrivalTime.getYear() + 1900;
+    const month = arrivalTime.getMonth() + 1;
+    this.props.checkFlight(airlineCode, flightNum, year, month, day)
+    .then(() => {
+      this.setState({ open: true });
+    }) 
+    .catch(() => {
+      this.setState({ open: false });
+    })
   }
 
 	render() {
@@ -70,18 +72,11 @@ class SingleTravelerContainer extends Component {
         onTouchTap={this.handleClose}
       />
     ];
-		const { initialValues } = this.props;
 		return (
     <div>
-      <SingleTraveler
-        updateTraveler={this.updateTraveler} 
-        updateFlight={this.updateFlight} 
-        handleSubmit={this.handleSubmit}
-        changed={this.state.changed} 
-        id={this.props.params.id}/>
-      
+      <SingleTraveler handleSubmit={this.handleSubmit} changed={this.state.changed} id={this.props.params.id}/>
       <Dialog
-        title="Confirm Submission"
+        title={(this.props.flight) ? 'Please confirm your flight info' : 'Whoops!'}
         actions={(this.props.flight) ? confirmActions : cancelActions}
         modal={true}
         open={this.state.open}
@@ -98,23 +93,13 @@ class SingleTravelerContainer extends Component {
 	}
 }
 
+/*---------------------------REDUX CONTAINER---------------------------*/
 
-// const mapStateToProps = ({ selectedTraveler }) => {
-//   const { name, nationality, email, phone, connectivity, secondaryContact, status } = selectedTraveler;
-//   const { arrivalTime, airlineCode, flightNum } = selectedTraveler.flight;
-//   return { 
-//     initialValues: {
-//       name, nationality, email, phone, connectivity, secondaryContact, status, arrivalTime, airlineCode, flightNum
-//     }
-//   }
-  
-// }
+const mapStateToProps = ({ form, flight }) => ({ form, flight })
 
 const mapDispatchToProps = dispatch => ({
-  setSelectedTraveler: (selectedTraveler) => dispatch(setSelectedTraveler(selectedTraveler)),
-  setFlight: (flight) => dispatch(setFlight(flight)),
-  updateTraveler: (traveler) => dispatch(updateTraveler(traveler)),
-  checkFlight: (flight) => dispatch(checkFlight(flight))
+  updateTraveler: (traveler, id) => dispatch(updateTraveler(traveler, id)),
+  checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 })
 
-export default connect(null, mapDispatchToProps)(SingleTravelerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTravelerContainer);

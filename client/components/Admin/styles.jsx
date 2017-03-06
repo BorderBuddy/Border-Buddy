@@ -1,4 +1,4 @@
-export const idStyle = { width: '4vw' };
+export const idStyle = { width: '5vw' };
 export const nameStyle = { width: '15vw', textAlign: 'left' };
 export const phoneStyle = { width: '14vw', textAlign: 'left' };
 export const nationalityStyle = { width: '12vw', textAlign: 'left' };

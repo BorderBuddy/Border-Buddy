@@ -5,9 +5,10 @@ import Card from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
+import AirlinePicker from '../AirlinePicker';
 
 
-import { required, phone, email, validateCode, uppercase } from '../../utils/validations'
+import { required, phone, email, validateCode, uppercase } from '../../utils/validations';
 
 class SingleTraveler extends Component {
 	constructor() {
@@ -19,65 +20,106 @@ class SingleTraveler extends Component {
 	}
 
 	render() {
+		const { handleSubmit, changed, valid } = this.props;
+		const style = {
+			form: {
+				display: 'block',
+				width: '80%',
+				margin: '1em auto'
+			},
+			input: {
+				width: '80%',
+				margin: '1%',
+				color: 'black',
+			},
+			error: {
+				color: '#bd1c11'
+			},
+			label: {
+				color: '#526B5C'
+			},
+			underline: {
+				color: '#526B5C'
+			}
+		};
 		return (
-			<div>
-				<Card>
-					<form>
+			<form style={style.form} onSubmit={handleSubmit}>
+				<div>
+					<legend className="mx-auto h1 subtitle">Update Traveler</legend>
+					<div className="clearfix">
+					<div className="field-container col-12 md-col md-col-6">
 						<Field
 							name="name"
-							floatingLabelText="name"
+							floatingLabelText="Name"
 							component={TextField}
+							validate={required}
+							style={style.input}
+							errorStyle={style.error}
+	            floatingLabelStyle={style.label}
+	            underlineFocusStyle={style.underline}
 						/>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
 						<Field
 							name="nationality"
-							floatingLabelText="nationality"
+							floatingLabelText="Nationality"
 							component={TextField}
-							/>
-						<Field
-							name="email"
-							floatingLabelText="email"
-							component={TextField}
-							/>
+							validate={required}
+							style={style.input}
+							errorStyle={style.error}
+	            floatingLabelStyle={style.label}
+	            underlineFocusStyle={style.underline}
+						/>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
+					<Field
+						name="email"
+						floatingLabelText="Email"
+						component={TextField}
+            validate={[required, email]}
+						style={style.input}
+						errorStyle={style.error}
+	            floatingLabelStyle={style.label}
+	            underlineFocusStyle={style.underline}
+					/>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
 						<Field
 							name="phone"
-							floatingLabelText="phone"
+							floatingLabelText="Phone"
 							component={TextField}
-							/>
+            	validate={[required, phone]}
+							style={style.input}
+							errorStyle={style.error}
+	            floatingLabelStyle={style.label}
+	            underlineFocusStyle={style.underline}
+						/>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
 						<Field
 							name="connectivity"
 							component={SelectField}
-							floatingLabelText="smartphone?"
+							floatingLabelText="Smartphone?"
 							validate={required}
+							style={style.input}
+							errorStyle={style.error}
+							floatingLabelStyle={style.label}
+							underlineFocusStyle={style.underline}
 						>
-							<MenuItem value="true" primaryText="Yes" />
-							<MenuItem value="false" primaryText="No" />
+							<MenuItem value={true} primaryText="Yes" />
+							<MenuItem value={false} primaryText="No" />
 						</Field>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
 						<Field
-							name="secondaryContact"
-							component={TextField}
-							floatingLabelText="secondary contact"
-						/>
-						<Field
-							name="arrivalTime"
-							component={DatePicker}
-							validate={required}
-							format={null}
-							floatingLabelText="date of arrival"
-						/>
-						<Field
-							name="airlineCode"
-							component={TextField}
-							floatingLabelText="airline code"
-							/>
-						<Field
-							name="flightNum"
-							component={TextField}
-							floatingLabelText="flight number"
-						/>
-						<Field
-							name="status"
+							name="passengerStatus"
 							component={SelectField}
-							floatingLabelText="status"
+							floatingLabelText="Passenger Status"
+							validate={required}
+							style={style.input}
+							errorStyle={style.error}
+							floatingLabelStyle={style.label}
+							underlineFocusStyle={style.underline}
 						>
 							<MenuItem value={'transit'} primaryText="In Transit"/>
 							<MenuItem value={'unconfirmed'} primaryText="Unconfirmed"/>
@@ -85,10 +127,82 @@ class SingleTraveler extends Component {
 							<MenuItem value={'at risk'} primaryText="At Risk"/>
 							<MenuItem value={'cleared'} primaryText="Cleared"/>
 						</Field>
-						<RaisedButton disabled={!this.props.changed} type="submit" label="Save Changes" />
-					</form>
-				</Card>
-			</div>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
+						<Field
+							name="secondaryContact"
+							component={TextField}
+							floatingLabelText="secondary contact"
+							style={style.input}
+							errorStyle={style.error}
+							floatingLabelStyle={style.label}
+							underlineFocusStyle={style.underline}
+						/>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
+						<Field
+							name="arrivalTime"
+							component={DatePicker}
+							validate={required}
+							format={null}
+							floatingLabelText="Date of Arrival"
+							style={style.input}
+							errorStyle={style.error}
+							floatingLabelStyle={style.label}
+							underlineFocusStyle={style.underline}
+						/>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
+						<Field
+							name="airlineCode"
+							component={AirlinePicker}
+							validate={[uppercase, required]}
+							label="Airline Code"
+							style={style.input}
+							errorStyle={style.error}
+							floatingLabelStyle={style.label}
+							underlineFocusStyle={style.underline}
+						/>
+					</div>
+					<div className="field-container col-12 md-col md-col-6">
+						<Field
+							name="flightNum"
+							component={TextField}
+							floatingLabelText="Flight Number"
+							validate={required}
+							style={style.input}
+							errorStyle={style.error}
+							floatingLabelStyle={style.label}
+							underlineFocusStyle={style.underline}
+						/>
+					</div>
+					<div className="col-12">
+						<Field
+							name="flightStatus"
+							component={SelectField}
+							floatingLabelText="Flight Status"
+							validate={required}
+							style={style.input}
+							errorStyle={style.error}
+							floatingLabelStyle={style.label}
+							underlineFocusStyle={style.underline}
+						>
+							<MenuItem value={'scheduled'} primaryText="Scheduled"/>
+							<MenuItem value={'delayed'} primaryText="Delayed"/>
+							<MenuItem value={'arrived'} primaryText="Arrived"/>
+						</Field>
+					</div>
+					<div className="col-12">
+						<RaisedButton 
+							type="submit" 
+							label="Save Changes" 
+							disabled={!valid}
+							primary={true}
+						/>
+					</div>
+					</div>
+				</div>
+			</form>
 		)
 	}
 }
@@ -100,11 +214,12 @@ SingleTraveler = reduxForm({
 })(SingleTraveler)
 
 const mapStateToProps = ({ selectedTraveler }) => {
-  const { name, nationality, email, phone, connectivity, secondaryContact, status } = selectedTraveler;
-  const { airlineCode, flightNum, arrivalTime } = selectedTraveler.flight;
+  const { name, nationality, email, phone, connectivity, secondaryContact, status: passengerStatus } = selectedTraveler;
+  const { airlineCode, flightNum, arrivalTime, status: flightStatus } = selectedTraveler.flight;
+	const flightDate = arrivalTime ? new Date(arrivalTime) : null;
   return { 
     initialValues: {
-      name, nationality, email, phone, connectivity, secondaryContact, status, arrivalTime, airlineCode, flightNum
+      name, nationality, email, phone, connectivity, secondaryContact, passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus
     }
   }  
 }
