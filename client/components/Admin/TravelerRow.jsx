@@ -4,6 +4,7 @@ import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { 
 	nameStyle, 
 	phoneStyle, 
+	emailStyle,
 	nationalityStyle, 
 	idStyle, 
 	flightCodeStyle,
@@ -14,19 +15,22 @@ import {
 } from './styles';
 
 
-export default ({ traveler }) => (
+export default ({ traveler }) => {
+	const { id, name, phone, email, nationality, status: travelerStatus } = traveler;
+	const { airlineCode, flightNum, arrivalTime, status: flightStatus } = traveler.flight;
+	const timeString = (new Date(arrivalTime)).toLocaleString();
+	return (
 		<TableRow onTouchTap={() => browserHistory.push(`/admin/travelers/${traveler.id}`)}>
-			<TableRowColumn style={idStyle}>{traveler.id}</TableRowColumn>
-			<TableRowColumn style={nameStyle}>{traveler.name}</TableRowColumn>
-			<TableRowColumn style={phoneStyle}>{traveler.phone}</TableRowColumn>
-			<TableRowColumn style={nationalityStyle}>{traveler.nationality}</TableRowColumn>
-
-			<TableRowColumn style={flightCodeStyle}>{traveler.flight.airlineCode}</TableRowColumn>
-			<TableRowColumn style={flightNumStyle}>{traveler.flight.flightNum}</TableRowColumn>
-			<TableRowColumn style={arrivalTimeStyle}>{traveler.flight.arrivalTime}</TableRowColumn>
-			<TableRowColumn style={flightStatusStyle}>{traveler.flight.status}</TableRowColumn>
-
-			<TableRowColumn style={travelerStatusStyle}>{traveler.status}</TableRowColumn>
+			<TableRowColumn style={idStyle}>{id}</TableRowColumn>
+			<TableRowColumn style={nameStyle}>{name}</TableRowColumn>
+			<TableRowColumn style={phoneStyle}>{phone}</TableRowColumn>
+			<TableRowColumn style={emailStyle}>{email}</TableRowColumn>
+			<TableRowColumn style={nationalityStyle}>{nationality}</TableRowColumn>
+			<TableRowColumn style={flightCodeStyle}>{airlineCode}</TableRowColumn>
+			<TableRowColumn style={flightNumStyle}>{flightNum}</TableRowColumn>
+			<TableRowColumn style={arrivalTimeStyle}>{timeString}</TableRowColumn>
+			<TableRowColumn style={flightStatusStyle}>{flightStatus}</TableRowColumn>
+			<TableRowColumn style={travelerStatusStyle}>{travelerStatus}</TableRowColumn>
 		</TableRow>
-
-)
+	)
+}

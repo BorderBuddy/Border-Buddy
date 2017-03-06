@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
@@ -12,7 +13,8 @@ export default ({ onCreateUserClick, onSignoutClick }) => (
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
-    <MenuItem primaryText="Create New User" onClick={onCreateUserClick}/>
+    <MenuItem primaryText="All Travelers" onClick={() => browserHistory.push('/admin/travelers')} />
+    <MenuItem primaryText="Create New User" onClick={() => browserHistory.push('/admin/createuser')}/>
     <MenuItem primaryText="Settings" />
     <MenuItem primaryText="Sign out" onClick={onSignoutClick}/>
   </IconMenu>
