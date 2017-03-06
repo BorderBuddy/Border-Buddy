@@ -3,5 +3,12 @@ import { SET_FLIGHT } from '../constants';
 
 export const setFlight = flight => ({ type: SET_FLIGHT, flight });
 
-export const updateFlight = flight => dispatch => {
+export const checkFlight = (code, flightNum, year, month, day) => dispatch => {
+  return axios.get(`http://localhost:3000/api/flight/verify?code=${code}&flightNum=${flightNum}&year=${year}&month=${month}&day=${day}`)
+  .then(response => {
+    dispatch(setFlight(response.data));
+  })
+  .catch((e) => {
+    dispatch(setFlight(null));
+  });
 }

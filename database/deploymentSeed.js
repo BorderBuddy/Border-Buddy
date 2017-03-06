@@ -3,9 +3,9 @@ const chalk = require('chalk');
 import { User } from './models/user';
 
 const users = [
-  { email: 'andrew@borderBuddy.us', password: '1234' },
-  { email: 'dillon@borderBuddy.us', password: '1234' },
-  { email: 'admin@borderBuddy.us', password: '1234' }
+  { email: 'andrew@borderbuddy.us', password: process.env.ADMIN_PW || '1234' },
+  { email: 'dillon@borderbuddy.us', password: process.env.ADMIN_PW || '1234' },
+  { email: 'admin@borderbuddy.us', password: process.env.ADMIN_PW || '1234' }
 ]
 
 const seedUsers = () => db.Promise.each(users, user => User.create(user));

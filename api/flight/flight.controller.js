@@ -20,7 +20,6 @@ export const getCode = (req, res, next) => {
 
 export const verifyFlight = (req, res, next) => {
 	const { code, flightNum, year, month, day } = req.query;
-
 	return axios.get(scheduleByCodeAndDate(code, flightNum, year, month, day))
 	.then(flight => {
 		if (flight.data.error || !flight.data.scheduledFlights.length) {

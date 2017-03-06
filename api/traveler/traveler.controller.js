@@ -65,8 +65,32 @@ export function getById(req, res, next) {
 }
 
 export function updateOne(req, res, next) {
-  return Traveler.findById(req.params.id)
-  .then(traveler => traveler.update(req.body))
-  .then(updatedTraveler => res.status(201).json(updatedTraveler))
+
+  const { flightNum, airlineCode, arrivalTime, flightStatus,
+          name, nationality, phone, email, connectivity, secondaryContact, passengerStatus  } = req.body;
+  let globalFlight;
+  return Flight.findOrCreate({ 
+    where: {
+      flightNum, airlineCode, arrivalTime
+    }
+  })
+  .then(flight => {
+    globalFlight = flight[0];
+    return Traveler.findOne({
+      include: [{ model: Flight }],
+      where:{
+       id: req.params.id
+      }
+    });
+  })
+  .then(traveler => {
+    return traveler.update({
+      name, nationality, phone, email, connectivity, secondaryContact, status: passengerStatus
+    })
+  })
+  .then(updatedTraveler => {
+    return updatedTraveler.setFlight(globalFlight);
+  })
+  .then(finalTraveler => res.status(201).json(finalTraveler))
   .catch(next);
 }

@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
 import SingleTraveler from '../components/Admin/SingleTraveler';
+import FlightConfirmation from '../components/FlightConfirmation';
 import {browserHistory} from 'react-router';
-import { setSelectedTraveler, updateTraveler } from '../actions/selectedTraveler';
-import { setFlight, updateFlight } from '../actions/flight';
+import { updateTraveler } from '../actions/selectedTraveler';
+import { checkFlight } from '../actions/flight';
 
 
 class SingleTravelerContainer extends Component {
@@ -12,62 +16,90 @@ class SingleTravelerContainer extends Component {
 		super(props);
 
 		this.state = {
-      changed: false
+      changed: false,
+      open: false
 		};
-    this.updateTraveler = this.updateTraveler.bind(this);
-    this.updateFlight = this.updateFlight.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.confirmSubmit = this.confirmSubmit.bind(this);
 	}
 
-  updateTraveler(key, value) {
-    console.log(key, value);
-    const newState = {[key]: value};
-    const { setSelectedTraveler, selectedTraveler } = this.props;
-    setSelectedTraveler(Object.assign({}, selectedTraveler, newState));
-    this.setState({ changed: true })
+  handleClose() {
+    this.setState({open: false});
   }
 
-  updateFlight(key, value) {
-    const newState = {[key]: value};
-    const { setFlight, flight } = this.props;
-    setFlight(Object.assign({}, flight, newState));
-    this.setState({ changed: true })
+  confirmSubmit() {
+    const { updateTraveler, routeParams } = this.props;
+    const { values } = this.props.form.singleTraveler;
+    updateTraveler(values, routeParams.id);
+    this.handleClose();
   }
+
 
   handleSubmit(e) {
     e.preventDefault();
-    const { updateTraveler, updateFlight, selectedTraveler, flight } = this.props;
-    Promise.all([updateTraveler(selectedTraveler), updateFlight(flight)])
-    .then(res => {
-      browserHistory.push('/admin/travelers');
+    const { flightNum, airlineCode, arrivalTime } = this.props.form.singleTraveler.values;
+    const day = arrivalTime.getDate();
+    const year = arrivalTime.getYear() + 1900;
+    const month = arrivalTime.getMonth() + 1;
+    this.props.checkFlight(airlineCode, flightNum, year, month, day)
+    .then(() => {
+      this.setState({ open: true });
+    }) 
+    .catch(() => {
+      this.setState({ open: false });
     })
   }
 
 	render() {
-		const { selectedTraveler, flight } = this.props;
+    const confirmActions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+      <RaisedButton
+        label="Submit"
+        primary={true}
+        onTouchTap={this.confirmSubmit}
+      />
+    ];
+
+    const cancelActions = [
+      <FlatButton
+        label="OK"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />
+    ];
 		return (
-		 <SingleTraveler
-      traveler={selectedTraveler} 
-      flight={flight} 
-      updateTraveler={this.updateTraveler} 
-      updateFlight={this.updateFlight} 
-      handleSubmit={this.handleSubmit}
-      changed={this.state.changed} />
-		);
+    <div>
+      <SingleTraveler handleSubmit={this.handleSubmit} changed={this.state.changed} id={this.props.params.id}/>
+      <Dialog
+        title={(this.props.flight) ? 'Please confirm your flight info' : 'Whoops!'}
+        actions={(this.props.flight) ? confirmActions : cancelActions}
+        modal={true}
+        open={this.state.open}
+      >
+        {
+          this.props.flight ?
+            <FlightConfirmation flight={this.props.flight} />
+            :
+            <h4>Sorry, we could not find your flight</h4>
+        }
+      </Dialog>
+    </div>
+    )
 	}
 }
 
+/*---------------------------REDUX CONTAINER---------------------------*/
 
-const mapStateToProps = ({ selectedTraveler, flight }) => ({
-  selectedTraveler,
-  flight
-})
+const mapStateToProps = ({ form, flight }) => ({ form, flight })
 
 const mapDispatchToProps = dispatch => ({
-  setSelectedTraveler: (selectedTraveler) => dispatch(setSelectedTraveler(selectedTraveler)),
-  setFlight: (flight) => dispatch(setFlight(flight)),
-  updateTraveler: (traveler) => dispatch(updateTraveler(traveler)),
-  updateFlight: (flight) => dispatch(updateFlight(flight))
+  updateTraveler: (traveler, id) => dispatch(updateTraveler(traveler, id)),
+  checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTravelerContainer);
