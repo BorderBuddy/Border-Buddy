@@ -14,11 +14,23 @@ export const fetchSelectedTraveler = (id) => dispatch => {
   .catch(err => console.error(err));
 }
 
-export const updateTraveler = (traveler) => dispatch => {
-  return axios.put(`/api/traveler/${traveler.id}`, traveler)
+export const updateTraveler = (traveler, id) => dispatch => {
+  return axios.put(`/api/traveler/${id}`, traveler)
   .then(traveler => {
     traveler = traveler.data;
     dispatch(setSelectedTraveler(traveler));
+  })
+  .catch(err => console.error(err));
+}
+
+export const sendText = (traveler) => dispatch => {
+  return axios.post('/api/twilio/send', 
+  {
+    to: traveler.phone,
+		message: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`
+  })
+  .then((res) => {
+    console.log('message sent!', res.data);
   })
   .catch(err => console.error(err));
 }

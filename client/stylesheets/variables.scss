@@ -1,0 +1,13 @@
+$txt-color: #0b2035;
+$grad-grey: rgba(150,150,150,0.8);
+
+$break-small: 500px;
+$break-medium: 750px;
+
+@mixin background-radial-gradient($color) {
+	background: $color;
+  background: -webkit-radial-gradient($color 30%, white 70%);
+  background: -o-radial-gradient($color 30%, white 70%); 
+  background: -moz-radial-gradient($color 30%, white 70%);
+  background: radial-gradient($color 30%, white 70%); 
+}

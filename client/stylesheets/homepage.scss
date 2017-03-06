@@ -1,25 +1,32 @@
 #homepage {
-	background-image: url('http://patterncooler.com/gen/index/w/islamic_geometric_interwoven_pattern-296.jpg');
-	background-repeat: repeat;
 	overflow: hidden;
 	min-height: 100vh;
+	position: relative;
+	
+	#banner {
+		background-image: url('http://patterncooler.com/gen/index/w/islamic_geometric_interwoven_pattern-296.jpg');
+		padding-top: 2em;
+		padding-bottom: 2em;
+	}
 
 	.title {
 		text-align: center;
 		margin: 0 auto;
-		margin-top: 1em;
 		color: white;
 		font-size: 3em;
+		line-height: 1em;
+		width: 80%;
 	}
 
 
 	footer {
 		bottom: 0;
-		margin-top: 10vh;
 		margin-bottom: 1em;
+		position: absolute;
+		width: 100%;
 
 		.footer-txt, a {
-			color: white
+			color: $txt-color
 		}
 	
 		a {

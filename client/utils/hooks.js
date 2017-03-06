@@ -7,7 +7,7 @@ import { fetchSelectedTraveler } from '../actions/selectedTraveler';
 import { checkToken } from '../actions/auth';
 
 // sync action creators
-import { clearSignUpUser } from '../actions/signUp';
+import { clearSignUpTraveler } from '../actions/signUp';
 
 export const onAdminEnter = () => {
 	store.dispatch(checkToken())
@@ -38,5 +38,5 @@ export const onSuccessEnter = () => {
 };
 
 export const onSuccessLeave = () => {
-	store.dispatch(clearSignUpUser());
+	store.dispatch(clearSignUpTraveler());
 };

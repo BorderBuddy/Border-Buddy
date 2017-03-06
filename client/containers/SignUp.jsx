@@ -5,6 +5,7 @@ import { Dialog, FlatButton, RaisedButton } from 'material-ui';
 import SignUp from '../components/SignUp';
 import FlightConfirmation from '../components/FlightConfirmation';
 import { signUpTraveler } from '../actions/signUp';
+import { checkFlight } from '../actions/flight';
 
 
 class SignUpContainer extends Component {
@@ -12,10 +13,8 @@ class SignUpContainer extends Component {
     super();
     this.state = {
       open: false,
-      flight: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.checkFlight = this.checkFlight.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.confirmSubmit = this.confirmSubmit.bind(this);
   }
@@ -37,17 +36,13 @@ class SignUpContainer extends Component {
     const day = arrivalTime.getDate();
     const year = arrivalTime.getYear() + 1900;
     const month = arrivalTime.getMonth() + 1;
-    this.checkFlight(airlineCode, flightNum, year, month, day);
-  }
-
-  checkFlight(code, flightNum, year, month, day) {
-    axios.get(`/api/flight/verify?code=${code}&flightNum=${flightNum}&year=${year}&month=${month}&day=${day}`)
-    .then(response => {
-      this.setState({ flight: response.data, open: true});
+    this.props.checkFlight(airlineCode, flightNum, year, month, day)
+    .then(() => {
+      this.setState({ open: true });
     })
-    .catch((e) => {
-      this.setState({ flight: null, open: true });
-    });
+    .catch(() => {
+      this.setState({ open: false })
+    })
   }
 
   render() {
@@ -76,14 +71,14 @@ class SignUpContainer extends Component {
       <div id="signup-container">
         <SignUp handleSubmit={this.handleSubmit} handleFlightChange={this.handleFlightChange} />
         <Dialog
-          title={(this.state.flight) ? 'Please confirm your flight info' : 'Whoops!'}
-          actions={(this.state.flight) ? confirmActions : cancelActions}
+          title="Confirm Submission"
+          actions={(this.props.flight) ? confirmActions : cancelActions}
           modal={true}
           open={this.state.open}
         >
           {
-            this.state.flight ?
-            <FlightConfirmation flight={this.state.flight} />
+            this.props.flight ?
+            <FlightConfirmation flight={this.props.flight} />
             :
             <h4>Sorry, we could not find your flight</h4>
           }
@@ -95,10 +90,11 @@ class SignUpContainer extends Component {
 
 /*---------------------------REDUX CONTAINER---------------------------*/
 
-const mapStateToProps = ({form}) => ({form});
+const mapStateToProps = ({form, flight}) => ({form, flight});
 
 const mapDispatchToProps = dispatch => ({
-  createTraveler: traveler => dispatch(signUpTraveler(traveler))
+  createTraveler: traveler => dispatch(signUpTraveler(traveler)),
+  checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 });
 
 export default connect(
