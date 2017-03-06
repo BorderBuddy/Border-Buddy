@@ -32,9 +32,11 @@ class SingleTravelerContainer extends Component {
   confirmSubmit() {
     const { updateTraveler, routeParams } = this.props;
     const { values } = this.props.form.singleTraveler;
-    updateTraveler(values, routeParams.id);
-    this.handleClose();
-    browserHistory.push('/admin/travelers');
+    updateTraveler(values, routeParams.id)
+    .then(() => {
+      this.handleClose();
+      browserHistory.push('/admin/travelers');
+    })
   }
 
   sendText() {
