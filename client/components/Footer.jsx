@@ -13,11 +13,6 @@ export default () => (
 						admin@borderbuddy.us
 				</a>
 			</div>
-			<div className="col-12">
-				<a href="https://github.com/EmilyDev/Border-Buddy" target="_blank" rel="noopener noreferrer">
-						Github
-				</a>
-			</div>
 		</footer>
 
 );
