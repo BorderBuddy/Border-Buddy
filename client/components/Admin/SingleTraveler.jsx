@@ -194,6 +194,7 @@ class SingleTraveler extends Component {
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
 								underlineFocusStyle={style.underline}
+								disabled={true}
 							>
 								<MenuItem value={'scheduled'} primaryText="Scheduled"/>
 								<MenuItem value={'delayed'} primaryText="Delayed"/>
