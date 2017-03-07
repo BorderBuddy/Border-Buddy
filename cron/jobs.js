@@ -63,22 +63,26 @@ module.exports = {
 	landFlightsAndTextTravelers: function() {
 		Flight.findFlightsToLand()
 		.then(flights => {
-			if (!flights.length) return;
+			if (!flights || !flights.length) return;
 			return Promise.filter(flights, didFlightLandTwoHoursAgo);
 		})
 		.then(arrivals => {
-			if (!arrivals.length) return;
+			if (!arrivals || !arrivals.length) return;
 			return Promise.all(arrivals.map(arrival => {
 				return arrival.landFlight();
 			}));
 		})
 		.then((passengers) => {
-			if (!passengers) return;
+			if (!passengers || !passengers.length) return;
 			const allTravelers = recursiveFlatten(passengers, []);
 			return Promise.map(allTravelers, askIfTravelerOk);
 		})
 		.then(messages => {
-			console.log(`Sent messages to ${messages.length} travelers`);
+			if (messages && messages.length) {
+				console.log(`Sent messages to ${messages.length} travelers`);
+			} else {
+				console.log('No messages sent!');
+			}
 		})
 		.catch(err => console.error(err));
 	}
