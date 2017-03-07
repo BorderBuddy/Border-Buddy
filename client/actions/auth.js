@@ -5,7 +5,7 @@ import { SET_AUTH } from '../constants';
 export const setAuth = auth => ({ type: SET_AUTH, auth });
 
 export const login = (user) => dispatch => {
-  return axios.post('/api/auth/local', user)
+  return axios.post('http://localhost:3000/api/auth/local', user)
   .then(response => {
     window.localStorage.setItem('accessToken', response.data.token);
     dispatch(setAuth(response.data));
@@ -15,17 +15,12 @@ export const login = (user) => dispatch => {
 }
 
 export const signup = (user) => dispatch => {
-  return axios.post('/api/user', user)
-  .then(response => {
-    window.localStorage.setItem('accessToken', response.data.token);
-    dispatch(setAuth(response.data));
-    browserHistory.push('/admin/travelers');
-  })
+  return axios.post('http://localhost:3000/api/user', user)
   .catch(err => console.error("ERROR!", err));
 }
 
 export const checkToken = () => dispatch => {
-  return axios.get('/api/auth/checkToken', {
+  return axios.get('http://localhost:3000/api/auth/checkToken', {
     headers: {
       'Authorization': window.localStorage.accessToken
     }
@@ -36,7 +31,7 @@ export const checkToken = () => dispatch => {
 }
 
 export const signout = () => dispatch => {
-  axios.post('/api/auth/logout')
+  axios.post('http://localhost:3000/api/auth/logout')
   .then(() => {
     window.localStorage.clear()
     dispatch(setAuth(null));

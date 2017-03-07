@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from "../components/Admin/Login";
 import { login } from '../actions/auth';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
+
 
 class LoginContainer extends Component {
 	constructor(props) {
@@ -34,10 +38,15 @@ class LoginContainer extends Component {
 
 	render() {
 		return(
-			<Login 
-				handleEmailChange={this.handleEmailChange}
-				handlePasswordChange={this.handlePasswordChange}
-				handleSubmit={this.handleSubmit} />
+			<div>
+				<AppBar
+          title="Border Buddy"
+          iconElementLeft={<IconButton><ActionFlightTakeoff /></IconButton>} />
+				<Login
+					handleEmailChange={this.handleEmailChange}
+					handlePasswordChange={this.handlePasswordChange}
+					handleSubmit={this.handleSubmit} />
+				</div>
 		)
 	}
 }

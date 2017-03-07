@@ -13,7 +13,7 @@ const setSignupTraveler = traveler => ({
 
 export const signUpTraveler = traveler => {
   return dispatch => {
-		axios.post('/api/traveler/', traveler)
+		axios.post('http://localhost:3000/api/traveler/', traveler)
 		.then(res => {
 			dispatch(setSignupTraveler(res.data));
 			browserHistory.push('/success');
