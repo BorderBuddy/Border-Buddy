@@ -13,7 +13,7 @@ export const email = value =>
 export const uppercase = value => value && value !== value.toUpperCase() ? 'Must be uppercase' : undefined
 
 export const validateCode = values => {
-  return axios.get(`http://localhost:3000/api/flight/code?code=${values.airlineCode}`)
+  return axios.get(`/api/flight/code?code=${values.airlineCode}`)
   .then(response => console.log(response.data))
   .catch(() => {
 		throw { airlineCode: 'Airline code not found!' };

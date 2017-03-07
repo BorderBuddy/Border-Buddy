@@ -8,4 +8,40 @@ export const flightCodeStyle = { width: '6vw', textAlign: 'left', color };
 export const flightNumStyle = { width: '6vw', textAlign: 'left', color };
 export const arrivalTimeStyle = {width: '15vw', textAlighn: 'left', color };
 export const flightStatusStyle = {width: '8vw', textAlign: 'left', color };
-export const travelerStatusStyle = {width: '8vw', textAlign: 'left', color };
+export const travelerStatusStyle = {width: '8vw', textAlign: 'left', color, fontWeight: 'bold' };
+
+export const signupLoginStyle = {
+		card: {
+			"margin": "5em auto",
+			"width": "50%",
+			"padding": "2em"
+		},
+		form: {
+			"margin": "1em auto",
+			"display": "block",
+			"width": "75%"
+		},
+		button: {
+			"margin": "2em auto",
+			"display": "block",
+			"width": "50%"
+		},
+		title: {
+			"textAlign": "center"
+		}
+	}
+
+export const setStatusColor = (status) => {
+  switch(status) {
+    case 'transit':
+      return 'blue';
+    case 'unconfirmed':
+      return 'orange';
+    case 'detained':
+      return 'red';
+    case 'at risk':
+      return 'red';
+    case 'cleared':
+      return 'green';
+  }
+}

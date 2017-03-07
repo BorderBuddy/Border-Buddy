@@ -17,16 +17,23 @@ class SingleTravelerContainer extends Component {
 
 		this.state = {
       changed: false,
-      open: false
+      flightConfirmOpen: false,
+      sentTextOpen: false,
+      textSentSuccess: null
 		};
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleFlightConfirmClose = this.handleFlightConfirmClose.bind(this);
+    this.handleSentTextClose = this.handleSentTextClose.bind(this);
     this.confirmSubmit = this.confirmSubmit.bind(this);
     this.sendText = this.sendText.bind(this);
 	}
 
-  handleClose() {
-    this.setState({open: false});
+  handleFlightConfirmClose() {
+    this.setState({flightConfirmOpen: false });
+  }
+
+  handleSentTextClose() {
+    this.setState({ sentTextOpen: false });
   }
 
   confirmSubmit() {
@@ -34,13 +41,19 @@ class SingleTravelerContainer extends Component {
     const { values } = this.props.form.singleTraveler;
     updateTraveler(values, routeParams.id)
     .then(() => {
-      this.handleClose();
+      this.handleFlightConfirmClose();
       browserHistory.push('/admin/travelers');
     })
   }
 
   sendText() {
-    this.props.sendText(this.props.form.singleTraveler.values);
+    this.props.sendText(this.props.form.singleTraveler.values)
+    .then(() => {
+      this.setState({ sentTextOpen: true, textSentSuccess: true })
+    })
+    .catch(() => {
+      this.setState({ sentTextOpen: true, textSentSuccess: false })
+    })
   }
 
 
@@ -52,10 +65,10 @@ class SingleTravelerContainer extends Component {
     const month = arrivalTime.getMonth() + 1;
     this.props.checkFlight(airlineCode, flightNum, year, month, day)
     .then(() => {
-      this.setState({ open: true });
+      this.setState({ flightConfirmOpen: true });
     }) 
     .catch(() => {
-      this.setState({ open: false });
+      this.setState({ flightConfirmOpen: false });
     })
   }
 
@@ -64,7 +77,7 @@ class SingleTravelerContainer extends Component {
       <FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleFlightConfirmClose}
       />,
       <RaisedButton
         label="Submit"
@@ -77,9 +90,18 @@ class SingleTravelerContainer extends Component {
       <FlatButton
         label="OK"
         primary={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleFlightConfirmClose}
       />
     ];
+
+    const textModalOptions = [
+      <FlatButton 
+        label="OK"
+        primary={true}
+        onTouchTap={this.handleSentTextClose}
+      />
+    ]
+
 		return (
     <div>
       <SingleTraveler 
@@ -92,13 +114,26 @@ class SingleTravelerContainer extends Component {
         title={(this.props.flight) ? 'Please confirm your flight info' : 'Whoops!'}
         actions={(this.props.flight) ? confirmActions : cancelActions}
         modal={true}
-        open={this.state.open}
+        open={this.state.flightConfirmOpen}
       >
         {
           this.props.flight ?
             <FlightConfirmation flight={this.props.flight} />
             :
             <h4>Sorry, we could not find your flight</h4>
+        }
+      </Dialog>
+      <Dialog
+        title="Texting Traveler..."
+        actions={textModalOptions}
+        modal={true}
+        open={this.state.sentTextOpen}
+      >
+        {
+          this.state.textSentSuccess ?
+            <h4>Your text has been sent successfully.</h4>
+            :
+            <h4>There was a problem trying to send your text</h4>
         }
       </Dialog>
     </div>

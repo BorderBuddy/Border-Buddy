@@ -11,7 +11,8 @@ import {
 	flightNumStyle,
 	flightStatusStyle,
 	arrivalTimeStyle,
-	travelerStatusStyle
+	travelerStatusStyle,
+	setStatusColor
 } from './styles';
 
 
@@ -19,6 +20,7 @@ export default ({ traveler }) => {
 	const { id, name, phone, email, nationality, status: travelerStatus } = traveler;
 	const { airlineCode, flightNum, arrivalTime, status: flightStatus } = traveler.flight;
 	const timeString = (new Date(arrivalTime)).toLocaleString();
+	const color = setStatusColor(travelerStatus);
 	return (
 		<TableRow onTouchTap={() => browserHistory.push(`/admin/travelers/${traveler.id}`)}>
 			<TableRowColumn style={idStyle}>{id}</TableRowColumn>
@@ -30,7 +32,7 @@ export default ({ traveler }) => {
 			<TableRowColumn style={flightNumStyle}>{flightNum}</TableRowColumn>
 			<TableRowColumn style={arrivalTimeStyle}>{timeString}</TableRowColumn>
 			<TableRowColumn style={flightStatusStyle}>{flightStatus}</TableRowColumn>
-			<TableRowColumn style={travelerStatusStyle}>{travelerStatus}</TableRowColumn>
+			<TableRowColumn style={Object.assign({}, travelerStatusStyle, { color })}>{travelerStatus}</TableRowColumn>
 		</TableRow>
 	)
 }
