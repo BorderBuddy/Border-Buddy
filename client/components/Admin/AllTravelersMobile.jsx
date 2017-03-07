@@ -15,7 +15,7 @@ const AllTravelersMobile = ({ travelers }) => {
           const color = setStatusColor(travelerStatus);
           const style = {
             passengerStatus: {
-              color, "fontWeight": "bold"
+              color, "fontWeight": "bold",
             }
           }
           return (
@@ -24,10 +24,10 @@ const AllTravelersMobile = ({ travelers }) => {
                 <CardTitle title={`${name}`} subtitle={`Traveler ID: ${id}`} />
                   <div className="field-container col-6 sm-col sm-col-6">
                     <CardTitle title="Traveler Information" />
+                    <CardText style={style.passengerStatus}>{`Traveler Status: ${travelerStatus}`}</CardText>
                     <CardText>{`Phone: ${phone}`}</CardText>
                     <CardText>{`Email: ${email}`}</CardText>
                     <CardText>{`Nationality: ${nationality}`}</CardText>
-                    <CardText style={style.passengerStatus}>{`Traveler Status: ${travelerStatus}`}</CardText>
                   </div>
                   <CardTitle title="Flight Information" />
                   <div className="field-container col-6 sm-col sm-col-6">
