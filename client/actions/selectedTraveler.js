@@ -5,7 +5,7 @@ import { setFlight } from './flight';
 export const setSelectedTraveler = selectedTraveler => ({ type: SET_SELECTED_TRAVELER, selectedTraveler });
 
 export const fetchSelectedTraveler = (id) => dispatch => {
-  return axios.get(`http://localhost:3000/api/traveler/${id}`)
+  return axios.get(`/api/traveler/${id}`)
   .then(traveler => {
     traveler = traveler.data;
     dispatch(setSelectedTraveler(traveler));
@@ -15,7 +15,7 @@ export const fetchSelectedTraveler = (id) => dispatch => {
 }
 
 export const updateTraveler = (traveler, id) => dispatch => {
-  return axios.put(`http://localhost:3000/api/traveler/${id}`, traveler)
+  return axios.put(`/api/traveler/${id}`, traveler)
   .then(traveler => {
     traveler = traveler.data;
     dispatch(setSelectedTraveler(traveler));
@@ -24,7 +24,7 @@ export const updateTraveler = (traveler, id) => dispatch => {
 }
 
 export const sendText = (traveler) => dispatch => {
-  return axios.post('http://localhost:3000/api/twilio/send', 
+  return axios.post('/api/twilio/send', 
   {
     to: traveler.phone,
 		message: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`
