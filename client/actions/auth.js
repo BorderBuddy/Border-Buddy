@@ -16,11 +16,6 @@ export const login = (user) => dispatch => {
 
 export const signup = (user) => dispatch => {
   return axios.post('/api/user', user)
-  .then(response => {
-    window.localStorage.setItem('accessToken', response.data.token);
-    dispatch(setAuth(response.data));
-    browserHistory.push('/admin/travelers');
-  })
   .catch(err => console.error("ERROR!", err));
 }
 
