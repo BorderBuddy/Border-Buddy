@@ -7,7 +7,7 @@ export default () => (
 		</div>
 		<div className="col-12">
 			<p className="center">We started at Hack the Ban.</p>
-			<a href="vocativ.com/405756/coders-hack-trump-immigration-ban/" target="_blank" rel="noopener noreferrer">
+			<a href="http://www.vocativ.com/405756/coders-hack-trump-immigration-ban/" target="_blank" rel="noopener noreferrer">
 				<img className="hacktheban-link" src="/images/hacktheban.png" />
 			</a>
 
