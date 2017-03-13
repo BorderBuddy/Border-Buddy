@@ -22,7 +22,7 @@ const sync = (force = testOrSeed, retries=0, maxRetries=5) => {
         return
       }
       // Otherwise, do this autocreate nonsense
-      console.log(`${retries ? `[retry ${retries}]` : ''} Creating database ${name}...`)
+      console.log(`${retries ? `[retry ${retries}]` : ''} Creating database ${db.config.database}...`)
 
       return new Promise((resolve, reject) =>
         require('child_process').exec(`createdb "${db.config.database}"`, resolve)
