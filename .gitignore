@@ -5,3 +5,4 @@ dist/fund.js.map
 dist/stylesheets/**
 .vscode/settings.json
 api/flight/apiKeys.js
+.idea
