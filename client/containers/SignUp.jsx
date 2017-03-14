@@ -53,6 +53,7 @@ class SignUpContainer extends Component {
         onTouchTap={this.handleClose}
       />,
       <RaisedButton
+        id="submit-flight-confirmation"
         label="Submit"
         primary={true}
         onTouchTap={this.confirmSubmit}

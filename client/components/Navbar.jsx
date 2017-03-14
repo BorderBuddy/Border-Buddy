@@ -14,7 +14,7 @@ export default () => (
 			</Link>
 		</div>
 		<div className="inline-block col-4">
-			<Link to="/register">
+			<Link to="/register" className={'register-link'}>
 				<FlatButton secondary={true} style={style}>Register</FlatButton>
 			</Link>
 		</div>
