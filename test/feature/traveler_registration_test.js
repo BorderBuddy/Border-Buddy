@@ -1,9 +1,12 @@
 import Nightmare from 'nightmare';
 import { expect } from 'chai';
+import { cleanDatabase } from './feature_helpers';
 
 require('./nightmare_helpers');
 
 describe('BorderBuddy', () => {
+
+  beforeEach(cleanDatabase);
 
   it('allows a user to register as a traveler', () => {
     const nightmare = new Nightmare({

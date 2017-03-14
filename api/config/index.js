@@ -1,6 +1,16 @@
 import path from 'path';
 import _ from 'lodash';
 
+const isTesting = process.env.NODE_ENV === 'testing';
+
+const dbUsername = 'postgres';
+const dbPassword = 'root';
+const dbName = 'BorderBuddy' + (isTesting ? '_test' : '');
+
+const databaseUrl  = _.get(process.env,
+  'DATABASE_URL',
+  `postgres://${dbUsername}:${dbPassword}@localhost:5432/${dbName}`);
+
 export const config = {
   env: process.env.NODE_ENV,
   root: path.normalize(`${__dirname}/../../..`),
@@ -9,8 +19,7 @@ export const config = {
     session: _.get(process.env, 'SESSION_SECRET', 'border buddy bl@h bl@h')
   },
   database: {
-	  username: 'postgres',
-	  password: 'root'
+    url: databaseUrl
   },
   twilio: {
     adminPhone: process.env.TWILIO_PHONE_NUM || '+15005550006', // limited functionality https://www.twilio.com/docs/api/rest/test-credentials

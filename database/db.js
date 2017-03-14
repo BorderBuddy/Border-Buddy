@@ -2,25 +2,16 @@ const chalk = require('chalk');
 const Sequelize = require('sequelize');
 import { config } from '../api/config';
 
-// db server constant(s)
-const dbName = 'BorderBuddy' +
-  (process.env.NODE_ENV === 'testing' ? '_test' : '');
-const url = process.env.DATABASE_URL || `postgres://${config.database.username}:${config.database.password}@localhost:5432/${dbName}`;
-
 // notify the user we're about to do it
-console.log(chalk.yellow(`Opening database connection to ${url}`))
+console.log(chalk.yellow(`Opening database connection to ${config.database.url}`));
 
 // init the db
-const db = new Sequelize(url, {
-  host: 'localhost',
-  username: 'postgres',
-  password: 'root',
+const db = new Sequelize(config.database.url, {
   define: {
     freezeTableName: true   // don't go changing our table names, Sequelize
   },
-  dialect: 'postgres',
   logging: true
-})
+});
 
 
 module.exports = db;
