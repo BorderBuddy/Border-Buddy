@@ -6,3 +6,4 @@ dist/stylesheets/**
 .vscode/settings.json
 api/flight/apiKeys.js
 .idea
+npm-debug.log
