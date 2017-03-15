@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "build": "webpack --config webpack.prod.babel.js",
     "test": "./run-tests.sh",
-    "seed": "NODE_ENV=testing babel-node database/seed.js",
+    "seed": "babel-node database/seed.js",
     "deploy-seed": "NODE_ENV=seeding babel-node database/deploymentSeed.js",
     "worker": "babel-node cron",
     "heroku-postbuild": "npm run build && npm run deploy-seed"
