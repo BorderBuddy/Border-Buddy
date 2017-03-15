@@ -17,7 +17,7 @@ describe('BorderBuddy', () => {
     })
       .viewport(1280, 1024);
 
-    return nightmare.goto('http://localhost:8080')
+    return nightmare.goto('http://localhost:3000')
       .wait('#homepage')
       .clickOnElementContaining('a', 'Register')
       .type('input[name="name"]', 'Jane Citizen')
@@ -39,7 +39,7 @@ describe('BorderBuddy', () => {
       .wait('#submit-flight-confirmation')
       .mouseDownUpOnElementContaining('#submit-flight-confirmation', 'Submit')
       .wait('#success-container')
-      .goto('http://localhost:8080/admin')
+      .goto('http://localhost:3000/admin')
       .type('input[name="email"]', 'admin@borderbuddy.us')
       .type('input[name="password"]', '1234')
       .clickOnElementContaining('button', 'Login')
