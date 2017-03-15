@@ -46,6 +46,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="name"
+            className="traveler-name"
             component={TextField}
             validate={required}
             floatingLabelText="Name"
@@ -58,6 +59,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="nationality"
+            className="traveler-nationality"
             component={TextField}
             validate={required}
             floatingLabelText="Nationality"
@@ -70,6 +72,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="email"
+            className="traveler-email"
             component={TextField}
             validate={[required, email]}
             floatingLabelText="Email"
@@ -82,6 +85,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="phone"
+            className="traveler-phone-number"
             component={TextField}
             floatingLabelText="Phone Number"
             floatingLabelStyle={style.label}
@@ -94,6 +98,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="connectivity"
+            className="traveler-connectivity"
             component={SelectField}
             floatingLabelText="Do you have a smartphone?"
             floatingLabelStyle={style.label}
@@ -102,13 +107,14 @@ const SignUp = ({handleSubmit, valid}) => {
             validate={required}
             style={style.input}
           >
-            <MenuItem value="true" primaryText="Yes" />
-            <MenuItem value="false" primaryText="No" />
+            <MenuItem className="traveler-has-phone-option" value="true" primaryText="Yes" />
+            <MenuItem className="traveler-has-no-phone-option" value="false" primaryText="No" />
           </Field>
         </div>
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="arrivalTime"
+            className="traveler-arrival-time"
             component={DatePicker}
             validate={required}
             format={null}
@@ -122,6 +128,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="airlineCode"
+            className="traveler-airline-code"
             component={AirlinePicker}
             validate={[uppercase, required]}
             format={null}
@@ -135,6 +142,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="field-container col-12 md-col md-col-6">
           <Field
             name="flightNum"
+            className="traveler-flight-number"
             component={TextField}
             validate={required}
             format={null}
@@ -148,6 +156,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <div className="col-12">
           <Field
             name="secondaryContact"
+            className="traveler-secondary-contact"
             component={TextField}
             floatingLabelText="Emergency contact"
             floatingLabelStyle={style.label}
@@ -160,6 +169,7 @@ const SignUp = ({handleSubmit, valid}) => {
           <RaisedButton
             type="submit"
             label="Register"
+            className="submit-traveler-registration"
             disabled={!valid}
             primary={true}
             style={style.button}

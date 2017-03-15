@@ -32,7 +32,7 @@ export default ({ travelers, selectTraveler }) => (
 	        <TableHeaderColumn style={travelerStatusStyle}>Traveler Status</TableHeaderColumn>
 	      </TableRow>
 	    </TableHeader>
-	    <TableBody>
+	    <TableBody className="all-travelers">
 	      {
 					travelers && travelers.map((traveler) =>
 						<TravelerRow traveler={traveler} key={traveler.id} />)
