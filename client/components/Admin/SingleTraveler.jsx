@@ -51,7 +51,7 @@ class SingleTraveler extends Component {
 			}
 		};
 		return (
-			<form style={style.form} onSubmit={handleSubmit}>
+			<form data-test="single-traveler-form" style={style.form} onSubmit={handleSubmit}>
 				<div>
 					<legend className="mx-auto h1 subtitle">Update Traveler</legend>
 					<div className="clearfix">
@@ -138,9 +138,31 @@ class SingleTraveler extends Component {
 						</div>
 						<div className="field-container col-12 md-col md-col-6">
 							<Field
-								name="secondaryContact"
+								name="secondaryContactName"
 								component={TextField}
-								floatingLabelText="secondary contact"
+								floatingLabelText="Secondary Contact Name"
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="secondaryContactPhone"
+								component={TextField}
+								floatingLabelText="Secondary Contact Phone"
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="secondaryContactRelation"
+								component={TextField}
+								floatingLabelText="Secondary Contact Relation"
 								style={style.input}
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
@@ -202,17 +224,17 @@ class SingleTraveler extends Component {
 							</Field>
 						</div>
 						<div className="field-container col-12 md-col md-col-6">
-							<RaisedButton 
-								type="submit" 
-								label="Save Changes" 
+							<RaisedButton
+								type="submit"
+								label="Save Changes"
 								disabled={!valid}
 								primary={true}
 								style={style.button}
 							/>
 						</div>
 						<div className="field-container col-12 md-col md-col-6">
-							<RaisedButton 
-								label="Text Traveler" 
+							<RaisedButton
+								label="Text Traveler"
 								secondary={true}
 								style={style.button}
 								onClick={sendText}
@@ -232,12 +254,14 @@ SingleTraveler = reduxForm({
 })(SingleTraveler)
 
 const mapStateToProps = ({ selectedTraveler }) => {
-  const { name, nationality, email, phone, connectivity, secondaryContact, status: passengerStatus } = selectedTraveler;
+  const { name, nationality, email, phone, connectivity, secondaryContactPhone, secondaryContactName,
+		secondaryContactRelation, status: passengerStatus } = selectedTraveler;
   const { airlineCode, flightNum, arrivalTime, status: flightStatus } = selectedTraveler.flight;
 	const flightDate = arrivalTime ? new Date(arrivalTime) : null;
   return { 
     initialValues: {
-      name, nationality, email, phone, connectivity, secondaryContact, passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus
+      name, nationality, email, phone, connectivity, secondaryContactPhone, secondaryContactName, secondaryContactRelation,
+			passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus
     }
   }  
 }

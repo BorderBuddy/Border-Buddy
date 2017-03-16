@@ -153,19 +153,44 @@ const SignUp = ({handleSubmit, valid}) => {
             style={style.input}
           />
         </div>
-        <div className="col-12">
+        <div className="field-container col-12 md-col md-col-6">
           <Field
-            name="secondaryContact"
-            className="traveler-secondary-contact"
+            name="secondaryContactName"
+            className="traveler-secondary-contact-name"
             component={TextField}
-            floatingLabelText="Emergency contact"
+            floatingLabelText="Emergency contact name"
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
             errorStyle={style.error}
             style={style.input}
           />
         </div>
-        <div className="col-12">
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="secondaryContactRelation"
+            className="traveler-secondary-contact-relation"
+            component={TextField}
+            floatingLabelText="Emergency contact relation (mother, father, etc)"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="secondaryContactPhone"
+            className="traveler-secondary-contact-phone"
+            component={TextField}
+            floatingLabelText="Emergency contact phone number"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            validate={[phone]}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12">
           <RaisedButton
             type="submit"
             label="Register"
