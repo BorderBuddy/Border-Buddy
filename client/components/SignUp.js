@@ -197,6 +197,8 @@ const SignUp = ({handleSubmit, valid}) => {
             style={style.input}
           />
         </div>
+      </div>
+      <div className="clearfix">
         <div className="field-container col-12">
           <RaisedButton
             type="submit"
