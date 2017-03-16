@@ -45,6 +45,7 @@
     "cron": "^1.2.1",
     "es6-promise": "^4.0.5",
     "express": "^4.14.1",
+    "express-https-redirect": "^1.0.0",
     "express-jwt": "^5.1.0",
     "history": "^4.5.1",
     "humps": "^2.0.0",
