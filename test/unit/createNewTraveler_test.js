@@ -1,5 +1,5 @@
 import './unit_helpers';
-import createNewTravler from '../../useCase/createNewTraveler';
+import createNewTraveler from '../../useCase/createNewTraveler';
 
 describe('createNewTraveler', () => {
 
@@ -31,18 +31,18 @@ describe('createNewTraveler', () => {
     };
 
     createdFlights = [{a: 'flight'}];
-    repository.flights.findOrCreate.resolves(createdFlights);
+    repository.flights.findOrCreate.returns(createdFlights);
 
     createdTraveler = {a: 'traveler', setFlight: sinon.stub()};
-    repository.travelers.create.resolves(createdTraveler);
+    repository.travelers.create.returns(createdTraveler);
 
     travelerWithFlight = {a: 'traveler-with-flight'};
-    createdTraveler.setFlight.resolves(travelerWithFlight);
+    createdTraveler.setFlight.returns(travelerWithFlight);
 
     callbacks = {onSuccess: sinon.spy(), onFailure: sinon.spy()};
     travelerNotifier = {onRegistrationSuccess: sinon.spy()};
 
-    return createNewTravler({repository, travelerDetails, callbacks, travelerNotifier});
+    return createNewTraveler({repository, travelerDetails, callbacks, travelerNotifier});
   });
 
   it('finds or creates a flight', () => {

@@ -105,8 +105,7 @@
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1",
     "sequelize-cli": "^2.5.1",
-    "sinon": "^2.0.0",
-    "sinon-as-promised": "^4.0.2",
+    "sinon": "1.17.7",
     "sinon-chai": "^2.8.0"
   }
 }
