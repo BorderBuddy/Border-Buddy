@@ -1,7 +1,7 @@
 # Hack The Ban - Border Buddy
 
 [![Stories in Ready](https://badge.waffle.io/EmilyDev/Hack-The-Ban.png?label=ready&title=Ready)](https://waffle.io/EmilyDev/Hack-The-Ban)
-[![CircleCI](https://circleci.com/gh/border-buddy/Border-Buddy/tree/master.svg?style=svg&circle-token=d1e727c511f29a2386854aa8e95fc005d37e3415)](https://circleci.com/gh/border-buddy/Border-Buddy/tree/master)
+[![CircleCI](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master.svg?style=svg&circle-token=e6542681d7c1b67287fe02caf10508ed6087dd03)](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master)
 
 ## Getting Started
 
