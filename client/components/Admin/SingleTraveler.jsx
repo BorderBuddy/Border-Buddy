@@ -51,7 +51,7 @@ class SingleTraveler extends Component {
 			}
 		};
 		return (
-			<form style={style.form} onSubmit={handleSubmit}>
+			<form data-test="single-traveler-form" style={style.form} onSubmit={handleSubmit}>
 				<div>
 					<legend className="mx-auto h1 subtitle">Update Traveler</legend>
 					<div className="clearfix">
@@ -114,8 +114,109 @@ class SingleTraveler extends Component {
 								floatingLabelStyle={style.label}
 								underlineFocusStyle={style.underline}
 							>
-								<MenuItem value={true} primaryText="Yes" />
-								<MenuItem value={false} primaryText="No" />
+								<MenuItem value="true" primaryText="Yes" />
+								<MenuItem value="false" primaryText="No" />
+							</Field>
+						</div>
+					</div>
+					<div className="clearfix">
+						<h2>Travel details</h2>
+						<div className="field-container col-12 md-col md-col-4">
+							<Field
+								name="arrivalTime"
+								component={DatePicker}
+								validate={required}
+								format={null}
+								floatingLabelText="What day do you arrive?"
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-4">
+							<Field
+								name="airlineCode"
+								component={AirlinePicker}
+								validate={[uppercase, required]}
+								label="Airline Code"
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-4">
+							<Field
+								name="flightNum"
+								component={TextField}
+								floatingLabelText="Flight Number"
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+					</div>
+					<div className="clearfix">
+						<h2>Emergency contact</h2>
+						<p><em>Who can we contact if we can't get in touch with you?</em></p>
+						<div className="field-container col-12 md-col sm-col-6 md-col-4">
+							<Field
+								name="secondaryContactName"
+								className="traveler-secondary-contact-name"
+								component={TextField}
+								floatingLabelText="Name"
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+								errorStyle={style.error}
+								style={style.input}
+							/>
+						</div>
+						<div className="field-container col-12 md-col sm-col-6 md-col-4">
+							<Field
+								name="secondaryContactPhone"
+								className="traveler-secondary-contact-phone"
+								component={TextField}
+								floatingLabelText="Phone number"
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+								errorStyle={style.error}
+								validate={[phone]}
+								style={style.input}
+							/>
+						</div>
+						<div className="field-container col-12 md-col sm-col-6 md-col-4">
+							<Field
+								name="secondaryContactRelation"
+								className="traveler-secondary-contact-relation"
+								component={TextField}
+								floatingLabelText="Relationship to you"
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+								errorStyle={style.error}
+								style={style.input}
+							/>
+						</div>
+					</div>
+					<div className="clearfix">
+						<h2>Traveler Status</h2>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="flightStatus"
+								component={SelectField}
+								floatingLabelText="Flight Status"
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+								disabled={true}
+							>
+								<MenuItem value={'scheduled'} primaryText="Scheduled"/>
+								<MenuItem value={'delayed'} primaryText="Delayed"/>
+								<MenuItem value={'arrived'} primaryText="Arrived"/>
 							</Field>
 						</div>
 						<div className="field-container col-12 md-col md-col-6">
@@ -136,83 +237,20 @@ class SingleTraveler extends Component {
 								<MenuItem value={'cleared'} primaryText="Cleared"/>
 							</Field>
 						</div>
+					</div>
+					<div className="clearfix">
 						<div className="field-container col-12 md-col md-col-6">
-							<Field
-								name="secondaryContact"
-								component={TextField}
-								floatingLabelText="secondary contact"
-								style={style.input}
-								errorStyle={style.error}
-								floatingLabelStyle={style.label}
-								underlineFocusStyle={style.underline}
-							/>
-						</div>
-						<div className="field-container col-12 md-col md-col-6">
-							<Field
-								name="arrivalTime"
-								component={DatePicker}
-								validate={required}
-								format={null}
-								floatingLabelText="Date of Arrival"
-								style={style.input}
-								errorStyle={style.error}
-								floatingLabelStyle={style.label}
-								underlineFocusStyle={style.underline}
-							/>
-						</div>
-						<div className="field-container col-12 md-col md-col-6">
-							<Field
-								name="airlineCode"
-								component={AirlinePicker}
-								validate={[uppercase, required]}
-								label="Airline Code"
-								style={style.input}
-								errorStyle={style.error}
-								floatingLabelStyle={style.label}
-								underlineFocusStyle={style.underline}
-							/>
-						</div>
-						<div className="field-container col-12 md-col md-col-6">
-							<Field
-								name="flightNum"
-								component={TextField}
-								floatingLabelText="Flight Number"
-								validate={required}
-								style={style.input}
-								errorStyle={style.error}
-								floatingLabelStyle={style.label}
-								underlineFocusStyle={style.underline}
-							/>
-						</div>
-						<div className="col-12">
-							<Field
-								name="flightStatus"
-								component={SelectField}
-								floatingLabelText="Flight Status"
-								validate={required}
-								style={style.input}
-								errorStyle={style.error}
-								floatingLabelStyle={style.label}
-								underlineFocusStyle={style.underline}
-								disabled={true}
-							>
-								<MenuItem value={'scheduled'} primaryText="Scheduled"/>
-								<MenuItem value={'delayed'} primaryText="Delayed"/>
-								<MenuItem value={'arrived'} primaryText="Arrived"/>
-							</Field>
-						</div>
-						<div className="field-container col-12 md-col md-col-6">
-							<RaisedButton 
-								type="submit" 
-								label="Save Changes" 
+							<RaisedButton
+								type="submit"
+								label="Save Changes"
 								disabled={!valid}
 								primary={true}
 								style={style.button}
 							/>
 						</div>
 						<div className="field-container col-12 md-col md-col-6">
-							<RaisedButton 
-								label="Text Traveler" 
+							<RaisedButton
+								label="Text Traveler"
 								secondary={true}
 								style={style.button}
 								onClick={sendText}
@@ -232,12 +270,14 @@ SingleTraveler = reduxForm({
 })(SingleTraveler)
 
 const mapStateToProps = ({ selectedTraveler }) => {
-  const { name, nationality, email, phone, connectivity, secondaryContact, status: passengerStatus } = selectedTraveler;
+  const { name, nationality, email, phone, connectivity, secondaryContactPhone, secondaryContactName,
+		secondaryContactRelation, status: passengerStatus } = selectedTraveler;
   const { airlineCode, flightNum, arrivalTime, status: flightStatus } = selectedTraveler.flight;
 	const flightDate = arrivalTime ? new Date(arrivalTime) : null;
   return { 
     initialValues: {
-      name, nationality, email, phone, connectivity, secondaryContact, passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus
+      name, nationality, email, phone, connectivity: String(connectivity), secondaryContactPhone, secondaryContactName, secondaryContactRelation,
+			passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus
     }
   }  
 }

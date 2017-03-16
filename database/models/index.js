@@ -9,5 +9,10 @@ const User = require('./user');
 Flight.hasOne(Traveler, {foreignKey: 'flight_id'});
 Traveler.belongsTo(Flight); // for eager loading
 
+const Repository = {
+  travelers: Traveler,
+  flights: Flight,
+  users: User
+};
 
-module.exports = { Traveler, Flight, User };
+module.exports = { Traveler, Flight, User, Repository };

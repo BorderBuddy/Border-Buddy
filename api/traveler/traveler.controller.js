@@ -1,49 +1,19 @@
-import Traveler from '../../database/models/travelers';
-import Flight from '../../database/models/flights';
+import { Repository, Traveler, Flight } from '../../database/models';
+import TravelerNotifier from '../notify/travelerNotifier';
 
-import chalk from 'chalk';
-
-import { Twilio } from '../twilio/twilio.controller';
-import { config  } from '../config';
-
+import createNewTravelerUseCase from '../../useCase/createNewTraveler';
 
 export const createNewTraveler = (req, res, next) => {
-  const { flightNum, airlineCode, arrivalTime,
-          name, nationality, phone, email, connectivity, secondaryContact  } = req.body;
-  let globalFlight;
-  return Flight.findOrCreate({where: {
-    flightNum,
-    airlineCode,
-    arrivalTime
-  }})
-  .then(flight => {
-    globalFlight = flight[0];
-    return Traveler.create({
-      name,
-      nationality,
-      phone,
-      email,
-      connectivity,
-      secondaryContact
-    });
-  })
-  .then(traveler => {
-    return traveler.setFlight(globalFlight);
-  })
-  .then(finalTraveler => {
-    res.status(201).json(finalTraveler);
+  const travelerDetails = req.body;
+  const travelerNotifier = new TravelerNotifier();
 
-    // not chaining as promise
-    // in future, maybe confirm user phone num before persisting
-    Twilio.sendMessage({
-      to: finalTraveler.phone,
-      from: config.twilio.adminPhone,
-      body: `Thanks for registering with BorderBuddy, ${finalTraveler.name}! Safe travels, and text OK to this number after you pass through customs and immigration.`
-    }, (err, result) => {
-      if (err) console.error(chalk.red('ERROR SENDING CONFIRMATION TEXT', err));
-      else return;
-    });
-
+  createNewTravelerUseCase({
+    repository: Repository,
+    travelerDetails,
+    callbacks: {
+      onSuccess: (traveler) => res.status(201).json(traveler)
+    },
+    travelerNotifier
   })
   .catch(next);
 };

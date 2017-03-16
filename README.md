@@ -24,6 +24,18 @@ $ psql -U postgres
 ```
 - Get the necessary `apiKeys.js` file and place under `api/flight/`
 
+- Migrate 
+
+```
+$ npm run migrate
+```
+
+**To rollback the last migration, run:**
+ 
+```
+$ npm run migrate:undo
+```
+
 - Seed the database
 
 ```

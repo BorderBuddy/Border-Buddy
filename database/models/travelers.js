@@ -25,7 +25,13 @@ const Traveler = db.define('traveler', {
   connectivity: {
     type: Sequelize.BOOLEAN
   },
-  secondaryContact: {
+  secondaryContactPhone: {
+    type: Sequelize.STRING
+  },
+  secondaryContactName: {
+    type: Sequelize.STRING
+  },
+  secondaryContactRelation: {
     type: Sequelize.STRING
   },
   status: {

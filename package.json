@@ -10,7 +10,9 @@
     "test": "./run-tests.sh",
     "seed": "babel-node database/seed.js",
     "deploy-seed": "NODE_ENV=seeding babel-node database/deploymentSeed.js",
-    "worker": "babel-node cron"
+    "worker": "babel-node cron",
+    "migrate": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo"
   },
   "engines": {
     "node": "7.6.0",
@@ -101,6 +103,10 @@
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "webpack-dev-server": "^2.4.1",
+    "sequelize-cli": "^2.5.1",
+    "sinon": "^2.0.0",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-chai": "^2.8.0"
   }
 }

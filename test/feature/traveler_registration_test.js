@@ -27,14 +27,15 @@ describe('BorderBuddy', () => {
       .mouseDownUpOnElement('.traveler-connectivity button')
       .wait('.traveler-has-phone-option')
       .mouseDownUpOnElement('.traveler-has-phone-option div')
-      .wait(500)
+      .wait(500) // wait for traveler has smart phone select dropdown to disappear
       .mouseDownUpOnElement('input[name="arrivalTime"]')
-      .wait(500)
+      .wait(500) // wait for arrival time modal to animate in
       .mouseDownUpOnElementContaining('button', 'Ok')
-      .wait(1000)
       .type('input[name="airlineCode"]', 'UA')
       .type('input[name="flightNum"]', '88')
-      .wait(1000)
+      .type('input[name="secondaryContactName"]', 'Jennifer Citizen')
+      .type('input[name="secondaryContactRelation"]', 'Mother')
+      .type('input[name="secondaryContactPhone"]', '5555678901')
       .clickOnElementContaining('.submit-traveler-registration button', 'Register')
       .wait('#submit-flight-confirmation')
       .mouseDownUpOnElementContaining('#submit-flight-confirmation', 'Submit')
@@ -44,12 +45,22 @@ describe('BorderBuddy', () => {
       .type('input[name="password"]', '1234')
       .clickOnElementContaining('button', 'Login')
       .wait('.all-travelers tr')
+      .mouseDownUpOnElementContaining('tr', 'Jane')
+      .wait(500)
       .evaluate(() => {
-        return document.querySelector('.all-travelers').innerHTML;
+        return document.querySelector('#root').innerHTML;
       })
       .end()
       .then((result) => {
         expect(result).to.contain('Jane Citizen');
-      });
+        expect(result).to.contain('Iranian');
+        expect(result).to.contain('jane@example.com');
+        expect(result).to.contain('5554567890');
+        expect(result).to.contain('UA');
+        expect(result).to.contain('88');
+        expect(result).to.contain('Jennifer Citizen');
+        expect(result).to.contain('Mother');
+        expect(result).to.contain('5555678901');
+      })
   });
 });
