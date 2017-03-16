@@ -1,0 +1,12 @@
+.cfignore
+.gitignore
+.git
+.DS_Store
+manifest.acceptance.yml
+run-tests.sh
+webpack.*.js
+.eslintrc.json
+*.log.*
+circle.yml
+README.md
+/test

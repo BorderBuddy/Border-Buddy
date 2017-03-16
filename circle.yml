@@ -1,10 +1,19 @@
 machine:
   pre:
     - curl -LsS 'https://cli.run.pivotal.io/stable?release=debian64&source=pws' -o cf-cli.deb
-    - dpkg -i cf-cli.deb
+    - sudo dpkg -i cf-cli.deb
+dependencies:
+  pre:
+    - rm -f .npmrc
+test:
+  pre:
+    - find . -type f -maxdepth 2
+    - npm run build
 deployment:
   staging:
     branch: master
     commands:
+      - echo 'only=production' > .npmrc
+      - npm prune --production
       - cf login -a api.run.pivotal.io -u $CF_USER_NAME -p $CF_USER_PASSWORD -s acceptance
       - cf push border-buddy -f manifest.acceptance.yml

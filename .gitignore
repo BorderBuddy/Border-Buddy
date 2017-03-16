@@ -7,3 +7,4 @@ dist/stylesheets/**
 api/flight/apiKeys.js
 .idea
 npm-debug.log*
+.npmrc
