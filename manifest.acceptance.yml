@@ -2,7 +2,7 @@ applications:
 - name: border-buddy
   instances: 2
   memory: 512M
-  disk_quota: 1024M
+  disk_quota: 2048M
   command: babel-node --presets es2015,stage-2 index.js
   routes:
   - route: border-buddy.cfapps.io
