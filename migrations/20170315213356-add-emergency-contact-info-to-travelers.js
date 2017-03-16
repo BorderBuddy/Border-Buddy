@@ -3,10 +3,7 @@
 module.exports = {
   up: function (queryInterface, Sequelize, done) {
     // is async for some reason, so needs to call done.
-    queryInterface.renameColumn('traveler', 'secondaryContact', 'secondaryContactPhone', {logging: console.log})
-      .then(function () {
-        done();
-      });
+    queryInterface.renameColumn('traveler', 'secondaryContact', 'secondaryContactPhone', {logging: console.log});
 
     queryInterface.addColumn(
       'traveler',
@@ -24,10 +21,7 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize, done) {
-    queryInterface.renameColumn('traveler', 'secondaryContactPhone', 'secondaryContact', { logging: console.log })
-      .then(function () {
-        done();
-      });
+    queryInterface.renameColumn('traveler', 'secondaryContactPhone', 'secondaryContact', { logging: console.log });
 
     queryInterface.removeColumn('traveler', 'secondaryContactName', {logging: console.log});
 
