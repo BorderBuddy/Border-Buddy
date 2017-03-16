@@ -1,0 +1,11 @@
+applications:
+- name: border-buddy
+  instances: 2
+  memory: 512M
+  disk_quota: 1024M
+  command: babel-node --presets es2015,stage-2 index.js
+  routes:
+  - route: border-buddy.cfapps.io
+  buildpack: nodejs_buildpack
+  services:
+  - border-buddy-db

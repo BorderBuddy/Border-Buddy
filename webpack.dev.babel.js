@@ -1,6 +1,6 @@
-import webpack from 'webpack';
-import { resolve } from 'path';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+const webpack = require('webpack');
+const resolve = require('path').resolve;
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const configPlugin = new webpack.DefinePlugin({
   'process.env': {
@@ -8,7 +8,7 @@ const configPlugin = new webpack.DefinePlugin({
   }
 });
 
-export default {
+module.exports = {
   context: resolve(__dirname),
 
   entry: [

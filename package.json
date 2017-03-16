@@ -14,7 +14,7 @@
     "heroku-postbuild": "npm run build && npm run deploy-seed"
   },
   "engines": {
-    "node": "6.9.5",
+    "node": "7.6.0",
     "npm": "4.3.0"
   },
   "repository": {

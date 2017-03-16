@@ -1,9 +1,8 @@
-import webpack from 'webpack';
-import { resolve } from 'path';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+const webpack = require('webpack');
+const resolve = require('path').resolve;
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
-export default {
+module.exports = {
 
   context: resolve(__dirname),
 
