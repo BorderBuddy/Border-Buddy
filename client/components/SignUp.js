@@ -111,7 +111,10 @@ const SignUp = ({handleSubmit, valid}) => {
             <MenuItem className="traveler-has-no-phone-option" value="false" primaryText="No" />
           </Field>
         </div>
-        <div className="field-container col-12 md-col md-col-6">
+      </div>
+      <div className="clearfix">
+        <h2>Travel details</h2>
+        <div className="field-container col-12 md-col sm-col-6 md-col-4">
           <Field
             name="arrivalTime"
             className="traveler-arrival-time"
@@ -122,10 +125,10 @@ const SignUp = ({handleSubmit, valid}) => {
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
             errorStyle={style.error}
-            style={style.input}
+            textFieldStyle={style.input}
           />
         </div>
-        <div className="field-container col-12 md-col md-col-6">
+        <div className="field-container col-12 md-col sm-col-6 md-col-4">
           <Field
             name="airlineCode"
             className="traveler-airline-code"
@@ -139,7 +142,7 @@ const SignUp = ({handleSubmit, valid}) => {
             style={style.input}
           />
         </div>
-        <div className="field-container col-12 md-col md-col-6">
+        <div className="field-container col-12 md-col sm-col-6 md-col-4">
           <Field
             name="flightNum"
             className="traveler-flight-number"
@@ -153,40 +156,44 @@ const SignUp = ({handleSubmit, valid}) => {
             style={style.input}
           />
         </div>
-        <div className="field-container col-12 md-col md-col-6">
+      </div>
+      <div className="clearfix">
+        <h2>Emergency contact</h2>
+        <p><em>Who can we contact if we can't get in touch with you?</em></p>
+        <div className="field-container col-12 md-col sm-col-6 md-col-4">
           <Field
             name="secondaryContactName"
             className="traveler-secondary-contact-name"
             component={TextField}
-            floatingLabelText="Emergency contact name"
+            floatingLabelText="Name"
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
             errorStyle={style.error}
             style={style.input}
           />
         </div>
-        <div className="field-container col-12 md-col md-col-6">
-          <Field
-            name="secondaryContactRelation"
-            className="traveler-secondary-contact-relation"
-            component={TextField}
-            floatingLabelText="Emergency contact relation (mother, father, etc)"
-            floatingLabelStyle={style.label}
-            underlineFocusStyle={style.underline}
-            errorStyle={style.error}
-            style={style.input}
-          />
-        </div>
-        <div className="field-container col-12 md-col md-col-6">
+        <div className="field-container col-12 md-col sm-col-6 md-col-4">
           <Field
             name="secondaryContactPhone"
             className="traveler-secondary-contact-phone"
             component={TextField}
-            floatingLabelText="Emergency contact phone number"
+            floatingLabelText="Phone number"
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
             errorStyle={style.error}
             validate={[phone]}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col sm-col-6 md-col-4">
+          <Field
+            name="secondaryContactRelation"
+            className="traveler-secondary-contact-relation"
+            component={TextField}
+            floatingLabelText="Relationship to you"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
             style={style.input}
           />
         </div>
