@@ -34,6 +34,12 @@ const Traveler = db.define('traveler', {
   secondaryContactRelation: {
     type: Sequelize.STRING
   },
+  requireInterpreter: {
+    type: Sequelize.BOOLEAN
+  },
+  preferredLanguage: {
+    type: Sequelize.STRING
+  },
   status: {
     type: Sequelize.ENUM,
     values: ['transit', 'unconfirmed', 'detained', 'at risk', 'cleared'],

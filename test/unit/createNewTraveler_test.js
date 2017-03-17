@@ -21,6 +21,8 @@ describe('createNewTraveler', () => {
       secondaryContactName: 'Jane Citizen',
       secondaryContactRelation: 'Mother',
       secondaryContactPhone: '0987654321',
+      requireInterpreter: true,
+      preferredLanguage: 'Chinese',
       flightNum: '1234',
       airlineCode: 'TEST',
       arrivalTime: '1970-01-01'
@@ -62,6 +64,8 @@ describe('createNewTraveler', () => {
       phone: '1234567890',
       email: 'jc@example.com',
       connectivity: true,
+      requireInterpreter: true,
+      preferredLanguage: 'Chinese',
       secondaryContactName: 'Jane Citizen',
       secondaryContactRelation: 'Mother',
       secondaryContactPhone: '0987654321'

@@ -24,6 +24,11 @@ describe('BorderBuddy', () => {
       .type('input[name="nationality"]', 'Iranian')
       .type('input[name="email"]', 'jane@example.com')
       .type('input[name="phone"]', '5554567890')
+      .mouseDownUpOnElement('.traveler-require-interpreter button')
+      .wait('.traveler-require-interpreter-option')
+      .mouseDownUpOnElement('.traveler-require-interpreter-option div')
+      .wait(500) // wait for traveler require interpreter select dropdown to disappear
+      .type('input[name="preferredLanguage"]', 'Chinese')
       .mouseDownUpOnElement('.traveler-connectivity button')
       .wait('.traveler-has-phone-option')
       .mouseDownUpOnElement('.traveler-has-phone-option div')
@@ -61,6 +66,7 @@ describe('BorderBuddy', () => {
         expect(result).to.contain('Jennifer Citizen');
         expect(result).to.contain('Mother');
         expect(result).to.contain('5555678901');
+        expect(result).to.contain('Chinese');
       })
   });
 });

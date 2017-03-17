@@ -79,6 +79,34 @@ class SingleTraveler extends Component {
 								underlineFocusStyle={style.underline}
 							/>
 						</div>
+
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="requireInterpreter"
+								component={SelectField}
+								floatingLabelText="Traveler requires interpreter?"
+								validate={required}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							>
+								<MenuItem value="true" primaryText="Yes" />
+								<MenuItem value="false" primaryText="No" />
+							</Field>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="preferredLanguage"
+								floatingLabelText="PreferredLanguage"
+								component={TextField}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+
 						<div className="field-container col-12 md-col md-col-6">
 						<Field
 							name="email"
@@ -270,13 +298,13 @@ SingleTraveler = reduxForm({
 })(SingleTraveler)
 
 const mapStateToProps = ({ selectedTraveler }) => {
-  const { name, nationality, email, phone, connectivity, secondaryContactPhone, secondaryContactName,
+  const { name, nationality, requireInterpreter, preferredLanguage, email, phone, connectivity, secondaryContactPhone, secondaryContactName,
 		secondaryContactRelation, status: passengerStatus } = selectedTraveler;
   const { airlineCode, flightNum, arrivalTime, status: flightStatus } = selectedTraveler.flight;
 	const flightDate = arrivalTime ? new Date(arrivalTime) : null;
   return { 
     initialValues: {
-      name, nationality, email, phone, connectivity: String(connectivity), secondaryContactPhone, secondaryContactName, secondaryContactRelation,
+      name, nationality, requireInterpreter: String(requireInterpreter), preferredLanguage, email, phone, connectivity: String(connectivity), secondaryContactPhone, secondaryContactName, secondaryContactRelation,
 			passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus
     }
   }  

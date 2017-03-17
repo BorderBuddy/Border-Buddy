@@ -14,7 +14,9 @@ export default function createNewTraveler({repository, travelerDetails, callback
     connectivity: travelerDetails.connectivity,
     secondaryContactName: travelerDetails.secondaryContactName,
     secondaryContactRelation: travelerDetails.secondaryContactRelation,
-    secondaryContactPhone: travelerDetails.secondaryContactPhone
+    secondaryContactPhone: travelerDetails.secondaryContactPhone,
+    requireInterpreter: travelerDetails.requireInterpreter,
+    preferredLanguage: travelerDetails.preferredLanguage
   });
 
   return Promise.all([findOrCreateFlight, createTraveler]).then((results) => {
