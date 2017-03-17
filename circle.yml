@@ -1,3 +1,7 @@
+general:
+  branches:
+    only:
+      - master
 machine:
   pre:
     - curl -LsS 'https://cli.run.pivotal.io/stable?release=debian64&source=pws' -o cf-cli.deb
