@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize, done) {
-    // is async for some reason, so needs to call done.
+    // because there are async calls, need to call done at the end.
     queryInterface.renameColumn('traveler', 'secondaryContact', 'secondaryContactPhone', {logging: console.log});
 
     queryInterface.addColumn(
@@ -18,6 +18,8 @@ module.exports = {
       Sequelize.STRING,
       {logging: console.log}
     );
+
+    done();
   },
 
   down: function (queryInterface, Sequelize, done) {
@@ -26,5 +28,7 @@ module.exports = {
     queryInterface.removeColumn('traveler', 'secondaryContactName', {logging: console.log});
 
     queryInterface.removeColumn('traveler', 'secondaryContactRelation', {logging: console.log});
+
+    done();
   }
 };
