@@ -1,17 +1,20 @@
-const chalk = require('chalk');
-const Sequelize = require('sequelize');
-import { config } from '../api/config';
+'use strict';
 
-// notify the user we're about to do it
-console.log(chalk.yellow(`Opening database connection to ${config.database.url}`));
+const env    = process.env.NODE_ENV || 'development';
+const config = require('./../../config/config')[env];
 
-// init the db
-const db = new Sequelize(config.database.url, {
+const baseConfig = {
   define: {
-    freezeTableName: true   // don't go changing our table names, Sequelize
+    // stop sequelize from pluralizing model names to get table names
+    freezeTableName: true
   },
-  logging: true
-});
+  logging: ['development'].includes(env)
+};
 
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env[config.use_env_variable], baseConfig);
+} else {
+  var sequelize = new Sequelize(config.database, config.username, config.password, Object.assign({}, baseConfig, config));
+}
 
-module.exports = db;
+module.exports = sequelize;
