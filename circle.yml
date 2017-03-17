@@ -17,4 +17,3 @@ deployment:
       - npm prune --production
       - cf login -a api.run.pivotal.io -u $CF_USER_NAME -p $CF_USER_PASSWORD -s acceptance
       - cf push border-buddy -f manifest.acceptance.yml
-      - cf run-task border-buddy './node_modules/.bin/sequelize db:migrate' --name migrate-db
