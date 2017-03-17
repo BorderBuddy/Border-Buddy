@@ -1,10 +1,5 @@
 import passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local';
-import jwt from 'jsonwebtoken';
-import { signToken } from './auth.service';
-import { config } from '../config';
-import { User } from'../../database/models/user';
-
+import { signToken, verifyToken } from './auth.service';
 
 export function login (req, res, next) {
   passport.authenticate('local', function(err, user, info) {
@@ -22,33 +17,16 @@ export function login (req, res, next) {
 }
 
 export function isAuthenticated (req, res, next) {
-  if (req.query && req.query.hasOwnProperty('access_token')) {
-    req.headers.authorization = 'Bearer ' + req.query.access_token;
-  }
-  if(req.headers.authorization === 'undefined') {
-    res.sendStatus(401)
-  }
-  else {
-    jwt.verify(req.headers.authorization, config.secrets.session, (err, user) => {
-      if(err) {
-        next(err)
-      }
-      else {
-        User.find({
-          _id: user._id
-        })
-        .then(user => {
-          if(!user) {
-            res.status(401).end();
-          }
-          req.user = user;
-          let token = signToken(user._id)
-          res.json({ token })
-        })
-        .catch(err => next(err));
-      }
+  const token = req.headers.authorization;
+
+  verifyToken(token)
+    .then((user) => {
+      let token = signToken(user._id);
+      res.json({token});
     })
-  }
+    .catch(err => {
+      res.status(401).send('Unauthorized').end();
+    });
 }
 
 export function logout(req, res, next) {

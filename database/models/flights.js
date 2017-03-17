@@ -2,8 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 const Traveler = require('./travelers');
 
-
-const Flight = db.define('flight', {
+export const Flight = db.define('flight', {
   flightNum: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -65,5 +64,3 @@ const Flight = db.define('flight', {
   }
 
 });
-
-module.exports = Flight;

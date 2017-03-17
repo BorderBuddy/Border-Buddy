@@ -4,17 +4,17 @@ import {
   	show,
   	destroy,
   	me,
-  	changePassword,
-  	authCallback
+  	changePassword
 } from './user.controller';
+import {protectedEndpoint} from "../auth/auth.service";
 
 const base = '/api/user';
 
 export default (app) => {
-  app.get(base + '/', index);
-  app.get(base + '/me', me);
-  app.get(base + '/:id', show);
-  app.post(base + '/', create);
-  app.put(base + '/:id/password', changePassword);
-  app.delete(base + '/:id', destroy);
+  app.get(base + '/', protectedEndpoint(index));
+  app.get(base + '/me', protectedEndpoint(me));
+  app.get(base + '/:id', protectedEndpoint(show));
+  app.post(base + '/', protectedEndpoint(create));
+  app.put(base + '/:id/password', protectedEndpoint(changePassword));
+  app.delete(base + '/:id', protectedEndpoint(destroy));
 };

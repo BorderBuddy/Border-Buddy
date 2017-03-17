@@ -5,7 +5,11 @@ import { setFlight } from './flight';
 export const setSelectedTraveler = selectedTraveler => ({ type: SET_SELECTED_TRAVELER, selectedTraveler });
 
 export const fetchSelectedTraveler = (id) => dispatch => {
-  return axios.get(`/api/traveler/${id}`)
+  return axios.get(`/api/traveler/${id}`, {
+    headers: {
+      'Authorization': window.localStorage.accessToken
+    }
+  })
   .then(traveler => {
     traveler = traveler.data;
     dispatch(setSelectedTraveler(traveler));

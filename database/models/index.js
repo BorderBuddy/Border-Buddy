@@ -1,7 +1,7 @@
 // Require our models.
-const Traveler = require('./travelers');
-const Flight = require('./flights');
-const User = require('./user');
+import { Traveler } from './travelers';
+import { Flight } from './flights';
+import { User } from './user';
 
 // -=-=-=-=-=-= ASSOCIATIONS =-=-=-=-=-=-
 // http://docs.sequelizejs.com/en/latest/docs/associations/

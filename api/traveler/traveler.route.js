@@ -7,9 +7,11 @@ import {
 
 const base = '/api/traveler';
 
+import { protectedEndpoint } from '../auth/auth.service';
+
 export default app => {
   app.post(base + '/', createNewTraveler);
-  app.get(base + '/', getAllTravelers);
-  app.get(base + '/:id', getById);
-  app.put(base + '/:id', updateOne)
+  app.get(base + '/', protectedEndpoint(getAllTravelers));
+  app.get(base + '/:id', protectedEndpoint(getById));
+  app.put(base + '/:id', protectedEndpoint(updateOne));
 };
