@@ -71,6 +71,34 @@ const SignUp = ({handleSubmit, valid}) => {
         </div>
         <div className="field-container col-12 md-col md-col-6">
           <Field
+            name="requireInterpreter"
+            className="traveler-require-interpreter"
+            component={SelectField}
+            floatingLabelText="Are you comfortable speaking English?"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            validate={required}
+            style={style.input}
+          >
+            <MenuItem className="traveler-not-require-interpreter-option" value="false" primaryText="Yes" />
+            <MenuItem className="traveler-require-interpreter-option" value="true" primaryText="No" />
+          </Field>
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="preferredLanguage"
+            className="traveler-preferredLanguage"
+            component={TextField}
+            floatingLabelText="Preferred language(s)"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
             name="email"
             className="traveler-email"
             component={TextField}

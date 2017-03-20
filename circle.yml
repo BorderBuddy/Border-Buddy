@@ -9,9 +9,6 @@ machine:
 dependencies:
   pre:
     - rm -f .npmrc
-test:
-  pre:
-    - npm run build
 deployment:
   staging:
     branch: master

@@ -9,7 +9,7 @@ import SingleTraveler from './containers/SingleTraveler';
 import Login from './containers/Login';
 import AdminSignUp from './containers/AdminSignUp';
 import Success from './containers/Success';
-import SignUp from './containers/SignUp';
+import SignUp from './containers/SignUpContainer';
 
 import About from './components/About';
 import WhyBorderBuddy from './components/WhyBorderBuddy';
