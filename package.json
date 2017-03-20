@@ -7,7 +7,7 @@
     "start": "nodemon index.js --exec babel-node --presets es2015,stage-2",
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "build": "webpack --config webpack.prod.babel.js",
-    "test": "./run-tests.sh",
+    "test": "NODE_ENV=test ./run-tests.sh",
     "seed": "babel-node database/seed.js",
     "deploy-seed": "NODE_ENV=seeding babel-node database/deploymentSeed.js",
     "worker": "babel-node cron",
