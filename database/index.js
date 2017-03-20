@@ -5,7 +5,7 @@ const db = require('./db')
 require('./models')
 
 // Sync the db, creating it if necessary
-const testOrSeed = process.env.NODE_ENV === 'testing' || process.env.NODE_ENV === 'seeding';
+const testOrSeed = process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'seeding';
 
 const sync = (force = testOrSeed, retries=0, maxRetries=5) => {
   return db.sync({ force }) 

@@ -1,7 +1,7 @@
 import path from 'path';
 import _ from 'lodash';
 
-const isTesting = process.env.NODE_ENV === 'testing';
+const isTesting = process.env.NODE_ENV === 'test';
 
 const dbUsername = 'postgres';
 const dbPassword = 'root';
