@@ -7,8 +7,8 @@ module.exports = {
   },
   'test' : {
     url: 'postgres://postgres:root@localhost:5432/BorderBuddy_test',
-    username: 'postgres',
     database: 'BorderBuddy_test',
+    username: 'postgres',
     dialect: 'postgres'
   },
   'production': {
