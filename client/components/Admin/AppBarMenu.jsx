@@ -15,7 +15,6 @@ export default ({ onCreateUserClick, onSignoutClick }) => (
   >
     <MenuItem primaryText="All Travelers" onClick={() => browserHistory.push('/admin/travelers')} />
     <MenuItem primaryText="Create New User" onClick={() => browserHistory.push('/admin/createuser')}/>
-    <MenuItem primaryText="Settings" />
     <MenuItem primaryText="Sign out" onClick={onSignoutClick}/>
   </IconMenu>
 )
