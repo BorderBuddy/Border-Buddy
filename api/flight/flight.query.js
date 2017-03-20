@@ -1,8 +1,7 @@
-const FLIGHT_STATS_ID = process.env.FLIGHT_STATS_ID || require('./apiKeys').FLIGHT_STATS_ID;
-const FLIGHT_STATS_KEY = process.env.FLIGHT_STATS_KEY || require('./apiKeys').FLIGHT_STATS_KEY;
+import apiKeys from '../../apiKeys';
 
 const baseline = 'https://api.flightstats.com/flex';
-const keys = `?appId=${FLIGHT_STATS_ID}&appKey=${FLIGHT_STATS_KEY}`;
+const keys = `?appId=${apiKeys.FLIGHT_STATS_ID}&appKey=${apiKeys.FLIGHT_STATS_KEY}`;
 
 export const airlineByCode = code =>
 	baseline + `/airlines/rest/v1/json/iata/${code}` + keys;

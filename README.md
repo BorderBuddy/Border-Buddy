@@ -22,7 +22,7 @@ $ brew services start postgres
 $ psql -U postgres
  > CREATE DATABASE BorderBuddy;
 ```
-- Get the necessary `apiKeys.js` file and place under `api/flight/`
+- Get the necessary api keys used in `apiKeys.js` file
 
 - Migrate 
 
