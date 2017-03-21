@@ -2,6 +2,6 @@ const db = require('./db');
 
 require('./models');
 
-db.didSync = db.sync();
+db.didSync = db.authenticate();
 
 module.exports = db;
