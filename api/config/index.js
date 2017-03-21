@@ -28,4 +28,3 @@ export const config = {
     authToken: appConfig.TWILIO_AUTH_TOKEN
   }
 };
-console.log(config);
