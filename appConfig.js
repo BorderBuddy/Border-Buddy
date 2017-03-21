@@ -2,6 +2,7 @@ import {config} from 'dotenv';
 
 config();
 module.exports = {
+  SESSION_SECRET: process.env.SESSION_SECRET,
   FLIGHT_STATS_ID: process.env.FLIGHT_STATS_ID,
   FLIGHT_STATS_KEY: process.env.FLIGHT_STATS_KEY,
   TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,

@@ -1,6 +1,6 @@
 import path from 'path';
 import _ from 'lodash';
-import apiKeys from '../../apiKeys'
+import appConfig from '../../appConfig'
 
 const isTesting = process.env.NODE_ENV === 'test';
 const dbUsername = 'postgres';
@@ -16,15 +16,16 @@ export const config = {
   root: path.normalize(`${__dirname}/../../..`),
   port: _.get(process.env, 'PORT', 3000),
   secrets: {
-    session: _.get(process.env, 'SESSION_SECRET', 'border buddy bl@h bl@h')
+    session: _.get(process.env, 'SESSION_SECRET')
   },
   database: {
     url: databaseUrl
   },
   twilio: {
-    adminPhone: apiKeys.TWILIO_PHONE_NUM,
-    messagingSid: apiKeys.TWILIO_MESSAGING_SID,
-    accountSid: apiKeys.TWILIO_ACCOUNT_SID,
-    authToken: apiKeys.TWILIO_AUTH_TOKEN
+    adminPhone: appConfig.TWILIO_PHONE_NUM,
+    messagingSid: appConfig.TWILIO_MESSAGING_SID,
+    accountSid: appConfig.TWILIO_ACCOUNT_SID,
+    authToken: appConfig.TWILIO_AUTH_TOKEN
   }
 };
+console.log(config);

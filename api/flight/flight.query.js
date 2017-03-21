@@ -1,7 +1,7 @@
-import apiKeys from '../../apiKeys';
+import appConfig from '../../appConfig';
 
 const baseline = 'https://api.flightstats.com/flex';
-const keys = `?appId=${apiKeys.FLIGHT_STATS_ID}&appKey=${apiKeys.FLIGHT_STATS_KEY}`;
+const keys = `?appId=${appConfig.FLIGHT_STATS_ID}&appKey=${appConfig.FLIGHT_STATS_KEY}`;
 
 export const airlineByCode = code =>
 	baseline + `/airlines/rest/v1/json/iata/${code}` + keys;
