@@ -51,6 +51,7 @@
     "express": "^4.14.1",
     "express-https-redirect": "^1.0.0",
     "express-jwt": "^5.1.0",
+    "helmet": "^3.5.0",
     "history": "^4.5.1",
     "humps": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
