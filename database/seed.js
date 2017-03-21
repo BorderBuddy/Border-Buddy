@@ -52,7 +52,6 @@ const seedTravelers = () => db.Promise.each(dummyTravelers, traveler => db.model
 const seedUsers = () => db.Promise.each(users, user => User.create(user));
 
 db.didSync
-	.then(() => db.sync({ force: true }))
 	.then(seedFlights)
 	.then(flights => console.log(chalk.blue(`Seeded ${flights.length} flights...`)))
 	.then(seedTravelers)
