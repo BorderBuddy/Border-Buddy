@@ -22,7 +22,7 @@ $ brew services start postgres
 $ psql -U postgres
  > CREATE DATABASE BorderBuddy;
 ```
-- Get the necessary api keys used in `apiKeys.js` file
+- Get the `.env` file from your another team member
 
 - Migrate 
 
