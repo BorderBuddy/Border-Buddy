@@ -24,6 +24,12 @@ $ psql -U postgres
 ```
 - Get the `.env` file from your another team member
 
+- Install dependencies
+
+```
+$ npm install
+```
+
 - Migrate 
 
 ```
@@ -43,12 +49,6 @@ $ npm run seed
 ```
 
 ### Running the app
-
-Install dependencies
-
-```
-$ npm install
-```
 
 To run the API, run: 
 
