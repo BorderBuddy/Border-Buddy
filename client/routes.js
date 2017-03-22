@@ -7,7 +7,7 @@ import AdminContainer from './containers/AdminContainer';
 import AllTravelers from './containers/AllTravelers';
 import SingleTraveler from './containers/SingleTraveler';
 import Login from './containers/Login';
-import AdminSignUp from './containers/AdminSignUp';
+import AdminSignUp from './containers/AdminSignUpContainer';
 import Success from './containers/Success';
 import SignUp from './containers/SignUpContainer';
 

@@ -5,7 +5,7 @@ import { signup } from '../actions/auth';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-class SignupContainer extends Component {
+class AdminSignUpContainer extends Component {
 	constructor(props) {
 		super(props);
 
@@ -83,4 +83,4 @@ const mapDispatchToProps = dispatch => ({
 	signup: (user) => dispatch(signup(user))
 })
 
-export default connect(null, mapDispatchToProps)(SignupContainer);
+export default connect(null, mapDispatchToProps)(AdminSignUpContainer);
