@@ -92,4 +92,4 @@ webpack-dev-server will proxy through any requests to 8080 to the API running on
 
 Tests use [Mocha](http://mochajs.org/) and [Chai.js](http://chaijs.com/). New tests should be included in the `test` directory (see `test/example.js` for an example test).
 
-To execute the test suite, run `npm test`.
+To execute the test suite locally, run `npm run test-local`.

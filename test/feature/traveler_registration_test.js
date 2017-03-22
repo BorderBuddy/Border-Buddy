@@ -17,7 +17,7 @@ describe('BorderBuddy', () => {
     })
       .viewport(1280, 1024);
 
-    return nightmare.goto('http://localhost:3000')
+    return nightmare.goto(rootURL())
       .wait('#homepage')
       .clickOnElementContaining('a', 'Register')
       .type('input[name="name"]', 'Jane Citizen')
@@ -45,7 +45,7 @@ describe('BorderBuddy', () => {
       .wait('#submit-flight-confirmation')
       .mouseDownUpOnElementContaining('#submit-flight-confirmation', 'Submit')
       .wait('#success-container')
-      .goto('http://localhost:3000/admin')
+      .goto(rootURL('/admin'))
       .type('input[name="email"]', 'admin@borderbuddy.us')
       .type('input[name="password"]', '1234')
       .clickOnElementContaining('button', 'Login')
@@ -69,4 +69,9 @@ describe('BorderBuddy', () => {
         expect(result).to.contain('Chinese');
       })
   });
+
+  function rootURL(path) {
+    let pathString = path || '';
+    return 'http://localhost:' + process.env.TEST_PORT + pathString;
+  }
 });
