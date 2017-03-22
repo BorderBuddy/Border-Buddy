@@ -47,9 +47,12 @@ const dummyTravelers = [
 	{ email: 'melbrux@abc.com', phone: '8084982097', name: 'Fraulein Hhauserr', status: 'unconfirmed', connectivity: true, nationality: 'Sudan', flight_id: 1}
 ];
 
-const seedFlights = () => db.Promise.each(dummyFlights, flight => db.model('flight').create(flight))
-const seedTravelers = () => db.Promise.each(dummyTravelers, traveler => db.model('traveler').create(traveler))
-const seedUsers = () => db.Promise.each(users, user => User.create(user));
+const seedFlights = () => db.Promise.each(dummyFlights, flight => db.model('flight').create(flight));
+const seedTravelers = () => db.Promise.each(dummyTravelers, traveler => db.model('traveler').create(traveler));
+const seedUsers = () => db.Promise.each(users, user => User.findOrCreate({
+	where: { email: user.email },
+	defaults: { password: user.password }}
+));
 
 db.didSync
 	.then(seedFlights)
