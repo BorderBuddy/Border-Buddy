@@ -6,7 +6,7 @@ import { User } from './user';
 // -=-=-=-=-=-= ASSOCIATIONS =-=-=-=-=-=-
 // http://docs.sequelizejs.com/en/latest/docs/associations/
 
-Flight.hasOne(Traveler, {foreignKey: 'flight_id'});
+Flight.hasOne(Traveler, {foreignKey: 'flightId'});
 Traveler.belongsTo(Flight); // for eager loading
 
 const Repository = {
