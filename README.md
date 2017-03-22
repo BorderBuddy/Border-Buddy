@@ -50,13 +50,21 @@ $ npm run seed
 
 ### Running the app
 
+To create the production bundle file (output as `dist/fund.js`), run:
+
+```
+$ npm run build
+```
+
 To run the API, run: 
+
+Navigate to localhost:3000.
 
 ```
 $ npm start
 ```
 
-Navigate to localhost:3000.
+The output can be viewed at localhost:3000
 
 For the webpack dev server, run the following.
 
@@ -66,14 +74,6 @@ $ npm run dev
 
 You can now visit your dev server at localhost:8080. To interact withe API, make sure your API server is running on port 3000.
 webpack-dev-server will proxy through any requests to 8080 to the API running on 3000.
-
-To create the production bundle file (output as `dist/fund.js`), run:
-
-```
-$ npm run build
-```
-
-The output can be viewed at localhost:3000
 
 ## Testing
 
