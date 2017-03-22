@@ -4,11 +4,11 @@ import { browserHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import thunkMiddleware from "redux-thunk";
 import reducer from "../reducers";
+import createLogger from 'redux-logger';
 
 let middlewares = [thunkMiddleware];
 
 if (process.env.NODE_ENV == "development") {
-  const createLogger = require("redux-logger");
   const logger = createLogger();
   middlewares.push(logger);
 }
