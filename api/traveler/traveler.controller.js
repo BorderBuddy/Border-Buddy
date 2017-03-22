@@ -1,4 +1,4 @@
-import { Repository, Traveler, Flight } from '../../database/models';
+import {Repository, Traveler, Flight} from '../../database/models';
 import TravelerNotifier from '../notify/travelerNotifier';
 
 import createNewTravelerUseCase from '../../useCase/createNewTraveler';
@@ -15,52 +15,54 @@ export const createNewTraveler = (req, res, next) => {
     },
     travelerNotifier
   })
-  .catch(next);
+    .catch(next);
 };
 
 export function getAllTravelers(req, res, next) {
-  return Traveler.findAll({ include: [{ all: true }] })
-  .then(allTravelers => {
-    res.status(200).json(allTravelers);
-  })
-  .catch(next);
+  return Traveler.findAll({include: [{all: true}]})
+    .then(allTravelers => {
+      res.status(200).json(allTravelers);
+    })
+    .catch(next);
 }
 
 export function getById(req, res, next) {
-  return Traveler.findById(req.params.id, { include: [{ all: true }] })
-  .then(traveler => {
-    res.status(200).json(traveler);
-  })
-  .catch(next);
+  return Traveler.findById(req.params.id, {include: [{all: true}]})
+    .then(traveler => {
+      res.status(200).json(traveler);
+    })
+    .catch(next);
 }
 
 export function updateOne(req, res, next) {
 
-  const { flightNum, airlineCode, arrivalTime, flightStatus,
-          name, nationality, phone, email, connectivity, secondaryContact, passengerStatus  } = req.body;
+  const {
+    flightNum, airlineCode, arrivalTime,
+    name, nationality, phone, email, connectivity, secondaryContact, passengerStatus
+  } = req.body;
   let globalFlight;
-  return Flight.findOrCreate({ 
+  return Flight.findOrCreate({
     where: {
       flightNum, airlineCode, arrivalTime
     }
   })
-  .then(flight => {
-    globalFlight = flight[0];
-    return Traveler.findOne({
-      include: [{ model: Flight }],
-      where:{
-       id: req.params.id
-      }
-    });
-  })
-  .then(traveler => {
-    return traveler.update({
-      name, nationality, phone, email, connectivity, secondaryContact, status: passengerStatus
+    .then(flight => {
+      globalFlight = flight[0];
+      return Traveler.findOne({
+        include: [{model: Flight}],
+        where: {
+          id: req.params.id
+        }
+      });
     })
-  })
-  .then(updatedTraveler => {
-    return updatedTraveler.setFlight(globalFlight);
-  })
-  .then(finalTraveler => res.status(201).json(finalTraveler))
-  .catch(next);
+    .then(traveler => {
+      return traveler.update({
+        name, nationality, phone, email, connectivity, secondaryContact, status: passengerStatus
+      });
+    })
+    .then(updatedTraveler => {
+      return updatedTraveler.setFlight(globalFlight);
+    })
+    .then(finalTraveler => res.status(201).json(finalTraveler))
+    .catch(next);
 }

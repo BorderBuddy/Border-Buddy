@@ -11,35 +11,35 @@ export const login = (user) => dispatch => {
       dispatch(setAuth(response.data));
       browserHistory.push('/admin/travelers');
     })
-    .catch(err => console.error("ERROR!!!", err));
-}
+    .catch(err => console.error('ERROR!!!', err));
+};
 
-export const signup = (user, _window = window) => dispatch => {
+export const signup = (user, _window = window) => () => {
   return axios.post('/api/user', user, {
     headers: {
-     'Authorization': _window.localStorage.accessToken
+      Authorization: _window.localStorage.accessToken
     }
   })
-    .catch(err => console.error("ERROR!", err));
-}
+    .catch(err => console.error('ERROR!', err));
+};
 
 export const checkToken = () => dispatch => {
   return axios.get('/api/auth/checkToken', {
     headers: {
-      'Authorization': window.localStorage.accessToken
+      Authorization: window.localStorage.accessToken
     }
   })
     .then(response => {
       dispatch(setAuth(response.data));
-    })
-}
+    });
+};
 
 export const signout = () => dispatch => {
   axios.post('/api/auth/logout')
     .then(() => {
-      window.localStorage.clear()
+      window.localStorage.clear();
       dispatch(setAuth(null));
-      browserHistory.push('/login')
+      browserHistory.push('/login');
     })
     .catch(err => console.error(err));
-}
+};

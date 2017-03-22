@@ -1,14 +1,9 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { RaisedButton, MenuItem } from 'material-ui';
-import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
+import {reduxForm, Field} from 'redux-form';
+import {RaisedButton, MenuItem} from 'material-ui';
+import {TextField, DatePicker, SelectField} from 'redux-form-material-ui';
 import AirlinePicker from './AirlinePicker';
-
-
-import { required, phone, email, validateCode, uppercase } from '../utils/validations'
-
-
-
+import {required, phone, email, validateCode, uppercase} from '../utils/validations';
 
 const SignUp = ({handleSubmit, valid}) => {
   const style = {
@@ -81,8 +76,8 @@ const SignUp = ({handleSubmit, valid}) => {
             validate={required}
             style={style.input}
           >
-            <MenuItem className="traveler-not-require-interpreter-option" value="false" primaryText="Yes" />
-            <MenuItem className="traveler-require-interpreter-option" value="true" primaryText="No" />
+            <MenuItem className="traveler-not-require-interpreter-option" value="false" primaryText="Yes"/>
+            <MenuItem className="traveler-require-interpreter-option" value="true" primaryText="No"/>
           </Field>
         </div>
         <div className="field-container col-12 md-col md-col-6">
@@ -135,8 +130,8 @@ const SignUp = ({handleSubmit, valid}) => {
             validate={required}
             style={style.input}
           >
-            <MenuItem className="traveler-has-phone-option" value="true" primaryText="Yes" />
-            <MenuItem className="traveler-has-no-phone-option" value="false" primaryText="No" />
+            <MenuItem className="traveler-has-phone-option" value="true" primaryText="Yes"/>
+            <MenuItem className="traveler-has-no-phone-option" value="false" primaryText="No"/>
           </Field>
         </div>
       </div>
@@ -240,7 +235,7 @@ const SignUp = ({handleSubmit, valid}) => {
       </div>
     </form>
   );
-}
+};
 
 export default reduxForm({
   form: 'signUp',  // a unique identifier for this form

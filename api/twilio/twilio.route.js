@@ -2,7 +2,7 @@ import {
   respondToText,
 	sendText
 } from './twilio.controller';
-import {protectedEndpoint} from "../auth/auth.service";
+import {protectedEndpoint} from '../auth/auth.service';
 
 const base = '/api/twilio';
 

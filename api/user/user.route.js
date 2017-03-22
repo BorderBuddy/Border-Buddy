@@ -1,12 +1,12 @@
 import {
-	index,
-  	create,
-  	show,
-  	destroy,
-  	me,
-  	changePassword
+  index,
+  create,
+  show,
+  destroy,
+  me,
+  changePassword
 } from './user.controller';
-import {protectedEndpoint} from "../auth/auth.service";
+import {protectedEndpoint} from '../auth/auth.service';
 
 const base = '/api/user';
 
