@@ -49,6 +49,18 @@ $ npm run migrate:undo
 $ npm run seed
 ```
 
+**NOTE**: To generate new migrations, use the sequelize CLI:
+
+```
+$ ./node_modules/.bin/sequelize migration:create 
+```
+
+```
+$ ./node_modules/.bin/sequelize --help (for other stuff)
+
+```
+
+
 ### Running the app
 
 To create the production bundle file (output as `dist/fund.js`), run:
