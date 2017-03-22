@@ -27,8 +27,6 @@ export const Flight = db.define('flight', {
     allowNull: false,
   }
 }, {
-  underscored: true,
-
   classMethods: {
     findFlightsToLand: function() {
       const oneDay = 24 * 60 * 60 * 1000;
@@ -56,7 +54,7 @@ export const Flight = db.define('flight', {
       .then(flight => {
         return Traveler.update(
         { status: 'unconfirmed' },
-        { where: { flight_id: flight.id }, returning: true });
+        { where: { flightId: flight.id }, returning: true });
       })
       .then(travelers => travelers[1])
       .catch(err => console.error(err));

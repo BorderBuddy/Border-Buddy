@@ -46,8 +46,6 @@ export const Traveler = db.define('traveler', {
     defaultValue: 'transit'
   },
 }, {
-  underscored: true,
-
   classMethods: {
     setToAtRisk: function() {
       Traveler.update(

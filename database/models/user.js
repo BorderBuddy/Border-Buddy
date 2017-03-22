@@ -3,7 +3,7 @@ import Sequelize from 'sequelize';
 const db = require('../db');
 
 export const User = db.define('user', {
-  _id: {
+  id: {
     type: Sequelize.DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
@@ -31,7 +31,7 @@ export const User = db.define('user', {
   getterMethods: {
     token: function() {
       return {
-        _id: this._id
+        id: this.id
       };
     }
   },

@@ -11,7 +11,7 @@ export function login (req, res, next) {
       return res.status(404).json({message: 'Something went wrong, please try again.'});
     }
 
-    var token = signToken(user._id);
+    var token = signToken(user.id);
     res.json({ token });
   })(req, res, next);
 }
@@ -21,7 +21,7 @@ export function isAuthenticated (req, res, next) {
 
   verifyToken(token)
     .then((user) => {
-      let token = signToken(user._id);
+      let token = signToken(user.id);
       res.json({token});
     })
     .catch(err => {

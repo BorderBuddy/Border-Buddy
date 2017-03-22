@@ -98,7 +98,7 @@ describe('auth.service', () => {
         it('returns a rejected promise', () => {
           const token = signToken(1234567890);
 
-          mockRepository.users.findOne.withArgs({ _id: 1234567890 })
+          mockRepository.users.findOne.withArgs({ id: 1234567890 })
             .returns(Promise.resolve(null));
 
           return verifyToken(token, mockRepository)
@@ -113,7 +113,7 @@ describe('auth.service', () => {
         it('returns a resolved promise', () => {
           const token = signToken(2345678901);
 
-          mockRepository.users.findOne.withArgs({ _id: 2345678901 })
+          mockRepository.users.findOne.withArgs({ id: 2345678901 })
             .returns(Promise.resolve({ a: 'user' }));
 
           return verifyToken(token, mockRepository);

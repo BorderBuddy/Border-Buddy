@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.createTable(
       'user',
       {
-        _id: {
+        id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           primaryKey: true,
@@ -56,10 +56,10 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: false,
           },
-          created_at: {
+          createdAt: {
             type: Sequelize.DATE
           },
-          updated_at: {
+          updatedAt: {
             type: Sequelize.DATE
           },
         }
@@ -111,13 +111,13 @@ module.exports = {
             values: ['transit', 'unconfirmed', 'detained', 'at risk', 'cleared'],
             defaultValue: 'transit'
           },
-          created_at: {
+          createdAt: {
             type: Sequelize.DATE
           },
-          updated_at: {
+          updatedAt: {
             type: Sequelize.DATE
           },
-          flight_id: {
+          flightId: {
             type: Sequelize.INTEGER,
             references: {
               model: 'flight',

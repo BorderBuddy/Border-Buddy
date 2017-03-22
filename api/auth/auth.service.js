@@ -3,7 +3,7 @@ import {config} from '../config';
 import {Repository} from '../../database/models';
 
 export function signToken(id) {
-  return jwt.sign({_id: id}, config.secrets.session, {
+  return jwt.sign({id: id}, config.secrets.session, {
     expiresIn: '2 hours'
   });
 }
@@ -18,7 +18,7 @@ export function verifyToken(token, repository = Repository) {
       }
 
       userRepository
-        .findOne({_id: user._id})
+        .findOne({id: user.id})
         .then(user => {
           if (!user) {
             reject('User not found');
