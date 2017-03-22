@@ -17,6 +17,7 @@ $ brew services start postgres
 ```
 
 - Create database
+- Note that your database name is case sensitive and must read 'BorderBuddy.' Creating a db in the command line might downcase your db name automatically.
 
 ```
 $ psql -U postgres
