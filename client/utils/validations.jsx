@@ -10,7 +10,7 @@ export const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
   'Invalid email address' : undefined;
 
-export const uppercase = value => value && value !== value.toUpperCase() ? 'Must be uppercase' : undefined
+export const uppercase = value => value && value !== value.toUpperCase() ? 'Must be uppercase' : undefined;
 
 export const validateCode = values => {
   return axios.get(`/api/flight/code?code=${values.airlineCode}`)
@@ -19,3 +19,5 @@ export const validateCode = values => {
 		throw { airlineCode: 'Airline code not found!' };
   });
 };
+
+export const minimumLength = value => value.length < 8 ? 'Must be at least 8 characters long' : undefined;

@@ -5,11 +5,10 @@ import { TextField } from 'redux-form-material-ui';
 import { Card } from 'material-ui/Card';
 import { Link } from 'react-router';
 import { signupLoginStyle } from './styles';
+import { minimumLength, required } from '../../utils/validations';
 
-
-const required = value => value == null ? 'Required' : undefined;
-
-const AdminSignUp = ({ handleSubmit, pristine, reset, submitting, handleEmailChange, handlePasswordChange }) => {
+const AdminSignUp = ({ handleSubmit, pristine, submitting,
+	handleEmailChange, handlePasswordChange, valid }) => {
 
 	const style = signupLoginStyle;
 
@@ -31,14 +30,14 @@ const AdminSignUp = ({ handleSubmit, pristine, reset, submitting, handleEmailCha
 						type="password"
 						component={TextField}
 						hintText="Password" 
-						validate={required}
+						validate={[required, minimumLength]}
 						onChange={handlePasswordChange}
 						style={style.form}
 					/>
 					<RaisedButton
 						type="submit"
 						label="Sign Up"
-						disabled={pristine || submitting}
+						disabled={pristine || submitting || !valid}
 						primary={true} 
 						style={style.button}
 					/>
