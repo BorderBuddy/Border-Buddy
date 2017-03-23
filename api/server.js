@@ -19,7 +19,7 @@ app.use((err, req, res, next) => {
 
 addRoutes(app);
 
-const staticContent = path.normalize(path.join(__dirname, '/../dist'));
+const staticContent = path.normalize(__dirname + '/../dist');
 app.use(express.static(staticContent));
 
 app.get('*', (req, res) => {
