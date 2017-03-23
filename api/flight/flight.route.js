@@ -6,6 +6,6 @@ import {
 const base = '/api/flight';
 
 export default app => {
-	app.get(base + '/verify', verifyFlight);
-	app.get(base + '/code', getCode);
-}
+  app.get(base + '/verify', verifyFlight);
+  app.get(base + '/code', getCode);
+};

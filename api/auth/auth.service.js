@@ -19,13 +19,13 @@ export function verifyToken(token, repository = Repository) {
 
       userRepository
         .findOne({id: user.id})
-        .then(user => {
-          if (!user) {
-            reject('User not found');
+        .then(foundUser => {
+          if (!foundUser) {
+            reject(new Error('User not found'));
           } else {
-            resolve(user);
+            resolve(foundUser);
           }
-        })
+        });
     });
   });
 }

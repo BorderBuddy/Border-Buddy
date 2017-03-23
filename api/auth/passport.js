@@ -1,13 +1,13 @@
 import passport from 'passport';
-import { 
-  Strategy as LocalStrategy 
+import {
+  Strategy as LocalStrategy
 } from 'passport-local';
 
 export function setup(User) {
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password' // this is the virtual field on the model
-  }, function(email, password, done) {
+  }, function (email, password, done) {
     return User
       .find({
         where: {
@@ -15,19 +15,19 @@ export function setup(User) {
         }
       })
       .then(user => {
-        if(!user) {
+        if (!user) {
           return done(null, false, {
             message: 'This email is not registered.'
           });
         }
 
         // Authenticate function to check password
-        user.authenticate(password, function(authError, authenticated) {
-          if(authError) {
+        user.authenticate(password, function (authError, authenticated) {
+          if (authError) {
             return done(authError);
           }
-          if(!authenticated) {
-            return done(null, false, { message: 'This password is not correct.' });
+          if (!authenticated) {
+            return done(null, false, {message: 'This password is not correct.'});
           } else {
             return done(null, user);
           }

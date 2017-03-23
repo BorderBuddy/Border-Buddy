@@ -14,5 +14,5 @@ const routes = [
 ];
 
 export function addRoutes(app) {
-  routes.forEach((r) => r(app));
+  routes.forEach((route) => route(app));
 }

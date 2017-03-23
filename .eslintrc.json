@@ -5,7 +5,9 @@
     "semi": [1, "always"],
     "jsx-quotes": [1, "prefer-double"],
     "react/prop-types": [0],
-    "react/display-name": [0]
+    "react/display-name": [0],
+    "react/jsx-tag-spacing": [0],
+    "no-warning-comments": [0]
   },
   "parserOptions": {
       "sourceType": "module",

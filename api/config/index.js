@@ -1,13 +1,13 @@
 import path from 'path';
 import _ from 'lodash';
-import appConfig from '../../appConfig'
+import appConfig from '../../appConfig';
 
 const isTesting = process.env.NODE_ENV === 'test';
 const dbUsername = 'postgres';
 const dbPassword = 'root';
 const dbName = 'BorderBuddy' + (isTesting ? '_test' : '');
 
-const databaseUrl  = _.get(process.env,
+const databaseUrl = _.get(process.env,
   'DATABASE_URL',
   `postgres://${dbUsername}:${dbPassword}@localhost:5432/${dbName}`);
 
