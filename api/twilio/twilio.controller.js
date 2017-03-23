@@ -1,5 +1,5 @@
 import {config} from '../config';
-import Traveler from '../../database/models/travelers';
+import {Traveler} from '../../database/models/travelers';
 import _ from 'lodash';
 export const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
 
