@@ -22,7 +22,10 @@ export const User = db.define('user', {
   password: {
     type: Sequelize.DataTypes.STRING,
     validate: {
-      notEmpty: true
+      len: {
+        args: [8, 1024],
+        msg: 'Must be at least 8 characters long'
+      }
     },
     allowNull: false
   },

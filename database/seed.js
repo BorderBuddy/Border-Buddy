@@ -9,9 +9,9 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 const threeHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 3);
 
 const users = [
-  { email: 'andrew@borderbuddy.us', password: '1234' },
-  { email: 'dillon@borderbuddy.us', password: '1234' },
-  { email: 'admin@borderbuddy.us', password: '1234' }
+  { email: 'andrew@borderbuddy.us', password: '12345678' },
+  { email: 'dillon@borderbuddy.us', password: '12345678' },
+  { email: 'admin@borderbuddy.us', password: '12345678' }
 ];
 
 const dummyFlights = [{

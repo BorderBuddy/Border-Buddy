@@ -47,7 +47,7 @@ describe('BorderBuddy', () => {
       .wait('#success-container')
       .goto(rootURL('/admin'))
       .type('input[name="email"]', 'admin@borderbuddy.us')
-      .type('input[name="password"]', '1234')
+      .type('input[name="password"]', '12345678')
       .clickOnElementContaining('button', 'Login')
       .wait('.all-travelers tr')
       .mouseDownUpOnElementContaining('tr', 'Jane')
