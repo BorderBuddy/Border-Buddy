@@ -50,6 +50,8 @@
     "dotenv": "^4.0.0",
     "es6-promise": "^4.0.5",
     "express": "^4.14.1",
+    "express-brute": "^1.0.1",
+    "express-brute-sequelize": "0.0.7",
     "express-https-redirect": "^1.0.0",
     "helmet": "^3.5.0",
     "history": "^4.5.1",
@@ -76,6 +78,7 @@
     "reselect": "^2.5.4",
     "sequelize": "^3.30.2",
     "sequelize-cli": "^2.5.1",
+    "sqlite3": "^3.1.8",
     "superagent": "^3.4.1",
     "tachyons-sass": "^4.7.1",
     "twilio": "^2.11.1"
