@@ -17,7 +17,7 @@ export default (app) => {
     const bruteforce = new ExpressBrute(store,
       {
         freeRetries: 3,
-        minWait: 2*1000,
+        minWait: 5*1000,
         attachResetToRequest: false,
         refreshTimeoutOnRequest: true
       });
