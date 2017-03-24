@@ -15,9 +15,10 @@ export function setup(User) {
         }
       })
       .then(user => {
+        const failureMessage = 'Username or password are incorrect';
         if (!user) {
           return done(null, false, {
-            message: 'This email is not registered.'
+            message: failureMessage
           });
         }
 
@@ -27,7 +28,7 @@ export function setup(User) {
             return done(authError);
           }
           if (!authenticated) {
-            return done(null, false, {message: 'This password is not correct.'});
+            return done(null, false, {message: failureMessage});
           } else {
             return done(null, user);
           }
