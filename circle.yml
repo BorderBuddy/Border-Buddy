@@ -3,12 +3,15 @@ general:
     only:
       - master
 machine:
+  node:
+    version: 7.6.0
   pre:
     - curl -LsS 'https://cli.run.pivotal.io/stable?release=debian64&source=pws' -o cf-cli.deb
     - sudo dpkg -i cf-cli.deb
 dependencies:
   pre:
     - rm -f .npmrc
+    - rm -rf ~/Border-Buddy/node_modules
 deployment:
   staging:
     branch: master
