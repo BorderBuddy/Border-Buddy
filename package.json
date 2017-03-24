@@ -59,6 +59,7 @@
     "less": "^2.7.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.17.0",
+    "mkdirp": "^0.5.1",
     "node-emoji": "^1.5.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

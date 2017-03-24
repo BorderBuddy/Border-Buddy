@@ -11,7 +11,6 @@ machine:
 dependencies:
   pre:
     - rm -f .npmrc
-    - npm install mkdirp
 deployment:
   staging:
     branch: master
