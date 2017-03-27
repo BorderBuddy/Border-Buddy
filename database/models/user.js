@@ -114,13 +114,14 @@ export const User = db.define('user', {
       var defaultIterations = 10000;
       var defaultKeyLength = 64;
       var salt = new Buffer(this.salt, 'base64');
+      const digest = 'SHA1';
 
       if(!callback) {
-        return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
+        return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength, digest)
                      .toString('base64');
       }
 
-      return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength,
+      return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, digest,
         function(err, key) {
           if(err) {
             callback(err);
