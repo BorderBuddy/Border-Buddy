@@ -13,17 +13,21 @@ export default (app) => {
   app.get(base + '/checkToken', isAuthenticated);
   app.post(base + '/logout', logout);
 
-  new SequelizeStore(sequelize, 'bruteStore', {}, (store) => {
-    const bruteforce = new ExpressBrute(store,
-      {
-        freeRetries: 3,
-        minWait: 5*1000,
-        attachResetToRequest: false,
-        refreshTimeoutOnRequest: true
-      });
+  if(process.env.NODE_ENV == 'production') {
+    new SequelizeStore(sequelize, 'bruteStore', {}, (store) => {
+      const bruteforce = new ExpressBrute(store,
+        {
+          freeRetries: 3,
+          minWait: 5*1000,
+          attachResetToRequest: false,
+          refreshTimeoutOnRequest: true
+        });
 
       app.post(base + '/local',
         bruteforce.prevent,
         login);
-  });
+    });
+  } else {
+    app.post(base + '/local', login);
+  }
 };
