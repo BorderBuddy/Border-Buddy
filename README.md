@@ -20,9 +20,11 @@ $ brew services start postgres
 - Note that your database name is case sensitive and must read 'BorderBuddy.' Creating a db in the command line might downcase your db name automatically.
 
 ```
-$ psql -U postgres
- > CREATE DATABASE BorderBuddy;
+$ createuser postgres
+$ createdb BorderBuddy
+$ createdb BorderBuddy_test
 ```
+
 - Get the `.env` file from your another team member
 
 - Install dependencies
