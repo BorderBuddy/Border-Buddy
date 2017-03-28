@@ -45,7 +45,6 @@ export const Flight = db.define('flight', {
         .then(flights => flights)
         .catch(err => console.error(err));
     }
-
   },
 
   instanceMethods: {

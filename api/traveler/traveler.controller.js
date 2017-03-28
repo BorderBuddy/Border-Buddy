@@ -7,6 +7,9 @@ export const createNewTraveler = (req, res, next) => {
   const travelerDetails = req.body;
   const travelerNotifier = new TravelerNotifier();
 
+  console.log("Traveler details");
+  console.log(req.body);
+
   createNewTravelerUseCase({
     repository: Repository,
     travelerDetails,
@@ -19,7 +22,7 @@ export const createNewTraveler = (req, res, next) => {
 };
 
 export function getAllTravelers(req, res, next) {
-  return Traveler.findAll({include: [{all: true}]})
+  return Traveler.orderByArrival()
     .then(allTravelers => {
       res.status(200).json(allTravelers);
     })

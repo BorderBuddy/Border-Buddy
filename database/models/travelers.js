@@ -1,3 +1,5 @@
+import {Flight} from './flights';
+
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -47,15 +49,21 @@ export const Traveler = db.define('traveler', {
   },
 }, {
   classMethods: {
-    setToAtRisk: function() {
+    setToAtRisk: function () {
       Traveler.update(
-        { status: 'at risk' },
-        { where: { status: 'unconfirmed' }, returning: true }
+        {status: 'at risk'},
+        {where: {status: 'unconfirmed'}, returning: true}
       )
-      .spread((count, travelers) => travelers)
-      .catch(err => console.error(err));
+        .spread((count, travelers) => travelers)
+        .catch(err => console.error(err));
     },
 
+    orderByArrival: function () {
+      return Traveler.findAll({
+        include: [{all: true}],
+        order: [[Flight, 'arrivalTime', 'DESC']]
+      });
+    }
   }
 });
 
