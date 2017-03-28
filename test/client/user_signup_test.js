@@ -1,5 +1,5 @@
 import './../unit_helpers';
-import {signup} from '../../../client/actions/auth';
+import {signup} from '../../client/actions/auth';
 import axios from 'axios';
 
 describe('User', () => {

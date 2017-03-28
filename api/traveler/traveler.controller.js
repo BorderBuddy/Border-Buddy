@@ -1,7 +1,7 @@
 import {Repository, Traveler, Flight} from '../../database/models';
 import TravelerNotifier from '../notify/travelerNotifier';
 
-import createNewTravelerUseCase from '../../useCase/createNewTraveler';
+import createNewTravelerUseCase from '../useCase/createNewTraveler';
 
 export const createNewTraveler = (req, res, next) => {
   const travelerDetails = req.body;

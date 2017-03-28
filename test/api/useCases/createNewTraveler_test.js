@@ -1,5 +1,5 @@
-import './unit_helpers';
-import createNewTraveler from '../../useCase/createNewTraveler';
+import '../../unit_helpers';
+import createNewTraveler from '../../../api/useCase/createNewTraveler';
 
 describe('createNewTraveler', () => {
 

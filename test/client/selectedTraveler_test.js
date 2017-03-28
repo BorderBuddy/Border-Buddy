@@ -1,5 +1,5 @@
-import {updateTraveler, sendText} from '../../../client/actions/selectedTraveler';
-import './../unit_helpers';
+import {updateTraveler, sendText} from '../../client/actions/selectedTraveler';
+import '../unit_helpers';
 import axios from 'axios';
 
 describe('SelectedTraveler', () => {

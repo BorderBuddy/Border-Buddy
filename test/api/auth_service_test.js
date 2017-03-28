@@ -1,5 +1,5 @@
 import { signToken, verifyToken, protectedEndpoint } from '../../api/auth/auth.service'
-import './unit_helpers';
+import '../unit_helpers';
 
 describe('auth.service', () => {
 

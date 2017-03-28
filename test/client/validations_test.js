@@ -1,5 +1,5 @@
 import '../unit_helpers';
-import { minimumLength } from '../../../client/utils/validations';
+import { minimumLength } from '../../client/utils/validations';
 
 describe('validations', () => {
   describe('when value length is under 8 characters', () => {

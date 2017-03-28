@@ -1,7 +1,6 @@
 import { config } from '../../api/config';
 import TravelerNotifier from '../../api/notify/travelerNotifier';
-
-require('./unit_helpers');
+import '../unit_helpers';
 
 describe('TravelerNotifier', () => {
 
