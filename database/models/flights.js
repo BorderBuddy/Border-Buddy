@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-const Traveler = require('./travelers');
+import {Traveler} from './travelers'
 
 export const Flight = db.define('flight', {
   flightNum: {
@@ -28,7 +28,7 @@ export const Flight = db.define('flight', {
   }
 }, {
   classMethods: {
-    findFlightsToLand: function() {
+    findFlightsToLand: function () {
       const oneDay = 24 * 60 * 60 * 1000;
       const today = new Date();
       const yesterday = new Date(today - oneDay);
@@ -42,22 +42,22 @@ export const Flight = db.define('flight', {
           status: 'scheduled'
         }
       })
-      .then(flights => flights)
-      .catch(err => console.error(err));
+        .then(flights => flights)
+        .catch(err => console.error(err));
     }
 
   },
 
   instanceMethods: {
-    landFlight: function() {
-      return this.update({ status: 'arrived' })
-      .then(flight => {
-        return Traveler.update(
-        { status: 'unconfirmed' },
-        { where: { flightId: flight.id }, returning: true });
-      })
-      .then(travelers => travelers[1])
-      .catch(err => console.error(err));
+    landFlight: function () {
+      return this.update({status: 'arrived'})
+        .then(flight => {
+          return Traveler.update(
+            {status: 'unconfirmed'},
+            {where: {flightId: flight.id}, returning: true});
+        })
+        .then(travelers => travelers[1])
+        .catch(err => console.error(err));
     }
   }
 

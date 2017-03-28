@@ -9,3 +9,13 @@ applications:
   buildpack: nodejs_buildpack
   services:
   - border-buddy-prod-db
+- name: border-buddy-prod-worker
+  instances: 1
+  memory: 512M
+  disk_quota: 2048M
+  command: npm run worker
+  no-route: true
+  health-check-type: none
+  buildpack: nodejs_buildpack
+  services:
+  - border-buddy-prod-db
