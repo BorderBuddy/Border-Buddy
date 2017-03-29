@@ -19,4 +19,4 @@ deployment:
       - echo 'only=production' > .npmrc
       - npm prune --production
       - cf login -a api.run.pivotal.io -u $CF_USER_NAME -p $CF_USER_PASSWORD -s acceptance
-      - cf push border-buddy -f manifest.acceptance.yml
+      - cf push -f manifest.acceptance.yml
