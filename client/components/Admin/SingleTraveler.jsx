@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import Card from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
@@ -72,7 +71,6 @@ class SingleTraveler extends Component {
 								name="nationality"
 								floatingLabelText="Nationality"
 								component={TextField}
-								validate={required}
 								style={style.input}
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
@@ -85,7 +83,6 @@ class SingleTraveler extends Component {
 								name="requireInterpreter"
 								component={SelectField}
 								floatingLabelText="Traveler requires interpreter?"
-								validate={required}
 								style={style.input}
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
@@ -112,7 +109,7 @@ class SingleTraveler extends Component {
 							name="email"
 							floatingLabelText="Email"
 							component={TextField}
-							validate={[required, email]}
+							validate={[email]}
 							style={style.input}
 							errorStyle={style.error}
 							floatingLabelStyle={style.label}
@@ -124,7 +121,7 @@ class SingleTraveler extends Component {
 								name="phone"
 								floatingLabelText="Phone"
 								component={TextField}
-								validate={[required, phone]}
+								validate={[phone]}
 								style={style.input}
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
@@ -136,7 +133,6 @@ class SingleTraveler extends Component {
 								name="connectivity"
 								component={SelectField}
 								floatingLabelText="Smartphone?"
-								validate={required}
 								style={style.input}
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
@@ -153,7 +149,6 @@ class SingleTraveler extends Component {
 							<Field
 								name="arrivalTime"
 								component={DatePicker}
-								validate={required}
 								format={null}
 								floatingLabelText="What day do you arrive?"
 								style={style.input}
@@ -166,7 +161,7 @@ class SingleTraveler extends Component {
 							<Field
 								name="airlineCode"
 								component={AirlinePicker}
-								validate={[uppercase, required]}
+								validate={[uppercase]}
 								label="Airline Code"
 								style={style.input}
 								errorStyle={style.error}
@@ -179,7 +174,6 @@ class SingleTraveler extends Component {
 								name="flightNum"
 								component={TextField}
 								floatingLabelText="Flight Number"
-								validate={required}
 								style={style.input}
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
@@ -235,7 +229,6 @@ class SingleTraveler extends Component {
 								name="flightStatus"
 								component={SelectField}
 								floatingLabelText="Flight Status"
-								validate={required}
 								style={style.input}
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
@@ -252,7 +245,6 @@ class SingleTraveler extends Component {
 								name="passengerStatus"
 								component={SelectField}
 								floatingLabelText="Passenger Status"
-								validate={required}
 								style={style.input}
 								errorStyle={style.error}
 								floatingLabelStyle={style.label}
@@ -300,7 +292,7 @@ SingleTraveler = reduxForm({
 const mapStateToProps = ({ selectedTraveler }) => {
   const { name, nationality, requireInterpreter, preferredLanguage, email, phone, connectivity, secondaryContactPhone, secondaryContactName,
 		secondaryContactRelation, status: passengerStatus } = selectedTraveler;
-  const { airlineCode, flightNum, arrivalTime, status: flightStatus } = selectedTraveler.flight;
+  const { airlineCode, flightNum, arrivalTime, status: flightStatus } = selectedTraveler.flight || {};
 	const flightDate = arrivalTime ? new Date(arrivalTime) : null;
   return { 
     initialValues: {
@@ -308,12 +300,12 @@ const mapStateToProps = ({ selectedTraveler }) => {
 			passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus
     }
   }  
-}
+};
 
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchSelectedTraveler: (id) => dispatch(fetchSelectedTraveler(id))
 	}
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTraveler)

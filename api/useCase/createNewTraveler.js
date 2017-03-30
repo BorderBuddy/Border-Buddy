@@ -1,31 +1,30 @@
+function flightDetailsSubmitted(travelerDetails) {
+  return travelerDetails.flightNum && travelerDetails.airlineCode && travelerDetails.arrivalTime;
+}
 export default function createNewTraveler({repository, travelerDetails, callbacks, travelerNotifier}) {
-  const findOrCreateFlight = repository.flights.findOrCreate({
-    where: {
-      flightNum: travelerDetails.flightNum,
-      airlineCode: travelerDetails.airlineCode,
-      arrivalTime: travelerDetails.arrivalTime
+  let findOrCreateFlight;
+
+  if (flightDetailsSubmitted(travelerDetails)) {
+    findOrCreateFlight = repository.flights.findOrCreate({
+      where: {
+        flightNum: travelerDetails.flightNum,
+        airlineCode: travelerDetails.airlineCode,
+        arrivalTime: travelerDetails.arrivalTime
+      }
+    });
+  } else {
+    findOrCreateFlight = Promise.resolve([{}]);
+  }
+
+  return findOrCreateFlight.then((flight) => {
+    const travelerDetailsWithFlight = Object.assign({}, travelerDetails, {flightId: flight[0].id});
+    if (!!travelerDetails.id) {
+      return repository.travelers.update(travelerDetailsWithFlight, {where: {id: travelerDetailsWithFlight.id}});
+    } else {
+      return repository.travelers.create(travelerDetailsWithFlight);
     }
-  });
-  const createTraveler = repository.travelers.create({
-    name: travelerDetails.name,
-    nationality: travelerDetails.nationality,
-    phone: travelerDetails.phone,
-    email: travelerDetails.email,
-    connectivity: travelerDetails.connectivity,
-    secondaryContactName: travelerDetails.secondaryContactName,
-    secondaryContactRelation: travelerDetails.secondaryContactRelation,
-    secondaryContactPhone: travelerDetails.secondaryContactPhone,
-    requireInterpreter: travelerDetails.requireInterpreter,
-    preferredLanguage: travelerDetails.preferredLanguage
-  });
-
-  return Promise.all([findOrCreateFlight, createTraveler]).then((results) => {
-    const flights = results[0];
-    const traveler = results[1];
-
-    return traveler.setFlight(flights[0]);
-  }).then(finalTraveler => {
-    callbacks.onSuccess(finalTraveler);
-    travelerNotifier.onRegistrationSuccess(finalTraveler);
+  }).then((traveler) => {
+    callbacks.onSuccess(traveler);
+    travelerNotifier.onRegistrationSuccess(traveler);
   });
 }

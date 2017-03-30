@@ -1,4 +1,4 @@
-import {Repository, Traveler, Flight} from '../../database/models';
+import {Repository, Traveler} from '../../database/models';
 import TravelerNotifier from '../notify/travelerNotifier';
 
 import createNewTravelerUseCase from '../useCase/createNewTraveler';
@@ -7,14 +7,13 @@ export const createNewTraveler = (req, res, next) => {
   const travelerDetails = req.body;
   const travelerNotifier = new TravelerNotifier();
 
-  console.log("Traveler details");
-  console.log(req.body);
-
   createNewTravelerUseCase({
     repository: Repository,
     travelerDetails,
     callbacks: {
-      onSuccess: (traveler) => res.status(201).json(traveler)
+      onSuccess: (traveler) => {
+        res.status(201).json(traveler)
+      }
     },
     travelerNotifier
   })
@@ -38,34 +37,19 @@ export function getById(req, res, next) {
 }
 
 export function updateOne(req, res, next) {
+  let travelerDetails = req.body;
+  travelerDetails.id = req.params.id;
+  travelerDetails.connectivity = (travelerDetails.connectivity == "true");
+  travelerDetails.requireInterpreter = (travelerDetails.requireInterpreter == "true");
 
-  const {
-    flightNum, airlineCode, arrivalTime,
-    name, nationality, phone, email, connectivity, secondaryContact, passengerStatus
-  } = req.body;
-  let globalFlight;
-  return Flight.findOrCreate({
-    where: {
-      flightNum, airlineCode, arrivalTime
+  createNewTravelerUseCase({
+    repository: Repository,
+    travelerDetails,
+    callbacks: {
+      onSuccess: (traveler) => {
+        res.status(201).json(traveler)
+      }
     }
   })
-    .then(flight => {
-      globalFlight = flight[0];
-      return Traveler.findOne({
-        include: [{model: Flight}],
-        where: {
-          id: req.params.id
-        }
-      });
-    })
-    .then(traveler => {
-      return traveler.update({
-        name, nationality, phone, email, connectivity, secondaryContact, status: passengerStatus
-      });
-    })
-    .then(updatedTraveler => {
-      return updatedTraveler.setFlight(globalFlight);
-    })
-    .then(finalTraveler => res.status(201).json(finalTraveler))
     .catch(next);
-}
+};

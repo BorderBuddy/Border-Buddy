@@ -9,7 +9,7 @@ import SingleTraveler from './containers/SingleTraveler';
 import Login from './containers/Login';
 import AdminSignUp from './containers/AdminSignUpContainer';
 import Success from './containers/Success';
-import SignUp from './containers/SignUpContainer';
+import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer';
 
 import About from './components/About';
 import WhyBorderBuddy from './components/WhyBorderBuddy';
@@ -23,7 +23,7 @@ const getRoutes = () => (
 	  <Route path="/" component={Homepage}>
 			<IndexRedirect to="/why" />
 			<Route path="why" component={WhyBorderBuddy} />
-			<Route path="register" component={SignUp} />
+			<Route path="register" component={ConnectedSignUpContainer} />
 			<Route path="about" component={About} />
 		  <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} />
 		</Route>

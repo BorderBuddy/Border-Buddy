@@ -56,7 +56,6 @@ const SignUp = ({handleSubmit, valid}) => {
             name="nationality"
             className="traveler-nationality"
             component={TextField}
-            validate={required}
             floatingLabelText="Nationality"
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
@@ -73,7 +72,6 @@ const SignUp = ({handleSubmit, valid}) => {
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
             errorStyle={style.error}
-            validate={required}
             style={style.input}
           >
             <MenuItem className="traveler-not-require-interpreter-option" value="false" primaryText="Yes"/>
@@ -97,7 +95,7 @@ const SignUp = ({handleSubmit, valid}) => {
             name="email"
             className="traveler-email"
             component={TextField}
-            validate={[required, email]}
+            validate={[email]}
             floatingLabelText="Email"
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
@@ -114,7 +112,7 @@ const SignUp = ({handleSubmit, valid}) => {
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
             errorStyle={style.error}
-            validate={[required, phone]}
+            validate={[phone]}
             style={style.input}
           />
         </div>
@@ -127,7 +125,6 @@ const SignUp = ({handleSubmit, valid}) => {
             floatingLabelStyle={style.label}
             underlineFocusStyle={style.underline}
             errorStyle={style.error}
-            validate={required}
             style={style.input}
           >
             <MenuItem className="traveler-has-phone-option" value="true" primaryText="Yes"/>
@@ -142,7 +139,6 @@ const SignUp = ({handleSubmit, valid}) => {
             name="arrivalTime"
             className="traveler-arrival-time"
             component={DatePicker}
-            validate={required}
             format={null}
             floatingLabelText="What day do you arrive?"
             floatingLabelStyle={style.label}
@@ -156,7 +152,7 @@ const SignUp = ({handleSubmit, valid}) => {
             name="airlineCode"
             className="traveler-airline-code"
             component={AirlinePicker}
-            validate={[uppercase, required]}
+            validate={[uppercase]}
             format={null}
             label="Airline code"
             floatingLabelStyle={style.label}
@@ -170,7 +166,6 @@ const SignUp = ({handleSubmit, valid}) => {
             name="flightNum"
             className="traveler-flight-number"
             component={TextField}
-            validate={required}
             format={null}
             floatingLabelText="Flight number"
             floatingLabelStyle={style.label}

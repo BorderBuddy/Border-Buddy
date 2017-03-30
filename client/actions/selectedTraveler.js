@@ -13,7 +13,7 @@ export const fetchSelectedTraveler = (id) => dispatch => {
     .then(traveler => {
       traveler = traveler.data;
       dispatch(setSelectedTraveler(traveler));
-      dispatch(setFlight(traveler.flight));
+      dispatch(setFlight(traveler.flight || {}));
     })
     .catch(err => console.error(err));
 };

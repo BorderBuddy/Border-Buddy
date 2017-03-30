@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import AppBarMenu from '../components/Admin/AppBarMenu';
 import { signout } from '../actions/auth';
 

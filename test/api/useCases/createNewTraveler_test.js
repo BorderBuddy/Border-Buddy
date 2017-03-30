@@ -4,12 +4,14 @@ import createNewTraveler from '../../../api/useCase/createNewTraveler';
 describe('createNewTraveler', () => {
 
   let travelerNotifier;
-  let travelerWithFlight;
+  let flightDetails;
   let travelerDetails;
   let repository;
   let createdFlights;
   let createdTraveler;
   let callbacks;
+  let findOrCreatePromise;
+  let createTravelerPromise;
 
   beforeEach(() => {
     travelerDetails = {
@@ -23,70 +25,86 @@ describe('createNewTraveler', () => {
       secondaryContactPhone: '0987654321',
       requireInterpreter: true,
       preferredLanguage: 'Chinese',
+    };
+    flightDetails = {
       flightNum: '1234',
       airlineCode: 'TEST',
       arrivalTime: '1970-01-01'
     };
+
     repository = {
       flights: {findOrCreate: sinon.stub()},
       travelers: {create: sinon.stub()}
     };
 
-    createdFlights = [{a: 'flight'}];
-    repository.flights.findOrCreate.returns(createdFlights);
-
-    createdTraveler = {a: 'traveler', setFlight: sinon.stub()};
-    repository.travelers.create.returns(createdTraveler);
-
-    travelerWithFlight = {a: 'traveler-with-flight'};
-    createdTraveler.setFlight.returns(travelerWithFlight);
-
     callbacks = {onSuccess: sinon.spy(), onFailure: sinon.spy()};
     travelerNotifier = {onRegistrationSuccess: sinon.spy()};
-
-    return createNewTraveler({repository, travelerDetails, callbacks, travelerNotifier});
   });
 
-  it('finds or creates a flight', () => {
-    expect(repository.flights.findOrCreate).to.have.been.calledWith({
-      where: {
-        flightNum: '1234',
-        airlineCode: 'TEST',
-        arrivalTime: '1970-01-01'
-      }
+  describe('always', () => {
+    beforeEach(() => {
+      createdTraveler = {a: 'traveler'};
+      createTravelerPromise = Promise.resolve(createdTraveler);
+
+      repository.flights.findOrCreate.returns(findOrCreatePromise);
+      repository.travelers.create.returns(createTravelerPromise);
+    });
+
+    it('creates a traveler', () => {
+      return createNewTraveler({repository, travelerDetails, callbacks, travelerNotifier}).then(() => {
+        expect(repository.travelers.create.getCall(0).args[0]).to.containSubset({
+          name: 'John Citizen',
+          nationality: 'Nation',
+          phone: '1234567890',
+          email: 'jc@example.com',
+          connectivity: true,
+          requireInterpreter: true,
+          preferredLanguage: 'Chinese',
+          secondaryContactName: 'Jane Citizen',
+          secondaryContactRelation: 'Mother',
+          secondaryContactPhone: '0987654321'
+        });
+      });
+    });
+
+    describe('on success', () => {
+      it('calls the onSuccess callback with the created traveler', () => {
+        return createNewTraveler({repository, travelerDetails: travelerDetails, callbacks, travelerNotifier})
+          .then(() => {
+            expect(callbacks.onSuccess).to.have.been.calledWith(createdTraveler);
+          });
+      });
+
+      it('notifies the traveler that they have been registered', () => {
+        return createNewTraveler({repository, travelerDetails: travelerDetails, callbacks, travelerNotifier})
+          .then(() => {
+            expect(travelerNotifier.onRegistrationSuccess).to.have.been.calledWith(createdTraveler);
+          });
+      });
     });
   });
 
-  it('creates a traveler', () => {
-    expect(repository.travelers.create).to.have.been.calledWith({
-      name: 'John Citizen',
-      nationality: 'Nation',
-      phone: '1234567890',
-      email: 'jc@example.com',
-      connectivity: true,
-      requireInterpreter: true,
-      preferredLanguage: 'Chinese',
-      secondaryContactName: 'Jane Citizen',
-      secondaryContactRelation: 'Mother',
-      secondaryContactPhone: '0987654321'
-    });
-  });
+  describe('when flight information is submitted', () => {
+    let travelerDetailsWithFlight;
 
-  it('assigns the flight to the traveler', () => {
-    expect(createdTraveler.setFlight).to.have.been.calledWith(createdFlights[0]);
-  });
+    beforeEach(() => {
+      travelerDetailsWithFlight = Object.assign({}, travelerDetails, flightDetails);
 
-  describe('on success', () => {
+      createdTraveler = {a: 'traveler', flightId: 123};
+      createTravelerPromise = Promise.resolve(createdTraveler);
 
-    it('calls the onSuccess callback with the traveler', () => {
-      expect(callbacks.onSuccess).to.have.been.calledWith(travelerWithFlight);
+      createdFlights = [{a: 'flight', id: 123}];
+      findOrCreatePromise = Promise.resolve(createdFlights);
+
+      repository.flights.findOrCreate.returns(findOrCreatePromise);
+      repository.travelers.create.returns(createTravelerPromise);
     });
 
-    it('notifies the traveler that they have been registered', () => {
-      expect(travelerNotifier.onRegistrationSuccess).to.have.been.calledWith(travelerWithFlight);
+    it('assigns the flight to the traveler', () => {
+      return createNewTraveler({repository, travelerDetails: travelerDetailsWithFlight, callbacks, travelerNotifier})
+        .then(() => {
+          expect(callbacks.onSuccess.getCall(0).args[0]).to.containSubset({flightId: 123});
+        });
     });
-
   });
-
-
 });

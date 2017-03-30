@@ -19,10 +19,6 @@ export const Traveler = db.define('traveler', {
   },
   phone: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   },
   connectivity: {
     type: Sequelize.BOOLEAN

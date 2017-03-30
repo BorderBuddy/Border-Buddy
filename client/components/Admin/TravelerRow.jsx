@@ -18,7 +18,7 @@ import {
 
 export default ({ traveler }) => {
 	const { id, name, phone, email, nationality, status: travelerStatus } = traveler;
-	const { airlineCode, flightNum, arrivalTime, status: flightStatus } = traveler.flight;
+	const { airlineCode, flightNum, arrivalTime, status: flightStatus } = traveler.flight || {};
 	const timeString = (new Date(arrivalTime)).toLocaleString();
 	const color = setStatusColor(travelerStatus);
 	return (
