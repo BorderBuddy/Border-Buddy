@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+pkill node
 dropdb BorderBuddy_test
 createdb BorderBuddy_test
 npm run migrate
