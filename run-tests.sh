@@ -12,6 +12,7 @@ if [ "$LOCAL" == "1" ]; then
 else
     export TEST_PORT=3000
     npm run build
+    sleep 5
 fi
 
 npm run start&
