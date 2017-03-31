@@ -1,6 +1,6 @@
 import Nightmare from 'nightmare';
-import { expect } from 'chai';
-import { cleanDatabase } from './feature_helpers';
+import {expect} from 'chai';
+import {cleanDatabase, rootURL} from './feature_helpers';
 
 require('./nightmare_helpers');
 
@@ -65,9 +65,4 @@ describe('BorderBuddy', () => {
         expect(result).to.contain('transit');
       })
   });
-
-  function rootURL(path) {
-    let pathString = path || '';
-    return 'http://localhost:8080' + pathString;
-  }
 });

@@ -1,6 +1,6 @@
 import Nightmare from 'nightmare';
 import {expect} from 'chai';
-import {cleanDatabase} from './feature_helpers';
+import {cleanDatabase, rootURL} from './feature_helpers';
 
 require('./nightmare_helpers');
 
@@ -39,9 +39,4 @@ describe('BorderBuddy Admin Dashboard', () => {
         expect(result).to.contain('Traveler 007');
       });
   });
-
-  function rootURL(path) {
-    let pathString = path || '';
-    return 'http://localhost:8080' + pathString;// + process.env.TEST_PORT + pathString;
-  }
 });

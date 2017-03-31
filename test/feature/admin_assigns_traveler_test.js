@@ -1,9 +1,7 @@
 import Nightmare from 'nightmare';
 import {expect} from 'chai';
-import {cleanDatabase} from './feature_helpers';
-
+import {cleanDatabase, rootURL} from './feature_helpers';
 import {Traveler} from '../../database/models/travelers';
-import {Flight} from '../../database/models/flights';
 
 require('./nightmare_helpers');
 
@@ -64,9 +62,4 @@ describe('BorderBuddy admin dashboard', () => {
         expect(result).to.contain('ADM');
       })
   });
-
-  function rootURL(path) {
-    let pathString = path || '';
-    return 'http://localhost:' + process.env.TEST_PORT + pathString;
-  }
 });

@@ -5,3 +5,8 @@ export function cleanDatabase() {
     Traveler.truncate()
   ]);
 }
+
+export function rootURL(path) {
+  let pathString = path || '';
+  return 'http://localhost:' + process.env.TEST_PORT + pathString;
+}
