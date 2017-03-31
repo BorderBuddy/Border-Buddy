@@ -1,13 +1,13 @@
 import {Repository, Traveler} from '../../database/models';
 import TravelerNotifier from '../notify/travelerNotifier';
 
-import createNewTravelerUseCase from '../useCase/createNewTraveler';
+import createOrUpdateTravelerUseCase from '../useCase/createOrUpdateTraveler';
 
 export const createNewTraveler = (req, res, next) => {
   const travelerDetails = req.body;
   const travelerNotifier = new TravelerNotifier();
 
-  createNewTravelerUseCase({
+  createOrUpdateTravelerUseCase({
     repository: Repository,
     travelerDetails,
     callbacks: {
@@ -42,7 +42,7 @@ export function updateOne(req, res, next) {
   travelerDetails.connectivity = (travelerDetails.connectivity == "true");
   travelerDetails.requireInterpreter = (travelerDetails.requireInterpreter == "true");
 
-  createNewTravelerUseCase({
+  createOrUpdateTravelerUseCase({
     repository: Repository,
     travelerDetails,
     callbacks: {

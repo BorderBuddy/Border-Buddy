@@ -1,7 +1,7 @@
 import '../../unit_helpers';
-import createNewTraveler from '../../../api/useCase/createNewTraveler';
+import createOrUpdateTraveler from '../../../api/useCase/createOrUpdateTraveler';
 
-describe('createNewTraveler', () => {
+describe('createOrUpdateTraveler', () => {
 
   let travelerNotifier;
   let flightDetails;
@@ -51,7 +51,7 @@ describe('createNewTraveler', () => {
     });
 
     it('creates a traveler', () => {
-      return createNewTraveler({repository, travelerDetails, callbacks, travelerNotifier}).then(() => {
+      return createOrUpdateTraveler({repository, travelerDetails, callbacks, travelerNotifier}).then(() => {
         expect(repository.travelers.create.getCall(0).args[0]).to.containSubset({
           name: 'John Citizen',
           nationality: 'Nation',
@@ -69,14 +69,14 @@ describe('createNewTraveler', () => {
 
     describe('on success', () => {
       it('calls the onSuccess callback with the created traveler', () => {
-        return createNewTraveler({repository, travelerDetails: travelerDetails, callbacks, travelerNotifier})
+        return createOrUpdateTraveler({repository, travelerDetails: travelerDetails, callbacks, travelerNotifier})
           .then(() => {
             expect(callbacks.onSuccess).to.have.been.calledWith(createdTraveler);
           });
       });
 
       it('notifies the traveler that they have been registered', () => {
-        return createNewTraveler({repository, travelerDetails: travelerDetails, callbacks, travelerNotifier})
+        return createOrUpdateTraveler({repository, travelerDetails: travelerDetails, callbacks, travelerNotifier})
           .then(() => {
             expect(travelerNotifier.onRegistrationSuccess).to.have.been.calledWith(createdTraveler);
           });
@@ -101,7 +101,7 @@ describe('createNewTraveler', () => {
     });
 
     it('assigns the flight to the traveler', () => {
-      return createNewTraveler({repository, travelerDetails: travelerDetailsWithFlight, callbacks, travelerNotifier})
+      return createOrUpdateTraveler({repository, travelerDetails: travelerDetailsWithFlight, callbacks, travelerNotifier})
         .then(() => {
           expect(callbacks.onSuccess.getCall(0).args[0]).to.containSubset({flightId: 123});
         });

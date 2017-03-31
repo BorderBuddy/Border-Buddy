@@ -1,7 +1,11 @@
 function flightDetailsSubmitted(travelerDetails) {
   return travelerDetails.flightNum && travelerDetails.airlineCode && travelerDetails.arrivalTime;
 }
-export default function createNewTraveler({repository, travelerDetails, callbacks, travelerNotifier}) {
+
+function shouldSendTextMessage(traveler, travelNotifier) {
+  return traveler.phone && travelNotifier;
+}
+export default function createOrUpdateTraveler({repository, travelerDetails, callbacks, travelerNotifier}) {
   let findOrCreateFlight;
 
   if (flightDetailsSubmitted(travelerDetails)) {
@@ -25,6 +29,8 @@ export default function createNewTraveler({repository, travelerDetails, callback
     }
   }).then((traveler) => {
     callbacks.onSuccess(traveler);
-    travelerNotifier.onRegistrationSuccess(traveler);
+    if(shouldSendTextMessage(traveler, travelerNotifier)) {
+      travelerNotifier.onRegistrationSuccess(traveler);
+    }
   });
 }
