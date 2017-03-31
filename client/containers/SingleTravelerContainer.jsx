@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import FlatButton from 'material-ui/FlatButton';
-import Dialog from 'material-ui/Dialog';
+import { FlatButton, RaisedButton, Dialog } from 'material-ui';
 import SingleTraveler from '../components/Admin/SingleTraveler';
 import {browserHistory} from 'react-router';
 import { updateTraveler, sendText } from '../actions/selectedTraveler';
@@ -66,7 +65,7 @@ class SingleTravelerContainer extends Component {
         primary={true}
         onTouchTap={this.handleSentTextClose}
       />
-    ]
+    ];
 
 		return (
     <div>
@@ -75,8 +74,9 @@ class SingleTravelerContainer extends Component {
         changed={this.state.changed} 
         id={this.props.params.id}
         sendText={this.sendText}
-      />
-      <SignUpConfirmation open={this.state.open} flight={this.props.flight} handleClose={this.handleClose}/>
+        representatives={this.props.users}/>
+      <SignUpConfirmation
+        open={this.state.open} flight={this.props.flight} handleClose={this.handleClose}/>
       <Dialog
         title="Texting Traveler..."
         actions={textModalOptions}
@@ -97,12 +97,12 @@ class SingleTravelerContainer extends Component {
 
 /*---------------------------REDUX CONTAINER---------------------------*/
 
-const mapStateToProps = ({ form, flight }) => ({ form, flight })
+const mapStateToProps = ({ form, flight, users }) => ({ form, flight, users });
 
 const mapDispatchToProps = dispatch => ({
   updateTraveler: (traveler, id) => dispatch(updateTraveler(traveler, id)),
   checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day)),
   sendText: (traveler) => dispatch(sendText(traveler))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTravelerContainer);

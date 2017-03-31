@@ -8,6 +8,7 @@ import { User } from './user';
 
 Flight.hasOne(Traveler, {foreignKey: 'flightId'});
 Traveler.belongsTo(Flight); // for eager loading
+User.hasOne(Traveler, {foreignKey: 'representative'});
 
 const Repository = {
   travelers: Traveler,

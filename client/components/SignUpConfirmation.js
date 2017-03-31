@@ -29,8 +29,8 @@ export default class SignUpConfirmation extends React.Component {
         </Dialog>
       </div>
     )
-  };
-};
+  }
+}
 
 SignUpConfirmation.propTypes = {
   open: React.PropTypes.bool.isRequired,

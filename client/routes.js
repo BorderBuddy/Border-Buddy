@@ -5,7 +5,7 @@ import { Route, IndexRedirect } from 'react-router';
 import Homepage from './containers/Homepage';
 import AdminContainer from './containers/AdminContainer';
 import AllTravelers from './containers/AllTravelers';
-import SingleTraveler from './containers/SingleTraveler';
+import SingleTravelerContainer from './containers/SingleTravelerContainer';
 import Login from './containers/Login';
 import AdminSignUp from './containers/AdminSignUpContainer';
 import Success from './containers/Success';
@@ -30,7 +30,7 @@ const getRoutes = () => (
 		<Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
 			<IndexRedirect to="/admin/travelers" />
 			<Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
-			<Route path="travelers/:id" component={SingleTraveler} onEnter={onSingleTravelerEnter} />
+			<Route path="travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
 			<Route path="createuser" component={AdminSignUp} />
 		</Route>
     <Route path="/login" component={Login} />

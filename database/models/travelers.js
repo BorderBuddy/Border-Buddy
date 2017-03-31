@@ -42,7 +42,7 @@ export const Traveler = db.define('traveler', {
     type: Sequelize.ENUM,
     values: ['transit', 'unconfirmed', 'detained', 'at risk', 'cleared'],
     defaultValue: 'transit'
-  },
+  }
 }, {
   classMethods: {
     setToAtRisk: function () {

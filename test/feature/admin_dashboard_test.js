@@ -28,8 +28,6 @@ describe('BorderBuddy Admin Dashboard', () => {
       .type('input[name="name"]', 'Traveler 007')
       .type('input[name="phone"]', '1231231234')
       .clickOnElementContaining('.submit-traveler-registration button', 'Register')
-      // .wait('#sign-up-confirmation')
-      // .mouseDownUpOnElementContaining('#dismiss-confirmation', 'OK')
       .wait('#success-container')
       .goto(rootURL('/admin'))
       .wait('.all-travelers tr')

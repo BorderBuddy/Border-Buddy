@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import { fetchAllTravelers } from '../actions/travelers';
 import { fetchSelectedTraveler } from '../actions/selectedTraveler';
 import { checkToken } from '../actions/auth';
+import { fetchAllUsers } from '../actions/users';
 
 // sync action creators
 import { clearSignUpTraveler } from '../actions/signUp';
@@ -27,6 +28,7 @@ export const onTravelersListEnter = () => {
 };
 
 export const onSingleTravelerEnter = ({ params }) => {
+	store.dispatch(fetchAllUsers());
 	store.dispatch(fetchSelectedTraveler(params.id));
 };
 

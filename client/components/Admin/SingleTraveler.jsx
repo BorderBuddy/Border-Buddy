@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import RaisedButton from 'material-ui/RaisedButton';
+import { RaisedButton, MenuItem } from 'material-ui';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
-import MenuItem from 'material-ui/MenuItem';
 import AirlinePicker from '../AirlinePicker';
 import { fetchSelectedTraveler } from '../../actions/selectedTraveler';
-
-
 import { required, phone, email, validateCode, uppercase } from '../../utils/validations';
 
-class SingleTraveler extends Component {
+class SingleTraveler extends React.Component {
 	constructor() {
 		super();
 	}
@@ -49,10 +46,41 @@ class SingleTraveler extends Component {
 				margin: '1em auto'
 			}
 		};
+
+    const menuItems = (representatives) => {
+    	return (
+    		representatives.map((rep, index) => {
+    			return <MenuItem key={index} value={rep.id} primaryText={first3Chars(rep.email)} className="traveler-assign-to-option" />;
+				})
+			);
+    };
+
+    const first3Chars = (text) => {
+    	return text.substring(0, 3).toUpperCase();
+		};
+
 		return (
 			<form data-test="single-traveler-form" style={style.form} onSubmit={handleSubmit}>
 				<div>
-					<legend className="mx-auto h1 subtitle">Update Traveler</legend>
+					<div className="clearfix">
+						<div className="field-container col-12 md-col md-col-6">
+							<legend className="h1 subtitle">Update Traveler</legend>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
+								name="representative"
+								component={SelectField}
+								floatingLabelText="Assign To"
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+								className="traveler-assign-to"
+							>
+								{menuItems(this.props.representatives)}
+							</Field>
+						</div>
+					</div>
 					<div className="clearfix">
 						<div className="field-container col-12 md-col md-col-6">
 							<Field
@@ -266,6 +294,7 @@ class SingleTraveler extends Component {
 								disabled={!valid}
 								primary={true}
 								style={style.button}
+								className="submit-save-changes"
 							/>
 						</div>
 						<div className="field-container col-12 md-col md-col-6">
@@ -287,17 +316,17 @@ SingleTraveler = reduxForm({
 	form: 'singleTraveler',
 	asyncValidate: validateCode,
 	asyncBlurFields: ['airlineCode']
-})(SingleTraveler)
+})(SingleTraveler);
 
 const mapStateToProps = ({ selectedTraveler }) => {
   const { name, nationality, requireInterpreter, preferredLanguage, email, phone, connectivity, secondaryContactPhone, secondaryContactName,
-		secondaryContactRelation, status: passengerStatus } = selectedTraveler;
+		secondaryContactRelation, status: passengerStatus, representative } = selectedTraveler;
   const { airlineCode, flightNum, arrivalTime, status: flightStatus } = selectedTraveler.flight || {};
 	const flightDate = arrivalTime ? new Date(arrivalTime) : null;
   return { 
     initialValues: {
       name, nationality, requireInterpreter: String(requireInterpreter), preferredLanguage, email, phone, connectivity: String(connectivity), secondaryContactPhone, secondaryContactName, secondaryContactRelation,
-			passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus
+			passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus, representative
     }
   }  
 };
