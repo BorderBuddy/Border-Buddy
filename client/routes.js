@@ -10,6 +10,7 @@ import Login from './containers/Login';
 import AdminSignUp from './containers/AdminSignUpContainer';
 import Success from './containers/Success';
 import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer';
+import AddTravelerContainer from './containers/Admin/AddTravelerContainer';
 
 import About from './components/About';
 import WhyBorderBuddy from './components/WhyBorderBuddy';
@@ -30,6 +31,7 @@ const getRoutes = () => (
 		<Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
 			<IndexRedirect to="/admin/travelers" />
 			<Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
+			<Route path="travelers/add" component={AddTravelerContainer} />
 			<Route path="travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
 			<Route path="createuser" component={AdminSignUp} />
 		</Route>

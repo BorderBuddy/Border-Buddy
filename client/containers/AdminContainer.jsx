@@ -30,7 +30,7 @@ export default class AdminContainer extends Component {
             <ToolbarTitle text="Border Buddy" />
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
-            <Link to="/register" >
+            <Link to="/admin/travelers/add" >
               <RaisedButton label="Add Traveler" secondary={true} id="add-new-traveler"/>
             </Link>
             <AppBarMenu />

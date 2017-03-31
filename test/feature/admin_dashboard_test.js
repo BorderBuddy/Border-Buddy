@@ -8,7 +8,7 @@ describe('BorderBuddy Admin Dashboard', () => {
 
   beforeEach(cleanDatabase);
 
-  xit('allows an admin to add a traveler', () => {
+  it('allows an admin to add a traveler', () => {
     const nightmare = new Nightmare({
       show: true,
       waitTimeout: 5000,
