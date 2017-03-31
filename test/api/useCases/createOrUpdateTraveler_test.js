@@ -43,7 +43,7 @@ describe('createOrUpdateTraveler', () => {
 
   describe('always', () => {
     beforeEach(() => {
-      createdTraveler = {a: 'traveler'};
+      createdTraveler = {a: 'traveler', phone: '1231231234'};
       createTravelerPromise = Promise.resolve(createdTraveler);
 
       repository.flights.findOrCreate.returns(findOrCreatePromise);
