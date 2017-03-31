@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {SET_ALL_USERS} from "../constants";
+import {SET_ALL_USERS} from '../constants';
 
 export const fetchAllUsers = (_window = window) => dispatch => {
   return axios.get('/api/user', {
