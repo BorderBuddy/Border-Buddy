@@ -12,7 +12,7 @@ describe('Component: Admin/AddTraveler', () => {
 
   beforeEach(() => {
     defaultFormValues = {
-      addTraveler: {
+      adminAddTraveler: {
         values: {
           foo: 'bar'
         }
@@ -67,8 +67,8 @@ describe('Component: Admin/AddTraveler', () => {
         arrivalTime = new Date();
 
         formWithFlightInfo = {
-          addTraveler: {
-            values: Object.assign({}, defaultFormValues.addTraveler.values, {
+          adminAddTraveler: {
+            values: Object.assign({}, defaultFormValues.adminAddTraveler.values, {
               airlineCode: 'FF',
               flightNum: '123',
               arrivalTime: arrivalTime
