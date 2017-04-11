@@ -26,7 +26,6 @@ describe('BorderBuddy Admin Dashboard', () => {
       .wait('button#add-new-traveler')
       .clickOnElementContaining('button', 'Add Traveler')
       .type('input[name="name"]', 'Traveler 007')
-      .type('input[name="phone"]', '1231231234')
       .clickOnElementContaining('.submit-traveler-registration button', 'Register')
       .wait('#success-container')
       .goto(rootURL('/admin'))

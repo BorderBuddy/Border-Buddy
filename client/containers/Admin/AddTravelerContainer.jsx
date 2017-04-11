@@ -14,7 +14,7 @@ export class AddTravelerContainer extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const formValues = this.props.form.addTraveler.values;
+    const formValues = this.props.form.adminAddTraveler.values;
 
     if(flightInfoSubmitted(formValues)) {
       const { flightNum, airlineCode, arrivalTime } = formValues;
@@ -24,12 +24,15 @@ export class AddTravelerContainer extends React.Component {
       this.props.checkFlight(airlineCode, flightNum, year, month, day);
     }
 
-    this.props.createTraveler(formValues);
+    this.props.createTraveler(formValues, true);
   }
 
   render() {
     return(
-      <AddTraveler handleSubmit={this.handleSubmit}/>
+      <AddTraveler 
+      handleSubmit={this.handleSubmit}
+      representatives={this.props.users}
+      />
     )
   }
 }
@@ -39,9 +42,9 @@ const flightInfoSubmitted = (formValues) => {
   return formValues.flightNum && formValues.airlineCode && formValues.arrivalTime;
 };
 
-const mapStateToProps = ({form}) => ({form})
+const mapStateToProps = ({form, users}) => ({form, users})
 const mapDispatchToProps = dispatch => ({
-  createTraveler: traveler => dispatch(signUpTraveler(traveler)),
+  createTraveler: (traveler, isAdmin) => dispatch(signUpTraveler(traveler, isAdmin)),
   checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 });
 

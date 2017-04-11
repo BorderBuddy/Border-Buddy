@@ -1,14 +1,17 @@
 import React from 'react';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
+import { MenuItem, RaisedButton } from 'material-ui';
+import { Field, reduxForm } from 'redux-form';
+import { required, phone, email, uppercase, validateCode } from '../../utils/validations';
+import AirlinePicker from '../AirlinePicker';
 
 
-export default class AddTraveler extends React.Component {
+export class AddTraveler extends React.Component {
   constructor() {
     super();
   }
 
   render() {
-    return(
     const { handleSubmit, valid } = this.props;
     const style = {
       form: {
@@ -38,7 +41,7 @@ export default class AddTraveler extends React.Component {
 
     const menuItems = (representatives) => {
       return (
-        representatives.map((rep, index) => {
+        representatives && representatives.map((rep, index) => {
           return <MenuItem key={index} value={rep.id} primaryText={first3Chars(rep.email)} className="traveler-assign-to-option" />;
         })
       );
@@ -53,7 +56,7 @@ export default class AddTraveler extends React.Component {
         <div>
           <div className="clearfix">
             <div className="field-container col-12 md-col md-col-6">
-              <legend className="h1 subtitle">Update Traveler</legend>
+              <legend className="h1 subtitle">Add Traveler</legend>
             </div>
             <div className="field-container col-12 md-col md-col-6">
               <Field
@@ -286,19 +289,15 @@ export default class AddTraveler extends React.Component {
                 className="submit-save-changes"
               />
             </div>
-            <div className="field-container col-12 md-col md-col-6">
-              <RaisedButton
-                label="Text Traveler"
-                secondary={true}
-                style={style.button}
-                onClick={sendText}
-              />
-            </div>
           </div>
         </div>
       </form>
     )
-    )
   }
 }
 
+export default reduxForm({
+  form: 'adminAddTraveler',
+  asyncValidate: validateCode,
+  asyncBlurFields: ['airlineCode']
+})(AddTraveler);
