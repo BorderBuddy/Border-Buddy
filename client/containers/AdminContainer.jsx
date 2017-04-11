@@ -24,7 +24,7 @@ export default class AdminContainer extends Component {
       <div>
         <Toolbar style={{backgroundColor: 'black'}}>
           <ToolbarGroup firstChild={true}>
-            <IconButton onClick={() => browserHistory.push('/admin/travelers')}>
+            <IconButton className="btn-all-travelers" onClick={() => browserHistory.push('/admin/travelers')}>
               <ActionFlightTakeoff />
             </IconButton>
             <ToolbarTitle text="Border Buddy" />

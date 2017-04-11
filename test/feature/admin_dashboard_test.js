@@ -26,9 +26,9 @@ describe('BorderBuddy Admin Dashboard', () => {
       .wait('button#add-new-traveler')
       .clickOnElementContaining('button', 'Add Traveler')
       .type('input[name="name"]', 'Traveler 007')
-      .clickOnElementContaining('.submit-traveler-registration button', 'Register')
-      .wait('#success-container')
-      .goto(rootURL('/admin'))
+      .mouseDownUpOnElementContaining('.submit-save-changes button', 'Add Traveler')
+      .wait(500)
+      .mouseDownUpOnElementContaining('.btn-all-travelers')
       .wait('.all-travelers tr')
       .evaluate(() => {
         return document.querySelector('.all-travelers tr').innerText
