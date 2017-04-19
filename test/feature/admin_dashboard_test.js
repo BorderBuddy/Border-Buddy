@@ -26,12 +26,13 @@ describe('BorderBuddy Admin Dashboard', () => {
       .wait('button#add-new-traveler')
       .clickOnElementContaining('button', 'Add Traveler')
       .type('input[name="name"]', 'Traveler 007')
-      .clickOnElementContaining('.submit-traveler-registration button', 'Register')
-      .wait('#success-container')
+      .mouseDownUpOnElementContaining('.add-new-traveler', 'Add Traveler')
       .goto(rootURL('/admin'))
       .wait('.all-travelers tr')
+      .mouseDownUpOnElementContaining('tr', 'Traveler 007')
+      .wait(500)
       .evaluate(() => {
-        return document.querySelector('.all-travelers tr').innerText
+        return document.querySelector('#root').innerText
       })
       .end()
       .then((result) => {

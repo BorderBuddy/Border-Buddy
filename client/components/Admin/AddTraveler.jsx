@@ -282,11 +282,11 @@ export class AddTraveler extends React.Component {
             <div className="field-container col-12 md-col md-col-6">
               <RaisedButton
                 type="submit"
-                label="Save Changes"
+                label="Add Traveler"
                 disabled={!valid}
                 primary={true}
                 style={style.button}
-                className="submit-save-changes"
+                className="add-new-traveler"
               />
             </div>
           </div>
