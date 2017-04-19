@@ -15,6 +15,8 @@ export const onAdminEnter = () => {
 	.then(() => {
 		if (!window.localStorage.accessToken) {
 			browserHistory.push('/login');
+		} else {
+			store.dispatch(fetchAllUsers());
 		}
 	})
 	.catch(err => {
@@ -28,7 +30,6 @@ export const onTravelersListEnter = () => {
 };
 
 export const onSingleTravelerEnter = ({ params }) => {
-	store.dispatch(fetchAllUsers());
 	store.dispatch(fetchSelectedTraveler(params.id));
 };
 

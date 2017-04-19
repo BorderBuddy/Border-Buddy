@@ -4,7 +4,9 @@ import {cleanDatabase, rootURL} from './feature_helpers';
 
 require('./nightmare_helpers');
 
-describe('BorderBuddy', () => {
+describe('BorderBuddy', function() {
+
+  this.timeout(20000); // avoids auto-fail after 15s
 
   beforeEach(cleanDatabase);
 
