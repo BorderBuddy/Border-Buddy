@@ -282,11 +282,12 @@ export class AddTraveler extends React.Component {
             <div className="field-container col-12 md-col md-col-6">
               <RaisedButton
                 type="submit"
-                label="Add Traveler"
+                label="Submit"
                 disabled={!valid}
                 primary={true}
                 style={style.button}
                 className="add-new-traveler"
+                id="submit-new-traveler"
               />
             </div>
           </div>

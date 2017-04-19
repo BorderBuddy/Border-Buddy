@@ -17,7 +17,7 @@
     "migrate:undo": "sequelize db:migrate:undo"
   },
   "engines": {
-    "node": "7.6.0",
+    "node": "6.10.2",
     "npm": "4.3.0"
   },
   "repository": {
