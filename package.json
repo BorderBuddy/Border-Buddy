@@ -83,7 +83,8 @@
     "sqlite3": "^3.1.8",
     "superagent": "^3.4.1",
     "tachyons-sass": "^4.7.1",
-    "twilio": "^2.11.1"
+    "twilio": "^2.11.1",
+    "webpack": "^2.3.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -118,7 +119,7 @@
     "sinon-chai": "^2.8.0",
     "sinon-stub-promise": "^4.0.0",
     "style-loader": "^0.13.1",
-    "webpack": "^2.3.1",
-    "webpack-dev-server": "^2.4.1"
+    "webpack-dev-server": "^2.4.1",
+    "webpack": "^2.3.1"
   }
 }
