@@ -1,12 +1,14 @@
 import React from 'react';
 
 export default ({ flight }) => {
+
 	const departureDate = flight.scheduledFlights[0].departureTime.split('T');
 	const arrivalDate = flight.scheduledFlights[0].arrivalTime.split('T');
 	const { arrivalAirportFsCode, departureAirportFsCode, carrierFsCode, flightNumber } = flight.scheduledFlights[0];
 	const { airlines } = flight.appendix;
 
 	let arrivalCityName, arrivalAirport, departureCityName, departureAirport, airlineName;
+
 
 	const airport1 = flight.appendix.airports[0];
 	const airport2 = flight.appendix.airports[1];

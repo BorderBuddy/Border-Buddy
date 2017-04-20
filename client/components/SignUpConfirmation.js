@@ -2,14 +2,14 @@ import React from 'react';
 import {Dialog, FlatButton} from 'material-ui';
 import FlightConfirmation from './FlightConfirmation';
 
-export default ({ handleClose, open, flight }) => {
+export default ({ confirmSubmit, open, flight }) => {
   const actions = [
     <FlatButton
       key={1}
       id="dismiss-confirmation"
       label="OK"
       primary={true}
-      onTouchTap={handleClose}
+      onTouchTap={confirmSubmit}
     />
   ];
 

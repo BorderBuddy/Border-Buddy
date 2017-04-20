@@ -20,7 +20,7 @@ class SingleTraveler extends React.Component {
 	}
 
 	render() {
-		const { handleSubmit, changed, valid, sendText } = this.props;
+		const { handleSubmit, confirmSubmit, changed, valid, sendText } = this.props;
 		const style = {
 			form: {
 				display: 'block',
@@ -59,8 +59,12 @@ class SingleTraveler extends React.Component {
     	return text.substring(0, 3).toUpperCase();
 		};
 
+		const { arrivalTime, airlineCode, flightNum } = this.props.initialValues;
+		const submit = arrivalTime && airlineCode && flightNum ? handleSubmit : confirmSubmit;
+
+
 		return (
-			<form data-test="single-traveler-form" style={style.form} onSubmit={handleSubmit}>
+			<form data-test="single-traveler-form" style={style.form} onSubmit={submit}>
 				<div>
 					<div className="clearfix">
 						<div className="field-container col-12 md-col md-col-6">

@@ -33,7 +33,8 @@ class SingleTravelerContainer extends Component {
     this.setState({ sentTextOpen: false });
   }
 
-  confirmSubmit() {
+  confirmSubmit(e) {
+    e.preventDefault()
     const { updateTraveler, routeParams } = this.props;
     const { values } = this.props.form.singleTraveler;
     updateTraveler(values, routeParams.id)
@@ -54,8 +55,17 @@ class SingleTravelerContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.updateTraveler(this.props.form.singleTraveler.values, this.props.routeParams.id);
-    this.setState({open: true});
+    const { flightNum, airlineCode, arrivalTime } = this.props.form.singleTraveler.values;
+    const day = arrivalTime.getDate();
+    const year = arrivalTime.getYear() + 1900;
+    const month = arrivalTime.getMonth() + 1;
+    this.props.checkFlight(airlineCode, flightNum, year, month, day)
+    .then(() => {
+      this.setState({ open: true });
+    })
+    .catch(() => {
+      this.setState({ open: false })
+    })
   }
 
 	render() {
@@ -70,13 +80,14 @@ class SingleTravelerContainer extends Component {
 		return (
     <div>
       <SingleTraveler 
+        confirmSubmit={this.confirmSubmit}
         handleSubmit={this.handleSubmit} 
         changed={this.state.changed} 
         id={this.props.params.id}
         sendText={this.sendText}
         representatives={this.props.users}/>
       <SignUpConfirmation
-        open={this.state.open} flight={this.props.flight} handleClose={this.handleClose}/>
+        open={this.state.open} flight={this.props.flight} handleClose={this.handleClose} confirmSubmit={this.confirmSubmit} />
       <Dialog
         title="Texting Traveler..."
         actions={textModalOptions}

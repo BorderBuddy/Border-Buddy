@@ -6,15 +6,15 @@ import FlightConfirmation from '../../../client/components/FlightConfirmation';
 import '../../unit_helpers';
 
 describe('Component: SignUpConfirmation', () => {
-  let handleCloseSpy;
+  let confirmSubmitSpy;
   let defaultProps;
 
   beforeEach(() => {
-    handleCloseSpy = sinon.spy();
+    confirmSubmitSpy = sinon.spy();
 
     defaultProps = {
       open: true,
-      handleClose: handleCloseSpy,
+      confirmSubmit: confirmSubmitSpy,
       flight: {}
     }
   });
@@ -38,7 +38,7 @@ describe('Component: SignUpConfirmation', () => {
 
     let actionButton = component.find('Dialog').prop('actions')[0];
 
-    expect(actionButton.props.onTouchTap).to.equal(handleCloseSpy);
+    expect(actionButton.props.onTouchTap).to.equal(confirmSubmitSpy);
   });
 
   describe('when flight info is passed as prop', () => {

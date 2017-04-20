@@ -22,7 +22,8 @@ export default function createOrUpdateTraveler({repository, travelerDetails, cal
 
   return findOrCreateFlight.then((flight) => {
     const travelerDetailsWithFlight = Object.assign({}, travelerDetails, {flightId: flight[0].id});
-    if (!!travelerDetails.id) {
+    travelerDetailsWithFlight.status = travelerDetailsWithFlight.passengerStatus // FIX THIS LATER! DO A MIGRATION TO FIX IT
+    if (travelerDetails.id) {
       return repository.travelers.update(travelerDetailsWithFlight, {where: {id: travelerDetailsWithFlight.id}});
     } else {
       return repository.travelers.create(travelerDetailsWithFlight);
