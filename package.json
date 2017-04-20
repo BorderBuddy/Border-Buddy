@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js --exec babel-node --presets es2015,stage-2",
+    "postinstall": "npm run build",
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "build": "webpack --config webpack.prod.babel.js",
     "test": "NODE_ENV=test ./run-tests.sh",
