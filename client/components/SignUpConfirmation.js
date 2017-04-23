@@ -9,7 +9,7 @@ export default ({ confirmSubmit, open, flight }) => {
       id="dismiss-confirmation"
       label="OK"
       primary={true}
-      onTouchTap={(e) => confirmSubmit(e, flight)}
+      onTouchTap={confirmSubmit}
     />
   ];
 
