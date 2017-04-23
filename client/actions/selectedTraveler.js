@@ -24,7 +24,6 @@ export const updateTraveler = (traveler, id, _window = window) => dispatch => {
   })
     .then(response => {
       traveler = response.data;
-      console.log("TRAVELERRRRRRR LOL", traveler);
       dispatch(setSelectedTraveler(traveler));
     })
     .catch(err => console.error(err));

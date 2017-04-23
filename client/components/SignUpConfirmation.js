@@ -9,7 +9,7 @@ export default ({ confirmSubmit, open, flight }) => {
       id="dismiss-confirmation"
       label="OK"
       primary={true}
-      onTouchTap={confirmSubmit}
+      onTouchTap={(e) => confirmSubmit(e, flight)}
     />
   ];
 
@@ -22,9 +22,9 @@ export default ({ confirmSubmit, open, flight }) => {
         modal={true}
         title={'Traveler submitted'}>
         {
-          Object.keys(flight).length ?
+          flight && Object.keys(flight).length ?
             <FlightConfirmation flight={flight}/>
-            : <div />
+            : <h4>Sorry, we could not find your flight or it has already landed.</h4>
         }
       </Dialog>
     </div>

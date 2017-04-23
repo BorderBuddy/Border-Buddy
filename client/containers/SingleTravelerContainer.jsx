@@ -33,14 +33,17 @@ class SingleTravelerContainer extends Component {
     this.setState({ sentTextOpen: false });
   }
 
-  confirmSubmit(e) {
+  confirmSubmit(e, flight) {
     e.preventDefault()
-    const { updateTraveler, routeParams } = this.props;
-    const { values } = this.props.form.singleTraveler;
-    updateTraveler(values, routeParams.id)
-    .then(() => {
-      browserHistory.push('/admin/travelers');
-    })
+    if(!flight) browserHistory.push('/admin/travelers');
+    else {
+      const { updateTraveler, routeParams } = this.props;
+      const { values } = this.props.form.singleTraveler;
+      updateTraveler(values, routeParams.id)
+      .then(() => {
+        browserHistory.push('/admin/travelers');
+      })
+    }
   }
 
   sendText() {
