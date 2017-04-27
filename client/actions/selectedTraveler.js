@@ -10,23 +10,23 @@ export const fetchSelectedTraveler = (id) => dispatch => {
       Authorization: window.localStorage.accessToken
     }
   })
-    .then(traveler => {
-      traveler = traveler.data;
-      dispatch(setSelectedTraveler(traveler));
-      dispatch(setFlight(traveler.flight || {}));
-    })
-    .catch(err => console.error(err));
+  .then(traveler => {
+    traveler = traveler.data;
+    dispatch(setSelectedTraveler(traveler));
+    dispatch(setFlight(traveler.flight || {}));
+  })
+  .catch(err => console.error(err));
 };
 
 export const updateTraveler = (traveler, id, _window = window) => dispatch => {
   return axios.put(`/api/traveler/${id}`, traveler, {
     headers: {Authorization: _window.localStorage.accessToken}
   })
-    .then(response => {
-      traveler = response.data;
-      dispatch(setSelectedTraveler(traveler));
-    })
-    .catch(err => console.error(err));
+  .then(response => {
+    traveler = response.data;
+    dispatch(setSelectedTraveler(traveler));
+  })
+  .catch(err => console.error(err));
 };
 
 export const sendText = (traveler, _window = window) => () => {
@@ -42,3 +42,13 @@ export const sendText = (traveler, _window = window) => () => {
     })
     .catch(err => console.error(err));
 };
+
+export const deleteTraveler = (id, _window = window) => dispatch => {
+  return axios.delete(`/api/traveler/${id}`, {
+    headers: {Authorization: _window.localStorage.accessToken}
+  })
+  .then((data) => {
+    console.log('***********traveler deleted*************', data);
+  })
+  .catch(err => console.error(err));
+}

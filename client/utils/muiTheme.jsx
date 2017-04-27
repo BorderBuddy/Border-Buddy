@@ -11,22 +11,22 @@ const customTheme = getMuiTheme({
   spacing: spacing,
   fontFamily: '"Josefin Sans", sans-serif',
   palette: {
-    primary1Color: '#0b2035',   // dark blue
-    primary2Color: '#868362',   // gold
-    primary3Color: '#7e8d85',   // medium green
-    accent1Color: '#7e8d85',    // medium green
-    accent2Color: cyan500, //'#b3bfb8',    // light grey
-    accent3Color: '#f0f7f4',    // offwhite
-    textColor: '#363836',       // dark olive
-    secondaryTextColor: fade('#363836', 0.54),
-    alternateTextColor: white,
+    primary1Color: '#2d6ea8',   // light blue
+    primary2Color: '#FFFFFF',   // white
+    primary3Color: '#000000',   // black
+    accent1Color: '#FFFFFF',    // white
+    accent2Color: '#2d6ea8', // light blue
+    accent3Color: '#FFFFFF',    // white
+    textColor: '#000000',       // black
+    secondaryTextColor: "#2d6ea8",
+    alternateTextColor: "#FFFFFF",
     canvasColor: white,
-    borderColor: '#b3bfb8',
+    borderColor: '#C0C0C0', // light grey
     disabledColor: fade(darkBlack, 0.3),
-    pickerHeaderColor: '#8078a5',
+    pickerHeaderColor: '#2d6ea8',
     clockCircleColor: fade(darkBlack, 0.07),
     shadowColor: fullBlack,
-  },
+  }
 });
 
 export default customTheme;

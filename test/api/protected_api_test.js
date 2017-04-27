@@ -12,6 +12,7 @@ describe('protected endpoints', () => {
     {method: 'GET', path: '/api/traveler/'},
     {method: 'GET', path: '/api/traveler/1234'},
     {method: 'PUT', path: '/api/traveler/1234'},
+    {method: 'DELETE', path: '/api/traveler/1234'},
 
     {method: 'GET', path: '/api/user/'},
     {method: 'GET', path: '/api/user/me'},

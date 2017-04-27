@@ -2,7 +2,8 @@ import {
   createNewTraveler,
   getAllTravelers,
   getById,
-  updateOne
+  updateOne,
+  deleteOne
 } from './traveler.controller';
 
 const base = '/api/traveler';
@@ -14,4 +15,5 @@ export default app => {
   app.get(base + '/', protectedEndpoint(getAllTravelers));
   app.get(base + '/:id', protectedEndpoint(getById));
   app.put(base + '/:id', protectedEndpoint(updateOne));
+  app.delete(base + '/:id', protectedEndpoint(deleteOne));
 };

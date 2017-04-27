@@ -5,7 +5,6 @@ import IconButton from 'material-ui/IconButton';
 import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
 import AppBarMenu from './AppBarMenu';
 import RaisedButton from 'material-ui/RaisedButton';
-
 let style = {
   button: {
     "margin": "2em auto",
@@ -22,16 +21,15 @@ export default class AdminContainer extends Component {
   render() {
     return (
       <div>
-        <Toolbar style={{backgroundColor: 'black'}}>
+        <Toolbar style={{ backgroundColor: '#2d6ea8' }}>
           <ToolbarGroup firstChild={true}>
             <IconButton id="btn-all-travelers" onClick={() => browserHistory.push('/admin/travelers')}>
-              <ActionFlightTakeoff />
+              <img src="/images/logos-png/BB_Logo_03-White.png" />
             </IconButton>
-            <ToolbarTitle text="Border Buddy" />
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
             <Link to="/admin/travelers/add" >
-              <RaisedButton label="Add Traveler" secondary={true} id="add-new-traveler"/>
+              <RaisedButton label="Add Traveler" backgroundColor="#FFFFFF" id="add-new-traveler"/>
             </Link>
             <AppBarMenu />
           </ToolbarGroup>

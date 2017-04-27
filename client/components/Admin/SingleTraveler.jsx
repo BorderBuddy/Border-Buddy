@@ -20,7 +20,7 @@ class SingleTraveler extends React.Component {
 	}
 
 	render() {
-		const { handleSubmit, confirmSubmit, changed, valid, sendText } = this.props;
+		const { handleSubmit, confirmSubmit, changed, valid, sendText, deleteTraveler } = this.props;
 		const style = {
 			form: {
 				display: 'block',
@@ -291,7 +291,7 @@ class SingleTraveler extends React.Component {
 						</div>
 					</div>
 					<div className="clearfix">
-						<div className="field-container col-12 md-col md-col-6">
+						<div className="field-container col-12 md-col md-col-4">
 							<RaisedButton
 								type="submit"
 								label="Save Changes"
@@ -301,12 +301,21 @@ class SingleTraveler extends React.Component {
 								className="submit-save-changes"
 							/>
 						</div>
-						<div className="field-container col-12 md-col md-col-6">
+						<div className="field-container col-12 md-col md-col-4">
 							<RaisedButton
 								label="Text Traveler"
-								secondary={true}
 								style={style.button}
+								backgroundColor="white"
 								onClick={sendText}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-4">
+							<RaisedButton
+								label="Delete Traveler"
+								style={style.button}
+								onClick={deleteTraveler}
+								backgroundColor="#800000"
+								labelColor="white"
 							/>
 						</div>
 					</div>

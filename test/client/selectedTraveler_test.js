@@ -42,4 +42,15 @@ describe('SelectedTraveler', () => {
       sendText({phone: '5553334444'}, window)();
     });
   });
+  describe('delete traveler information', () => {
+    it('sends a delete request to traveler api with accessToken', () => {
+      const window = {localStorage: {accessToken: 'accessToken'}};
+      sandbox.stub(axios, 'delete', (url, traveler, headers) => {
+        expect(url).to.equal('/api/travelers/1');
+        expect(headers.headers['Authorization']).to.equal('accessToken');
+        return new Promise((resolve, reject) => {
+        })
+      })
+    })
+  })
 });

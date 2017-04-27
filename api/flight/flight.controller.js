@@ -7,6 +7,7 @@ export const getCode = (req, res, next) => {
 
 	return axios.get(airlineByCode(code))
 	.then(results => {
+		console.log(results);
 		const { airlines } = results.data;
 		if (!airlines.length) {
 			res.status(404).json('code not found');

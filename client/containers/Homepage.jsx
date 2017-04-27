@@ -6,7 +6,7 @@ export default (props) => {
 	return (
 	<div id="homepage">
 		<div id="banner" className="col-12">
-			<h1 className="title">Welcome To Border Buddy</h1>
+			<img style={styles.image} src="/images/logos-png/BB_Logo-Type-White.png" />
 		</div>
 		<Navbar />
 		{
@@ -16,3 +16,11 @@ export default (props) => {
 	</div>
 	);
 };
+
+const styles = {
+	image: {
+		display: 'block',
+		margin: 'auto',
+		width: '50%'
+	}
+}

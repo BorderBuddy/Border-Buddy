@@ -39,9 +39,6 @@ class LoginContainer extends Component {
 	render() {
 		return(
 			<div>
-				<AppBar
-          title="Border Buddy"
-          iconElementLeft={<IconButton><ActionFlightTakeoff /></IconButton>} />
 				<Login
 					handleEmailChange={this.handleEmailChange}
 					handlePasswordChange={this.handlePasswordChange}
