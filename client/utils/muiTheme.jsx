@@ -1,7 +1,6 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import { cyan500,
-  white, darkBlack, fullBlack,
+import { cyan500, darkBlack, fullBlack,
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
@@ -20,7 +19,7 @@ const customTheme = getMuiTheme({
     textColor: '#000000',       // black
     secondaryTextColor: "#2d6ea8",
     alternateTextColor: "#FFFFFF",
-    canvasColor: white,
+    canvasColor: '#FFFFFF',
     borderColor: '#C0C0C0', // light grey
     disabledColor: fade(darkBlack, 0.3),
     pickerHeaderColor: '#2d6ea8',

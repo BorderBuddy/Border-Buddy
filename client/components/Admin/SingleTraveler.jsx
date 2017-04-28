@@ -315,7 +315,7 @@ class SingleTraveler extends React.Component {
 								style={style.button}
 								onClick={deleteTraveler}
 								backgroundColor="#800000"
-								labelColor="white"
+								labelColor="#FFFFFF"
 							/>
 						</div>
 					</div>

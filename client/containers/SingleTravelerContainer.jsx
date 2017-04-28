@@ -6,6 +6,8 @@ import {browserHistory} from 'react-router';
 import { updateTraveler, sendText, deleteTraveler } from '../actions/selectedTraveler';
 import { checkFlight } from '../actions/flight';
 import SignUpConfirmation from "../components/SignUpConfirmation";
+import SendTextModal from '../components/Admin/SendTextModal';
+import DeleteTravelerConfirmation from '../components/Admin/DeleteTravelerConfirmation';
 
 
 class SingleTravelerContainer extends Component {
@@ -16,14 +18,17 @@ class SingleTravelerContainer extends Component {
       changed: false,
       open: false,
       sentTextOpen: false,
-      textSentSuccess: null
+      textSentSuccess: null,
+      deleteTravelerOpen: false
 		};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSentTextClose = this.handleSentTextClose.bind(this);
     this.confirmSubmit = this.confirmSubmit.bind(this);
     this.sendText = this.sendText.bind(this);
-    this.deleteTraveler = this.deleteTraveler.bind(this);
+    this.deleteTravelerConfirm = this.deleteTravelerConfirm.bind(this);
+    this.handleDeleteTravelerClose = this.handleDeleteTravelerClose.bind(this);
+    this.openDeleteTravelerModal = this.openDeleteTravelerModal.bind(this);
 	}
 
   handleClose() {
@@ -32,6 +37,14 @@ class SingleTravelerContainer extends Component {
 
   handleSentTextClose() {
     this.setState({ sentTextOpen: false });
+  }
+
+  handleDeleteTravelerClose() {
+    this.setState({ deleteTravelerOpen: false })
+  }
+
+  openDeleteTravelerModal() {
+    this.setState({ deleteTravelerOpen: true })
   }
 
   confirmSubmit(e) {
@@ -57,11 +70,12 @@ class SingleTravelerContainer extends Component {
     })
   }
 
-  deleteTraveler(e) {
+  deleteTravelerConfirm(e) {
     e.preventDefault()
     const { deleteTraveler, routeParams } = this.props;
     deleteTraveler(routeParams.id)
     .then(() => {
+      this.handleDeleteTravelerClose();
       browserHistory.push('/admin/travelers');
     })
   }
@@ -82,13 +96,6 @@ class SingleTravelerContainer extends Component {
   }
 
 	render() {
-    const textModalOptions = [
-      <FlatButton 
-        label="OK"
-        primary={true}
-        onTouchTap={this.handleSentTextClose}
-      />
-    ];
 
 		return (
     <div>
@@ -99,22 +106,10 @@ class SingleTravelerContainer extends Component {
         id={this.props.params.id}
         sendText={this.sendText}
         representatives={this.props.users}
-        deleteTraveler={this.deleteTraveler}/>
-      <SignUpConfirmation
-        open={this.state.open} flight={this.props.flight} handleClose={this.handleClose} confirmSubmit={this.confirmSubmit} />
-      <Dialog
-        title="Texting Traveler..."
-        actions={textModalOptions}
-        modal={true}
-        open={this.state.sentTextOpen}
-      >
-        {
-          this.state.textSentSuccess ?
-            <h4>Your text has been sent successfully.</h4>
-            :
-            <h4>There was a problem trying to send your text</h4>
-        }
-      </Dialog>
+        deleteTraveler={this.openDeleteTravelerModal}/>
+      <SignUpConfirmation open={this.state.open} handleClose={this.handleClose} flight={this.props.flight} confirmSubmit={this.confirmSubmit} />
+      <SendTextModal open={this.state.sentTextOpen} handleClose={this.handleSentTextClose} success={this.state.textSentSuccess} />
+      <DeleteTravelerConfirmation open={this.state.deleteTravelerOpen} handleClose={this.handleDeleteTravelerClose} traveler={this.props.selectedTraveler} confirmDelete={this.deleteTravelerConfirm}/>
     </div>
     )
 	}
@@ -122,7 +117,7 @@ class SingleTravelerContainer extends Component {
 
 /*---------------------------REDUX CONTAINER---------------------------*/
 
-const mapStateToProps = ({ form, flight, users }) => ({ form, flight, users });
+const mapStateToProps = ({ form, flight, users, selectedTraveler }) => ({ form, flight, users, selectedTraveler });
 
 const mapDispatchToProps = dispatch => ({
   updateTraveler: (traveler, id) => dispatch(updateTraveler(traveler, id)),
