@@ -12,10 +12,12 @@ class AdminSignUpContainer extends Component {
 		this.state = {
 			email: '',
 			password: '',
+			phone: '',
 			open: false
 		}
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
+		this.handlePhoneChange = this.handlePhoneChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 	}
@@ -28,11 +30,16 @@ class AdminSignUpContainer extends Component {
 		this.setState({ password: e.target.value })
 	}
 
+	handlePhoneChange(e) {
+		this.setState({ phone: e.target.value })
+	}
+
 	handleSubmit(e) {
 		e.preventDefault();
 		this.props.signup({
 			email: this.state.email,
-			password: this.state.password
+			password: this.state.password,
+			phone: this.state.phone
 		})
 		.then(() => {
 			this.setState({ open: true, createdSuccess: true })
@@ -60,6 +67,7 @@ class AdminSignUpContainer extends Component {
 				<AdminSignUp 
 					handleEmailChange={this.handleEmailChange}
 					handlePasswordChange={this.handlePasswordChange}
+					handlePhoneChange={this.handlePhoneChange}
 					handleSubmit={this.handleSubmit} />
 				<Dialog
 					title="Creating New Admin..."

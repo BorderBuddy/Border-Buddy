@@ -5,10 +5,10 @@ import { TextField } from 'redux-form-material-ui';
 import { Card } from 'material-ui/Card';
 import { Link } from 'react-router';
 import { signupLoginStyle } from './styles';
-import { minimumLength, required } from '../../utils/validations';
+import { minimumLength, required, phone } from '../../utils/validations';
 
 const AdminSignUp = ({ handleSubmit, pristine, submitting,
-	handleEmailChange, handlePasswordChange, valid }) => {
+	handleEmailChange, handlePasswordChange, handlePhoneChange, valid }) => {
 
 	const style = signupLoginStyle;
 
@@ -32,6 +32,14 @@ const AdminSignUp = ({ handleSubmit, pristine, submitting,
 						hintText="Password (at least 8 characters)"
 						validate={[required, minimumLength]}
 						onChange={handlePasswordChange}
+						style={style.form}
+					/>
+					<Field 
+						name="phone" 
+						component={TextField}
+						hintText="Phone Number"
+						validate={[phone]}
+						onChange={handlePhoneChange}
 						style={style.form}
 					/>
 					<RaisedButton

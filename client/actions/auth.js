@@ -15,6 +15,7 @@ export const login = (user) => dispatch => {
 };
 
 export const signup = (user, _window = window) => () => {
+  console.log(user, "USER!!!")
   return axios.post('/api/user', user, {
     headers: {
       Authorization: _window.localStorage.accessToken

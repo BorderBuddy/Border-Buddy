@@ -29,7 +29,10 @@ export const User = db.define('user', {
     },
     allowNull: false
   },
-  salt: Sequelize.DataTypes.STRING
+  salt: Sequelize.DataTypes.STRING,
+  phone: {
+    type: Sequelize.DataTypes.STRING
+  }
 }, {
   getterMethods: {
     token: function() {
