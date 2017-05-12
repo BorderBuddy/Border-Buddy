@@ -13,13 +13,13 @@ const customTheme = getMuiTheme({
     primary1Color: '#2d6ea8',   // light blue
     primary2Color: '#2d6ea8',   // light blue
     primary3Color: '#FFFFFF',   // white
-    accent1Color: '#2d6ea8',    // white
+    accent1Color: '#2d6ea8',    // light blue
     accent2Color: '#2d6ea8', // light blue
-    accent3Color: '#2d6ea8',    // white
+    accent3Color: '#2d6ea8',    // light blue
     textColor: '#000000',       // black
-    secondaryTextColor: "#2d6ea8",
-    alternateTextColor: "#FFFFFF",
-    canvasColor: '#FFFFFF',
+    secondaryTextColor: "#2d6ea8", // light blue
+    alternateTextColor: "#FFFFFF", // white
+    canvasColor: '#FFFFFF', // white
     borderColor: '#C0C0C0', // light grey
     disabledColor: fade(darkBlack, 0.3),
     pickerHeaderColor: '#2d6ea8',
