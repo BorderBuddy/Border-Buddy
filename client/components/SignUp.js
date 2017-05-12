@@ -31,6 +31,11 @@ const SignUp = ({handleSubmit, valid}) => {
       display: 'block',
       marginBottom: '2em',
       width: '80%'
+    },
+    datePicker: {
+      dialogContainerStyle: {
+        color: "#000000"
+      }
     }
   };
 
@@ -149,6 +154,7 @@ const SignUp = ({handleSubmit, valid}) => {
             underlineFocusStyle={style.underline}
             errorStyle={style.error}
             textFieldStyle={style.input}
+            style={style.datePicker}
           />
         </div>
         <div className="field-container col-12 md-col sm-col-6 md-col-4">

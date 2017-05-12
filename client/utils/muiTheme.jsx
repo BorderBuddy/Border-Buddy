@@ -11,11 +11,11 @@ const customTheme = getMuiTheme({
   fontFamily: '"Josefin Sans", sans-serif',
   palette: {
     primary1Color: '#2d6ea8',   // light blue
-    primary2Color: '#FFFFFF',   // white
-    primary3Color: '#000000',   // black
-    accent1Color: '#FFFFFF',    // white
+    primary2Color: '#2d6ea8',   // light blue
+    primary3Color: '#FFFFFF',   // white
+    accent1Color: '#2d6ea8',    // white
     accent2Color: '#2d6ea8', // light blue
-    accent3Color: '#FFFFFF',    // white
+    accent3Color: '#2d6ea8',    // white
     textColor: '#000000',       // black
     secondaryTextColor: "#2d6ea8",
     alternateTextColor: "#FFFFFF",
