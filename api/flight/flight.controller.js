@@ -1,5 +1,5 @@
 const axios = require('axios');
-import { airlineByCode, scheduleByCodeAndDate } from './flight.query';
+import { airlineByCode, scheduleByCodeAndDate, statusByCodeAndDate } from './flight.query';
 
 
 export const getCode = (req, res, next) => {
@@ -7,7 +7,6 @@ export const getCode = (req, res, next) => {
 
 	return axios.get(airlineByCode(code))
 	.then(results => {
-		console.log(results);
 		const { airlines } = results.data;
 		if (!airlines.length) {
 			res.status(404).json('code not found');
@@ -32,3 +31,8 @@ export const verifyFlight = (req, res, next) => {
 	.catch(next);
 };
 
+
+
+
+	// if the landing date of the flight is in the past, use statusByCodeAndDate
+	// else use scheduleByCodeAndDate

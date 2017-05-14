@@ -96,12 +96,24 @@ class SingleTravelerContainer extends Component {
   }
 
 	render() {
+    let arrivalTime, flightNum, airlineCode
+    if(this.props.form.singleTraveler) {
+      const values = this.props.form.singleTraveler.values;
+      airlineCode = values.airlineCode;
+      flightNum = values.flightNum;
+      arrivalTime = values.arrivalTime;      
+    } else {
+      airlineCode = '';
+      flightNum = '';
+      arrivalTime = {};
+    }
+		const submit = arrivalTime > Date.now() ? this.handleSubmit : this.confirmSubmit;
+
 
 		return (
     <div>
       <SingleTraveler 
-        confirmSubmit={this.confirmSubmit}
-        handleSubmit={this.handleSubmit} 
+        onSubmit={submit} 
         changed={this.state.changed} 
         id={this.props.params.id}
         sendText={this.sendText}
