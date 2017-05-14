@@ -58,7 +58,6 @@ class SingleTraveler extends React.Component {
     const first3Chars = (text) => {
     	return text.substring(0, 3).toUpperCase();
 		};
-			console.log(typeof onSubmit, '****************************************');
 
 		return (
 			<form data-test="single-traveler-form" style={style.form} onSubmit={onSubmit}>
