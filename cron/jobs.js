@@ -31,7 +31,7 @@ const didFlightLandTwoHoursAgo = flight => {
   return axios.get(statusByCodeAndDate(airlineCode, flightNum, year, month, date))
     .then(response => {
       if (response.data.error) {
-        throw new Error('Error from FlightStats API');
+        throw new Error(response.data.error);
       } else {
         const {operationalTimes} = response.data.flightStatuses[0];
         if (!operationalTimes || !operationalTimes.actualGateArrival) {
