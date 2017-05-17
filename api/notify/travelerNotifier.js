@@ -15,7 +15,7 @@ export default class TravelerNotifier {
       body: `Thanks for registering with BorderBuddy, ${traveler.name}! ` +
       'Safe travels, and text OK to this number after you pass through customs and immigration.'
     }, (err) => {
-      if (err) console.error(chalk.red('ERROR SENDING CONFIRMATION TEXT', err));
+      if (err) console.error(chalk.red('ERROR SENDING CONFIRMATION TEXT', err.message));
     });
   }
 

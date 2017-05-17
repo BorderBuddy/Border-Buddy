@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {Repository, Traveler} from '../../database/models';
 import TravelerNotifier from '../notify/travelerNotifier';
 
@@ -17,7 +18,7 @@ export const createNewTraveler = (req, res, next) => {
     },
     travelerNotifier
   })
-    .catch(next);
+  .catch(next);
 };
 
 export function getAllTravelers(req, res, next) {
