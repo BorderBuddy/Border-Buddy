@@ -31,13 +31,15 @@ const didFlightLandTwoHoursAgo = flight => {
   return axios.get(statusByCodeAndDate(airlineCode, flightNum, year, month, date))
     .then(response => {
       if (response.data.error) {
-        throw new Error(response.data.error);
+        throw new Error(response.data.error.message);
       } else {
+        console.log("RESPONSE TO GET STATUS BY CODE AND DATE: ", response.data.flightStatuses)
         const {operationalTimes} = response.data.flightStatuses[0];
         if (!operationalTimes || !operationalTimes.actualGateArrival) {
           return false;
         }
         const realArrival = new Date(operationalTimes.actualGateArrival.dateUtc);
+        console.log("REAL ARRIVAL: ", realArrival)
         return twoHoursAgo > realArrival;
       }
     })
