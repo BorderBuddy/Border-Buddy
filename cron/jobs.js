@@ -28,16 +28,23 @@ const didFlightLandTwoHoursAgo = flight => {
 
   const twoHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 2);
 
-  return axios.get(statusByCodeAndDate(airlineCode, flightNum, year, month, date))
+  return axios.get(statusByCodeAndDate(airlineCode, flightNum, year, month, date)) // problem is here
     .then(response => {
       if (response.data.error) {
         throw new Error(response.data.error);
       } else {
+        console.log("RESPONSE TO GET STATUS BY CODE AND DATE: ", response.data.flightStatuses)
         const {operationalTimes} = response.data.flightStatuses[0];
-        if (!operationalTimes || !operationalTimes.actualGateArrival) {
+        if (!operationalTimes || !operationalTimes.actualGateArrival || !operationalTimes.actualRunwayArrival) {
           return false;
         }
-        const realArrival = new Date(operationalTimes.actualGateArrival.dateUtc);
+        const realArrival = operationalTimes.actualGateArrival ? 
+          new Date(operationalTimes.actualGateArrival.dateUtc) : 
+          new Date(operationalTimes.actualRunwayArrival.dateUtc);
+        
+        console.log("REAL ARRIVAL: ", realArrival)
+        console.log("TWO HOURS AGO: ", twoHoursAgo)
+        console.log(twoHoursAgo > realArrival)
         return twoHoursAgo > realArrival;
       }
     })
@@ -62,16 +69,19 @@ module.exports = {
   landFlightsAndTextTravelers: function () {
     Flight.findFlightsToLand()
       .then(flights => {
-        if (!flights || !flights.length) return;
+        console.log('Flights Found:', flights);
+        if (!flights || !flights.length) return new Promise((resolve, reject) => {});
         return Promise.filter(flights, didFlightLandTwoHoursAgo);
       })
       .then(arrivals => {
-        if (!arrivals || !arrivals.length) return;
+        console.log('Arrivals Found: ', arrivals);
+        if (!arrivals || !arrivals.length) return new Promise((resolve, reject) => {});
         return Promise.all(arrivals.map(arrival => {
           return arrival.landFlight();
         }));
       })
       .then((passengers) => {
+        console.log('Passengers Found: ', passengers);
         if (!passengers || !passengers.length) return;
         const allTravelers = recursiveFlatten(passengers, []);
         return Promise.map(allTravelers, askIfTravelerOk);

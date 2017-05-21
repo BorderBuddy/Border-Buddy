@@ -14,10 +14,12 @@
     "worker": "babel-node cron",
     "migrate": "sequelize db:migrate",
     "test:migrate": "NODE_ENV=test sequelize db:migrate",
-    "migrate:undo": "sequelize db:migrate:undo"
+    "migrate:undo": "sequelize db:migrate:undo",
+    "push:acceptance": "cf push -f manifest.acceptance.yml",
+    "push:production": "cf push -f manifest.production.yml"
   },
   "engines": {
-    "node": "6.10.2",
+    "node": "6.10.3",
     "npm": "4.3.0"
   },
   "repository": {
