@@ -23,7 +23,7 @@ export class AddTravelerContainer extends React.Component {
       const month = arrivalTime.getMonth() + 1;
       this.props.checkFlight(airlineCode, flightNum, year, month, day);
     }
-
+    // TODO: Get flight time
     this.props.createTraveler(formValues, true);
   }
 
