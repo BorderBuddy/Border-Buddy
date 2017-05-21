@@ -67,12 +67,12 @@ module.exports = {
     Flight.findFlightsToLand()
       .then(flights => {
         console.log('Flights Found:', flights);
-        if (!flights || !flights.length) return new Promise(resolve, reject);;
+        if (!flights || !flights.length) return new Promise((resolve, reject) => {});;
         return Promise.filter(flights, didFlightLandTwoHoursAgo);
       })
       .then(arrivals => {
         console.log('Arrivals Found: ', arrivals);
-        if (!arrivals || !arrivals.length) return new Promise(resolve, reject);
+        if (!arrivals || !arrivals.length) return new Promise((resolve, reject) => {});
         return Promise.all(arrivals.map(arrival => {
           return arrival.landFlight();
         }));
