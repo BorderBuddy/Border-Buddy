@@ -22,8 +22,8 @@ export const createNewTraveler = (req, res, next) => {
   .then((traveler) => {
     return notifyAdminOfNewTravelerSignUp(traveler);
   })
-  .then(({ messages, traveler }) => {
-    return res.status(201).json({ messages, traveler });
+  .then((traveler) => {
+    return res.status(201).json(traveler);
   })
   .catch(next);
 };
