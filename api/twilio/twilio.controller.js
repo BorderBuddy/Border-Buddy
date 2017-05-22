@@ -75,7 +75,7 @@ export const notifyAdminOfNewTravelerSignUp = (traveler) => {
         if(err) console.error(err);
         else {
           console.log(result);
-          return result;
+          return { result, traveler };
         }
       })
     })

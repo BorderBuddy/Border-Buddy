@@ -15,11 +15,11 @@ export const signUpTraveler = (traveler, isAdmin) => {
   return dispatch => {
 		axios.post('/api/traveler/', traveler)
 		.then(res => {
-			dispatch(setSignupTraveler(res.data));
-		})
-		.then((res) => {
+			dispatch(setSignupTraveler(res.data.traveler));
 			console.log(res);
 			if(!isAdmin) browserHistory.push('/success');
+		})
+		.then((res) => {
 		})
 		.catch(console.error);
   };
