@@ -16,7 +16,6 @@ export const signUpTraveler = (traveler, isAdmin) => {
 		axios.post('/api/traveler/', traveler)
 		.then(res => {
 			dispatch(setSignupTraveler(res.data));
-			return axios.post('/api/twilio/notifyAdminOfSignUp', { travelerName: traveler.name })
 		})
 		.then((res) => {
 			console.log(res);

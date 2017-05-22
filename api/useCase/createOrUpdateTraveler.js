@@ -29,9 +29,9 @@ export default function createOrUpdateTraveler({repository, travelerDetails, cal
       return repository.travelers.create(travelerDetailsWithFlight);
     }
   }).then((traveler) => {
-    callbacks.onSuccess(traveler);
     if(shouldSendTextMessage(traveler, travelerNotifier)) {
       travelerNotifier.onRegistrationSuccess(traveler);
     }
+    return callbacks.onSuccess(traveler);
   });
 }

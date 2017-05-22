@@ -2,6 +2,8 @@ import {config} from '../config';
 import {Traveler} from '../../database/models/travelers';
 import {User} from '../../database/models/user';
 import _ from 'lodash';
+import Promise from 'bluebird';
+
 export const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
 
 // admin hits this api to send text to users
@@ -59,26 +61,23 @@ export const respondToText = (req, res, next) => {
 };
 
 // sends a text to all admin users when traveler signs up
-export const notifyAdminOfNewTravelerSignUp = (req, res, next) => {
+export const notifyAdminOfNewTravelerSignUp = (traveler) => {
   
-  User.findAll()
+  return User.findAll()
   .then((adminUsers) => {
-    return adminUsers.forEach(user => {
+    return Promise.each(adminUsers, user => {
       Twilio.sendMessage({
         to: user.phone,
         from: config.twilio.adminPhone,
-        body: `New Traveler: ${req.body.travelerName} has just registered on Border Buddy.`
+        body: `New Traveler: ${traveler.name} has just registered on Border Buddy.`
       + 'Check https://border-buddy.com/admin for more details.'
       }, (err, result) => {
         if(err) console.error(err);
         else {
           console.log(result);
+          return result;
         }
       })
     })
   })
-  .then(ok => {
-    res.sendStatus(204);
-  })
-  .catch(next);
 }

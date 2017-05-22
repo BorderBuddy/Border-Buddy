@@ -1,8 +1,9 @@
 import axios from 'axios';
-import {Repository, Traveler} from '../../database/models';
+import {Repository, Traveler, User} from '../../database/models';
 import TravelerNotifier from '../notify/travelerNotifier';
 
 import createOrUpdateTravelerUseCase from '../useCase/createOrUpdateTraveler';
+import { notifyAdminOfNewTravelerSignUp } from '../twilio/twilio.controller';
 
 export const createNewTraveler = (req, res, next) => {
   const travelerDetails = req.body;
@@ -13,10 +14,16 @@ export const createNewTraveler = (req, res, next) => {
     travelerDetails,
     callbacks: {
       onSuccess: (traveler) => {
-        res.status(201).json(traveler)
+        return traveler;
       }
     },
     travelerNotifier
+  })
+  .then((traveler) => {
+    return notifyAdminOfNewTravelerSignUp(traveler);
+  })
+  .then((messages) => {
+    return res.status(201).json(messages);
   })
   .catch(next);
 };
