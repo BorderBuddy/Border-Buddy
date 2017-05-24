@@ -35,7 +35,7 @@ const didFlightLandTwoHoursAgo = flight => {
       } else {
         console.log("RESPONSE TO GET STATUS BY CODE AND DATE: ", response.data.flightStatuses)
         const {operationalTimes} = response.data.flightStatuses[0];
-        if (!operationalTimes || !operationalTimes.actualGateArrival || !operationalTimes.actualRunwayArrival) {
+        if (!operationalTimes || !operationalTimes.actualGateArrival && !operationalTimes.actualRunwayArrival) {
           return false;
         }
         const realArrival = operationalTimes.actualGateArrival ? 
