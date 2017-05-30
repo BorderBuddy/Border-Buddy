@@ -12,7 +12,7 @@ export function login(req, res, next) {
     }
 
     var token = signToken(user.id);
-    res.json({token});
+    res.json({ token, id: user.id, phone: user.phone, email: user.email });
   })(req, res, next);
 }
 
@@ -22,7 +22,7 @@ export function isAuthenticated(req, res, next) {
   verifyToken(token)
     .then((user) => {
       let tokenResponse = signToken(user.id);
-      res.json({tokenResponse});
+      res.json({ tokenResponse, id: user.id, phone: user.phone, email: user.email });
     })
     .catch(() => {
       res.status(401).send('Unauthorized').end();

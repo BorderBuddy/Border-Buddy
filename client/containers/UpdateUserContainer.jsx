@@ -1,33 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AdminSignUp from "../components/Admin/AdminSignUp";
-import { signup, updateUser } from '../actions/auth';
+import UpdateUser from "../components/Admin/UpdateUser";
+import { updateUser } from '../actions/auth';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-class AdminSignUpContainer extends Component {
+class UpdateUserContainer extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			email: '',
-			password: '',
-			phone: '',
+			oldPassword: '',
+			newPassword: '',
+      phone: '',
+      id: 0,
 			open: false
 		}
 		this.handleEmailChange = this.handleEmailChange.bind(this);
-		this.handlePasswordChange = this.handlePasswordChange.bind(this);
+		this.handleNewPasswordChange = this.handleNewPasswordChange.bind(this);
+    this.handleOldPasswordChange = this.handleOldPasswordChange.bind(this);
 		this.handlePhoneChange = this.handlePhoneChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 	}
 
+  componentWillReceiveProps(nextProps) {
+    console.log("NEXT PROOOOOOOOOPS", nextProps)
+    console.log('THIS PROOOOOOOPS',this.props)
+    console.log("IDDDDDDD", this.props.auth.id)
+    this.setState({ 
+      id: this.props.auth.id,
+      email: this.props.auth.email,
+      phone: this.props.auth.phone
+    });
+  }
+
+
 	handleEmailChange(e) {
 		this.setState({ email: e.target.value })
 	}
 
-	handlePasswordChange(e) {
-		this.setState({ password: e.target.value })
+	handleOldPasswordChange(e) {
+		this.setState({ oldPassword: e.target.value })
+	}
+	
+  handleNewPasswordChange(e) {
+		this.setState({ newPassword: e.target.value })
 	}
 
 	handlePhoneChange(e) {
@@ -36,10 +55,11 @@ class AdminSignUpContainer extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.signup({
+		this.props.updateUser({
 			email: this.state.email,
 			password: this.state.password,
-			phone: this.state.phone
+			phone: this.state.phone,
+      id: this.state.id
 		})
 		.then(() => {
 			this.setState({ open: true, createdSuccess: true })
@@ -54,6 +74,8 @@ class AdminSignUpContainer extends Component {
 	}
 
 	render() {
+
+    console.log(this.state);
 		let actions = [
 			<FlatButton
 				label="OK"
@@ -64,22 +86,22 @@ class AdminSignUpContainer extends Component {
 
 		return(
 			<div>
-				<AdminSignUp 
+				<UpdateUser 
 					handleEmailChange={this.handleEmailChange}
 					handlePasswordChange={this.handlePasswordChange}
 					handlePhoneChange={this.handlePhoneChange}
 					handleSubmit={this.handleSubmit} />
 				<Dialog
-					title="Creating New Admin..."
+					title="Updating Admin..."
 					actions={actions}
 					open={this.state.open}
 					modal={true}
 				>
 					{
 						this.state.createdSuccess ?
-							<h4>New admin created successfully!</h4>
+							<h4>Admin Updated successfully!</h4>
 							:
-							<h4>There was a problem trying to create a new admin</h4>
+							<h4>There was a problem trying to update admin</h4>
 					}
 				</Dialog>
 			</div>
@@ -87,9 +109,12 @@ class AdminSignUpContainer extends Component {
 	}
 }
 
+const mapStateToProps = ({ auth }) => ({
+  auth
+})
+
 const mapDispatchToProps = dispatch => ({
-	signup: (user) => dispatch(signup(user)),
 	updateUser: (user) => dispatch(updateUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(AdminSignUpContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserContainer);

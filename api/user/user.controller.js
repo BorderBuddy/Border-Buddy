@@ -41,19 +41,22 @@ export function create(req, res) {
 }
 
 export function show(req, res, next) {
+  if(!req.params) {
+    return;
+  };
   var userId = req.params.id;
   return User.find({
     where: {
       id: userId
     }
   })
-    .then(user => {
-      if (!user) {
-        return res.status(404).end();
-      }
-      res.json(user);
-    })
-    .catch(err => next(err));
+  .then(user => {
+    if (!user) {
+      return res.status(404).end();
+    }
+    res.json(user);
+  })
+  .catch(err => next(err));
 }
 
 export function destroy(req, res) {
@@ -88,22 +91,43 @@ export function changePassword(req, res) {
     });
 }
 
-export function me(req, res, next) {
-  let userId = req.user.id;
-  User.find({
-    where: {
-      id: userId
-    },
-    attributes: [
-      'id',
-      'email',
-    ]
+export function update(req, res, next) {
+
+  console.log(req.body)
+  const userId = req.body.id;
+  const oldPass = String(req.body.oldPassword);
+  const newPass = String(req.body.newPassword);
+  const phone = req.body.phone;
+  const email = req.body.email;
+
+  return User.findById(userId)
+  .then(user => {
+    if (oldPass && newPass && user.authenticate(oldPass)) {
+      user.password = newPass;
+    }
+    user.phone = phone || user.phone;
+    user.email = email || user.email;
+    return user.save();
   })
-    .then(user => {
-      if (!user) {
-        return res.status(401).end();
-      }
-      res.json(user);
-    })
-    .catch(err => next(err));
+  .then(user => {
+    res.status(200).json(user);
+  })
+  .catch(next);
+}
+
+export function me(req, res, next) {
+
+  let userId = req.headers.user.id;
+  User.findById(userId, {
+    attributes: {
+      exclude: ['salt', 'password']
+    }
+  })
+  .then(user => {
+    if (!user) {
+      return res.status(401).end();
+    }
+    res.json(user);
+  })
+  .catch(err => next(err));
 }

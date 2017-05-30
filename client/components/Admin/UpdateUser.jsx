@@ -5,10 +5,19 @@ import { TextField } from 'redux-form-material-ui';
 import { Card } from 'material-ui/Card';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { signupLoginStyle } from './styles';
 import { minimumLength, required, phone } from '../../utils/validations';
+import { whoAmI } from '../../actions/auth';
 
-class AdminSignUp extends Component {
+class UpdateUser extends Component {
+
+  componentDidMount() {
+			this.props.whoAmI()
+			.then(() => {
+				this.props.initialize(this.props.initialValues);
+		})
+  }
 
 	render() {
 
@@ -19,7 +28,7 @@ class AdminSignUp extends Component {
 		return (
 			<Card style={style.card}>
 				<div>
-					<h3 style={style.title}>Admin SignUp</h3>
+					<h3 style={style.title}>Update Profile</h3>
 					<form onSubmit={handleSubmit}>
 						<Field 
 							name="email" 
@@ -30,10 +39,19 @@ class AdminSignUp extends Component {
 							style={style.form}
 						/>
 						<Field 
-							name="password" 
+							name="oldPassword" 
 							type="password"
 							component={TextField}
-							hintText="Password (at least 8 characters)"
+							hintText="Old Password"
+							validate={[required, minimumLength]}
+							onChange={handlePasswordChange}
+							style={style.form}
+						/>
+						<Field 
+							name="newPassword" 
+							type="password"
+							component={TextField}
+							hintText="New Password (at least 8 characters)"
 							validate={[required, minimumLength]}
 							onChange={handlePasswordChange}
 							style={style.form}
@@ -48,7 +66,7 @@ class AdminSignUp extends Component {
 						/>
 						<RaisedButton
 							type="submit"
-							label="Sign Up"
+							label="Save"
 							disabled={pristine || submitting || !valid}
 							primary={true} 
 							style={style.button}
@@ -61,10 +79,18 @@ class AdminSignUp extends Component {
 }
 
 
-AdminSignUp = reduxForm({
-	form: "adminSignup"
-})(AdminSignUp);
+UpdateUser = reduxForm({
+	form: "updateUser"
+})(UpdateUser);
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = ({ auth }) => {
+	return {
+		initialValues: Object.assign({}, auth, { oldPassword: '', newPassword: '' }),
+	}
+}
 
-export default connect(mapStateToProps)(AdminSignUp);
+const mapDispatchToProps = dispatch => ({
+	whoAmI: (id) => dispatch(whoAmI(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateUser);

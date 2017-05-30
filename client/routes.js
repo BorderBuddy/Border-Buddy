@@ -8,6 +8,7 @@ import AllTravelers from './containers/AllTravelers';
 import SingleTravelerContainer from './containers/SingleTravelerContainer';
 import Login from './containers/Login';
 import AdminSignUp from './containers/AdminSignUpContainer';
+import UpdateUserContainer from './containers/UpdateUserContainer';
 import Success from './containers/Success';
 import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer';
 import AddTravelerContainer from './containers/Admin/AddTravelerContainer';
@@ -34,6 +35,7 @@ const getRoutes = () => (
 			<Route path="travelers/add" component={AddTravelerContainer} />
 			<Route path="travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
 			<Route path="createuser" component={AdminSignUp} />
+			<Route path="updateprofile" component={UpdateUserContainer} />
 		</Route>
     <Route path="/login" component={Login} />
 	</div>

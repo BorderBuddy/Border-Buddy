@@ -31,6 +31,7 @@ export const checkToken = () => dispatch => {
     }
   })
     .then(response => {
+      console.log("OWIEJFOISJEFOIEJF", response.data);
       dispatch(setAuth(response.data));
     });
 };
@@ -43,4 +44,30 @@ export const signout = () => dispatch => {
       browserHistory.push('/login');
     })
     .catch(err => console.error(err));
+};
+
+export const whoAmI = () => (dispatch, getState) => {
+  // if (!getState().auth.id) return new Promise((resolve, reject) => (resolve()))
+  return axios.get('/api/auth/checkToken', {
+    headers: {
+      Authorization: window.localStorage.accessToken
+    }
+  })
+  .then((res) => {
+    dispatch(setAuth(res.data))
+  })
+  .catch(err => console.error(err));
+};
+
+export const updateUser = (user) => dispatch => {
+  console.log("USER IN ACTIONSSS", user);
+  return axios.put(`/api/user/${user.id}`, user, {
+    headers: {
+      Authorization: window.localStorage.accessToken
+    }
+  })
+  .then(res => {
+    console.log(res);
+    dispatch(setAuth(res.data));
+  })
 };
