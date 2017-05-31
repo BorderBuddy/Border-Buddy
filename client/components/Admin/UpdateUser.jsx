@@ -23,7 +23,7 @@ class UpdateUser extends Component {
 
 		const style = signupLoginStyle;
 		const { handleSubmit, pristine, submitting,
-		handleEmailChange, handlePasswordChange, handlePhoneChange, valid } = this.props;
+		handleEmailChange, handleOldPasswordChange, handleNewPasswordChange, handlePhoneChange, valid } = this.props;
 
 		return (
 			<Card style={style.card}>
@@ -42,9 +42,8 @@ class UpdateUser extends Component {
 							name="oldPassword" 
 							type="password"
 							component={TextField}
-							hintText="Old Password"
-							validate={[required, minimumLength]}
-							onChange={handlePasswordChange}
+							hintText="Provide your old password to make a new password"
+							onChange={handleOldPasswordChange}
 							style={style.form}
 						/>
 						<Field 
@@ -52,22 +51,21 @@ class UpdateUser extends Component {
 							type="password"
 							component={TextField}
 							hintText="New Password (at least 8 characters)"
-							validate={[required, minimumLength]}
-							onChange={handlePasswordChange}
+							onChange={handleNewPasswordChange}
 							style={style.form}
 						/>
 						<Field 
 							name="phone" 
 							component={TextField}
 							hintText="Phone Number"
-							validate={[phone]}
+							validate={[phone, required]}
 							onChange={handlePhoneChange}
 							style={style.form}
 						/>
 						<RaisedButton
 							type="submit"
 							label="Save"
-							disabled={pristine || submitting || !valid}
+							disabled={submitting || !valid}
 							primary={true} 
 							style={style.button}
 						/>

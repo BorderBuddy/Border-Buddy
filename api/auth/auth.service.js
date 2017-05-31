@@ -12,13 +12,15 @@ export function verifyToken(token, repository = Repository) {
   const userRepository = repository.users;
   return new Promise((resolve, reject) => {
     jwt.verify(token, config.secrets.session, (err, user) => {
+
+
       if (err) {
         reject(err.message);
         return;
       }
 
       userRepository
-        .findOne({id: user.id})
+        .findById(user.id)
         .then(foundUser => {
           if (!foundUser) {
             reject(new Error('User not found'));

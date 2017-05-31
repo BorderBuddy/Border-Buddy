@@ -72,19 +72,14 @@ export function changePassword(req, res) {
   let oldPass = String(req.body.oldPassword);
   let newPass = String(req.body.newPassword);
 
-  return User.find({
-    where: {
-      id: userId
-    }
-  })
+  return User.findById(userId)
     .then(user => {
       if (user.authenticate(oldPass)) {
-        user.password = newPass;
-        return user.save()
-          .then(() => {
-            res.status(204).end();
-          })
-          .catch(validationError(res));
+        user.update({ password: newPass })
+        .then((user) => {
+          res.status(204).end();
+        })
+        .catch(validationError(res));
       } else {
         return res.status(403).end();
       }
@@ -102,16 +97,24 @@ export function update(req, res, next) {
 
   return User.findById(userId)
   .then(user => {
-    if (oldPass && newPass && user.authenticate(oldPass)) {
-      user.password = newPass;
-    }
     user.phone = phone || user.phone;
     user.email = email || user.email;
     return user.save();
   })
   .then(user => {
-    res.status(200).json(user);
+    if(oldPass && !user.authenticate(oldPass)) {
+      res.sendStatus(401)
+      return user;
+    }
+    if (newPass) {
+      return user.update({
+        password: newPass
+      })
+    } else {
+      return user;
+    }
   })
+  .then((user => res.status(200).json(user)))
   .catch(next);
 }
 

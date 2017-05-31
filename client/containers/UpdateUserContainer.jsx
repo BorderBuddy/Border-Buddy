@@ -26,9 +26,6 @@ class UpdateUserContainer extends Component {
 	}
 
   componentWillReceiveProps(nextProps) {
-    console.log("NEXT PROOOOOOOOOPS", nextProps)
-    console.log('THIS PROOOOOOOPS',this.props)
-    console.log("IDDDDDDD", this.props.auth.id)
     this.setState({ 
       id: this.props.auth.id,
       email: this.props.auth.email,
@@ -57,7 +54,8 @@ class UpdateUserContainer extends Component {
 		e.preventDefault();
 		this.props.updateUser({
 			email: this.state.email,
-			password: this.state.password,
+			newPassword: this.state.newPassword,
+			oldPassword: this.state.oldPassword,
 			phone: this.state.phone,
       id: this.state.id
 		})
@@ -75,7 +73,6 @@ class UpdateUserContainer extends Component {
 
 	render() {
 
-    console.log(this.state);
 		let actions = [
 			<FlatButton
 				label="OK"
@@ -88,7 +85,8 @@ class UpdateUserContainer extends Component {
 			<div>
 				<UpdateUser 
 					handleEmailChange={this.handleEmailChange}
-					handlePasswordChange={this.handlePasswordChange}
+					handleOldPasswordChange={this.handleOldPasswordChange}
+					handleNewPasswordChange={this.handleNewPasswordChange}
 					handlePhoneChange={this.handlePhoneChange}
 					handleSubmit={this.handleSubmit} />
 				<Dialog
