@@ -1,4 +1,4 @@
-import {Traveler, Flight} from '../database/models'
+import {Traveler, Flight, User} from '../database/models'
 import axios from 'axios';
 import {Twilio} from '../api/twilio/twilio.controller';
 import {config} from '../api/config';
@@ -19,6 +19,21 @@ const askIfTravelerOk = traveler => {
   });
 };
 
+const alertAssignedAtRisk = (number, traveler) => {
+  return new Promise((resolve, reject) => {
+    Twilio.sendMessage({
+      to: number,
+      from: config.twilio.adminPhone,
+      body: `ALERT! ${traveler.name} has not checked in and has been marked AT RISK.`
+    }, (err, result) => {
+      if (err) reject(err);
+      else {
+        console.log(result);
+        resolve(result);
+      }
+    })
+  })
+};
 
 const didFlightLandTwoHoursAgo = flight => {
   const {arrivalTime, airlineCode, flightNum} = flight;
@@ -33,7 +48,6 @@ const didFlightLandTwoHoursAgo = flight => {
       if (response.data.error) {
         throw new Error(response.data.error);
       } else {
-        console.log("RESPONSE TO GET STATUS BY CODE AND DATE: ", response.data.flightStatuses)
         const {operationalTimes} = response.data.flightStatuses[0];
         if (!operationalTimes || !operationalTimes.actualGateArrival && !operationalTimes.actualRunwayArrival) {
           return false;
@@ -41,10 +55,7 @@ const didFlightLandTwoHoursAgo = flight => {
         const realArrival = operationalTimes.actualGateArrival ? 
           new Date(operationalTimes.actualGateArrival.dateUtc) : 
           new Date(operationalTimes.actualRunwayArrival.dateUtc);
-        
-        console.log("REAL ARRIVAL: ", realArrival)
-        console.log("TWO HOURS AGO: ", twoHoursAgo)
-        console.log(twoHoursAgo > realArrival)
+
         return twoHoursAgo > realArrival;
       }
     })
@@ -64,7 +75,18 @@ const recursiveFlatten = (arr, start) => {
 
 module.exports = {
 
-  setToAtRisk: Traveler.setToAtRisk,
+  setToAtRisk: function () {
+    Traveler.setToAtRisk()
+    .then((travelers) => {
+      return Promise.map(travelers, (traveler) => {
+        return Promise.all([
+          alertAssignedAtRisk(process.env.NAZ_NUM, traveler),
+          alertAssignedAtRisk(process.env.TAREK_NUM, traveler)
+        ])
+        .catch(err => console.error(err))
+      })
+    })
+  },
 
   landFlightsAndTextTravelers: function () {
     Flight.findFlightsToLand()

@@ -8,5 +8,7 @@ module.exports = {
   TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
   TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
   TWILIO_MESSAGING_SID: process.env.TWILIO_MESSAGING_SID,
-  TWILIO_PHONE_NUM: process.env.TWILIO_PHONE_NUM
+  TWILIO_PHONE_NUM: process.env.TWILIO_PHONE_NUM,
+  NAZ_NUM: process.env.NAZ_NUM,
+  TAREK_NUM: process.env.TAREK_NUM
 };

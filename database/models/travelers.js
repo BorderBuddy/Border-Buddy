@@ -46,7 +46,7 @@ export const Traveler = db.define('traveler', {
 }, {
   classMethods: {
     setToAtRisk: function () {
-      Traveler.update(
+      return Traveler.update(
         {status: 'at risk'},
         {where: {status: 'unconfirmed'}, returning: true}
       )
