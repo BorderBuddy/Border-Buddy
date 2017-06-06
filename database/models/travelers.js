@@ -20,6 +20,9 @@ export const Traveler = db.define('traveler', {
   phone: {
     type: Sequelize.STRING,
   },
+  countryCode: {
+    type: Sequelize.STRING
+  },
   connectivity: {
     type: Sequelize.BOOLEAN
   },

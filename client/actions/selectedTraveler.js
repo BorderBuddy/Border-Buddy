@@ -32,7 +32,7 @@ export const updateTraveler = (traveler, id, _window = window) => dispatch => {
 export const sendText = (traveler, _window = window) => () => {
   return axios.post('/api/twilio/send',
     {
-      to: traveler.phone,
+      to: `+${traveler.countryCode}${traveler.phone}`,
       message: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`
     }, {
       headers: {Authorization: _window.localStorage.accessToken}

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { 
-	nameStyle, 
-	phoneStyle, 
+	nameStyle,
+	countryCodeStyle,
+	phoneStyle,
 	emailStyle,
 	nationalityStyle, 
-	idStyle, 
+	idStyle,
 	flightCodeStyle,
 	flightNumStyle,
 	flightStatusStyle,
@@ -17,7 +18,7 @@ import {
 
 
 export default ({ traveler }) => {
-	const { id, name, phone, email, nationality, status: travelerStatus } = traveler;
+	const { id, name, phone, email, nationality, status: travelerStatus, countryCode } = traveler;
 	const { airlineCode, flightNum, arrivalTime, status: flightStatus } = traveler.flight || {};
 	const timeString = (new Date(arrivalTime)).toLocaleString();
 	const color = setStatusColor(travelerStatus);
@@ -25,6 +26,7 @@ export default ({ traveler }) => {
 		<TableRow onTouchTap={() => browserHistory.push(`/admin/travelers/${traveler.id}`)}>
 			<TableRowColumn style={idStyle}>{id}</TableRowColumn>
 			<TableRowColumn style={nameStyle}>{name}</TableRowColumn>
+			<TableRowColumn style={countryCodeStyle}>{`+${countryCode}`}</TableRowColumn>
 			<TableRowColumn style={phoneStyle}>{phone}</TableRowColumn>
 			<TableRowColumn style={emailStyle}>{email}</TableRowColumn>
 			<TableRowColumn style={nationalityStyle}>{nationality}</TableRowColumn>

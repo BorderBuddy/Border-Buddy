@@ -15,7 +15,6 @@ export const login = (user) => dispatch => {
 };
 
 export const signup = (user, _window = window) => () => {
-  console.log(user, "USER!!!")
   return axios.post('/api/user', user, {
     headers: {
       Authorization: _window.localStorage.accessToken
@@ -31,7 +30,6 @@ export const checkToken = () => dispatch => {
     }
   })
     .then(response => {
-      console.log("OWIEJFOISJEFOIEJF", response.data);
       dispatch(setAuth(response.data));
     });
 };
@@ -60,14 +58,12 @@ export const whoAmI = () => (dispatch, getState) => {
 };
 
 export const updateUser = (user) => dispatch => {
-  console.log("USER IN ACTIONSSS", user);
   return axios.put(`/api/user/${user.id}`, user, {
     headers: {
       Authorization: window.localStorage.accessToken
     }
   })
   .then(res => {
-    console.log(res);
     dispatch(setAuth(res.data));
   })
 };

@@ -73,7 +73,6 @@ export const notifyAdminOfNewTravelerSignUp = (traveler) => {
       + 'Check https://border-buddy.com/admin for more details.'
       }, (err, result) => {
         if(err) console.error(err);
-        console.log(result);
         return { result, traveler };
       })
     })
