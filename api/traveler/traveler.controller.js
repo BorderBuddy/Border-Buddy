@@ -63,7 +63,6 @@ export function updateOne(req, res, next) {
 };
 
 export function deleteOne(req, res, next) {
-  console.log(req.params.id);
   return Traveler.destroy({ where: { id: req.params.id }})
   .then(() => {
     res.sendStatus(204);
