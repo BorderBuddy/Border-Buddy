@@ -9,7 +9,7 @@ const AllTravelersMobile = ({ travelers }) => {
     <div>
       { 
         travelers.map((traveler, i) => {
-          const { id, name, phone, email, nationality, status: travelerStatus } = traveler;
+          const { id, name, phone, email, nationality, status: travelerStatus, countryCode } = traveler;
           const { airlineCode, flightNum, arrivalTime, status: flightStatus } = traveler.flight || {};
           const timeString = (new Date(arrivalTime)).toLocaleString();
           const color = setStatusColor(travelerStatus);
@@ -25,6 +25,7 @@ const AllTravelersMobile = ({ travelers }) => {
                   <div className="field-container col-6 sm-col sm-col-6">
                     <CardTitle title="Traveler Information" />
                     <CardText style={style.passengerStatus}>{`Traveler Status: ${travelerStatus}`}</CardText>
+                    <CardText>{`Country Code: +${countryCode}`}</CardText>
                     <CardText>{`Phone: ${phone}`}</CardText>
                     <CardText>{`Email: ${email}`}</CardText>
                     <CardText>{`Nationality: ${nationality}`}</CardText>

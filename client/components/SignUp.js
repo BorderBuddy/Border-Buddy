@@ -106,17 +106,32 @@ const SignUp = ({handleSubmit, valid}) => {
           />
         </div>
         <div className="field-container col-12 md-col md-col-6">
-          <Field
-            name="phone"
-            className="traveler-phone-number"
-            component={TextField}
-            floatingLabelText="Phone Number"
-            floatingLabelStyle={style.label}
-            underlineFocusStyle={style.underline}
-            errorStyle={style.error}
-            validate={[required, phone]}
-            style={style.input}
-          />
+          <div className="field-container col-12 md-col md-col-5">
+            <Field
+              name="countryCode"
+              className="traveler-country-phone-code"
+              component={TextField}
+              floatingLabelText="Country Phone Code"
+              floatingLabelStyle={style.label}
+              underlineFocusStyle={style.underline}
+              errorStyle={style.error}
+              validate={[required]}
+              style={style.input}
+            />
+          </div>
+          <div className="field-container col-12 md-col md-col-6">
+            <Field
+              name="phone"
+              className="traveler-phone-number"
+              component={TextField}
+              floatingLabelText="Phone Number"
+              floatingLabelStyle={style.label}
+              underlineFocusStyle={style.underline}
+              errorStyle={style.error}
+              validate={[required, phone]}
+              style={style.input}
+            />
+          </div>
         </div>
         <div className="field-container col-12 md-col md-col-6">
           <Field

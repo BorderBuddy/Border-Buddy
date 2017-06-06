@@ -9,7 +9,7 @@ const Promise = require('bluebird');
 const askIfTravelerOk = traveler => {
   return new Promise((resolve, reject) => {
     Twilio.sendMessage({
-      to: `+1${traveler.phone}`, // needs change for non-US numbers
+      to: `+${traveler.countryCode}${traveler.phone}`,
       from: config.twilio.adminPhone,
       body: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`
     }, (err, result) => {

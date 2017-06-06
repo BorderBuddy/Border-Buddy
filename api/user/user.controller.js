@@ -88,7 +88,6 @@ export function changePassword(req, res) {
 
 export function update(req, res, next) {
 
-  console.log(req.body)
   const userId = req.body.id;
   const oldPass = String(req.body.oldPassword);
   const newPass = String(req.body.newPassword);

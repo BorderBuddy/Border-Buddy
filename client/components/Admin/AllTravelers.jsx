@@ -5,6 +5,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import { 
 	nameStyle, 
 	phoneStyle,
+	countryCodeStyle,
 	emailStyle,
 	nationalityStyle, 
 	idStyle, 
@@ -22,6 +23,7 @@ export default ({ travelers, selectTraveler }) => (
 	      <TableRow>
 	        <TableHeaderColumn style={idStyle}>ID</TableHeaderColumn>
 	        <TableHeaderColumn style={nameStyle}>Name</TableHeaderColumn>
+					<TableHeaderColumn style={countryCodeStyle}>Code</TableHeaderColumn>
 	        <TableHeaderColumn style={phoneStyle}>Phone</TableHeaderColumn>
 					<TableHeaderColumn style={emailStyle}>Email</TableHeaderColumn>
 	        <TableHeaderColumn style={nationalityStyle} >Nationality</TableHeaderColumn>

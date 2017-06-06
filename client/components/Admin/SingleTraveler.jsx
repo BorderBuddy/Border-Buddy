@@ -146,6 +146,17 @@ class SingleTraveler extends React.Component {
 						</div>
 						<div className="field-container col-12 md-col md-col-6">
 							<Field
+								name="countryCode"
+								floatingLabelText="Phone Country Code"
+								component={TextField}
+								style={style.input}
+								errorStyle={style.error}
+								floatingLabelStyle={style.label}
+								underlineFocusStyle={style.underline}
+							/>
+						</div>
+						<div className="field-container col-12 md-col md-col-6">
+							<Field
 								name="phone"
 								floatingLabelText="Phone"
 								component={TextField}
@@ -329,13 +340,13 @@ SingleTraveler = reduxForm({
 
 const mapStateToProps = ({ selectedTraveler }) => {
   const { name, nationality, requireInterpreter, preferredLanguage, email, phone, connectivity, secondaryContactPhone, secondaryContactName,
-		secondaryContactRelation, status: passengerStatus, representative } = selectedTraveler;
+		secondaryContactRelation, status: passengerStatus, representative, countryCode } = selectedTraveler;
   const { airlineCode, flightNum, arrivalTime, status: flightStatus } = selectedTraveler.flight || {};
 	const flightDate = arrivalTime ? new Date(arrivalTime) : null;
   return { 
     initialValues: {
       name, nationality, requireInterpreter: String(requireInterpreter), preferredLanguage, email, phone, connectivity: String(connectivity), secondaryContactPhone, secondaryContactName, secondaryContactRelation,
-			passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus, representative
+			passengerStatus, arrivalTime: flightDate, airlineCode, flightNum, flightStatus, representative, countryCode
     }
   }  
 };
