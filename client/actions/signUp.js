@@ -18,6 +18,9 @@ export const signUpTraveler = (traveler, isAdmin) => {
 			console.log(res);
 			dispatch(setSignupTraveler(res.data));
 			if(!isAdmin) browserHistory.push('/success');
+			else {
+				browserHistory.push('/admin/travelers')
+			}
 		})
 		.then((res) => {
 		})

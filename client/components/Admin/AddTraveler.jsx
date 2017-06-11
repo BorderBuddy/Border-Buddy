@@ -138,6 +138,18 @@ export class AddTraveler extends React.Component {
             </div>
             <div className="field-container col-12 md-col md-col-6">
               <Field
+                name="countryCode"
+                floatingLabelText="Country Code"
+                component={TextField}
+                validate={[required]}
+                style={style.input}
+                errorStyle={style.error}
+                floatingLabelStyle={style.label}
+                underlineFocusStyle={style.underline}
+              />
+            </div>
+            <div className="field-container col-12 md-col md-col-6">
+              <Field
                 name="phone"
                 floatingLabelText="Phone"
                 component={TextField}
