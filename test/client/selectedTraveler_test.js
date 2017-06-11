@@ -33,13 +33,13 @@ describe('SelectedTraveler', () => {
 
       sandbox.stub(axios, 'post', (url, message, headers) => {
         expect(url).to.equal('/api/twilio/send');
-        expect(message.to).to.equal('5553334444');
+        expect(message.to).to.equal('+15553334444');
         expect(headers.headers['Authorization']).to.equal('accessToken');
         return new Promise((resolve, reject) => {
         });
       });
 
-      sendText({phone: '5553334444'}, window)();
+      sendText({phone: '5553334444', countryCode: '1' }, window)();
     });
   });
   describe('delete traveler information', () => {

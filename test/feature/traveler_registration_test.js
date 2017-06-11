@@ -29,6 +29,7 @@ describe('BorderBuddy', function() {
       .type('input[name="nationality"]', 'Iranian')
       .type('input[name="email"]', 'jane@example.com')
       .type('input[name="phone"]', '5554567890')
+      .type('input[name="countryCode"]', '1')
       .mouseDownUpOnElement('.traveler-require-interpreter button')
       .wait('.traveler-require-interpreter-option')
       .mouseDownUpOnElement('.traveler-require-interpreter-option div')
@@ -66,6 +67,7 @@ describe('BorderBuddy', function() {
         expect(result).to.contain('Iranian');
         expect(result).to.contain('jane@example.com');
         expect(result).to.contain('5554567890');
+        expect(result).to.contain('1');
         expect(result).to.contain('UA');
         expect(result).to.contain('88');
         expect(result).to.contain('Jennifer Citizen');
