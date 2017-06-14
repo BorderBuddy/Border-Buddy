@@ -105,8 +105,8 @@ const SignUp = ({handleSubmit, valid}) => {
             style={style.input}
           />
         </div>
-        <div className="field-container col-12 md-col md-col-6">
-          <div className="field-container col-12 md-col md-col-5">
+        <div className="clearfix">
+          <div className="field-container col-12 md-col md-col-6">
             <Field
               name="countryCode"
               className="traveler-country-phone-code"
