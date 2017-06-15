@@ -21,3 +21,5 @@ export const validateCode = values => {
 };
 
 export const minimumLength = value => value.length < 8 ? 'Must be at least 8 characters long' : undefined;
+
+export const numbersOnly = value => value && !/^[0-9]+$/i.test(value) ? 'Please only put the country code number only' : undefined;
