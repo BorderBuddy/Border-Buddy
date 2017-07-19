@@ -3,6 +3,7 @@ import {reduxForm, Field} from 'redux-form';
 import {RaisedButton, MenuItem} from 'material-ui';
 import {TextField, DatePicker, SelectField} from 'redux-form-material-ui';
 import AirlinePicker from './AirlinePicker';
+import CountryCodePicker from './CountryCodePicker';
 import {required, phone, email, validateCode, uppercase} from '../utils/validations';
 
 const SignUp = ({handleSubmit, valid}) => {
@@ -106,32 +107,31 @@ const SignUp = ({handleSubmit, valid}) => {
           />
         </div>
         <div className="field-container col-12 md-col md-col-6">
-          <div className="field-container col-12 md-col md-col-5">
-            <Field
-              name="countryCode"
-              className="traveler-country-phone-code"
-              component={TextField}
-              floatingLabelText="Country Phone Code"
-              floatingLabelStyle={style.label}
-              underlineFocusStyle={style.underline}
-              errorStyle={style.error}
-              validate={[required]}
-              style={style.input}
-            />
-          </div>
-          <div className="field-container col-12 md-col md-col-6">
-            <Field
-              name="phone"
-              className="traveler-phone-number"
-              component={TextField}
-              floatingLabelText="Phone Number"
-              floatingLabelStyle={style.label}
-              underlineFocusStyle={style.underline}
-              errorStyle={style.error}
-              validate={[required, phone]}
-              style={style.input}
-            />
-          </div>
+          <Field
+            name="countryCode"
+            label="Country code"
+            className="traveler-country-phone-code"
+            component={CountryCodePicker}
+            floatingLabelText="Country Phone Code"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            validate={[required]}
+            style={style.input}
+          />
+        </div>
+        <div className="field-container col-12 md-col md-col-6">
+          <Field
+            name="phone"
+            className="traveler-phone-number"
+            component={TextField}
+            floatingLabelText="Phone Number"
+            floatingLabelStyle={style.label}
+            underlineFocusStyle={style.underline}
+            errorStyle={style.error}
+            validate={[required, phone]}
+            style={style.input}
+          />
         </div>
         <div className="field-container col-12 md-col md-col-6">
           <Field
