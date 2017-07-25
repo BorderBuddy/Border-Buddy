@@ -6,6 +6,7 @@ import AirlinePicker from './AirlinePicker';
 import CountryCodePicker from './CountryCodePicker';
 import {required, phone, email, validateCode, uppercase} from '../utils/validations';
 
+
 const SignUp = ({handleSubmit, valid}) => {
   const style = {
     form: {

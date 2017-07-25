@@ -38,7 +38,6 @@ describe('SelectedTraveler', () => {
         return new Promise((resolve, reject) => {
         });
       });
-
       sendText({phone: '5553334444', countryCode: "1"}, window)();
     });
   });

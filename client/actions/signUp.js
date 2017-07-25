@@ -12,12 +12,17 @@ const setSignupTraveler = traveler => ({
 });
 
 export const signUpTraveler = (traveler, isAdmin) => {
+	if (traveler.countryCode[0] === '+') traveler.countryCode = traveler.countryCode.slice(1);
+	console.log("CODE", traveler.countryCode);
   return dispatch => {
 		axios.post('/api/traveler/', traveler)
 		.then(res => {
 			console.log(res);
 			dispatch(setSignupTraveler(res.data));
 			if(!isAdmin) browserHistory.push('/success');
+			else {
+				browserHistory.push('/admin/travelers')
+			}
 		})
 		.then((res) => {
 		})
