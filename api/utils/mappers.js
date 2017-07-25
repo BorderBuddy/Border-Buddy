@@ -3,8 +3,6 @@ export const airlineInfoMapper = airlines => {
 };
 
 export const flightInfoMapper = fsFlightData => {
-	
-	console.log(fsFlightData);
 
 	const {
 		arrivalCityName,

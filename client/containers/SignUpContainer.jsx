@@ -23,13 +23,13 @@ class SignUpContainer extends Component {
   }
 
   confirmSubmit() {
-    const { createTraveler, flight } = this.props;
+    const { signUpTraveler, flight } = this.props;
     const { values } = this.props.form.signUp;
 
-    const { arrivalTime } = flight;
-    values.arrivalTime = arrivalTime; // DOES THIS WORK???? 
+    const { arrivalTimeUtc } = flight;
+    values.arrivalTime = arrivalTimeUtc; // THIS SHOULD BE SOMEWHERE ELSE NICER
 
-    createTraveler(values);
+    signUpTraveler(values);
     this.handleClose();
   }
 
@@ -97,7 +97,7 @@ class SignUpContainer extends Component {
 const mapStateToProps = ({form, flight}) => ({form, flight});
 
 const mapDispatchToProps = dispatch => ({
-  createTraveler: traveler => dispatch(signUpTraveler(traveler)),
+  signUpTraveler: traveler => dispatch(signUpTraveler(traveler)),
   checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 });
 
