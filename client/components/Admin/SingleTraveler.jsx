@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { RaisedButton, MenuItem } from 'material-ui';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 import AirlinePicker from '../AirlinePicker';
+import CountryCodePicker from '../CountryCodePicker';
 import { fetchSelectedTraveler } from '../../actions/selectedTraveler';
 import { required, phone, email, validateCode, uppercase } from '../../utils/validations';
 import countryCodes from '../../utils/countryCodes'
@@ -149,20 +150,14 @@ class SingleTraveler extends React.Component {
             <Field
               name="countryCode"
               className="traveler-country-phone-code"
-              component={SelectField}
-              floatingLabelText="Country Phone Code"
+              component={CountryCodePicker}
+              label="Country Phone Code"
               floatingLabelStyle={style.label}
               underlineFocusStyle={style.underline}
               errorStyle={style.error}
               validate={[required]}
               style={style.input}
-            >
-              {
-                countryCodes.map(country => (
-                  <MenuItem primaryText={`${country.dial_code} - ${country.name}`} value={country.value} />
-                ))
-              }
-            </Field>
+            />
 						</div>
 						<div className="field-container col-12 md-col md-col-6">
 							<Field

@@ -53,7 +53,8 @@ class SingleTravelerContainer extends Component {
     else {
       const { updateTraveler, routeParams } = this.props;
       const { values } = this.props.form.singleTraveler;
-      // TODO: get time off of flight if need be 
+      // TODO: get time off of flight if need be
+      values.countryCode = values.countryCode.split('-')[1].slice(2);
       updateTraveler(values, routeParams.id)
       .then(() => {
         browserHistory.push('/admin/travelers');

@@ -16,6 +16,7 @@ const CountryCodePicker = ({ input, label, style, floatingLabelStyle, underlineF
   return (
     <AutoComplete
       {...input}
+      searchText={input.value}
       floatingLabelText={label}
       floatingLabelStyle={floatingLabelStyle}
       underlineFocusStyle={underlineFocusStyle}
