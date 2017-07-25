@@ -3,6 +3,8 @@ export const airlineInfoMapper = airlines => {
 };
 
 export const flightInfoMapper = fsFlightData => {
+	
+	console.log(fsFlightData);
 
 	const {
 		arrivalCityName,
@@ -17,7 +19,11 @@ export const flightInfoMapper = fsFlightData => {
 		departureAirportFsCode
 	} = mapAirportInfo(fsFlightData);
 
-	const { airlineName } = mapAirlineName(fsFlightData);
+	const {
+		airlineName,
+		flightNumber,
+		carrierFsCode
+	} = mapAirlineDetails(fsFlightData);
 
 	const {
 		arrivalTimeLocal,
@@ -39,7 +45,9 @@ export const flightInfoMapper = fsFlightData => {
 		arrivalTimeLocal,
 		departureTimeLocal,
 		arrivalTimeUtc,
-		departureTimeUtc
+		departureTimeUtc,
+		flightNumber,
+		carrierFsCode
 	};
 };
 
@@ -80,13 +88,17 @@ const mapAirportInfo = fsFlightData => {
 };
 
 
-const mapAirlineName = fsFlightData => {
+const mapAirlineDetails = fsFlightData => {
 
-	const { carrierFsCode } = fsFlightData.scheduledFlights[0];
+	const { carrierFsCode, flightNumber } = fsFlightData.scheduledFlights[0];
 	const { airlines } = fsFlightData.appendix;
 	const bestName = airlines.find(airline => airline.fs === carrierFsCode);
 
-	return { airlineName: bestName.name };
+	return {
+		airlineName: bestName.name,
+		flightNumber,
+		carrierFsCode
+	};
 };
 
 const mapTimes = (fsFlightData, arrivalUtcOffset, departureUtcOffset) => {
