@@ -60,7 +60,7 @@ export function updateOne(req, res, next) {
     }
   })
     .catch(next);
-};
+}
 
 export function deleteOne(req, res, next) {
   return Traveler.destroy({ where: { id: req.params.id }})

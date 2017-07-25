@@ -23,9 +23,12 @@ class SignUpContainer extends Component {
   }
 
   confirmSubmit() {
-    const { createTraveler } = this.props;
+    const { createTraveler, flight } = this.props;
     const { values } = this.props.form.signUp;
-    // TODO: add time details here
+
+    const { arrivalTime } = flight;
+    values.arrivalTime = arrivalTime; // DOES THIS WORK???? 
+
     createTraveler(values);
     this.handleClose();
   }
@@ -41,8 +44,8 @@ class SignUpContainer extends Component {
       this.setState({ open: true });
     })
     .catch(() => {
-      this.setState({ open: false })
-    })
+      this.setState({ open: false });
+    });
   }
 
   render() {
