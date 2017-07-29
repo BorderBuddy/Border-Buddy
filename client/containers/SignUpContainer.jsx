@@ -25,10 +25,10 @@ class SignUpContainer extends Component {
     const { signUpTraveler, flight } = this.props;
     const { values } = this.props.form.signUp;
 
-    const { arrivalTimeUtc } = flight;
-    values.arrivalTime = arrivalTimeUtc; // THIS SHOULD BE SOMEWHERE ELSE NICER
+    // THIS COULD BE CLEANER
+    const travelerInfo = Object.assign({}, values, { arrivalTime: flight.arrivalTimeUtc });
 
-    signUpTraveler(values);
+    signUpTraveler(travelerInfo);
     this.handleClose();
   }
 
