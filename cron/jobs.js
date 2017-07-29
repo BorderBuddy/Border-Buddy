@@ -43,10 +43,15 @@ const didFlightLandTwoHoursAgo = flight => {
 
   const twoHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 2);
 
-  return axios.get(statusByCodeAndDate(airlineCode, flightNum, year, month, date)) // problem is here
+  return axios.get(statusByCodeAndDate(airlineCode, flightNum, year, month, date))
     .then(response => {
       if (response.data.error) {
-        throw new Error(response.data.error);
+        if (response.data.error.errorCode === 'DATE_OUT_OF_RANGE') {
+          // we should have validation that keeps users from signing up for flights in the past
+          return true;
+        } else {
+          throw new Error(response.data.error.errorMessage);
+        }
       } else {
         const {operationalTimes} = response.data.flightStatuses[0];
         if (!operationalTimes || !operationalTimes.actualGateArrival && !operationalTimes.actualRunwayArrival) {
