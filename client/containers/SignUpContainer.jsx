@@ -25,6 +25,7 @@ class SignUpContainer extends Component {
   confirmSubmit() {
     const { createTraveler } = this.props;
     const { values } = this.props.form.signUp;
+    values.countryCode = values.countryCode.split('-')[1].slice(2);
     // TODO: add time details here
     createTraveler(values);
     this.handleClose();

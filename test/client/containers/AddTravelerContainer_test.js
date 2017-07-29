@@ -14,7 +14,8 @@ describe('Component: Admin/AddTraveler', () => {
     defaultFormValues = {
       adminAddTraveler: {
         values: {
-          foo: 'bar'
+          foo: 'bar',
+          countryCode: 'United States - +1' // imperfect solution, but until we do a full rewrite of the form, this'll have to do.
         }
       }
     };
@@ -55,7 +56,7 @@ describe('Component: Admin/AddTraveler', () => {
 
       component.instance().handleSubmit(event);
 
-      expect(createTravelerSpy).to.have.been.calledWith({foo: 'bar'});
+      expect(createTravelerSpy).to.have.been.calledWith({foo: 'bar', countryCode: '1'});
     });
 
     describe('when flight information is present', () => {

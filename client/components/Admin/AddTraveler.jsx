@@ -4,6 +4,8 @@ import { MenuItem, RaisedButton } from 'material-ui';
 import { Field, reduxForm } from 'redux-form';
 import { required, phone, email, uppercase, validateCode, numbersOnly } from '../../utils/validations';
 import AirlinePicker from '../AirlinePicker';
+import CountryCodePicker from '../CountryCodePicker';
+import countryCodes from '../../utils/countryCodes';
 
 
 export class AddTraveler extends React.Component {
@@ -139,13 +141,14 @@ export class AddTraveler extends React.Component {
             <div className="field-container col-12 md-col md-col-6">
               <Field
                 name="countryCode"
-                floatingLabelText="Country Code"
-                component={TextField}
-                validate={[required, numbersOnly]}
-                style={style.input}
-                errorStyle={style.error}
+                className="traveler-country-phone-code"
+                component={CountryCodePicker}
+                label="Country Phone Code"
                 floatingLabelStyle={style.label}
                 underlineFocusStyle={style.underline}
+                errorStyle={style.error}
+                validate={[required]}
+                style={style.input}
               />
             </div>
             <div className="field-container col-12 md-col md-col-6">

@@ -9,7 +9,7 @@ const baseConfig = {
     // stop sequelize from pluralizing model names to get table names
     freezeTableName: true
   },
-  logging: ['development'].includes(env)
+  logging: false
 };
 
 if (config.use_env_variable) {
