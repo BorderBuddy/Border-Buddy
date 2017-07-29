@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-import {Traveler} from './travelers'
+import {Traveler} from './travelers';
 
 export const Flight = db.define('flight', {
   flightNum: {
@@ -19,7 +19,7 @@ export const Flight = db.define('flight', {
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['arrived', 'delayed', 'scheduled'], // arrived means landed >2hrs ago
+    values: ['arrived', 'delayed', 'scheduled'],
     defaultValue: 'scheduled'
   },
   arrivalTime: {
@@ -29,15 +29,12 @@ export const Flight = db.define('flight', {
 }, {
   classMethods: {
     findFlightsToLand: function () {
-      const oneDay = 24 * 60 * 60 * 1000;
       const today = new Date();
-      const yesterday = new Date(today - oneDay);
 
       return Flight.findAll({
         where: {
           arrivalTime: {
-            $lt: today,
-            $gt: yesterday
+            $lt: today
           },
           status: 'scheduled'
         }

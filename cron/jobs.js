@@ -31,8 +31,8 @@ const alertAssignedAtRisk = (number, traveler) => {
         console.log(result);
         resolve(result);
       }
-    })
-  })
+    });
+  });
 };
 
 const didFlightLandTwoHoursAgo = flight => {
@@ -52,8 +52,8 @@ const didFlightLandTwoHoursAgo = flight => {
         if (!operationalTimes || !operationalTimes.actualGateArrival && !operationalTimes.actualRunwayArrival) {
           return false;
         }
-        const realArrival = operationalTimes.actualGateArrival ? 
-          new Date(operationalTimes.actualGateArrival.dateUtc) : 
+        const realArrival = operationalTimes.actualGateArrival ?
+          new Date(operationalTimes.actualGateArrival.dateUtc) :
           new Date(operationalTimes.actualRunwayArrival.dateUtc);
 
         return twoHoursAgo > realArrival;
