@@ -6,7 +6,6 @@ import FlightConfirmation from '../components/FlightConfirmation';
 import { signUpTraveler } from '../actions/signUp';
 import { checkFlight } from '../actions/flight';
 
-
 class SignUpContainer extends Component {
   constructor() {
     super();
