@@ -11,6 +11,10 @@ const db = require('../database');
 	   -send texts to all those passengers
 
 	SET TO AT RISK
+
+	note to Dillon: this now needs to change
+
+
 	2. -get all travelers with statuses 'unconfirmed'
 		 -set their statuses to 'at risk'
 		 -in future, could send email push notifications

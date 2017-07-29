@@ -19,7 +19,7 @@ export const Flight = db.define('flight', {
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['arrived', 'delayed', 'scheduled'],
+    values: ['arrived', 'delayed', 'scheduled'], // arrived means landed + 2hrs. want to change this.
     defaultValue: 'scheduled'
   },
   arrivalTime: {
@@ -29,12 +29,12 @@ export const Flight = db.define('flight', {
 }, {
   classMethods: {
     findFlightsToLand: function () {
-      const today = new Date();
+      const now = new Date();
 
       return Flight.findAll({
         where: {
           arrivalTime: {
-            $lt: today
+            $lt: now
           },
           status: 'scheduled'
         }
@@ -52,7 +52,7 @@ export const Flight = db.define('flight', {
             {status: 'unconfirmed'},
             {where: {flightId: flight.id}, returning: true});
         })
-        .then(travelers => travelers[1])
+        .spread((count, travelers) => travelers)
         .catch(err => console.error(err));
     }
   }

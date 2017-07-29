@@ -88,9 +88,9 @@ module.exports = {
           alertAssignedAtRisk(process.env.NAZ_NUM, traveler),
           alertAssignedAtRisk(process.env.TAREK_NUM, traveler)
         ])
-        .catch(err => console.error(err))
-      })
-    })
+        .catch(err => console.error(err));
+      });
+    });
   },
 
   landFlightsAndTextTravelers: function () {
