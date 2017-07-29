@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 import { Dialog, FlatButton, RaisedButton } from 'material-ui';
-import SignUp from '../components/SignUp';
+import Form from '../components/Form';
 import FlightConfirmation from '../components/FlightConfirmation';
 import { signUpTraveler } from '../actions/signUp';
 import { checkFlight } from '../actions/flight';
+import { validateCode } from '../utils/validations';
 
 
-class SignUpContainer extends Component {
+class SignUpComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -71,7 +73,7 @@ class SignUpContainer extends Component {
 
     return (
       <div id="signup-container">
-        <SignUp handleSubmit={this.handleSubmit} handleFlightChange={this.handleFlightChange} />
+        <Form handleSubmit={this.handleSubmit} handleFlightChange={this.handleFlightChange} />
         <Dialog
           title="Confirm Submission"
           actions={(this.props.flight) ? confirmActions : cancelActions}
@@ -92,6 +94,7 @@ class SignUpContainer extends Component {
 
 /*---------------------------REDUX CONTAINER---------------------------*/
 
+
 const mapStateToProps = ({form, flight}) => ({form, flight});
 
 const mapDispatchToProps = dispatch => ({
@@ -99,7 +102,13 @@ const mapDispatchToProps = dispatch => ({
   checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 });
 
-export default connect(
+const SignUpContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignUpContainer);
+)(SignUpComponent);
+
+export default reduxForm({
+  form: 'signUp',  // a unique identifier for this form
+  asyncValidate: validateCode,
+  asyncBlurFields: ['airlineCode']
+})(SignUpContainer);
