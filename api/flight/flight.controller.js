@@ -1,5 +1,6 @@
-const axios = require('axios');
-import { airlineByCode, scheduleByCodeAndDate, statusByCodeAndDate } from './flight.query';
+import axios from 'axios';
+import { airlineByCode, scheduleByCodeAndDate } from './flight.query';
+import { flightInfoMapper, airlineInfoMapper } from '../utils/mappers';
 
 
 export const getCode = (req, res, next) => {
@@ -11,7 +12,8 @@ export const getCode = (req, res, next) => {
 		if (!airlines.length) {
 			res.status(404).json('code not found');
 		} else {
-			res.status(200).json(airlines[0]);
+			const mappedAirlineInfo = airlineInfoMapper(airlines);
+			res.status(200).json(mappedAirlineInfo);
 		}
 	})
 	.catch(next);
@@ -25,14 +27,10 @@ export const verifyFlight = (req, res, next) => {
 		if (flight.data.error || !flight.data.scheduledFlights.length) {
 			res.status(404).json('flight not found');
 		} else {
-			res.status(200).json(flight.data);
+			const mappedFlightInfo = flightInfoMapper(flight.data);
+			res.status(200).json(mappedFlightInfo);
 		}
 	})
 	.catch(next);
 };
 
-
-
-
-	// if the landing date of the flight is in the past, use statusByCodeAndDate
-	// else use scheduleByCodeAndDate

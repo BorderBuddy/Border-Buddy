@@ -6,7 +6,6 @@ import FlightConfirmation from '../components/FlightConfirmation';
 import { signUpTraveler } from '../actions/signUp';
 import { checkFlight } from '../actions/flight';
 
-
 class SignUpContainer extends Component {
   constructor() {
     super();
@@ -23,10 +22,13 @@ class SignUpContainer extends Component {
   }
 
   confirmSubmit() {
-    const { createTraveler } = this.props;
+    const { signUpTraveler, flight } = this.props;
     const { values } = this.props.form.signUp;
-    // TODO: add time details here
-    createTraveler(values);
+
+    // THIS COULD BE CLEANER
+    const travelerInfo = Object.assign({}, values, { arrivalTime: flight.arrivalTimeUtc });
+
+    signUpTraveler(travelerInfo);
     this.handleClose();
   }
 
@@ -41,8 +43,8 @@ class SignUpContainer extends Component {
       this.setState({ open: true });
     })
     .catch(() => {
-      this.setState({ open: false })
-    })
+      this.setState({ open: false });
+    });
   }
 
   render() {
@@ -94,7 +96,7 @@ class SignUpContainer extends Component {
 const mapStateToProps = ({form, flight}) => ({form, flight});
 
 const mapDispatchToProps = dispatch => ({
-  createTraveler: traveler => dispatch(signUpTraveler(traveler)),
+  signUpTraveler: traveler => dispatch(signUpTraveler(traveler)),
   checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 });
 

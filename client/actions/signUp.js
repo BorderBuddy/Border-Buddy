@@ -13,18 +13,18 @@ const setSignupTraveler = traveler => ({
 
 export const signUpTraveler = (traveler, isAdmin) => {
 	if (traveler.countryCode[0] === '+') traveler.countryCode = traveler.countryCode.slice(1);
-	console.log("CODE", traveler.countryCode);
+	// NOTE: we really should make the code an enum
+
   return dispatch => {
 		axios.post('/api/traveler/', traveler)
 		.then(res => {
-			console.log(res);
 			dispatch(setSignupTraveler(res.data));
-			if(!isAdmin) browserHistory.push('/success');
-			else {
-				browserHistory.push('/admin/travelers')
+
+			if (isAdmin) {
+				browserHistory.push('/admin/travelers');
+			} else {
+				browserHistory.push('/success');
 			}
-		})
-		.then((res) => {
 		})
 		.catch(console.error);
   };
