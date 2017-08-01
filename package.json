@@ -19,7 +19,7 @@
     "push:production": "cf push -f manifest.production.yml"
   },
   "engines": {
-    "node": "6.10.3",
+    "node": "6.11.0",
     "npm": "4.3.0"
   },
   "repository": {
