@@ -15,7 +15,6 @@ class SingleTravelerContainer extends Component {
 		super(props);
 
 		this.state = {
-      changed: false,
       open: false,
       sentTextOpen: false,
       textSentSuccess: null,
@@ -48,11 +47,10 @@ class SingleTravelerContainer extends Component {
   }
 
   confirmSubmit(e) {
-    e.preventDefault()
     if (!this.props.flight) browserHistory.push('/admin/travelers');
     else {
       const { updateTraveler, routeParams } = this.props;
-      const { values } = this.props.form.singleTraveler;
+      const { values } = this.props.form.travelerForm;
       // TODO: get time off of flight if need be
       values.countryCode = values.countryCode.split('-')[1].slice(2);
       updateTraveler(values, routeParams.id)
@@ -63,7 +61,7 @@ class SingleTravelerContainer extends Component {
   }
 
   sendText() {
-    this.props.sendText(this.props.form.singleTraveler.values)
+    this.props.sendText(this.props.form.travelerForm.values)
     .then(() => {
       this.setState({ sentTextOpen: true, textSentSuccess: true })
     })
@@ -83,8 +81,7 @@ class SingleTravelerContainer extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    const { flightNum, airlineCode, arrivalTime } = this.props.form.singleTraveler.values;
+    const { flightNum, airlineCode, arrivalTime } = this.props.form.travelerForm.values;
     const day = arrivalTime.getDate();
     const year = arrivalTime.getYear() + 1900;
     const month = arrivalTime.getMonth() + 1;
@@ -98,25 +95,13 @@ class SingleTravelerContainer extends Component {
   }
 
 	render() {
-    let arrivalTime, flightNum, airlineCode
-    if(this.props.form.singleTraveler) {
-      const values = this.props.form.singleTraveler.values;
-      airlineCode = values.airlineCode;
-      flightNum = values.flightNum;
-      arrivalTime = values.arrivalTime;      
-    } else {
-      airlineCode = '';
-      flightNum = '';
-      arrivalTime = {};
-    }
-		const submit = arrivalTime > Date.now() ? this.handleSubmit : this.confirmSubmit;
 
-
+    const submit = this.props.flight.arrivalTime > Date.now() ? this.handleSubmit : this.confirmSubmit;
+    
 		return (
     <div>
       <SingleTraveler 
         onSubmit={submit} 
-        changed={this.state.changed} 
         id={this.props.params.id}
         sendText={this.sendText}
         representatives={this.props.users}

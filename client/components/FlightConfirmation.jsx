@@ -2,6 +2,10 @@ import React from 'react';
 
 export default ({ flight }) => {
 
+	if (!flight) {
+		return <h4>Sorry, we could not find your flight</h4>
+	}
+
 	const departureDate = flight.scheduledFlights[0].departureTime.split('T');
 	const arrivalDate = flight.scheduledFlights[0].arrivalTime.split('T');
 	const { arrivalAirportFsCode, departureAirportFsCode, carrierFsCode, flightNumber } = flight.scheduledFlights[0];
@@ -30,7 +34,6 @@ export default ({ flight }) => {
 			airlineName = airlines[i].name;
 		}
 	}
-
 
 	return (
 		<div id="flight-confirmation-container" className="clearfix">

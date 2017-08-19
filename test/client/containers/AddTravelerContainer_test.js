@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from "enzyme";
-import {AddTravelerContainer} from "../../../client/containers/Admin/AddTravelerContainer"
-import AddTraveler from "../../../client/components/Admin/AddTraveler"
+import {AddTravelerContainer} from "../../../client/containers/AddTravelerContainer"
+import AddTraveler from "../../../client/components/Admin/AdminAddTravelerForm"
 import '../../unit_helpers'
 
 describe('Component: Admin/AddTraveler', () => {
@@ -12,7 +12,7 @@ describe('Component: Admin/AddTraveler', () => {
 
   beforeEach(() => {
     defaultFormValues = {
-      adminAddTraveler: {
+      travelerForm: {
         values: {
           foo: 'bar',
           countryCode: 'United States - +1' // imperfect solution, but until we do a full rewrite of the form, this'll have to do.
@@ -26,7 +26,7 @@ describe('Component: Admin/AddTraveler', () => {
     };
 
     createTravelerSpy = sinon.spy();
-    checkFlightSpy = sinon.spy();
+    checkFlightSpy = sinon.stub().returns(new Promise((res, rej) => res('resolved')));
   });
 
   describe('render', () => {
@@ -68,11 +68,11 @@ describe('Component: Admin/AddTraveler', () => {
         arrivalTime = new Date();
 
         formWithFlightInfo = {
-          adminAddTraveler: {
-            values: Object.assign({}, defaultFormValues.adminAddTraveler.values, {
+          travelerForm: {
+            values: Object.assign({}, defaultFormValues.travelerForm.values, {
               airlineCode: 'FF',
               flightNum: '123',
-              arrivalTime: arrivalTime
+              arrivalTime: arrivalTime,
             })
           }
         };
@@ -85,7 +85,7 @@ describe('Component: Admin/AddTraveler', () => {
         const event = {
           preventDefault: sinon.stub().returns({})
         };
-
+        // console.log("PROPS WITH FLIGHT INFO", defaultPropsWithFlightInfo);
         const component = shallow(<AddTravelerContainer {...defaultPropsWithFlightInfo}/>);
 
         component.instance().handleSubmit(event);
