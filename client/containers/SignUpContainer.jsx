@@ -72,6 +72,9 @@ class SignUpContainer extends Component {
 
     return (
       <div id="signup-container">
+        <h4 style={{ margin: '0em 5vw' }}>
+          NOTE: Border Buddy is in beta. We currently are only assisting travelers landing in JFK Airport in New York City. We plan to add more airports to our network in the future. Thank you for your support, and safe travels!
+        </h4>
         <SignUp handleSubmit={this.handleSubmit} handleFlightChange={this.handleFlightChange} />
         <Dialog
           title="Confirm Submission"
