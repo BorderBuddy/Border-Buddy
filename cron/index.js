@@ -5,12 +5,16 @@ const db = require('../database');
 /* SCHEDULED JOBS:
 
 	LAND FLIGHTS AND TEXT TRAVELERS
-	1. -get all recent flights (ie landed yesterday or today and has 'scheduled')
+	1. -get all flights that should have landed by now
 	   -check all those flights against API
 	   -if landed+2hrs, run 'landFlight' on the instance, which updates to 'landed' and all passengers to 'unconfirmed'
 	   -send texts to all those passengers
 
 	SET TO AT RISK
+
+	note to Dillon: this now needs to change
+
+
 	2. -get all travelers with statuses 'unconfirmed'
 		 -set their statuses to 'at risk'
 		 -in future, could send email push notifications

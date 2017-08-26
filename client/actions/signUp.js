@@ -12,6 +12,9 @@ const setSignupTraveler = traveler => ({
 });
 
 export const signUpTraveler = (traveler, isAdmin) => {
+	if (traveler.countryCode[0] === '+') traveler.countryCode = traveler.countryCode.slice(1);
+	// NOTE: we really should make the code an enum
+
   return dispatch => {
 		axios.post('/api/traveler/', traveler)
 		.then(res => {

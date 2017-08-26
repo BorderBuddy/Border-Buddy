@@ -54,7 +54,7 @@ $ npm run seed
 **NOTE**: To generate new migrations, use the sequelize CLI:
 
 ```
-$ ./node_modules/.bin/sequelize migration:create 
+$ ./node_modules/.bin/sequelize migration:create --name [insert-name-of-migration-here]
 ```
 
 ```
