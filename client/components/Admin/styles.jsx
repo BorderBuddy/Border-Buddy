@@ -46,3 +46,37 @@ export const setStatusColor = (status) => {
       return 'green';
   }
 }
+
+export const formStyle = {
+  form: {
+    display: 'block',
+    width: '80%',
+    margin: '5em auto'
+  },
+  input: {
+    width: '80%',
+    color: 'black',
+    marginTop: "1em",
+    marginBottom: "1em"
+  },
+  error: {
+    color: '#bd1c11'
+  },
+  label: {
+    color: '#526B5C'
+  },
+  underline: {
+    color: '#526B5C'
+  },
+  adminButton: {
+    marginBottom: '2em', 
+    width: '50%'
+  },
+  submitButton: {
+    marginBottom: '2em',
+    width: '100%'
+  },
+  header: {
+    textAlign: 'center'
+  }
+}

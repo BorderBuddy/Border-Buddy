@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import AddTraveler from '../../components/Admin/AddTraveler';
-import {checkFlight} from "../../actions/flight";
-import {signUpTraveler} from "../../actions/signUp";
+import AdminAddTravelerForm from '../components/Admin/AdminAddTravelerForm';
+import {checkFlight} from "../actions/flight";
+import {signUpTraveler} from "../actions/signUp";
 
 export class AddTravelerContainer extends React.Component {
   constructor() {
@@ -14,24 +14,33 @@ export class AddTravelerContainer extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const formValues = this.props.form.adminAddTraveler.values;
+    const formValues = this.props.form.travelerForm.values;
 
-    if(flightInfoSubmitted(formValues)) {
+    if (flightInfoSubmitted(formValues)) {
       const { flightNum, airlineCode, arrivalTime } = formValues;
       const day = arrivalTime.getDate();
       const year = arrivalTime.getYear() + 1900;
       const month = arrivalTime.getMonth() + 1;
-      this.props.checkFlight(airlineCode, flightNum, year, month, day);
+      this.props.checkFlight(airlineCode, flightNum, year, month, day)
+      .then((res) => {
+        formValues.countryCode = formValues.countryCode.split('-')[1].slice(2);
+        this.props.createTraveler(formValues, true);
+      })
+      .catch((err) => {
+        
+      })
+    } else {
+      formValues.countryCode = formValues.countryCode.split('-')[1].slice(2);
+      this.props.createTraveler(formValues, true);
     }
-    // TODO: Get flight time
-    this.props.createTraveler(formValues, true);
   }
 
   render() {
-    return(
-      <AddTraveler 
+    return (
+      <AdminAddTravelerForm 
       handleSubmit={this.handleSubmit}
       representatives={this.props.users}
+      title="Add New Traveler and Trip"
       />
     )
   }

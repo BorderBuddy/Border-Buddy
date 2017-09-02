@@ -39,7 +39,7 @@ describe('SelectedTraveler', () => {
         });
       });
 
-      sendText({phone: '5553334444', countryCode: '1' }, window)();
+      sendText({phone: '5553334444', countryCode: "1"}, window)();
     });
   });
   describe('delete traveler information', () => {

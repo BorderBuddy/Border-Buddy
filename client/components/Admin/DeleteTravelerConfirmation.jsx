@@ -2,6 +2,7 @@ import React from 'react';
 import {Dialog, RaisedButton} from 'material-ui';
 
 export default ({ confirmDelete, handleClose, open, traveler }) => {
+  
   const actions = [
     <RaisedButton
       key={1}

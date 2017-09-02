@@ -63,8 +63,8 @@
     "less": "^2.7.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.17.0",
-    "nodemon": "^1.11.0",
     "node-emoji": "^1.5.1",
+    "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.1.2",
@@ -84,7 +84,8 @@
     "sqlite3": "^3.1.8",
     "superagent": "^3.4.1",
     "tachyons-sass": "^4.7.1",
-    "twilio": "^2.11.1"
+    "twilio": "^2.11.1",
+    "volleyball": "^1.4.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
