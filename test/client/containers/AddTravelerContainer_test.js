@@ -85,7 +85,6 @@ describe('Component: Admin/AddTraveler', () => {
         const event = {
           preventDefault: sinon.stub().returns({})
         };
-        // console.log("PROPS WITH FLIGHT INFO", defaultPropsWithFlightInfo);
         const component = shallow(<AddTravelerContainer {...defaultPropsWithFlightInfo}/>);
 
         component.instance().handleSubmit(event);

@@ -2,34 +2,9 @@ import React from 'react';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
 import { MenuItem, RaisedButton } from 'material-ui';
 import { Field } from 'redux-form';
+import { adminFormExtensionStyle } from './styles';
 
 export default (props) => {
-
-  const style = {
-    form: {
-      display: 'block',
-      width: '80%',
-      margin: '0 auto'
-    },
-    input: {
-      width: '80%',
-      margin: '2%',
-      color: 'black',
-    },
-    error: {
-      color: '#bd1c11'
-    },
-    label: {
-      color: '#526B5C'
-    },
-    underline: {
-      color: '#526B5C'
-    },
-    button: {
-      display: 'block',
-      margin: '1em auto'
-    }
-  };
 
   const menuItems = (representatives) => {
     return (
@@ -52,10 +27,10 @@ export default (props) => {
           name="flightStatus"
           component={SelectField}
           hintText="Flight Status"
-          style={style.input}
-          errorStyle={style.error}
-          hintStyle={style.label}
-          underlineFocusStyle={style.underline}
+          style={adminFormExtensionStyle.input}
+          errorStyle={adminFormExtensionStyle.error}
+          hintStyle={adminFormExtensionStyle.label}
+          underlineFocusStyle={adminFormExtensionStyle.underline}
           disabled={true}
         >
           <MenuItem value={'scheduled'} primaryText="Scheduled"/>
@@ -68,10 +43,10 @@ export default (props) => {
           name="passengerStatus"
           component={SelectField}
           hintText="Passenger Status"
-          style={style.input}
-          errorStyle={style.error}
-          hintStyle={style.label}
-          underlineFocusStyle={style.underline}
+          style={adminFormExtensionStyle.input}
+          errorStyle={adminFormExtensionStyle.error}
+          hintStyle={adminFormExtensionStyle.label}
+          underlineFocusStyle={adminFormExtensionStyle.underline}
         >
           <MenuItem value={'transit'} primaryText="In Transit"/>
           <MenuItem value={'unconfirmed'} primaryText="Unconfirmed"/>
@@ -85,10 +60,10 @@ export default (props) => {
           name="representative"
           component={SelectField}
           hintText="Assign To"
-          style={style.input}
-          errorStyle={style.error}
-          hintStyle={style.label}
-          underlineFocusStyle={style.underline}
+          style={adminFormExtensionStyle.input}
+          errorStyle={adminFormExtensionStyle.error}
+          hintStyle={adminFormExtensionStyle.label}
+          underlineFocusStyle={adminFormExtensionStyle.underline}
           className="traveler-assign-to"
         >
           {menuItems(props.users)}

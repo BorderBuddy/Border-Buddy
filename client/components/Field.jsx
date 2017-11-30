@@ -4,7 +4,6 @@ import {required, phone, email, validateCode, uppercase} from '../utils/validati
 import {formStyle} from './Admin/styles';
 
 const StyledField = (props) => {
-  if (props.name === 'arrivalTime') console.log(props);
   return (
     <Field
       name={props.name}

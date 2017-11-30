@@ -22,8 +22,6 @@ export const signUpTraveler = (traveler, isAdmin) => {
 			if(!isAdmin) browserHistory.push('/success');
 			else browserHistory.push('/admin/travelers')
 		})
-		.then((res) => {
-		})
 		.catch(console.error);
   };
 };

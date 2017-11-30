@@ -23,21 +23,21 @@ export class AddTravelerContainer extends React.Component {
       const month = arrivalTime.getMonth() + 1;
       this.props.checkFlight(airlineCode, flightNum, year, month, day)
       .then((res) => {
-        formValues.countryCode = formValues.countryCode.split('-')[1].slice(2);
+        formValues.countryCode = extractCountryCode(formValues);
         this.props.createTraveler(formValues, true);
       })
       .catch((err) => {
         
       })
     } else {
-      formValues.countryCode = formValues.countryCode.split('-')[1].slice(2);
+      formValues.countryCode = extractCountryCode(formValues);
       this.props.createTraveler(formValues, true);
     }
   }
 
   render() {
     return (
-      <AdminAddTravelerForm 
+      <AdminAddTravelerForm
       handleSubmit={this.handleSubmit}
       representatives={this.props.users}
       title="Add New Traveler and Trip"
@@ -46,10 +46,14 @@ export class AddTravelerContainer extends React.Component {
   }
 }
 
-// HELPER FN
+// HELPER FNS
 const flightInfoSubmitted = (formValues) => {
   return formValues.flightNum && formValues.airlineCode && formValues.arrivalTime;
 };
+
+const extractCountryCode = (formValues) => formValues.countryCode.split('-')[1].slice(2)
+
+
 
 const mapStateToProps = ({form, users}) => ({form, users})
 const mapDispatchToProps = dispatch => ({
