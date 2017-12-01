@@ -4,7 +4,8 @@ import {
   SET_AUTH,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  LOGOUT
 } from '../constants';
 
 export const setAuth = auth => ({ type: SET_AUTH, auth });
@@ -34,6 +35,14 @@ export const loginFailure = message => ({
   error: true
 });
 
+export const logout = () => ({
+  type: LOGOUT,
+  payload: {
+    fetching: false
+  },
+  error: false
+});
+
 export const login = (email, password) => dispatch => {
   dispatch(loginRequest());
   axios
@@ -43,9 +52,7 @@ export const login = (email, password) => dispatch => {
       dispatch(loginSuccess(response.data));
       browserHistory.push('/admin/travelers');
     })
-    .catch(err => {
-      dispatch(loginFailure(err.response.data.message));
-    });
+    .catch(err => dispatch(loginFailure(err.response.data.message)));
 };
 
 export const signup = (user, _window = window) => () => {
@@ -58,16 +65,17 @@ export const signup = (user, _window = window) => () => {
     .catch(err => console.error('ERROR!', err));
 };
 
-export const checkToken = () => dispatch => {
+export const checkToken = () => (dispatch, getState) => {
   return axios
     .get('/api/auth/checkToken', {
       headers: {
-        Authorization: window.localStorage.accessToken
+        Authorization: getState().auth.user.token
       }
     })
     .then(response => {
-      dispatch(setAuth(response.data));
-    });
+      dispatch(loginSuccess(response.data));
+    })
+    .catch(err => dispatch(loginFailure(err.response.data.message)));
 };
 
 export const signout = () => dispatch => {
@@ -75,7 +83,7 @@ export const signout = () => dispatch => {
     .post('/api/auth/logout')
     .then(() => {
       window.localStorage.clear();
-      dispatch(setAuth(null));
+      dispatch(logout(null));
       browserHistory.push('/login');
     })
     .catch(err => console.error(err));

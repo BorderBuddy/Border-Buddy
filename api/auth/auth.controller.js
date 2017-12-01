@@ -31,10 +31,11 @@ export function isAuthenticated(req, res, next) {
         email: user.email
       });
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err);
       res
         .status(401)
-        .send('Unauthorized')
+        .send({ message: `You are not allowed to access this page: ${err}` })
         .end();
     });
 }

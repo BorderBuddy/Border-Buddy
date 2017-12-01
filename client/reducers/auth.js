@@ -2,7 +2,8 @@ import {
   SET_AUTH,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  LOGOUT
 } from '../constants';
 
 const INITIAL_AUTH_STATE = {
@@ -10,7 +11,9 @@ const INITIAL_AUTH_STATE = {
     email: '',
     id: 0,
     phone: '',
-    tokenResponse: ''
+    token: window.localStorage.accessToken
+      ? window.localStorage.accessToken
+      : ''
   },
   fetching: false,
   error: null
@@ -35,6 +38,12 @@ const loginFailure = (state, { payload: { fetching, error } }) => ({
   error
 });
 
+const logout = (state, { payload: { fetching } }) => ({
+  ...stage,
+  fetching,
+  error
+});
+
 export default (state = INITIAL_AUTH_STATE, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
@@ -43,6 +52,8 @@ export default (state = INITIAL_AUTH_STATE, action) => {
       return loginSuccess(state, action);
     case LOGIN_FAILURE:
       return loginFailure(state, action);
+    case LOGOUT:
+      return logout(state, action);
     default:
       return state;
   }
