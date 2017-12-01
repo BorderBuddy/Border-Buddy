@@ -3,12 +3,9 @@ const resolve = require('path').resolve;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-
   context: resolve(__dirname),
 
-  entry: [
-    './client/index.js'
-  ],
+  entry: ['./client/index.js'],
 
   output: {
     filename: 'fund.js',
@@ -26,7 +23,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loaders: ['babel-loader']
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react', 'stage-2']
+        }
       },
       {
         test: /\.js?$/,
@@ -78,9 +78,7 @@ module.exports = {
     }),
 
     new webpack.DefinePlugin({
-      'DEV': false
-    }),
-
+      DEV: false
+    })
   ]
-
 };

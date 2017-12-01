@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const configPlugin = new webpack.DefinePlugin({
   'process.env': {
-    'NODE_ENV': JSON.stringify(process.env.NODE_ENV || "development")
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
   }
 });
 
@@ -37,9 +37,8 @@ module.exports = {
     historyApiFallback: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
-      "/api" : "http://localhost:3000"
+      '/api': 'http://localhost:3000'
     }
-
   },
 
   module: {
@@ -47,14 +46,17 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loaders: ['babel-loader']
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react', 'stage-2']
+        }
       },
       {
         test: /\.js?$/,
         exclude: [
           resolve(__dirname, 'node_modules'),
           resolve(__dirname, 'dist')
-        ],
+        ]
       },
       {
         test: /\.scss$/,
@@ -77,7 +79,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new ExtractTextPlugin('stylesheets/fund.compiled.css'),
     new webpack.DefinePlugin({
-      'DEV': true
-    }),
+      DEV: true
+    })
   ]
 };

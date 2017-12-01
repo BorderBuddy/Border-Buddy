@@ -1,9 +1,15 @@
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+
+export const SET_AUTH = 'SET_AUTH';
+
+
 export const SET_ALL_TRAVELERS = 'SET_ALL_TRAVELERS';
 export const SET_SELECTED_TRAVELER = 'SET_SELECTED_TRAVELER';
 export const UPDATE_TRAVELER = 'UPDATE_TRAVELER';
 export const LOAD = 'LOAD';
 export const SET_FLIGHT = 'SET_FLIGHT';
-export const SET_AUTH = 'SET_AUTH';
 export const SET_SIGNUP_TRAVELER = 'SET_SIGNUP_TRAVELER';
 export const CLEAR_SIGNUP_TRAVELER = 'CLEAR_SIGNUP_TRAVELER';
 export const SET_ALL_USERS = 'SET_ALL_USERS';
