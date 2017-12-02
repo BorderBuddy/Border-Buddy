@@ -19,12 +19,8 @@ export const signUpTraveler = (traveler, isAdmin) => {
 		axios.post('/api/traveler/', traveler)
 		.then(res => {
 			dispatch(setSignupTraveler(res.data));
-
-			if (isAdmin) {
-				browserHistory.push('/admin/travelers');
-			} else {
-				browserHistory.push('/success');
-			}
+			if(!isAdmin) browserHistory.push('/success');
+			else browserHistory.push('/admin/travelers')
 		})
 		.catch(console.error);
   };
