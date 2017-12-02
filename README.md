@@ -1,6 +1,6 @@
 # Hack The Ban - Border Buddy
 
-[![Stories in Ready](https://badge.waffle.io/EmilyDev/Hack-The-Ban.png?label=ready&title=Ready)](https://waffle.io/EmilyDev/Hack-The-Ban)
+[![Stories in Ready](https://badge.waffle.io/BorderBuddy/Border-Buddy.png?label=ready&title=Ready)](https://waffle.io/BorderBuddy/Border-Buddy)
 [![CircleCI](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master.svg?style=svg&circle-token=e6542681d7c1b67287fe02caf10508ed6087dd03)](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master)
 
 ## Getting Started
@@ -9,7 +9,7 @@ Initial setup:
 
 ### Database setup:
 
-- Install/start postgres
+- Install/start postgres. You can find installers via the [Postgres website](https://www.postgresql.org/download/), or you can use a package manager like Homebrew:
  
 ```
 $ brew install postgres
@@ -25,7 +25,7 @@ $ createdb BorderBuddy
 $ createdb BorderBuddy_test
 ```
 
-- Get the `.env` file from your another team member
+- Get the `.env` file from admin@borderbuddy.us
 
 - Install dependencies
 
@@ -92,6 +92,6 @@ webpack-dev-server will proxy through any requests to 8080 to the API running on
 
 ## Testing
 
-Tests use [Mocha](http://mochajs.org/) and [Chai.js](http://chaijs.com/). New tests should be included in the `test` directory (see `test/example.js` for an example test).
+Tests use [Mocha](http://mochajs.org/) and [Chai.js](http://chaijs.com/). New tests should be included in the `test` directory (see `test/example.js` for an example test). We are also using Jest for testing our Redux actions.
 
 To execute the test suite locally, run `npm run test-local`.
