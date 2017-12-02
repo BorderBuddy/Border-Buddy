@@ -45,14 +45,17 @@ export const logout = () => ({
 
 export const login = (email, password) => dispatch => {
   dispatch(loginRequest());
-  axios
+  return axios
     .post('/api/auth/local', { email, password })
     .then(response => {
       window.localStorage.setItem('accessToken', response.data.token);
-      dispatch(loginSuccess(response.data));
       browserHistory.push('/admin/travelers');
+      return dispatch(loginSuccess(response.data));
     })
-    .catch(err => dispatch(loginFailure(err.response.data.message)));
+    .catch(err => {
+      console.log(err);
+      return dispatch(loginFailure(err.response.data.message));
+    });
 };
 
 export const signup = (user, _window = window) => () => {
@@ -89,7 +92,7 @@ export const signout = () => dispatch => {
     .catch(err => console.error(err));
 };
 
-export const whoAmI = () => (dispatch, getState) => {
+export const whoAmI = () => dispatch => {
   // if (!getState().auth.id) return new Promise((resolve, reject) => (resolve()))
   return axios
     .get('/api/auth/checkToken', {

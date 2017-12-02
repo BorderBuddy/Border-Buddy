@@ -7,11 +7,11 @@ npm run seed
 
 if [ "$LOCAL" == "1" ]; then
     export TEST_PORT=8080
-    npm run dev&
+    # npm run dev&
     sleep 3
 else
     export TEST_PORT=3000
-    npm run build
+    # npm run build
     sleep 5
 fi
 
