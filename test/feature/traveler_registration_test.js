@@ -29,12 +29,7 @@
 //       .type('input[name="nationality"]', 'Iranian')
 //       .type('input[name="email"]', 'jane@example.com')
 //       .type('input[name="phone"]', '5554567890')
-<<<<<<< HEAD
 //       .type('input[name="countryCode"]', '1')
-=======
-//       .type('input[name="countryCode"]', 'United States - +1')
-//       .mouseDownUpOnElementContaining('div', 'United States - +1')
->>>>>>> master
 //       .mouseDownUpOnElement('.traveler-require-interpreter button')
 //       .wait('.traveler-require-interpreter-option')
 //       .mouseDownUpOnElement('.traveler-require-interpreter-option div')
