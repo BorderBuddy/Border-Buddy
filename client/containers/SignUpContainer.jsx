@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 import { Dialog, FlatButton, RaisedButton } from 'material-ui';
-import SignUp from '../components/SignUp';
+import Form from '../components/FormContainer';
 import FlightConfirmation from '../components/FlightConfirmation';
 import { signUpTraveler } from '../actions/signUp';
 import { checkFlight } from '../actions/flight';
@@ -23,18 +24,16 @@ class SignUpContainer extends Component {
 
   confirmSubmit() {
     const { signUpTraveler, flight } = this.props;
-    const { values } = this.props.form.signUp;
-
-    // THIS COULD BE CLEANER
+    const { values } = this.props.form.travelerForm;
+    values.countryCode = values.countryCode.split('-')[1].slice(2);
     const travelerInfo = Object.assign({}, values, { arrivalTime: flight.arrivalTimeUtc });
-
     signUpTraveler(travelerInfo);
     this.handleClose();
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const { flightNum, airlineCode, arrivalTime } = this.props.form.signUp.values;
+    const { flightNum, airlineCode, arrivalTime } = this.props.form.travelerForm.values;
     const day = arrivalTime.getDate();
     const year = arrivalTime.getYear() + 1900;
     const month = arrivalTime.getMonth() + 1;
@@ -71,20 +70,15 @@ class SignUpContainer extends Component {
     ];
 
     return (
-      <div id="signup-container">
-        <SignUp handleSubmit={this.handleSubmit} handleFlightChange={this.handleFlightChange} />
+      <div>
+        <Form handleSubmit={this.handleSubmit} extraFields={[]} formTitle="Traveler Registration" />
         <Dialog
           title="Confirm Submission"
           actions={(this.props.flight) ? confirmActions : cancelActions}
           modal={true}
           open={this.state.open}
         >
-          {
-            this.props.flight ?
-            <FlightConfirmation flight={this.props.flight} />
-            :
-            <h4>Sorry, we could not find your flight</h4>
-          }
+          <FlightConfirmation flight={this.props.flight} />
         </Dialog>
       </div>
     );
@@ -92,6 +86,7 @@ class SignUpContainer extends Component {
 }
 
 /*---------------------------REDUX CONTAINER---------------------------*/
+
 
 const mapStateToProps = ({form, flight}) => ({form, flight});
 
@@ -104,3 +99,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SignUpContainer);
+

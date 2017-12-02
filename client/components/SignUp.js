@@ -36,6 +36,9 @@ const SignUp = ({handleSubmit, valid}) => {
 
   return (
     <form style={style.form} onSubmit={handleSubmit}>
+      <h4 style={{ margin: '0em 5vw' }}>
+        NOTE: Border Buddy is in beta. We currently are only assisting travelers landing in JFK Airport in New York City. We plan to add more airports to our network in the future. Thank you for your support, and safe travels!
+      </h4>
       <legend className="mx-auto h1 subtitle">Register Your Trip</legend>
       <div className="clearfix">
         <div className="field-container col-12 md-col md-col-6">
