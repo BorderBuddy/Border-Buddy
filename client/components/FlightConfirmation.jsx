@@ -18,7 +18,6 @@ export default props => {
 		flightNumber
 	} = flightConfirmationConverter(props);
 
-
 	return (
 		<div id="flight-confirmation-container" className="clearfix">
 		  <div className="col-12">

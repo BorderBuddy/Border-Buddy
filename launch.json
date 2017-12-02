@@ -1,0 +1,3 @@
+{
+  "runtimeArgs": ["-r", "babel-register"]
+}
