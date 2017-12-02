@@ -29,7 +29,12 @@
 //       .type('input[name="nationality"]', 'Iranian')
 //       .type('input[name="email"]', 'jane@example.com')
 //       .type('input[name="phone"]', '5554567890')
+<<<<<<< HEAD
 //       .type('input[name="countryCode"]', '1')
+=======
+//       .type('input[name="countryCode"]', 'United States - +1')
+//       .mouseDownUpOnElementContaining('div', 'United States - +1')
+>>>>>>> master
 //       .mouseDownUpOnElement('.traveler-require-interpreter button')
 //       .wait('.traveler-require-interpreter-option')
 //       .mouseDownUpOnElement('.traveler-require-interpreter-option div')
@@ -67,7 +72,6 @@
 //         expect(result).to.contain('Iranian');
 //         expect(result).to.contain('jane@example.com');
 //         expect(result).to.contain('5554567890');
-//         expect(result).to.contain('1');
 //         expect(result).to.contain('UA');
 //         expect(result).to.contain('88');
 //         expect(result).to.contain('Jennifer Citizen');

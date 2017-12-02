@@ -11,7 +11,7 @@ import AdminSignUp from './containers/AdminSignUpContainer';
 import UpdateUserContainer from './containers/UpdateUserContainer';
 import Success from './containers/Success';
 import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer';
-import AddTravelerContainer from './containers/Admin/AddTravelerContainer';
+import AddTravelerContainer from './containers/AddTravelerContainer';
 
 import About from './components/About';
 import WhyBorderBuddy from './components/WhyBorderBuddy';
