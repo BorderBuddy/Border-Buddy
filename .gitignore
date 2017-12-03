@@ -9,3 +9,5 @@ dist/stylesheets/**
 npm-debug.log*
 .npmrc
 flow-typed/
+.DS_Store
+api/.DS_Store
