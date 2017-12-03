@@ -4,7 +4,7 @@ general:
       - master
 machine:
   node:
-    version: 8.9.0
+    version: 8.9.1
   pre:
     - curl -LsS 'https://cli.run.pivotal.io/stable?release=debian64&source=pws' -o cf-cli.deb
     - sudo dpkg -i cf-cli.deb
