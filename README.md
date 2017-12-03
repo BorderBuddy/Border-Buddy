@@ -76,10 +76,11 @@ To run the API, run:
 Navigate to localhost:3000.
 
 ```
-$ npm start
+$ npm start --dev
 ```
 
 The output can be viewed at localhost:3000
+**Note:** The `--dev` flag loads a dummy flightstats dataset so that we don't have to hit the flightstats API with prod keys.
 
 For the webpack dev server, run the following.
 
