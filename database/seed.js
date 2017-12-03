@@ -14,6 +14,9 @@ const users = [
   { email: 'admin@borderbuddy.us', password: '12345678', phone: '1234567890' }
 ];
 
+/*
+* ATTN: Do not change this test data because controller/flight.dev's fixtures depend on it
+*/
 const dummyFlights = [{
 	flightNum: '88',
 	airlineCode: 'UA',
