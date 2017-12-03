@@ -1,4 +1,4 @@
-# Hack The Ban - Border Buddy
+# Border Buddy
 
 [![Stories in Ready](https://badge.waffle.io/BorderBuddy/Border-Buddy.png?label=ready&title=Ready)](https://waffle.io/BorderBuddy/Border-Buddy)
 [![CircleCI](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master.svg?style=svg&circle-token=e6542681d7c1b67287fe02caf10508ed6087dd03)](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master)
