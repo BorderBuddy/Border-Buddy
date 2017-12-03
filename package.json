@@ -27,9 +27,7 @@
     "type": "git",
     "url": "https://github.com/EmilyDev/Hack-The-Ban.git"
   },
-  "keywords": [
-    "hacktheban"
-  ],
+  "keywords": ["hacktheban"],
   "author": "emilyho",
   "license": "ISC",
   "bugs": {
