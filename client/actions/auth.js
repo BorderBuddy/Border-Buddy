@@ -93,7 +93,6 @@ export const signout = () => dispatch => {
 };
 
 export const whoAmI = () => dispatch => {
-  // if (!getState().auth.id) return new Promise((resolve, reject) => (resolve()))
   return axios
     .get('/api/auth/checkToken', {
       headers: {
