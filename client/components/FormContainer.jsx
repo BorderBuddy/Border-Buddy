@@ -15,7 +15,6 @@ class FormContainer extends Component {
   }
 
   toggleTooltip() {
-    console.log('yo');
     this.setState({ tooltipOpen: !this.state.tooltipOpen });
   }
 
