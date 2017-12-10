@@ -1,19 +1,31 @@
 import React from 'react';
 import StyledField from './Field';
-import {RaisedButton, MenuItem, Divider} from 'material-ui';
-import {TextField, DatePicker, SelectField, AutoComplete} from 'redux-form-material-ui';
+import { RaisedButton, MenuItem, Divider } from 'material-ui';
+import {
+  TextField,
+  DatePicker,
+  SelectField,
+  AutoComplete
+} from 'redux-form-material-ui';
 import AirlinePicker from './AirlinePicker';
-import {required, phone, email, validateCode, uppercase} from '../utils/validations';
+import {
+  required,
+  phone,
+  email,
+  validateCode,
+  uppercase
+} from '../utils/validations';
 import countryCodes from '../utils/countryCodes';
 import { formStyle } from './Admin/styles';
 
-const Form = (props) => (
-
+const Form = props => (
   <form style={formStyle.form} onSubmit={props.handleSubmit}>
     <h1 style={formStyle.header}>{props.formTitle}</h1>
     <Divider />
     <h3>Personal and Contact Details</h3>
-    <p><em>Tell us about yourself, so our lawyers can can best assist you.</em></p>
+    <p>
+      <em>Tell us about yourself, so our lawyers can can best assist you.</em>
+    </p>
     <div className="clearfix">
       <div className="field-container col-12 md-col md-col-6">
         <StyledField
@@ -24,7 +36,7 @@ const Form = (props) => (
         />
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField 
+        <StyledField
           name="nationality"
           component={TextField}
           validate={!props.isAdmin ? required : undefined}
@@ -37,8 +49,8 @@ const Form = (props) => (
           component={SelectField}
           hintText="Are you comfortable speaking English?"
         >
-          <MenuItem value="false" primaryText="Yes"/>
-          <MenuItem value="true" primaryText="No"/>
+          <MenuItem value="false" primaryText="Yes" />
+          <MenuItem value="true" primaryText="No" />
         </StyledField>
       </div>
       <div className="field-container col-12 md-col md-col-6">
@@ -82,14 +94,27 @@ const Form = (props) => (
           hintText="Do you have a smartphone?"
           validate={!props.isAdmin ? required : undefined}
         >
-          <MenuItem className="traveler-has-phone-option" value="true" primaryText="Yes"/>
-          <MenuItem className="traveler-has-no-phone-option" value="false" primaryText="No"/>
+          <MenuItem
+            className="traveler-has-phone-option"
+            value="true"
+            primaryText="Yes"
+          />
+          <MenuItem
+            className="traveler-has-no-phone-option"
+            value="false"
+            primaryText="No"
+          />
         </StyledField>
       </div>
     </div>
     <div className="clearfix">
       <h3>Travel details</h3>
-      <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
+      <p>
+        <em>
+          Tell us when your flight arrives, so we know when to check in with
+          you.
+        </em>
+      </p>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
         <StyledField
           name="arrivalTime"
@@ -105,6 +130,8 @@ const Form = (props) => (
           component={AirlinePicker}
           validate={!props.isAdmin ? [uppercase, required] : uppercase}
           label="Airline code"
+          toggleTooltip={props.toggleTooltip}
+          tooltipOpen={props.tooltipOpen}
         />
       </div>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
@@ -118,7 +145,9 @@ const Form = (props) => (
     </div>
     <div className="clearfix">
       <h3>Emergency contact</h3>
-      <p><em>Who can we contact if we can't get in touch with you?</em></p>
+      <p>
+        <em>Who can we contact if we can't get in touch with you?</em>
+      </p>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
         <StyledField
           name="secondaryContactName"
@@ -142,7 +171,9 @@ const Form = (props) => (
         />
       </div>
     </div>
-    {props.children /* renders the AdminExtension part of the form or any other additional fields you may want */ }
+    {
+      props.children /* renders the AdminExtension part of the form or any other additional fields you may want */
+    }
     <div>
       <RaisedButton
         type="submit"
@@ -152,24 +183,23 @@ const Form = (props) => (
         primary={true}
         style={formStyle.submitButton}
       />
-      {
-        props.showAdditionalButtons &&
+      {props.showAdditionalButtons && (
         <div>
-          <RaisedButton 
-            label="Text Traveler" 
-            onClick={props.sendText} 
-            style={formStyle.adminButton} 
-            labelColor="#2d6ea8" 
+          <RaisedButton
+            label="Text Traveler"
+            onClick={props.sendText}
+            style={formStyle.adminButton}
+            labelColor="#2d6ea8"
           />
-          <RaisedButton 
-            label="Delete Traveler" 
-            onClick={props.deleteTraveler} 
-            style={formStyle.adminButton} 
-            backgroundColor="#bd1c11" 
-            labelColor="#FFFFFF" 
+          <RaisedButton
+            label="Delete Traveler"
+            onClick={props.deleteTraveler}
+            style={formStyle.adminButton}
+            backgroundColor="#bd1c11"
+            labelColor="#FFFFFF"
           />
         </div>
-      }
+      )}
     </div>
   </form>
 );
