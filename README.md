@@ -1,4 +1,4 @@
-# Hack The Ban - Border Buddy
+# Border Buddy
 
 [![Stories in Ready](https://badge.waffle.io/BorderBuddy/Border-Buddy.png?label=ready&title=Ready)](https://waffle.io/BorderBuddy/Border-Buddy)
 [![CircleCI](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master.svg?style=svg&circle-token=e6542681d7c1b67287fe02caf10508ed6087dd03)](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master)
@@ -76,10 +76,11 @@ To run the API, run:
 Navigate to localhost:3000.
 
 ```
-$ npm start
+$ npm start --dev
 ```
 
 The output can be viewed at localhost:3000
+**Note:** The `--dev` flag loads a dummy flightstats dataset so that we don't have to hit the flightstats API with prod keys.
 
 For the webpack dev server, run the following.
 
