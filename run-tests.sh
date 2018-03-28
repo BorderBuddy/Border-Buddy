@@ -18,3 +18,4 @@ fi
 npm run start&
 sleep 3
 ./node_modules/mocha/bin/mocha
+jest

@@ -8,15 +8,12 @@ import {addRoutes} from './endpoints';
 
 const app = express();
 
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(volleyball);
 
-
 addRoutes(app);
-
 
 const staticContent = path.normalize(__dirname + '/../dist');
 app.use(express.static(staticContent));
