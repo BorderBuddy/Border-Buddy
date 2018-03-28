@@ -1,5 +1,5 @@
-export const airlineInfoMapper = airlines => {
-	return airlines[0];
+export const airlineInfoMapper = (airlines, code) => {
+	return airlines.find(airline => airline.iata === code);
 };
 
 export const flightInfoMapper = fsFlightData => {
