@@ -1,14 +1,16 @@
 import passport from 'passport';
-import {signToken, verifyToken} from './auth.service';
+import { signToken, verifyToken } from './auth.service';
 
 export function login(req, res, next) {
-  passport.authenticate('local', function (err, user, info) {
+  passport.authenticate('local', function(err, user, info) {
     var error = err || info;
     if (error) {
-      return res.status(401).json(error);
+      return res.status(401).send(error);
     }
     if (!user) {
-      return res.status(404).json({message: 'Something went wrong, please try again.'});
+      return res
+        .status(404)
+        .json({ message: 'Something went wrong, please try again.' });
     }
 
     var token = signToken(user.id);
@@ -20,12 +22,21 @@ export function isAuthenticated(req, res, next) {
   const token = req.headers.authorization;
 
   verifyToken(token)
-    .then((user) => {
+    .then(user => {
       let tokenResponse = signToken(user.id);
-      res.json({ tokenResponse, id: user.id, phone: user.phone, email: user.email });
+      res.json({
+        tokenResponse,
+        id: user.id,
+        phone: user.phone,
+        email: user.email
+      });
     })
-    .catch(() => {
-      res.status(401).send('Unauthorized').end();
+    .catch(err => {
+      console.log(err);
+      res
+        .status(401)
+        .send({ message: `You are not allowed to access this page: ${err}` })
+        .end();
     });
 }
 

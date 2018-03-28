@@ -10,12 +10,11 @@
     "no-warning-comments": [0]
   },
   "parserOptions": {
-      "sourceType": "module",
-      "ecmaFeatures": {
-      "jsx": true
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
     }
   },
-  "plugins": [
-    "react"
-  ]
+  "plugins": ["react"]
 }
