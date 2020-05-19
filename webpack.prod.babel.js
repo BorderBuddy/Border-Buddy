@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const resolve = require('path').resolve;
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 
 module.exports = {
   context: resolve(__dirname),
@@ -19,7 +21,7 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
@@ -40,15 +42,36 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /(node_modules)/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         include: /\.json$/,
         loader: 'json'
       }
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          ie8: false,
+          ecma: 6,
+          compress: {
+            conditionals: true,
+            unused: true,
+            comparisons: true,
+            sequences: true,
+            dead_code: true,
+            evaluate: true,
+            if_return: true,
+            join_vars: true
+          },
+          sourceMap: true,
+          output: {
+            comments: false
+          }
+        },
+      })
     ]
   },
 
@@ -57,26 +80,9 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
 
-    new ExtractTextPlugin('stylesheets/fund.compiled.css'),
+    new MiniCssExtractPlugin('stylesheets/fund.compiled.css'),
 
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true
-      },
-      output: {
-        comments: false
-      }
-    }),
+    new webpack.LoaderOptionsPlugin({ options: {} }),
 
     new webpack.DefinePlugin({
       DEV: false
