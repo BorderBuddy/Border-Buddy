@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const resolve = require('path').resolve;
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 const configPlugin = new webpack.DefinePlugin({
   'process.env': {
@@ -42,7 +43,7 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
@@ -62,10 +63,7 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /(node_modules)/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         include: /\.json$/,
@@ -78,7 +76,8 @@ module.exports = {
     configPlugin,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new ExtractTextPlugin('stylesheets/fund.compiled.css'),
+    new MiniCssExtractPlugin('stylesheets/fund.compiled.css'),
+    new webpack.LoaderOptionsPlugin({ options: {} }),
     new webpack.DefinePlugin({
       DEV: true
     })
