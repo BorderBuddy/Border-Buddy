@@ -1,24 +1,17 @@
-require('dotenv').config()
-
-const {DB_PASSWORD} = process.env
-
 module.exports = {
-  development: {
-    url: 'postgres://postgres:root@localhost:5432/BorderBuddy',
+  'development' : {
     username: 'postgres',
+    password: 'password',
     database: 'BorderBuddy',
-    dialect: 'postgres',
-    password: DB_PASSWORD
+    dialect: 'postgres'
   },
-  test: {
+  'test' : {
     url: 'postgres://postgres:root@localhost:5432/BorderBuddy_test',
     database: 'BorderBuddy_test',
     username: 'postgres',
-    dialect: 'postgres',
-    password: DB_PASSWORD
-
+    dialect: 'postgres'
   },
-  production: {
+  'production': {
     use_env_variable: 'DATABASE_URL'
   }
-}
+};
