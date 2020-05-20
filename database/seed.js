@@ -50,18 +50,20 @@ const dummyTravelers = [
 	{ email: 'melbrux@abc.com', countryCode: '1', phone: '8084982097', name: 'Fraulein Hhauserr', status: 'unconfirmed', connectivity: true, nationality: 'Sudan', flightId: 1}
 ];
 
-const seedFlights = () => db.Promise.each(dummyFlights, flight => db.model('flight').create(flight));
-const seedTravelers = () => db.Promise.each(dummyTravelers, traveler => db.model('traveler').create(traveler));
-const seedUsers = () => db.Promise.each(users, user => User.findOrCreate({
-	where: { email: user.email },
-	defaults: { password: user.password }}
-));
+const seedFlights = () => { 
+	dummyFlights.forEach((flight) => {db.model('flight').create(flight)})
+}
+// const seedTravelers = () => db.Promise.each(dummyTravelers, traveler => db.model('traveler').create(traveler));
+// const seedUsers = () => db.Promise.each(users, user => User.findOrCreate({
+// 	where: { email: user.email },
+// 	defaults: { password: user.password }}
+// ));
 
-db.didSync
+db.authenticate()
 	.then(seedFlights)
-	.then(flights => console.log(chalk.blue(`Seeded ${flights.length} flights...`)))
-	.then(seedTravelers)
-	.then(travelers => console.log(chalk.blue(`Seeded ${travelers.length} travelers...`)))
-	.then(seedUsers)
-	.then(users => console.log(chalk.blue(`Seeded ${users.length} users...`)))
-	.catch(error => console.error(chalk.red(error.stack)));
+ 	.then(flights => console.log(flights))
+// 	.then(seedTravelers)
+// 	.then(travelers => console.log(chalk.blue(`Seeded ${travelers.length} travelers...`)))
+// 	.then(seedUsers)
+// 	.then(users => console.log(chalk.blue(`Seeded ${users.length} users...`)))
+ 	.catch(error => console.error(chalk.red(error.stack)));
