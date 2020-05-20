@@ -7,7 +7,7 @@ export const adminFormExtensionStyle = {
   input: {
     width: '80%',
     margin: '2%',
-    color: 'black',
+    color: 'black'
   },
   error: {
     color: '#bd1c11'
@@ -22,4 +22,4 @@ export const adminFormExtensionStyle = {
     display: 'block',
     margin: '1em auto'
   }
-};
+}
