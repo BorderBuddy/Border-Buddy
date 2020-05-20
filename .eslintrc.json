@@ -1,20 +1,29 @@
 {
-    "extends": ["fullstack", "plugin:react/recommended"],
-    "rules": {
-      "no-extra-semi": "error",
-      "semi": [1, "always"],
-      "jsx-quotes": [1, "prefer-double"],
-      "react/prop-types": [0],
-      "react/display-name": [0],
-      "react/jsx-tag-spacing": [0],
-      "no-warning-comments": [0]
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
     },
+    "extends": [
+        "plugin:react/recommended",
+        "standard"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true,
-        "experimentalObjectRestSpread": true
-      }
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
     },
-    "plugins": ["react"]
-  }
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+    }
+}
