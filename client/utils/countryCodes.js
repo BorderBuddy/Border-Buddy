@@ -227,4 +227,4 @@ export default {
   967: 'Yemen - +967',
   260: 'Zambia - +260',
   26: 'Zimbabwe - +263'
-};
+}
