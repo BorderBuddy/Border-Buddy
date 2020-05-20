@@ -1,8 +1,7 @@
-const webpack = require('webpack');
-const resolve = require('path').resolve;
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+const webpack = require('webpack')
+const resolve = require('path').resolve
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   context: resolve(__dirname),
@@ -17,11 +16,19 @@ module.exports = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
-
   module: {
     rules: [
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader'
+          }
+        ]
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
@@ -32,12 +39,20 @@ module.exports = {
         }
       },
       {
+        enforce: 'pre',
         test: /\.js?$/,
         exclude: [
           resolve(__dirname, 'node_modules'),
           resolve(__dirname, 'dist')
         ],
-        use: [{ loader: 'eslint-loader' }]
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: {
+              fix: false
+            }
+          }
+        ]
       },
       {
         test: /\.scss$/,
@@ -70,7 +85,7 @@ module.exports = {
           output: {
             comments: false
           }
-        },
+        }
       })
     ]
   },
@@ -88,4 +103,4 @@ module.exports = {
       DEV: false
     })
   ]
-};
+}

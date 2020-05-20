@@ -1,6 +1,6 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const {DB_PASSWORD} = process.env;
+const { DB_PASSWORD } = process.env
 
 module.exports = {
   development: {
@@ -18,4 +18,4 @@ module.exports = {
   production: {
     use_env_variable: 'DATABASE_URL'
   }
-};
+}

@@ -1,21 +1,21 @@
-import axios from 'axios';
-import { browserHistory } from 'react-router';
+import axios from 'axios'
+import { browserHistory } from 'react-router'
 import {
   SET_AUTH,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT
-} from '../constants';
+} from '../constants'
 
-export const setAuth = auth => ({ type: SET_AUTH, auth });
+export const setAuth = auth => ({ type: SET_AUTH, auth })
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
   payload: {
     fetching: true
   },
   error: false
-});
+})
 
 export const loginSuccess = user => ({
   type: LOGIN_SUCCESS,
@@ -24,7 +24,7 @@ export const loginSuccess = user => ({
     user
   },
   error: false
-});
+})
 
 export const loginFailure = message => ({
   type: LOGIN_FAILURE,
@@ -33,7 +33,7 @@ export const loginFailure = message => ({
     fetching: false
   },
   error: true
-});
+})
 
 export const logout = () => ({
   type: LOGOUT,
@@ -41,22 +41,22 @@ export const logout = () => ({
     fetching: false
   },
   error: false
-});
+})
 
 export const login = (email, password) => dispatch => {
-  dispatch(loginRequest());
+  dispatch(loginRequest())
   return axios
     .post('/api/auth/local', { email, password })
     .then(response => {
-      window.localStorage.setItem('accessToken', response.data.token);
-      browserHistory.push('/admin/travelers');
-      return dispatch(loginSuccess(response.data));
+      window.localStorage.setItem('accessToken', response.data.token)
+      browserHistory.push('/admin/travelers')
+      return dispatch(loginSuccess(response.data))
     })
     .catch(err => {
-      console.log(err);
-      return dispatch(loginFailure(err.response.data.message));
-    });
-};
+      console.log(err)
+      return dispatch(loginFailure(err.response.data.message))
+    })
+}
 
 export const signup = (user, _window = window) => () => {
   return axios
@@ -65,8 +65,8 @@ export const signup = (user, _window = window) => () => {
         Authorization: _window.localStorage.accessToken
       }
     })
-    .catch(err => console.error('ERROR!', err));
-};
+    .catch(err => console.error('ERROR!', err))
+}
 
 export const checkToken = () => (dispatch, getState) => {
   return axios
@@ -76,21 +76,21 @@ export const checkToken = () => (dispatch, getState) => {
       }
     })
     .then(response => {
-      dispatch(loginSuccess(response.data));
+      dispatch(loginSuccess(response.data))
     })
-    .catch(err => dispatch(loginFailure(err.response.data.message)));
-};
+    .catch(err => dispatch(loginFailure(err.response.data.message)))
+}
 
 export const signout = () => dispatch => {
   axios
     .post('/api/auth/logout')
     .then(() => {
-      window.localStorage.clear();
-      dispatch(logout(null));
-      browserHistory.push('/login');
+      window.localStorage.clear()
+      dispatch(logout(null))
+      browserHistory.push('/login')
     })
-    .catch(err => console.error(err));
-};
+    .catch(err => console.error(err))
+}
 
 export const whoAmI = () => dispatch => {
   return axios
@@ -100,10 +100,10 @@ export const whoAmI = () => dispatch => {
       }
     })
     .then(res => {
-      dispatch(setAuth(res.data));
+      dispatch(setAuth(res.data))
     })
-    .catch(err => console.error(err));
-};
+    .catch(err => console.error(err))
+}
 
 export const updateUser = user => dispatch => {
   return axios
@@ -113,6 +113,6 @@ export const updateUser = user => dispatch => {
       }
     })
     .then(res => {
-      dispatch(setAuth(res.data));
-    });
-};
+      dispatch(setAuth(res.data))
+    })
+}
