@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const resolve = require('path').resolve
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   context: resolve(__dirname),
@@ -66,28 +66,18 @@ module.exports = {
     ]
   },
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          ie8: false,
-          ecma: 6,
-          compress: {
-            conditionals: true,
-            unused: true,
-            comparisons: true,
-            sequences: true,
-            dead_code: true,
-            evaluate: true,
-            if_return: true,
-            join_vars: true
-          },
-          sourceMap: true,
-          output: {
-            comments: false
-          }
+    minimize: true,
+    minimizer: [new TerserPlugin({
+      terserOptions: {
+        ie8: false,
+        ecma: 6,
+        compress: {},
+        sourceMap: true,
+        output: {
+          comments: false
         }
-      })
-    ]
+      }
+    })]
   },
 
   plugins: [

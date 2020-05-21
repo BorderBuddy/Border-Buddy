@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 // thunk action creators
 import { fetchAllTravelers } from '../actions/travelers'
 import { fetchSelectedTraveler } from '../actions/selectedTraveler'
-import { checkToken, whoAmI } from '../actions/auth'
+import { checkToken } from '../actions/auth'
 import { fetchAllUsers } from '../actions/users'
 
 // sync action creators
