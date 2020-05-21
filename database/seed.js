@@ -61,9 +61,9 @@ const seedUsers = () => Promise.each(users, user => User.findOrCreate({
 
 db.authenticate()
   .then(seedFlights)
- 	.then(flights => console.log(flights))
+  .then(flights => console.log(flights))
   .then(seedTravelers)
   .then(travelers => console.log(travelers))
   .then(seedUsers)
   .then(users => console.log(users))
- 	.catch(error => console.error(chalk.red(error.stack)))
+  .catch(error => console.error(chalk.red(error.stack)))

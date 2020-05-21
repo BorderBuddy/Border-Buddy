@@ -11,12 +11,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import muiTheme from '../utils/muiTheme'
 injectTapEventPlugin()
 
+// eslint-disable-next-line react/prop-types
 const Root = ({ store, history }) => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
-	    <Router history={history}>
-	      {getRoutes(store)}
-	    </Router>
+      <Router history={history}>
+        {getRoutes(store)}
+      </Router>
     </MuiThemeProvider>
   </Provider>
 )
