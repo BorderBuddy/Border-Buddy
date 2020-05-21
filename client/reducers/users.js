@@ -1,10 +1,10 @@
-import {SET_ALL_USERS} from '../constants';
+import { SET_ALL_USERS } from '../constants'
 
 export default (state = [], action) => {
   switch (action.type) {
     case SET_ALL_USERS:
-      return action.users;
+      return action.users
     default:
-      return state;
+      return state
   }
-};
+}
