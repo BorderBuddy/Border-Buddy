@@ -1,6 +1,6 @@
-import crypto from 'crypto';
-import Sequelize from 'sequelize';
-const db = require('../db');
+import crypto from 'crypto'
+import Sequelize from 'sequelize'
+const db = require('../db')
 
 export const User = db.define('user', {
   id: {
@@ -31,7 +31,7 @@ export const User = db.define('user', {
   },
   salt: {
     type: Sequelize.STRING,
-    get(){
+    get () {
       return () => this.getDataValue('salt')
     }
   },
@@ -41,57 +41,56 @@ export const User = db.define('user', {
 })
 
 User.beforeBulkCreate((users, fields, fn) => {
-  var totalUpdated = 0;
+  var totalUpdated = 0
   users.forEach(user => {
     user.updatePassword(user, err => {
-      if(err) {
-        return fn(err);
+      if (err) {
+        return fn(err)
       }
-      totalUpdated += 1;
-      if(totalUpdated === users.length) {
-        return fn();
+      totalUpdated += 1
+      if (totalUpdated === users.length) {
+        return fn()
       }
     })
   })
 })
 
 User.beforeCreate((user, fields, fn) => {
-  user.updatePassword(user, fn);
+  user.updatePassword(user, fn)
   User.beforeUpdate((user, fields, fn) => {
-    if(user.changed('password')) {
-      return user.updatePassword(user, fn);
+    if (user.changed('password')) {
+      return user.updatePassword(user, fn)
     }
-    fn();
+    fn()
   })
 })
 
 User.prototype.authenticate = (password, callback) => {
-  if(!callback) {
-    return this.password === this.encryptPassword(password);
+  if (!callback) {
+    return this.password === this.encryptPassword(password)
   }
 
-  var _this = this;
-  this.encryptPassword(password, function(err, pwdGen) {
-    if(err) {
-      callback(err);
+  var _this = this
+  this.encryptPassword(password, function (err, pwdGen) {
+    if (err) {
+      callback(err)
     }
 
-    if(_this.password === pwdGen) {
-      callback(null, true);
+    if (_this.password === pwdGen) {
+      callback(null, true)
+    } else {
+      callback(null, false)
     }
-    else {
-      callback(null, false);
-    }
-  });
+  })
 }
 User.prototype.makeSalt = (byteSize, callback) => {
-  let defaultByteSize = 16;
+  const defaultByteSize = 16
 
   if (typeof arguments[0] === 'function') {
-    callback = arguments[0];
+    callback = arguments[0]
     byteSize = defaultByteSize
   } else if (typeof arguments[1] === 'function') {
-    callback = arguments[1];
+    callback = arguments[1]
   } else {
     throw new Error('Missing Callback')
   }
@@ -102,45 +101,45 @@ User.prototype.makeSalt = (byteSize, callback) => {
   return crypto.randomBytes(byteSize).toString('base64')
 }
 User.prototype.encryptPassword = (u_salt, password, callback) => {
-  if(!password || !u_salt) {
-    return callback ? callback(null) : null;
+  if (!password || !u_salt) {
+    return callback ? callback(null) : null
   }
 
-  var defaultIterations = 10000;
-  var defaultKeyLength = 64;
-  var salt = new Buffer(u_salt, 'base64');
-  const digest = 'SHA1';
+  var defaultIterations = 10000
+  var defaultKeyLength = 64
+  var salt = new Buffer(u_salt, 'base64')
+  const digest = 'SHA1'
 
-  if(!callback) {
-    return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength, digest).toString('base64');
+  if (!callback) {
+    return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength, digest).toString('base64')
   }
 
   return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, digest,
-    function(err, key) {
-      if(err) {
-        callback(err);
+    function (err, key) {
+      if (err) {
+        callback(err)
       }
-      return callback(null, key.toString('base64'));
-    });
+      return callback(null, key.toString('base64'))
+    })
 }
 User.prototype.updatePassword = (user, fn) => {
-  if(!user.password) return fn(null);
+  if (!user.password) return fn(null)
 
-  if(!(user.password && user.password.length)) {
-  fn(new Error('Invalid password'));
+  if (!(user.password && user.password.length)) {
+    fn(new Error('Invalid password'))
   }
 
   user.makeSalt((salt, saltErr) => {
-    if(saltErr) {
-      return fn(saltErr);
+    if (saltErr) {
+      return fn(saltErr)
     }
-    user.salt = salt;
+    user.salt = salt
     user.encryptPassword(user.salt, user.password, (encryptErr, hashedPassword) => {
-      if(encryptErr) {
-        fn(encryptErr);
+      if (encryptErr) {
+        fn(encryptErr)
       }
-      user.password = hashedPassword;
-      fn(null);
-    });
-  });
+      user.password = hashedPassword
+      fn(null)
+    })
+  })
 }

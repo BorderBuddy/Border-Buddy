@@ -18,18 +18,21 @@ import WhyBorderBuddy from './components/WhyBorderBuddy'
 
 // Router Hooks
 import {
-  onSuccessEnter, onSuccessLeave, onAdminEnter,
-				 onTravelersListEnter, onSingleTravelerEnter
+  onSuccessEnter,
+  onSuccessLeave,
+  onAdminEnter,
+  onTravelersListEnter,
+  onSingleTravelerEnter
 } from './utils/hooks'
 
 const getRoutes = () => (
   <div>
-	  <Route path="/" component={Homepage}>
+    <Route path="/" component={Homepage}>
       <IndexRedirect to="/why" />
       <Route path="why" component={WhyBorderBuddy} />
       <Route path="register" component={ConnectedSignUpContainer} />
       <Route path="about" component={About} />
-		  <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} />
+      <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} />
     </Route>
     <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
       <IndexRedirect to="/admin/travelers" />
