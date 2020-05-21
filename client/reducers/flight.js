@@ -1,10 +1,10 @@
-import {SET_FLIGHT} from '../constants';
+import { SET_FLIGHT } from '../constants'
 
 export default (state = {}, action) => {
   switch (action.type) {
     case SET_FLIGHT:
-      return action.flight;
+      return action.flight
     default:
-      return state;
+      return state
   }
-};
+}
