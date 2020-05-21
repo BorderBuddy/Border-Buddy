@@ -12,17 +12,15 @@ export const SignUpConfirmation = ({ confirmSubmit, open, flight }: SignUpConfPr
   const actions = [
     <FlatButton
       key={1}
-      id="dismiss-confirmation"
       label="OK"
       primary={true}
-      onTouchTap={confirmSubmit}
+      onTouchStart={confirmSubmit}
     />
   ]
 
   return (
     <div>
       <Dialog
-        id="sign-up-confirmation"
         open={open}
         actions={actions}
         modal={true}

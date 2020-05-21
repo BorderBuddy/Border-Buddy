@@ -1,5 +1,4 @@
 import {
-  SET_AUTH,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -37,9 +36,9 @@ const loginFailure = (state, { payload: { fetching, error } }) => ({
   fetching,
   error
 })
-
-const logout = (state, { payload: { fetching } }) => ({
-  ...stage,
+// TODO: check this function
+const logout = (state, { payload: { fetching }, error }) => ({
+  ...state,
   fetching,
   error
 })
