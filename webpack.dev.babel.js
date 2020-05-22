@@ -9,6 +9,8 @@ const configPlugin = new webpack.DefinePlugin({
 })
 
 module.exports = {
+  mode: 'development',
+
   context: resolve(__dirname),
 
   entry: [
