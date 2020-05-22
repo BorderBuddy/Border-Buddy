@@ -1,10 +1,10 @@
-import axios from 'axios';
-import { SET_ALL_TRAVELERS } from '../constants';
+import axios from 'axios'
+import { SET_ALL_TRAVELERS } from '../constants'
 
 export const setAllTravelers = travelers => ({
   type: SET_ALL_TRAVELERS,
   travelers
-});
+})
 
 export const fetchAllTravelers = () => dispatch => {
   return axios
@@ -14,5 +14,5 @@ export const fetchAllTravelers = () => dispatch => {
       }
     })
     .then(travelers => dispatch(setAllTravelers(travelers.data)))
-    .catch(err => console.error(err.response.data));
-};
+    .catch(err => console.error(err.response.data))
+}

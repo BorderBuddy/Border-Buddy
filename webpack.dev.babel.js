@@ -1,13 +1,12 @@
-const webpack = require('webpack');
-const resolve = require('path').resolve;
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const webpack = require('webpack')
+const resolve = require('path').resolve
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const configPlugin = new webpack.DefinePlugin({
   'process.env': {
     NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
   }
-});
+})
 
 module.exports = {
   context: resolve(__dirname),
@@ -28,7 +27,7 @@ module.exports = {
   devtool: 'eval-source-map',
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
 
   devServer: {
@@ -44,6 +43,15 @@ module.exports = {
 
   module: {
     rules: [
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader'
+          }
+        ]
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
@@ -82,4 +90,4 @@ module.exports = {
       DEV: true
     })
   ]
-};
+}
