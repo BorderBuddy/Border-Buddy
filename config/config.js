@@ -10,9 +10,9 @@ module.exports = {
     dialect: 'postgres'
   },
   test: {
-    url: 'postgres://postgres:root@localhost:5432/BorderBuddy_test',
-    database: 'BorderBuddy_test',
     username: 'postgres',
+    password: DB_PASSWORD,
+    database: 'BorderBuddy_test',
     dialect: 'postgres'
   },
   production: {
