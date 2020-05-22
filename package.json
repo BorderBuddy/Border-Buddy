@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --config webpack.dev.babel.js",
     "build": "webpack --config webpack.prod.babel.js",
     "test-redux": "jest",
-    "test": "NODE_ENV=test ./run-tests.sh",
+    "test": "NODE_ENV=test npx babel-node ./node_modules/mocha/bin/mocha -r ts-node/register 'test/model/*.js'",
     "test-local": "NODE_ENV=test LOCAL=1 ./run-tests.sh",
     "seed": "babel-node database/seed.js",
     "deploy-seed": "babel-node database/deploymentSeed.js",
