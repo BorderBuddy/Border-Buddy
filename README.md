@@ -28,6 +28,7 @@ $ createdb BorderBuddy_test
 ```
 
 - Get the `.env` file from admin@borderbuddy.us
+- Load the environment variables with `export $(cat .env | xargs)`
 
 - Install dependencies
 
