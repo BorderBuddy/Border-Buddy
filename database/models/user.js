@@ -83,31 +83,18 @@ User.prototype.authenticate = (password, callback) => {
     }
   })
 }
-User.prototype.makeSalt = (byteSize, callback) => {
-  const defaultByteSize = 16
-
-  if (typeof arguments[0] === 'function') {
-    callback = arguments[0]
-    byteSize = defaultByteSize
-  } else if (typeof arguments[1] === 'function') {
-    callback = arguments[1]
-  } else {
-    throw new Error('Missing Callback')
-  }
-
-  if (!byteSize) {
-    byteSize = defaultByteSize
-  }
-  return crypto.randomBytes(byteSize).toString('base64')
+User.prototype.makeSalt = (callback) => {
+  return crypto.randomBytes(16).toString('base64')
 }
-User.prototype.encryptPassword = (u_salt, password, callback) => {
-  if (!password || !u_salt) {
+
+User.prototype.encryptPassword = (password, callback) => {
+  if (!password || !this.salt) {
     return callback ? callback(null) : null
   }
 
   var defaultIterations = 10000
   var defaultKeyLength = 64
-  var salt = new Buffer(u_salt, 'base64')
+  var salt = new Buffer(this.salt, 'base64')
   const digest = 'SHA1'
 
   if (!callback) {
@@ -122,6 +109,7 @@ User.prototype.encryptPassword = (u_salt, password, callback) => {
       return callback(null, key.toString('base64'))
     })
 }
+
 User.prototype.updatePassword = (user, fn) => {
   if (!user.password) return fn(null)
 
@@ -129,12 +117,13 @@ User.prototype.updatePassword = (user, fn) => {
     fn(new Error('Invalid password'))
   }
 
-  user.makeSalt((salt, saltErr) => {
+  user.makeSalt((saltErr, salt) => {
     if (saltErr) {
       return fn(saltErr)
     }
-    user.salt = salt
-    user.encryptPassword(user.salt, user.password, (encryptErr, hashedPassword) => {
+    this.salt = salt
+    
+    user.encryptPassword(this.salt, user.password, (encryptErr, hashedPassword) => {
       if (encryptErr) {
         fn(encryptErr)
       }
