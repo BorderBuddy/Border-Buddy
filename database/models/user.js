@@ -133,8 +133,9 @@ User.prototype.updatePassword = (user, fn) => {
     if (saltErr) {
       return fn(saltErr)
     }
-    user.salt = salt
-    user.encryptPassword(user.salt, user.password, (encryptErr, hashedPassword) => {
+    this.salt = salt
+
+    user.encryptPassword(this.salt, user.password, (encryptErr, hashedPassword) => {
       if (encryptErr) {
         fn(encryptErr)
       }
