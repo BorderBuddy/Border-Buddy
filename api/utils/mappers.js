@@ -56,18 +56,16 @@ const mapAirportInfo = fsFlightData => {
   const airport2 = fsFlightData.appendix.airports[1]
 
   const inOrder = airport1.fs === departureAirportFsCode
-  let arrivalCityName, arrivalAirportName, departureCityName, departureAirportName,
-    arrivalUtcOffset, departureUtcOffset, arrivalCountryName, departureCountryName
 
-  departureCityName = inOrder ? airport1.city : airport2.city
-  departureAirportName = inOrder ? airport1.name : airport2.name
-  departureUtcOffset = inOrder ? airport1.utcOffsetHours : airport2.utcOffsetHours
-  departureCountryName = inOrder ? airport1.countryName : airport2.countryName
+  const departureCityName = inOrder ? airport1.city : airport2.city
+  const departureAirportName = inOrder ? airport1.name : airport2.name
+  const departureUtcOffset = inOrder ? airport1.utcOffsetHours : airport2.utcOffsetHours
+  const departureCountryName = inOrder ? airport1.countryName : airport2.countryName
 
-  arrivalCityName = inOrder ? airport2.city : airport1.city
-  arrivalAirportName = inOrder ? airport2.name : airport1.name
-  arrivalUtcOffset = inOrder ? airport2.utcOffsetHours : airport1.utcOffsetHours
-  arrivalCountryName = inOrder ? airport2.countryName : airport1.countryName
+  const arrivalCityName = inOrder ? airport2.city : airport1.city
+  const arrivalAirportName = inOrder ? airport2.name : airport1.name
+  const arrivalUtcOffset = inOrder ? airport2.utcOffsetHours : airport1.utcOffsetHours
+  const arrivalCountryName = inOrder ? airport2.countryName : airport1.countryName
 
   return {
     arrivalCityName,
