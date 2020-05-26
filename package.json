@@ -17,7 +17,8 @@
     "test:migrate": "NODE_ENV=test sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "push:acceptance": "cf push -f manifest.acceptance.yml",
-    "push:production": "cf push -f manifest.production.yml"
+    "push:production": "cf push -f manifest.production.yml",
+    "env": "export $(cat .env | xargs)" 
   },
   "engines": {
     "node": "8.10.0",
