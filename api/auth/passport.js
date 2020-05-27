@@ -8,35 +8,24 @@ export function setup (User) {
         usernameField: 'email',
         passwordField: 'password' // this is the virtual field on the model
       },
-      function (email, password, done) {
+      async (email, password, done) => {
         console.log(`passport called with ${email} and ${password}`)
-        return User.findOne({
-          where: {
-            email: email.toLowerCase()
+        let user
+        try {
+          user = await User.findOne({ where: { email: email.toLowerCase() } })
+          if (!user) {
+            return done(null, false, { message: 'No user by that email' })
           }
-        })
-          .then(user => {
-            const failureMessage = 'Username or password are incorrect'
-            console.log(user)
-            if (!user) {
-              return done(null, false, {
-                message: failureMessage
-              })
-            }
+        } catch (e) {
+          return done(e)
+        }
 
-            // Authenticate function to check password
-            // user.authenticate(password, function (authError, authenticated) {
-            //   if (authError) {
-            //     return done(authError)
-            //   }
-            //   if (!authenticated) {
-            //     return done(null, false, { message: failureMessage })
-            //   } else {
-            return done(null, user)
-            // }
-          })
-          // })
-          .catch(err => done(err))
+        const authenticated = await user.authenticate(user, password)
+        if (!authenticated) {
+          return done(null, false, { message: 'Not a matching password' })
+        }
+
+        return done(null, user)
       }
     )
   )
