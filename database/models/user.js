@@ -30,105 +30,65 @@ export const User = db.define('user', {
     allowNull: false
   },
   salt: {
-    type: Sequelize.STRING,
-    get () {
-      return () => this.getDataValue('salt')
-    }
+    type: Sequelize.STRING
   },
   phone: {
     type: Sequelize.STRING
   }
 })
 
-User.beforeBulkCreate((users, fields, fn) => {
-  var totalUpdated = 0
+User.beforeBulkCreate(async (users, options) => {
   users.forEach(user => {
-    user.updatePassword(user, err => {
-      if (err) {
-        return fn(err)
-      }
-      totalUpdated += 1
-      if (totalUpdated === users.length) {
-        return fn()
-      }
-    })
+    user.updatePassword(user)
   })
 })
 
-User.beforeCreate((user, fields, fn) => {
-  user.updatePassword(user, fn)
-  User.beforeUpdate((user, fields, fn) => {
-    if (user.changed('password')) {
-      return user.updatePassword(user, fn)
-    }
-    fn()
-  })
+User.beforeCreate(async (user, options) => {
+  await user.updatePassword(user)
 })
 
-User.prototype.authenticate = (password, callback) => {
-  if (!callback) {
-    return this.password === this.encryptPassword(password)
+User.beforeUpdate(async (user, options) => {
+  if (user.changed('password')) {
+    await user.updatePassword(user)
   }
+})
 
-  var _this = this
-  this.encryptPassword(password, function (err, pwdGen) {
-    if (err) {
-      callback(err)
-    }
-
-    if (_this.password === pwdGen) {
-      callback(null, true)
-    } else {
-      callback(null, false)
-    }
-  })
+User.prototype.authenticate = async (user, passwordAttempt) => {
+  console.log('user.authenticate called')
+  console.log(user.password, user.salt.toString('base64'))
+  const { password, salt } = user
+  console.log('password and salt', password, salt)
+  return password === await user.encryptPassword(salt, passwordAttempt)
 }
-User.prototype.makeSalt = (callback) => {
+
+User.prototype.makeSalt = async () => {
   return crypto.randomBytes(16).toString('base64')
 }
 
-User.prototype.encryptPassword = (password, callback) => {
-  if (!password || !this.salt) {
-    return callback ? callback(null) : null
-  }
-
-  var defaultIterations = 10000
-  var defaultKeyLength = 64
-  var salt = new Buffer(this.salt, 'base64')
+User.prototype.encryptPassword = async (salt, password) => {
+  const defaultIterations = 10000
+  const defaultKeyLength = 64
+  const saltBuf = Buffer.from(salt, 'base64')
   const digest = 'SHA1'
 
-  if (!callback) {
-    return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength, digest).toString('base64')
-  }
-
-  return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, digest,
-    function (err, key) {
-      if (err) {
-        callback(err)
-      }
-      return callback(null, key.toString('base64'))
-    })
+  return crypto.pbkdf2Sync(
+    password,
+    saltBuf,
+    defaultIterations,
+    defaultKeyLength,
+    digest
+  ).toString('base64')
 }
 
-User.prototype.updatePassword = (user, fn) => {
-  if (!user.password) return fn(null)
+User.prototype.updatePassword = async (user) => {
+  if (!user.password) throw new Error('no password to update')
 
   if (!(user.password && user.password.length)) {
-    fn(new Error('Invalid password'))
+    throw new Error('Invalid password')
   }
 
-  user.makeSalt((saltErr, salt) => {
-    if (saltErr) {
-      return fn(saltErr)
-    }
-    this.salt = salt
-
-    user.encryptPassword(this.salt, user.password, (encryptErr, hashedPassword) => {
-      if (encryptErr) {
-        fn(encryptErr)
-      }
-      user.password = hashedPassword
-      fn(null)
-    })
-  })
+  const salt = await user.makeSalt()
+  const hashedPassword = await user.encryptPassword(salt, user.password)
+  user.password = hashedPassword
+  user.salt = salt
 }
