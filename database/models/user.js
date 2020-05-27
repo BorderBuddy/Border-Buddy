@@ -54,10 +54,7 @@ User.beforeUpdate(async (user, options) => {
 })
 
 User.prototype.authenticate = async (user, passwordAttempt) => {
-  console.log('user.authenticate called')
-  console.log(user.password, user.salt.toString('base64'))
   const { password, salt } = user
-  console.log('password and salt', password, salt)
   return password === await user.encryptPassword(salt, passwordAttempt)
 }
 <<<<<<< HEAD
