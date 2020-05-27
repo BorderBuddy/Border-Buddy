@@ -9,7 +9,6 @@ export function setup (User) {
         passwordField: 'password' // this is the virtual field on the model
       },
       async (email, password, done) => {
-        console.log(`passport called with ${email} and ${password}`)
         let user
         try {
           user = await User.findOne({ where: { email: email.toLowerCase() } })
