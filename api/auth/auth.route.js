@@ -13,8 +13,8 @@ export default (app) => {
   app.get(base + '/checkToken', isAuthenticated)
   app.post(base + '/logout', logout)
 
-  if (process.env.NODE_ENV == 'production') {
-    new SequelizeStore(sequelize, 'bruteStore', {}, (store) => {
+  if (process.env.NODE_ENV === 'production') {
+    SequelizeStore(sequelize, 'bruteStore', {}, (store) => {
       const bruteforce = new ExpressBrute(store,
         {
           freeRetries: 3,
