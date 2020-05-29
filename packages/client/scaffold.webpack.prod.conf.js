@@ -28,15 +28,15 @@ module.exports = {
   target: 'web',
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
   },
   devtool: 'source-map',
+
   module: {
     rules: [
       { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
-      { test: /\.tsx?$/, loader: 'babel-loader' },
-      { test: /\.tsx?$/, loader: 'ts-loader' },
-      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
+      { test: /\.(t|j)sx?$/, use: { loader: 'ts-loader' }, exclude: /node_modules/ },
+      { enforce: 'pre', test: /\.js$/, exclude: /node_modules/, loader: 'source-map-loader' }
     ]
   },
   plugins: [
@@ -71,17 +71,17 @@ module.exports = {
         to: path.resolve(paths.distFolder, 'manifest.json')
       }
     ])
-  ],
+  ]
 
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: false
-      }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
-  }
+  //   optimization: {
+  //     minimizer: [
+  //       new UglifyJsPlugin({
+  //         cache: true,
+  //         parallel: true,
+  //         sourceMap: false
+  //       }),
+  //       new OptimizeCSSAssetsPlugin({})
+  //     ]
+  //   }
 
 }
