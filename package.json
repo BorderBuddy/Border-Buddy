@@ -18,11 +18,11 @@
     "migrate:undo": "sequelize db:migrate:undo",
     "push:acceptance": "cf push -f manifest.acceptance.yml",
     "push:production": "cf push -f manifest.production.yml",
-    "env": "export $(cat .env | xargs)" 
-  },
-  "engines": {
-    "node": "8.10.0",
-    "npm": "4.3.0"
+    "build-client": "lerna run --scope client build",
+    "build-server": "lerna run --scope server build",
+    "copy-assets": "cp -R ./packages/client/dist/* ./packages/server/dist/src/public",
+    "lerna:build": "lerna bootstrap && yarn build-client && yarn build-server && yarn copy-assets",
+    "lerna:dev": "lerna bootstrap && lerna run dev --stream --parallel"
   },
   "repository": {
     "type": "git",
@@ -76,6 +76,7 @@
     "humps": "^2.0.1",
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^7.4.3",
+    "lerna": "^3.22.0",
     "less": "^2.7.3",
     "lodash": "^4.17.15",
     "material-ui": "^0.20.2",
@@ -123,7 +124,6 @@
     "chai": "^3.5.0",
     "chai-http": "^4.3.0",
     "chai-subset": "^1.6.0",
-    "css-loader": "^3.5.3",
     "enzyme": "^2.9.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-fullstack": "^2.7.0",
@@ -147,7 +147,6 @@
     "redux-form-material-ui": "^4.3.1",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
-    "sass-loader": "^6.0.6",
     "sinon": "1.17.7",
     "sinon-chai": "^2.14.0",
     "sinon-stub-promise": "^4.0.0",

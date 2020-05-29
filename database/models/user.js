@@ -57,33 +57,6 @@ User.prototype.authenticate = async (user, passwordAttempt) => {
   const { password, salt } = user
   return password === await user.encryptPassword(salt, passwordAttempt)
 }
-<<<<<<< HEAD
-User.prototype.makeSalt = (byteSize, callback) => {
-  const defaultByteSize = 16
-
-  if (typeof arguments[0] === 'function') {
-    callback = arguments[0]
-    byteSize = defaultByteSize
-  } else if (typeof arguments[1] === 'function') {
-    callback = arguments[1]
-  } else {
-    throw new Error('Missing Callback')
-  }
-
-  if (!byteSize) {
-    byteSize = defaultByteSize
-  }
-  return crypto.randomBytes(byteSize).toString('base64')
-}
-User.prototype.encryptPassword = (u_salt, password, callback) => {
-  if (!password || !u_salt) {
-    return callback ? callback(null) : null
-  }
-
-  var defaultIterations = 10000
-  var defaultKeyLength = 64
-  var salt = new Buffer(u_salt, 'base64')
-=======
 
 User.prototype.makeSalt = async () => {
   return crypto.randomBytes(16).toString('base64')
@@ -93,7 +66,6 @@ User.prototype.encryptPassword = async (salt, password) => {
   const defaultIterations = 10000
   const defaultKeyLength = 64
   const saltBuf = Buffer.from(salt, 'base64')
->>>>>>> refactor user.js to async/await
   const digest = 'SHA1'
 
   return crypto.pbkdf2Sync(
