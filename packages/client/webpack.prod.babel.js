@@ -59,7 +59,7 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /(node_modules)/,
-        use: [MiniCssExtractPlugin.loader, 'sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         include: /\.json$/,

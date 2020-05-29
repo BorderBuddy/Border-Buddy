@@ -28,76 +28,17 @@ module.exports = {
   target: 'web',
 
   resolve: {
-    // Resolve module requests (default)
-    modules: ['node_modules'],
-    // Add ".ts" and ".tsx" as resolvable extensions.
     extensions: ['.ts', '.tsx', '.js', '.json']
   },
-
+  devtool: 'source-map',
   module: {
     rules: [
-      // Lint TypeScript
-      {
-        test: /\.tsx?$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: 'stylish'
-            },
-            loader: require.resolve('tslint-loader')
-          }
-        ]
-      },
-      // All files with a ".ts" or ".tsx" extension will be handled by "awesome-typescript-loader".
-      {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.s(a|c)ss$/,
-        exclude: /(node_modules)/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: { modules: true }
-          },
-          'sass-loader'
-        //   {
-        //     loader: require.resolve('typings-for-css-modules-loader'),
-        //     options: {
-        //       importLoaders: 1,
-        //       sourceMap: false,
-        //       modules: true,
-        //       localIdentName: '[name]_[local][hash:base64:5]',
-        //       namedExport: true
-        //     }
-        //   },
-        //   {
-        //     loader: require.resolve('postcss-loader'),
-        //     options: {
-        //       ident: 'postcss',
-        //       plugins: () => [
-        //         require('postcss-flexbugs-fixes'),
-        //         autoprefixer({
-        //           browsers: [
-        //             '>1%',
-        //             'last 4 versions',
-        //             'Firefox ESR',
-        //             'not ie < 9' // React doesn"t support IE8 anyway
-        //           ],
-        //           flexbox: 'no-2009'
-        //         })
-        //       ]
-        //     }
-        //   }
-        ]
-      }
+      { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.tsx?$/, loader: 'babel-loader' },
+      { test: /\.tsx?$/, loader: 'ts-loader' },
+      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
     ]
   },
-
   plugins: [
     new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: [paths.distFolder] }),
     new HtmlWebpackPlugin({
