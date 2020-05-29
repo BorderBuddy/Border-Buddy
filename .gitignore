@@ -11,3 +11,4 @@ npm-debug.log*
 flow-typed/
 .DS_Store
 api/.DS_Store
+node_modules
