@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Repository, Traveler, User } from '../../database/models'
+import { Repository, Traveler, User } from '../database/models'
 import TravelerNotifier from '../notify/travelerNotifier'
 
 import createOrUpdateTravelerUseCase from '../useCase/createOrUpdateTraveler'

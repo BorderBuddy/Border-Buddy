@@ -1,5 +1,5 @@
 import { airlineInfoMapper } from '../../utils/mappers'
-import { Flight } from '../../../database/models/flights'
+import { Flight } from '../../database/models/flights'
 
 /*
 * All data in this file is dummy test data either from the DB

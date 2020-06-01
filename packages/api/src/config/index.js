@@ -1,6 +1,6 @@
 import path from 'path'
 import _ from 'lodash'
-import appConfig from '../../appConfig'
+import appConfig from '../../../../appConfig'
 
 const isTesting = process.env.NODE_ENV === 'test'
 const dbUsername = 'postgres'

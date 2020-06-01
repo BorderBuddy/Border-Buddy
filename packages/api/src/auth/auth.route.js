@@ -1,7 +1,7 @@
 import * as passportConfig from './passport'
 import { login, isAuthenticated, logout } from './auth.controller'
-import { User } from '../../database/models/user'
-import sequelize from '../../database/db'
+import { User } from '../database/models/user'
+import sequelize from '../database/db'
 import ExpressBrute from 'express-brute'
 import SequelizeStore from 'express-brute-sequelize'
 
