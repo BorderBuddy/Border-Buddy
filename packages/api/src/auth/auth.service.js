@@ -1,34 +1,34 @@
-import jwt from 'jsonwebtoken';
-import { config } from '../config';
-import { Repository } from '../../database/models';
+import jwt from 'jsonwebtoken'
+import { config } from '../config'
+import { Repository } from '../database/models'
 
-export function signToken(id) {
+export function signToken (id) {
   return jwt.sign({ id: id }, config.secrets.session, {
     expiresIn: '2 hours'
-  });
+  })
 }
 
-export function verifyToken(token, repository = Repository) {
-  const userRepository = repository.users;
+export function verifyToken (token, repository = Repository) {
+  const userRepository = repository.users
   return new Promise((resolve, reject) => {
     jwt.verify(token, config.secrets.session, (err, user) => {
       if (err) {
-        reject(err.message);
-        return;
+        reject(err.message)
+        return
       }
 
       userRepository.findById(user.id).then(foundUser => {
         if (!foundUser) {
-          reject(new Error('User not found'));
+          reject(new Error('User not found'))
         } else {
-          resolve(foundUser);
+          resolve(foundUser)
         }
-      });
-    });
-  });
+      })
+    })
+  })
 }
 
-export function protectedEndpoint(endpoint, tokenVerifier = verifyToken) {
+export function protectedEndpoint (endpoint, tokenVerifier = verifyToken) {
   return (req, res, next) => {
     tokenVerifier(req.headers.authorization)
       .then(() => endpoint(req, res, next))
@@ -37,6 +37,6 @@ export function protectedEndpoint(endpoint, tokenVerifier = verifyToken) {
           .status(401)
           .send('Unauthorized')
           .end()
-      );
-  };
+      )
+  }
 }

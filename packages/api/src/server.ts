@@ -15,14 +15,14 @@ app.use(volleyball)
 
 addRoutes(app)
 
-const staticContent = path.normalize(__dirname + '/../dist')
+const staticContent = path.normalize(path.join(__dirname, '/../dist'))
 app.use(express.static(staticContent))
 
 app.get('*', (req, res) => {
   res.sendFile(staticContent + '/index.html')
 })
 
-app.use((err, req, res, next) => {
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err.stack)
   res.status(400).send(err.message)
 })

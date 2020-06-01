@@ -1,6 +1,6 @@
-import {config} from 'dotenv';
+import { config } from 'dotenv'
 
-config();
+config()
 module.exports = {
   SESSION_SECRET: process.env.SESSION_SECRET,
   FLIGHT_STATS_ID: process.env.FLIGHT_STATS_ID,
@@ -11,4 +11,4 @@ module.exports = {
   TWILIO_PHONE_NUM: process.env.TWILIO_PHONE_NUM,
   NAZ_NUM: process.env.NAZ_NUM,
   TAREK_NUM: process.env.TAREK_NUM
-};
+}

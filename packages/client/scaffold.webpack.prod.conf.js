@@ -76,6 +76,7 @@ module.exports = {
   optimization: {
     minimizer: [
       new TerserPlugin({
+        parallel: true,
         terserOptions: {
           ie8: false,
           ecma: 6,

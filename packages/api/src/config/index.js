@@ -1,15 +1,15 @@
-import path from 'path';
-import _ from 'lodash';
-import appConfig from '../../appConfig';
+import path from 'path'
+import _ from 'lodash'
+import appConfig from '../../../../appConfig'
 
-const isTesting = process.env.NODE_ENV === 'test';
-const dbUsername = 'postgres';
-const dbPassword = 'root';
-const dbName = 'BorderBuddy' + (isTesting ? '_test' : '');
+const isTesting = process.env.NODE_ENV === 'test'
+const dbUsername = 'postgres'
+const dbPassword = 'root'
+const dbName = 'BorderBuddy' + (isTesting ? '_test' : '')
 
 const databaseUrl = _.get(process.env,
   'DATABASE_URL',
-  `postgres://${dbUsername}:${dbPassword}@localhost:5432/${dbName}`);
+  `postgres://${dbUsername}:${dbPassword}@localhost:5432/${dbName}`)
 
 export const config = {
   env: process.env.NODE_ENV,
@@ -27,4 +27,4 @@ export const config = {
     accountSid: appConfig.TWILIO_ACCOUNT_SID,
     authToken: appConfig.TWILIO_AUTH_TOKEN
   }
-};
+}
