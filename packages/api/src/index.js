@@ -1,6 +1,6 @@
 import { emoji } from 'node-emoji'
 import httpsRedirect from 'express-https-redirect'
-import app from './api/server'
+import app from './server'
 import helmet from 'helmet'
 import db from './database'
 
