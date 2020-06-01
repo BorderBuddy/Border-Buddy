@@ -1,5 +1,9 @@
 import jwt from 'jsonwebtoken'
+<<<<<<< HEAD
 import { User } from '../../database/models/user'
+=======
+import { User } from '../database/models/user'
+>>>>>>> fix paths
 import { config } from '../config'
 
 function validationError (res, statusCode) {

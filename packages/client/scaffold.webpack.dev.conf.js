@@ -32,72 +32,75 @@ module.exports = {
     // Resolve module requests (default)
     modules: ['node_modules'],
     // Add ".ts" and ".tsx" as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
   },
 
   module: {
     rules: [
-      // Lint TypeScript
-      {
-        test: /\.tsx?$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: 'stylish'
-            },
-            loader: require.resolve('tslint-loader')
-          }
-        ]
-      },
-      // All files with a ".ts" or ".tsx" extension will be handled by "awesome-typescript-loader".
-      {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
-      },
-      // All output ".js" files will have any sourcemaps re-processed by "source-map-loader".
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader'
-      },
-      // Load CSS files as modules and generate typing files for TS
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('typings-for-css-modules-loader'),
-            options: {
-              importLoaders: 1,
-              modules: true,
-              localIdentName: '[name]_[local][hash:base64:5]',
-              namedExport: true
-            }
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              // Necessary for external CSS imports to work
-              // https://github.com/facebookincubator/create-react-app/issues/2677
-              ident: 'postcss',
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9' // React doesn"t support IE8 anyway
-                  ],
-                  flexbox: 'no-2009'
-                })
-              ]
-            }
-          }
-        ]
-      }
+      { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.(t|j)sx?$/, use: { loader: 'ts-loader' }, exclude: /node_modules/ },
+      { enforce: 'pre', test: /\.js$/, exclude: /node_modules/, loader: 'source-map-loader' }
+      // // Lint TypeScript
+      // {
+      //   test: /\.tsx?$/,
+      //   enforce: 'pre',
+      //   use: [
+      //     {
+      //       options: {
+      //         formatter: 'stylish'
+      //       },
+      //       loader: require.resolve('tslint-loader')
+      //     }
+      //   ]
+      // },
+      // // All files with a ".ts" or ".tsx" extension will be handled by "awesome-typescript-loader".
+      // {
+      //   test: /\.tsx?$/,
+      //   loader: 'awesome-typescript-loader'
+      // },
+      // // All output ".js" files will have any sourcemaps re-processed by "source-map-loader".
+      // {
+      //   enforce: 'pre',
+      //   test: /\.js$/,
+      //   loader: 'source-map-loader'
+      // },
+      // // Load CSS files as modules and generate typing files for TS
+      // {
+      //   test: /\.css$/,
+      //   exclude: /node_modules/,
+      //   use: [
+      //     require.resolve('style-loader'),
+      //     {
+      //       loader: require.resolve('typings-for-css-modules-loader'),
+      //       options: {
+      //         importLoaders: 1,
+      //         modules: true,
+      //         localIdentName: '[name]_[local][hash:base64:5]',
+      //         namedExport: true
+      //       }
+      //     },
+      //     {
+      //       loader: require.resolve('postcss-loader'),
+      //       options: {
+      //         // Necessary for external CSS imports to work
+      //         // https://github.com/facebookincubator/create-react-app/issues/2677
+      //         ident: 'postcss',
+      //         plugins: () => [
+      //           require('postcss-flexbugs-fixes'),
+      //           autoprefixer({
+      //             browsers: [
+      //               '>1%',
+      //               'last 4 versions',
+      //               'Firefox ESR',
+      //               'not ie < 9' // React doesn"t support IE8 anyway
+      //             ],
+      //             flexbox: 'no-2009'
+      //           })
+      //         ]
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   },
   plugins: [

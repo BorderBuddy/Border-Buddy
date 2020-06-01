@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken'
 import { config } from '../config'
+<<<<<<< HEAD
 import { Repository } from '../../database/models'
+=======
+import { Repository } from '../database/models'
+>>>>>>> fix paths
 
 export function signToken (id) {
   return jwt.sign({ id: id }, config.secrets.session, {
