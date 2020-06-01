@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const autoprefixer = require('autoprefixer')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
@@ -71,17 +71,23 @@ module.exports = {
         to: path.resolve(paths.distFolder, 'manifest.json')
       }
     ])
-  ]
+  ],
 
-  //   optimization: {
-  //     minimizer: [
-  //       new UglifyJsPlugin({
-  //         cache: true,
-  //         parallel: true,
-  //         sourceMap: false
-  //       }),
-  //       new OptimizeCSSAssetsPlugin({})
-  //     ]
-  //   }
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          ie8: false,
+          ecma: 6,
+          compress: {},
+          sourceMap: true,
+          output: {
+            comments: false
+          }
+        }
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  }
 
 }
