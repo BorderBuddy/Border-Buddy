@@ -12,6 +12,7 @@ const threeHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 3)
 const users = [
   { email: 'andrew@borderbuddy.us', password: '12345678', phone: '8607163066' },
   { email: 'dillon@borderbuddy.us', password: '12345678', phone: '1234567890' },
+  { email: 'aaron@borderbuddy.us', password: 'password', phone: '1234567890' },
   { email: 'admin@borderbuddy.us', password: '12345678', phone: '1234567890' }
 ]
 
@@ -53,11 +54,7 @@ const dummyTravelers = [
 
 const seedFlights = () => Promise.each(dummyFlights, flight => db.model('flight').create(flight))
 const seedTravelers = () => Promise.each(dummyTravelers, traveler => db.model('traveler').create(traveler))
-const seedUsers = () => Promise.each(users, user => User.findOrCreate({
-  where: { email: user.email },
-  defaults: { password: user.password }
-}
-))
+const seedUsers = () => Promise.each(users, user => db.model('user').create(user))
 
 db.authenticate()
   .then(seedFlights)

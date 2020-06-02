@@ -13,7 +13,7 @@ const baseConfig = {
 }
 
 // if (config.use_env_variable) {
-//   var sequelize = new Sequelize(process.env[config.use_env_variable], baseConfig);
+//   let sequelize = new Sequelize(process.env[config.use_env_variable], baseConfig)
 // } else {
 const sequelize = new Sequelize(config.database, config.username, config.password, Object.assign({}, baseConfig, config))
 // }
