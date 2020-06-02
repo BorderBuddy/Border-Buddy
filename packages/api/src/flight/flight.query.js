@@ -1,4 +1,4 @@
-import appConfig from '../../../../appConfig'
+import appConfig from '../appConfig'
 
 const baseline = 'https://api.flightstats.com/flex'
 const keys = `?appId=${appConfig.FLIGHT_STATS_ID}&appKey=${appConfig.FLIGHT_STATS_KEY}`

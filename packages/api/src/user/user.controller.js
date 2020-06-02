@@ -3,8 +3,12 @@ import jwt from 'jsonwebtoken'
 import { User } from '../../database/models/user'
 =======
 import { User } from '../database/models/user'
+<<<<<<< HEAD
 >>>>>>> fix paths
 import { config } from '../config'
+=======
+import { config } from '../config2'
+>>>>>>> add api that builds
 
 function validationError (res, statusCode) {
   statusCode = statusCode || 422
