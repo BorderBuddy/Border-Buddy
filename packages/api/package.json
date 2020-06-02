@@ -1,14 +1,21 @@
 {
-  "name": "server",
+  "name": "api",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon",
-    "start": "node ./dist/index.js"
+    "build":"tsc && mkdir -p ./dist/src/public",
+    "clean": "rm -rf dist",
+    "dev": "nodemon --dev",
+    "start": "node ./dist/index.js",
+    "migrate": "sequelize db:migrate",
+    "test:migrate": "NODE_ENV=test sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo",
+    "seed": "node dist/database/seed.js",
+    "deploy-seed": "node dist/database/deploymentSeed.js"
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "@babel/node": "^7.10.1",
     "@types/body-parser": "^1.17.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
