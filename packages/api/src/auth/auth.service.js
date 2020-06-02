@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { config } from '../config'
+import { config } from '../config2'
 import { Repository } from '../database/models'
 
 export function signToken (id) {
