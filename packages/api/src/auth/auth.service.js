@@ -1,14 +1,6 @@
 import jwt from 'jsonwebtoken'
-<<<<<<< HEAD
-import { config } from '../config'
-<<<<<<< HEAD
-import { Repository } from '../../database/models'
-=======
-=======
 import { config } from '../config2'
->>>>>>> add api that builds
 import { Repository } from '../database/models'
->>>>>>> fix paths
 
 export function signToken (id) {
   return jwt.sign({ id: id }, config.secrets.session, {
