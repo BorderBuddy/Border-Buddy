@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
+  mode: 'production',
+
   context: resolve(__dirname),
 
   entry: ['./client/index.js'],

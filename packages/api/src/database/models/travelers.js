@@ -1,7 +1,7 @@
-import {Flight} from './flights';
+import { Flight } from './flights'
 
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require('sequelize')
+const db = require('../db')
 
 export const Traveler = db.define('traveler', {
   name: {
@@ -18,7 +18,7 @@ export const Traveler = db.define('traveler', {
     type: Sequelize.STRING
   },
   phone: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   countryCode: {
     type: Sequelize.STRING
@@ -46,23 +46,20 @@ export const Traveler = db.define('traveler', {
     values: ['transit', 'unconfirmed', 'detained', 'at risk', 'cleared'],
     defaultValue: 'transit'
   }
-}, {
-  classMethods: {
-    setToAtRisk: function () {
-      return Traveler.update(
-        {status: 'at risk'},
-        {where: {status: 'unconfirmed'}, returning: true}
-      )
-        .spread((count, travelers) => travelers)
-        .catch(err => console.error(err));
-    },
+})
 
-    orderByArrival: function () {
-      return Traveler.findAll({
-        include: [{all: true}],
-        order: [[Flight, 'arrivalTime', 'DESC']]
-      });
-    }
-  }
-});
+Traveler.setToAtRisk = () => {
+  return Traveler.update(
+    { status: 'at risk' },
+    { where: { status: 'unconfirmed' }, returning: true }
+  )
+    .spread((count, travelers) => travelers)
+    .catch(err => console.error(err))
+}
 
+Traveler.orderByArrival = () => {
+  return Traveler.findAll({
+    include: [{ all: true }],
+    order: [[Flight, 'arrivalTime', 'DESC']]
+  })
+}
