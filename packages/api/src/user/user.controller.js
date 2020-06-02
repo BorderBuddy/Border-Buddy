@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { User } from '../database/models/user'
-import { config } from '../config'
+import { config } from '../config2'
 
 function validationError (res, statusCode) {
   statusCode = statusCode || 422
