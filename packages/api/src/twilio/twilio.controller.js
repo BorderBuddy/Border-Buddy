@@ -1,4 +1,4 @@
-import { config } from '../config'
+import { config } from '../config2'
 import { Traveler } from '../database/models/travelers'
 import { User } from '../database/models/user'
 import _ from 'lodash'
