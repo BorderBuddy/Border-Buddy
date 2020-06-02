@@ -1,4 +1,3 @@
-import { User } from './models/user'
 const db = require('./index')
 const chalk = require('chalk')
 const Promise = require('bluebird')
