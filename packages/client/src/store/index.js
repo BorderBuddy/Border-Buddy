@@ -1,10 +1,11 @@
 /* global process, require, module */
 import { createStore, applyMiddleware } from 'redux'
-import { browserHistory } from 'react-router'
+// import { browserHistory } from 'react-router'
+import { createBrowserHistory } from 'history'
 import { syncHistoryWithStore } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
 import reducer from '../reducers'
-import createLogger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 
 const middlewares = [thunkMiddleware]
 
@@ -17,7 +18,7 @@ const finalCreateStore = applyMiddleware(...middlewares)(createStore)
 
 const configureStore = (initialState) => {
   const store = finalCreateStore(reducer, initialState)
-  const history = syncHistoryWithStore(browserHistory, store)
+  const history = syncHistoryWithStore(createBrowserHistory(), store)
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
