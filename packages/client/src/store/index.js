@@ -1,6 +1,5 @@
 /* global process, require, module */
 import { createStore, applyMiddleware } from 'redux'
-// import { browserHistory } from 'react-router'
 import { createBrowserHistory } from 'history'
 import { syncHistoryWithStore } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
@@ -16,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const finalCreateStore = applyMiddleware(...middlewares)(createStore)
 
-const configureStore = (initialState) => {
+export const configureStore = (initialState) => {
   const store = finalCreateStore(reducer, initialState)
   const history = syncHistoryWithStore(createBrowserHistory(), store)
 
@@ -33,5 +32,3 @@ const configureStore = (initialState) => {
     history
   }
 }
-
-export default configureStore

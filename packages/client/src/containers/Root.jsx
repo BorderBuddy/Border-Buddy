@@ -1,10 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
-import getRoutes from '../routes'
+import { getRoutes } from '../routes'
 
 // needed for Material-UI and onTouchTap events
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { MuiThemeProvider } from '@material-ui/styles'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
 
 // custom Mui Theme
@@ -12,7 +12,7 @@ import muiTheme from '../utils/muiTheme'
 // injectTapEventPlugin()
 
 // eslint-disable-next-line react/prop-types
-const Root = ({ store, history }) => (
+export const Root = ({ store, history }) => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
       <Router history={history}>
@@ -21,5 +21,3 @@ const Root = ({ store, history }) => (
     </MuiThemeProvider>
   </Provider>
 )
-
-export default Root
