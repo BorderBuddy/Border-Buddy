@@ -1,12 +1,37 @@
 {
+    "compileOnSave": true,
     "compilerOptions": {
         "target": "esnext",
         "module": "commonjs",
+        "allowJs": true,
         "sourceMap": true,
-        "outDir": "./build",
+        "outDir": "./dist",
         "strict": true,
         "esModuleInterop": true,
         "jsx": "react",
-        "allowJs": true
-    }
+        "baseUrl": "./src",
+        "typeRoots": ["node_modules/@types", "src/types"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
 }
+// sample config
+// {
+//     "compileOnSave": true,
+//     "compilerOptions": {
+//       "target": "es6",
+//       "module": "commonjs",
+//       "allowJs": true,
+//       "jsx": "react",
+//       "outDir": "./dist",
+//       "rootDir": "./",
+//       "isolatedModules": true,
+//       "strict": true,
+//       "moduleResolution": "node",
+//       "baseUrl": "./src",
+//       "typeRoots": ["node_modules/@types", "src/typings"],
+//       "esModuleInterop": true
+//     },
+//     "include": ["src/**/*"],
+//     "exclude": ["node_modules"]
+//   }
