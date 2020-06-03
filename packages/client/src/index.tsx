@@ -1,8 +1,14 @@
+import 'isomorphic-fetch'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import styles from './index.scss'
+import Root from './containers/Root'
+import configureStore from './store'
+const { store, history } = configureStore()
+export { store }
 
-const App = () => {
-  return <h1 className={styles.title}>Hello Webpack!</h1>
-}
-ReactDOM.render(<App />, document.getElementById('root'))
+require('./style/index.scss')
+
+ReactDOM.render(
+  <Root store={store} history={history} />,
+  document.getElementById('root')
+)

@@ -5,11 +5,11 @@ import getRoutes from '../routes'
 
 // needed for Material-UI and onTouchTap events
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import injectTapEventPlugin from 'react-tap-event-plugin'
+// import injectTapEventPlugin from 'react-tap-event-plugin'
 
 // custom Mui Theme
 import muiTheme from '../utils/muiTheme'
-injectTapEventPlugin()
+// injectTapEventPlugin()
 
 // eslint-disable-next-line react/prop-types
 const Root = ({ store, history }) => (
