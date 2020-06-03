@@ -1,5 +1,12 @@
 const resolve = require('path').resolve
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+
+const paths = {
+  distFolder: resolve(__dirname, 'dist'),
+  assetsFolder: resolve(__dirname, 'assets')
+}
 
 module.exports = {
   entry: resolve(__dirname, 'src', 'index.tsx'),
@@ -10,6 +17,9 @@ module.exports = {
   mode: 'development',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+    // alias: {
+    //   react: resolve('node_modules/react')
+    // }
   },
   module: {
     rules: [
@@ -22,6 +32,7 @@ module.exports = {
         test: /\.s(a|c)ss$/,
         use: [
           'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: { modules: true }
@@ -34,7 +45,16 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')
-    })
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'bundle.compiled.css'
+    }),
+    new CopyPlugin([
+      {
+        from: resolve(paths.assetsFolder, 'images'),
+        to: resolve(paths.distFolder, 'images')
+      }
+    ])
   ],
   devServer: {
     contentBase: resolve(__dirname, 'dist'),

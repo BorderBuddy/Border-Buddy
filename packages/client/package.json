@@ -8,10 +8,25 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "es6-promise": "^4.2.8",
+    "history": "^4.10.1",
+    "isomorphic-fetch": "^2.2.1",
+    "material-ui": "^0.20.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "regenerator-runtime": "^0.13.5"
+    "react-redux": "^7.2.0",
+    "react-router": "^5.2.0",
+    "react-router-redux": "^4.0.8",
+    "react-tap-event-plugin": "^3.0.3",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.6",
+    "redux-form-material-ui": "^4.3.4",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.13.5",
+    "tachyons-sass": "^4.9.5"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
