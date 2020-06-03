@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, IndexRedirect } from 'react-router'
 
 // Components
-import Homepage from './containers/Homepage'
+import { Homepage } from './containers/Homepage'
 import AdminContainer from './containers/AdminContainer'
 import AllTravelers from './containers/AllTravelers'
 import SingleTravelerContainer from './containers/SingleTravelerContainer'
@@ -25,7 +25,7 @@ import {
   onSingleTravelerEnter
 } from './utils/hooks'
 
-const getRoutes = () => (
+export const getRoutes = () => (
   <div>
     <Route path="/" component={Homepage}>
       <IndexRedirect to="/why" />
@@ -45,5 +45,3 @@ const getRoutes = () => (
     <Route path="/login" component={Login} />
   </div>
 )
-
-export default getRoutes
