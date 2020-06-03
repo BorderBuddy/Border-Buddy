@@ -1,28 +1,27 @@
-import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Link } from 'react-router';
+import React from 'react'
+import Button from '@material-ui/core/Button'
+import { Link } from 'react-router-dom'
 
 const style = {
-	width: '100%',
+  width: '100%'
+}
 
-};
-
-export default () => (
-	<div className="navbar col-12">
-		<div className="inline-block col-4">
-			<Link to="/why">
-				<RaisedButton primary={true} label="Why Border Buddy?" style={style} />
-			</Link>
-		</div>
-		<div className="inline-block col-4">
-			<Link to="/register" className={'register-link'}>
-				<RaisedButton primary={true} label="Register" style={style} />
-			</Link>
-		</div>
-		<div className="inline-block col-4">
-			<Link to="/about">
-				<RaisedButton primary={true} label="About Us" style={style} />
-			</Link>
-		</div>
-	</div>
-);
+export const Navbar = () => (
+  <div className="navbar col-12">
+    <div className="inline-block col-4">
+      <Link to="/why">
+        <Button variant="contained" label="Why Border Buddy?" style={style} />
+      </Link>
+    </div>
+    <div className="inline-block col-4">
+      <Link to="/register" className={'register-link'}>
+        <Button variant="contained" label="Register" style={style} />
+      </Link>
+    </div>
+    <div className="inline-block col-4">
+      <Link to="/about">
+        <Button variant="contained" label="About Us" style={style} />
+      </Link>
+    </div>
+  </div>
+)

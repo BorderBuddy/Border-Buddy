@@ -1,12 +1,12 @@
-import React from 'react';
-import { reduxForm, Field } from 'redux-form';
-import RaisedButton from 'material-ui/RaisedButton';
-import { TextField } from 'redux-form-material-ui';
-import { Link } from 'react-router';
-import { Card } from 'material-ui/Card';
-import { signupLoginStyle } from './styles';
+import React from 'react'
+import { reduxForm, Field } from 'redux-form'
+import RaisedButton from 'material-ui/RaisedButton'
+import { TextField } from 'redux-form-material-ui'
+import { Link } from 'react-router-dom'
+import { Card } from 'material-ui/Card'
+import { signupLoginStyle } from './styles'
 
-const required = value => (value == null ? 'Required' : undefined);
+const required = value => (value == null ? 'Required' : undefined)
 
 const AdminLogin = ({
   handleSubmit,
@@ -17,7 +17,7 @@ const AdminLogin = ({
   handlePasswordChange,
   auth
 }) => {
-  const style = signupLoginStyle;
+  const style = signupLoginStyle
 
   return (
     <Card style={style.card}>
@@ -53,9 +53,9 @@ const AdminLogin = ({
         </form>
       </div>
     </Card>
-  );
-};
+  )
+}
 
 export default reduxForm({
   form: 'adminLogin'
-})(AdminLogin);
+})(AdminLogin)
