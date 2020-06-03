@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, IndexRedirect } from 'react-router'
+import { Route, Redirect, Switch } from 'react-router-dom'
 
 // Components
 import { Homepage } from './containers/Homepage'
@@ -14,7 +14,7 @@ import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpConta
 import AddTravelerContainer from './containers/AddTravelerContainer'
 
 import About from './components/About'
-import WhyBorderBuddy from './components/WhyBorderBuddy'
+import { WhyBorderBuddy } from './components/WhyBorderBuddy'
 
 // Router Hooks
 import {
@@ -26,22 +26,35 @@ import {
 } from './utils/hooks'
 
 export const getRoutes = () => (
-  <div>
-    <Route path="/" component={Homepage}>
-      <IndexRedirect to="/why" />
-      <Route path="why" component={WhyBorderBuddy} />
-      <Route path="register" component={ConnectedSignUpContainer} />
-      <Route path="about" component={About} />
-      <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} />
+  <Switch>
+    <Route path="/">
+      <Homepage>
+        <WhyBorderBuddy/>
+      </Homepage>
     </Route>
-    <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
+    {/* <Redirect path='/' to='/why' /> */}
+    <Route path="why">
+      <WhyBorderBuddy />
+    </Route>
+    {/* <Route path="register" component={ConnectedSignUpContainer} />
+    <Route path="about" component={About} />
+  <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
+    {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
       <IndexRedirect to="/admin/travelers" />
       <Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
       <Route path="travelers/add" component={AddTravelerContainer} />
       <Route path="travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
       <Route path="createuser" component={AdminSignUp} />
       <Route path="updateprofile" component={UpdateUserContainer} />
-    </Route>
-    <Route path="/login" component={Login} />
-  </div>
+      </Route>
+    <Route path="/login" component={Login} /> */}
+  </Switch>
 )
+
+// const App = () => (
+//   <Switch>
+//     <Route exact path="/" component={Home} />
+//     <Route path="/about" component={About} />
+//     <Route path="/contact" component={Contact} />
+//   </Switch>
+// )
