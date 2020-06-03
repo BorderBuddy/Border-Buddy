@@ -32,11 +32,8 @@ module.exports = {
         test: /\.s(a|c)ss$/,
         use: [
           'style-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: { modules: true }
-          },
+          // MiniCssExtractPlugin.loader,
+          'css-loader',
           'sass-loader'
         ]
       }
@@ -46,9 +43,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')
     }),
-    new MiniCssExtractPlugin({
-      filename: 'bundle.compiled.css'
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: 'bundle.compiled.css'
+    // }),
     new CopyPlugin([
       {
         from: resolve(paths.assetsFolder, 'images'),
