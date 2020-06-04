@@ -17,9 +17,6 @@ module.exports = {
   mode: 'development',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
-    // alias: {
-    //   react: resolve('node_modules/react')
-    // }
   },
   module: {
     rules: [
@@ -31,8 +28,7 @@ module.exports = {
       {
         test: /\.s(a|c)ss$/,
         use: [
-          'style-loader',
-          // MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ]
@@ -43,18 +39,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')
     }),
-    // new MiniCssExtractPlugin({
-    //   filename: 'bundle.compiled.css'
-    // }),
+    new MiniCssExtractPlugin({
+      filename: 'bundle.compiled.css'
+    }),
     new CopyPlugin([
       {
         from: resolve(paths.assetsFolder, 'images'),
         to: resolve(paths.distFolder, 'images')
       }
     ])
-  ],
-  devServer: {
-    contentBase: resolve(__dirname, 'dist'),
-    port: 8000
-  }
+  ]
 }

@@ -9,19 +9,21 @@ const style = {
 export const Navbar = () => (
   <div className="navbar col-12">
     <div className="inline-block col-4">
-      <Link to="/why">
-        <Button variant="contained" label="Why Border Buddy?" style={style} />
-      </Link>
+      <Button
+        component={Link}
+        to={'/why'}
+        variant='contained'
+        color='primary'
+        disableElevation
+        style={style}>
+          Why Border Buddy?
+      </Button>
     </div>
     <div className="inline-block col-4">
-      <Link to="/register" className={'register-link'}>
-        <Button variant="contained" label="Register" style={style} />
-      </Link>
+      <Button component={Link} to={'/register'} variant='contained' color='primary' disableElevation style={style}>Register</Button>
     </div>
     <div className="inline-block col-4">
-      <Link to="/about">
-        <Button variant="contained" label="About Us" style={style} />
-      </Link>
+      <Button component={Link} to={'/about'} variant='contained' color='primary' disableElevation style={style}>About Us</Button>
     </div>
   </div>
 )

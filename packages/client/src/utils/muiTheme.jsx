@@ -21,10 +21,8 @@ const customTheme = createMuiTheme({
     alternateTextColor: '#FFFFFF', // white
     canvasColor: '#FFFFFF', // white
     borderColor: '#C0C0C0', // light grey
-    // disabledColor: fade(darkBlack, 0.3),
     disabledColor: darkBlack,
     pickerHeaderColor: '#2d6ea8',
-    // clockCircleColor: fade(darkBlack, 0.07),
     clockCircleColor: darkBlack,
     shadowColor: fullBlack
   }
