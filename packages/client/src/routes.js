@@ -13,7 +13,7 @@ import Success from './containers/Success'
 import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer'
 import AddTravelerContainer from './containers/AddTravelerContainer'
 
-import About from './components/About'
+import { About } from './components/About'
 import { WhyBorderBuddy } from './components/WhyBorderBuddy'
 
 // Router Hooks
@@ -26,20 +26,23 @@ import {
 } from './utils/hooks'
 
 export const getRoutes = () => (
-  <Switch>
-    <Route path="/">
-      <Homepage>
+  <Homepage>
+    <Switch>
+      <Route path="/why">
         <WhyBorderBuddy/>
-      </Homepage>
-    </Route>
-    {/* <Redirect path='/' to='/why' /> */}
-    <Route path="why">
-      <WhyBorderBuddy />
-    </Route>
-    {/* <Route path="register" component={ConnectedSignUpContainer} />
-    <Route path="about" component={About} />
-  <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
-    {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
+      </Route>
+      <Route path="/register">
+        <ConnectedSignUpContainer/>
+      </Route>
+      <Route path="/about">
+        <About />
+      </Route>
+      <Route path="/">
+        <Redirect path='/' to='/why' />
+      </Route>
+
+      {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
+      {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
       <IndexRedirect to="/admin/travelers" />
       <Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
       <Route path="travelers/add" component={AddTravelerContainer} />
@@ -48,7 +51,8 @@ export const getRoutes = () => (
       <Route path="updateprofile" component={UpdateUserContainer} />
       </Route>
     <Route path="/login" component={Login} /> */}
-  </Switch>
+    </Switch>
+  </Homepage>
 )
 
 // const App = () => (
