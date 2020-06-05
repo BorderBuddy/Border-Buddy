@@ -1,4 +1,4 @@
-import { User } from '../../database/models/user'
+import { User } from '../../src/database/models/user'
 import { expect } from 'chai'
 
 describe('Model: User', () => {
