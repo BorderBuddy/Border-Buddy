@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "build": "webpack --config webpack.prod.config.js",
-    "dev": "webpack-dev-server --config webpack.dev.config.js --open"
+    "dev": "webpack-dev-server --config webpack.dev.config.js --open",
+    "test": "jest"
   },
   "license": "Apache-2.0",
   "dependencies": {
