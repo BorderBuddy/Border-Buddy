@@ -15,7 +15,7 @@ app.use(volleyball)
 
 addRoutes(app)
 
-const staticContent = path.normalize(path.join(__dirname, '/../dist'))
+const staticContent = path.resolve(__dirname, 'public')
 app.use(express.static(staticContent))
 
 app.get('*', (req, res) => {
