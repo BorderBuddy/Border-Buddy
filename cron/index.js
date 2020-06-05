@@ -1,6 +1,6 @@
-const { CronJob } = require('cron');
-const jobs = require('./jobs');
-const db = require('../database');
+const { CronJob } = require('cron')
+const jobs = require('./jobs')
+const db = require('../database')
 
 /* SCHEDULED JOBS:
 
@@ -14,7 +14,6 @@ const db = require('../database');
 
 	note to Dillon: this now needs to change
 
-
 	2. -get all travelers with statuses 'unconfirmed'
 		 -set their statuses to 'at risk'
 		 -in future, could send email push notifications
@@ -22,21 +21,20 @@ const db = require('../database');
 
 // once every fifteen min, at :11 :26 :41 :56
 const landFlightsAndTextTravelers = new CronJob({
-	cronTime: '0 11,25,41,56 * * * *',
-	onTick: jobs.landFlightsAndTextTravelers,
-	timeZone: 'America/New_York'
-});
+  cronTime: '0 11,25,41,56 * * * *',
+  onTick: jobs.landFlightsAndTextTravelers,
+  timeZone: 'America/New_York'
+})
 
 // once every fifteen min, at :10 :25 :40 :55
 const setUnconfirmedToAtRisk = new CronJob({
-	cronTime: '0 10,24,40,55 * * * *',
-	onTick: jobs.setToAtRisk,
-	timeZone: 'America/New_York'
-});
-
+  cronTime: '0 10,24,40,55 * * * *',
+  onTick: jobs.setToAtRisk,
+  timeZone: 'America/New_York'
+})
 
 db.didSync
-.then(() => {
-	landFlightsAndTextTravelers.start();
-	setUnconfirmedToAtRisk.start();
-});
+  .then(() => {
+    landFlightsAndTextTravelers.start()
+    setUnconfirmedToAtRisk.start()
+  })
