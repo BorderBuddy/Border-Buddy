@@ -1,6 +1,6 @@
-import { Traveler } from '../../database/models/travelers'
-import { Flight } from '../../database/models/flights'
-import '../../database/models/index'
+import { Traveler } from '../../src/database/models/travelers'
+import { Flight } from '../../src/database/models/flights'
+import '../../src/database/models/index'
 import { expect } from 'chai'
 
 describe('Model: Traveler', () => {
