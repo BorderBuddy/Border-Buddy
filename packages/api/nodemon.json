@@ -6,5 +6,5 @@
     "ignore": [
         "test/**/*.ts"
     ],
-    "exec": "ts-node ./src/index.js"
+    "exec": "npm_config_dev=true ts-node ./src/index.js"
 }
