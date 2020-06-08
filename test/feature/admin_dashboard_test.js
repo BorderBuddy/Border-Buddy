@@ -1,12 +1,11 @@
-// import Nightmare from 'nightmare';
-// import {expect} from 'chai';
-// import {cleanDatabase, rootURL} from './feature_helpers';
+// import Nightmare from 'nightmare'
+// import { expect } from 'chai'
+// import { cleanDatabase, rootURL } from './feature_helpers'
 
-// require('./nightmare_helpers');
+// require('./nightmare_helpers')
 
 // describe('BorderBuddy Admin Dashboard', () => {
-
-//   beforeEach(cleanDatabase);
+//   beforeEach(cleanDatabase)
 
 //   it('allows an admin to add a traveler', () => {
 //     const nightmare = new Nightmare({
@@ -15,9 +14,9 @@
 //       gotoTimeout: 5000,
 //       typeInterval: 20,
 //       openDevTools: {
-//         mode: "detach"
+//         mode: 'detach'
 //       }
-//     }).viewport(1280, 1024);
+//     }).viewport(1280, 1024)
 
 //     return nightmare.goto(rootURL('/login'))
 //       .type('input[name="email"]', 'admin@borderbuddy.us')
@@ -37,7 +36,7 @@
 //       })
 //       .end()
 //       .then((result) => {
-//         expect(result).to.contain('Traveler 007');
-//       });
-//   });
-// });
+//         expect(result).to.contain('Traveler 007')
+//       })
+//   })
+// })
