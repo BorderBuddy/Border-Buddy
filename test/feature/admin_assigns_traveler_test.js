@@ -1,14 +1,13 @@
-// import Nightmare from 'nightmare';
-// import {expect} from 'chai';
-// import {cleanDatabase, rootURL} from './feature_helpers';
-// import {Traveler} from '../../database/models/travelers';
+// import Nightmare from 'nightmare'
+// import { expect } from 'chai'
+// import { cleanDatabase, rootURL } from './feature_helpers'
+// import { Traveler } from '../../database/models/travelers'
 
-// require('./nightmare_helpers');
+// require('./nightmare_helpers')
 
 // describe('BorderBuddy admin dashboard', () => {
-
 //   beforeEach(() => {
-//     cleanDatabase();
+//     cleanDatabase()
 //     return Traveler.create({
 //       name: 'traveler-name',
 //       nationality: 'traveler-nationality',
@@ -16,13 +15,13 @@
 //       phone: 1234567890,
 //       connectivity: true,
 //       secondaryContactPhone: 5555555555,
-//       secondaryContactName: "secondary-contact-name",
-//       secondaryContactRelation: "secondary-contact-relation",
+//       secondaryContactName: 'secondary-contact-name',
+//       secondaryContactRelation: 'secondary-contact-relation',
 //       requireInterpreter: false,
 //       preferredLanguage: 'preferred-language',
 //       status: 'transit'
-//     });
-//   });
+//     })
+//   })
 
 //   it('allows an admin to assign a representative to a traveler', () => {
 //     const nightmare = new Nightmare({
@@ -31,10 +30,10 @@
 //       gotoTimeout: 5000,
 //       typeInterval: 20,
 //       openDevTools: {
-//         mode: "detach"
+//         mode: 'detach'
 //       }
 //     })
-//       .viewport(1280, 1024);
+//       .viewport(1280, 1024)
 
 //     return nightmare.goto(rootURL('/admin'))
 //       .type('input[name="email"]', 'admin@borderbuddy.us')
@@ -55,11 +54,11 @@
 //       .mouseDownUpOnElementContaining('tr', 'traveler-name')
 //       .wait(500)
 //       .evaluate(() => {
-//         return document.querySelector('#root').innerHTML;
+//         return document.querySelector('#root').innerHTML
 //       })
 //       .end()
 //       .then((result) => {
-//         expect(result).to.contain('ADM');
+//         expect(result).to.contain('ADM')
 //       })
-//   });
-// });
+//   })
+// })

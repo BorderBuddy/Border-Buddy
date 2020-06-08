@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "npm run clean && tsc && mkdir -p ./dist/public && mkdir -p ./src/public",
-    "test": "NODE_ENV=test mocha -r ts-node/register 'test/model/*.js'",
+    "test": "NODE_ENV=test mocha -r ts-node/register 'test/**/*'",
     "clean": "rm -rf dist && rm -rf ./src/public",
     "dev": "nodemon",
     "start": "node ./dist/index.js",
@@ -44,8 +44,12 @@
     "@types/sequelize": "^4.28.9",
     "@types/validator": "^13.0.0",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "chai-subset": "^1.6.0",
     "mocha": "^7.2.0",
     "nodemon": "^1.19.1",
+    "sinon": "^9.0.2",
+    "sinon-chai": "^3.5.0",
     "ts-node": "^8.2.0",
     "typescript": "^3.9.3"
   }

@@ -1,5 +1,5 @@
-import '../../unit_helpers'
-import createOrUpdateTraveler from '../../../api/useCase/createOrUpdateTraveler'
+import '../unit_helpers'
+import createOrUpdateTraveler from '../../src/useCase/createOrUpdateTraveler'
 
 describe('createOrUpdateTraveler', () => {
   let travelerNotifier
