@@ -1,9 +1,10 @@
+import 'jsdom-global/register'
 import React from 'react'
-import { shallow, configure } from 'enzyme'
+import { shallow, mount, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { SignUpConfirmation } from '../../src/components/SignUpConfirmation'
 import FlightConfirmation from '../../src/components/FlightConfirmation'
-import { Dialog } from '@material-ui/core'
+import { Dialog, Button } from '@material-ui/core'
 
 import '../unit_helpers'
 configure({ adapter: new Adapter() })
@@ -33,6 +34,13 @@ describe('Component: SignUpConfirmation', () => {
     const component = shallow(<SignUpConfirmation {...defaultProps} />)
     expect(component.find(Dialog).prop('open')).to.equal(true)
   })
+
+  // This test is broken, can't find Button
+  // it('binds handleClose method to Dialog action button', () => {
+  //   const component = shallow(<SignUpConfirmation {...defaultProps}/>)
+  //   const actionButton = component.find(Button)
+  //   expect(actionButton.prop('onClick').to.equal(confirmSubmitSpy))
+  // })
 
   describe('when flight info is passed as prop', () => {
     it('shows FlightConfirmation in the Dialog', () => {
