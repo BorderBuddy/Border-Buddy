@@ -1,9 +1,8 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import RaisedButton from 'material-ui/RaisedButton'
 import { TextField } from 'redux-form-material-ui'
 import { Link } from 'react-router-dom'
-import { Card } from 'material-ui/Card'
+import { Card, Button } from '@material-ui/core'
 import { signupLoginStyle } from './styles'
 
 const required = value => (value == null ? 'Required' : undefined)
@@ -43,11 +42,12 @@ const AdminLogin = ({
           />
           {auth.fetching && <p style={style.loader}>Logging In...</p>}
           {auth.error && <p style={style.error}>ERROR: {auth.error.message}</p>}
-          <RaisedButton
+          <Button
             type="submit"
             label="Login"
             disabled={pristine || submitting}
-            primary={true}
+            variant='contained'
+            color='primary'
             style={style.button}
           />
         </form>

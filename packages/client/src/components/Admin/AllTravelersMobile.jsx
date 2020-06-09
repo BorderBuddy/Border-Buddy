@@ -1,6 +1,5 @@
 import React, { Component} from 'react';
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Button, Card, CardActions, CardTitle, CardText } from '@material-ui/core';
 import { browserHistory } from 'react-router';
 import { setStatusColor } from './styles';
 
@@ -38,9 +37,10 @@ const AllTravelersMobile = ({ travelers }) => {
                     <CardText>{`Flight Status: ${flightStatus}`}</CardText>
                   </div>
                 <CardActions>
-                  <RaisedButton 
+                  <Button 
                     label="View/Edit Traveler"
-                    primary={true}
+                    color='primary'
+                    variant='contained'
                     onTouchTap={() => browserHistory.push(`/admin/travelers/${traveler.id}`)}
                   />
                 </CardActions>

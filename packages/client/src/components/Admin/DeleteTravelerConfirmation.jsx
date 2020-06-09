@@ -1,10 +1,10 @@
 import React from 'react';
-import {Dialog, RaisedButton} from 'material-ui';
+import {Dialog, Button} from '@material-ui/core';
 
 export default ({ confirmDelete, handleClose, open, traveler }) => {
   
   const actions = [
-    <RaisedButton
+    <Button
       key={1}
       id="confirm-delete"
       label="Yes, delete this traveler"
@@ -13,7 +13,7 @@ export default ({ confirmDelete, handleClose, open, traveler }) => {
       labelColor="#FFFFFF"
       style={style.button}
       />,
-    <RaisedButton
+    <Button
       key={2}
       id="cancel-delete"
       label="No, do not delete this traveler"
