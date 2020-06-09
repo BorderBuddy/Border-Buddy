@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
-import { MenuItem, RaisedButton } from 'material-ui';
+import { MenuItem, Button } from '@material-ui/core';
 import { Field, reduxForm } from 'redux-form';
 import { required, phone, email, uppercase, validateCode, numbersOnly } from '../../utils/validations';
 import AirlinePicker from '../AirlinePicker';
@@ -292,11 +292,12 @@ export class AddTraveler extends React.Component {
           </div>
           <div className="clearfix">
             <div className="field-container col-12 md-col md-col-6">
-              <RaisedButton
+              <Button
                 type="submit"
                 label="Submit"
                 disabled={!valid}
-                primary={true}
+                color='primary'
+                variant='contained'
                 style={style.button}
                 className="add-new-traveler"
                 id="submit-new-traveler"

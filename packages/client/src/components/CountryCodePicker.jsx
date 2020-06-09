@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoComplete, MenuItem } from 'material-ui';
+import { AutoComplete, MenuItem } from '@material-ui/core';
 import countryCodes from '../utils/countryCodes'
 
 const CountryCodePicker = ({ input, label, style, floatingLabelStyle, underlineFocusStyle, errorStyle, meta: { touched, error }}) => {
