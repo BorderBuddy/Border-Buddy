@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import { TableRow, TableRowColumn } from 'material-ui/Table';
+import { TableRow, TableRowColumn } from '@material-ui/core';
 import { 
 	nameStyle,
 	countryCodeStyle,

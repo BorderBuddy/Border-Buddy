@@ -1,20 +1,14 @@
 import React from 'react'
-import { Dialog, FlatButton } from 'material-ui'
+import { Dialog, Button } from '@material-ui/core'
 import FlightConfirmation from './FlightConfirmation'
 
-interface SignUpConfProps {
-  confirmSubmit: any,
-  open: any,
-  flight: any,
-}
-
-export const SignUpConfirmation = ({ confirmSubmit, open, flight }: SignUpConfProps) => {
+export default ({ confirmSubmit, open, flight }) => {
   const actions = [
-    <FlatButton
+    <Button
       key={1}
       label="OK"
-      primary={true}
-      onTouchStart={confirmSubmit}
+      color='primary'
+      onClick={confirmSubmit}
     />
   ]
 

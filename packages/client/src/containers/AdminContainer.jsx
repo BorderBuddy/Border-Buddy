@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { browserHistory, Link } from 'react-router-dom'
-import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
-import IconButton from 'material-ui/IconButton'
-import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff'
+import { Toolbar, ToolbarGroup, ToolbarTitle, IconButton, Button } from '@material-ui/core'
+import {ActionFlightTakeoff} from '@material-ui/icon'
 import AppBarMenu from './AppBarMenu'
-import RaisedButton from 'material-ui/RaisedButton'
+
 const style = {
   button: {
     margin: '2em auto',
@@ -25,7 +24,7 @@ export default class AdminContainer extends Component {
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
             <Link to="/admin/travelers/add" >
-              <RaisedButton label="Add Traveler" backgroundColor="#FFFFFF" id="add-new-traveler"/>
+              <Button label="Add Traveler" backgroundColor="#FFFFFF" id="add-new-traveler" variant='contained'/>
             </Link>
             <AppBarMenu />
           </ToolbarGroup>

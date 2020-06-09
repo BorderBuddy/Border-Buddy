@@ -1,14 +1,12 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
-import MenuItem from 'material-ui/MenuItem';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import {IconMenu, IconButton, MenuItem} from '@material-ui/core';
+import {MoreVert} from '@material-ui/icon';
 
 export default ({ onCreateUserClick, onSignoutClick }) => (
   <IconMenu
     iconButtonElement={
-      <IconButton><MoreVertIcon color={'white'}/></IconButton>
+      <IconButton><MoreVert color={'white'}/></IconButton>
     }
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}

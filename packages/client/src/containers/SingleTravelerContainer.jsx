@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FlatButton, RaisedButton, Dialog } from 'material-ui'
 import SingleTraveler from '../components/Admin/SingleTraveler'
 import { browserHistory } from 'react-router'
 import { updateTraveler, sendText, deleteTraveler } from '../actions/selectedTraveler'
