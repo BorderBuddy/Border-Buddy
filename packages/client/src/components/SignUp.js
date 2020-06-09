@@ -1,6 +1,6 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
-import {RaisedButton, MenuItem} from 'material-ui';
+import {Button, MenuItem} from '@material-ui/core';
 import {TextField, DatePicker, SelectField} from 'redux-form-material-ui';
 import AirlinePicker from './AirlinePicker';
 import {required, phone, email, validateCode, uppercase, numbersOnly} from '../utils/validations';
@@ -241,12 +241,13 @@ const SignUp = ({handleSubmit, valid}) => {
       </div>
       <div className="clearfix">
         <div className="field-container col-12">
-          <RaisedButton
+          <Button
             type="submit"
             label="Register"
             className="submit-traveler-registration"
             disabled={!valid}
-            primary={true}
+            color='primary'
+            variant='contained'
             style={style.button}
           />
         </div>
