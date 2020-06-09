@@ -26,20 +26,12 @@ import {
 } from './utils/hooks'
 
 export const getRoutes = () => (
-  <Homepage>
-    <Switch>
-      <Route path="/why">
-        <WhyBorderBuddy/>
-      </Route>
-      <Route path="/register">
-        <ConnectedSignUpContainer/>
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/">
-        <Redirect path='/' to='/why' />
-      </Route>
+  <Homepage/>>
+  <Switch>
+      <Route exact path="/why" component={WhyBorderBuddy}/>
+      <Route exact path="/register" component={ConnectedSignUpContainer}/>
+      <Route exact path="/about" component={About}/>
+      <Route component={WhyBorderBuddy} />
 
       {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
       {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
@@ -52,7 +44,7 @@ export const getRoutes = () => (
       </Route>
     <Route path="/login" component={Login} /> */}
     </Switch>
-  </Homepage>
+
 )
 
 // const App = () => (
