@@ -1,9 +1,12 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import SignUpConfirmation from '../../src/components/SignUpConfirmation'
+import { shallow, configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+import { SignUpConfirmation } from '../../src/components/SignUpConfirmation'
 import FlightConfirmation from '../../src/components/FlightConfirmation'
+import { Dialog } from '@material-ui/core'
 
 import '../unit_helpers'
+configure({ adapter: new Adapter() })
 
 describe('Component: SignUpConfirmation', () => {
   let confirmSubmitSpy
@@ -22,23 +25,13 @@ describe('Component: SignUpConfirmation', () => {
   describe('render', () => {
     it('has a dialog', () => {
       const component = shallow(<SignUpConfirmation {...defaultProps} />)
-
-      expect(component.find('Dialog').length).to.equal(1)
+      expect(component.find(Dialog)).to.have.lengthOf(1)
     })
   })
 
   it('passes through the "open" prop to the Dialog', () => {
     const component = shallow(<SignUpConfirmation {...defaultProps} />)
-
-    expect(component.find('Dialog').prop('open')).to.equal(true)
-  })
-
-  it('binds handleClose method to Dialog action button', () => {
-    const component = shallow(<SignUpConfirmation {...defaultProps}/>)
-
-    const actionButton = component.find('Dialog').prop('actions')[0]
-
-    expect(actionButton.props.onTouchTap).to.equal(confirmSubmitSpy)
+    expect(component.find(Dialog).prop('open')).to.equal(true)
   })
 
   describe('when flight info is passed as prop', () => {
