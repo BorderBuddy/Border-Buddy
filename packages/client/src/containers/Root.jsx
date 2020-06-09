@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import {Router as BrowserRouter } from 'react-router-dom'
 import { getRoutes } from '../routes'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import muiTheme from '../utils/muiTheme'
@@ -9,9 +9,9 @@ import muiTheme from '../utils/muiTheme'
 export const Root = ({ store }) => (
   <Provider store={store}>
     <MuiThemeProvider theme={muiTheme}>
-      <BrowserRouter>
+      <Router>
         {getRoutes()}
-      </BrowserRouter>
+      </Router>
     </MuiThemeProvider>
   </Provider>
 )
