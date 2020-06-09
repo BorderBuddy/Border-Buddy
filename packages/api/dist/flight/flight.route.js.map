@@ -1,0 +1,1 @@
+{"version":3,"file":"flight.route.js","sourceRoot":"","sources":["../../src/flight/flight.route.js"],"names":[],"mappings":";;;;;AAAA,iEAA4C;AAE5C,MAAM,IAAI,GAAG,aAAa,CAAA;AAE1B,kBAAe,GAAG,CAAC,EAAE;IACnB,GAAG,CAAC,GAAG,CAAC,IAAI,GAAG,SAAS,EAAE,gBAAU,CAAC,YAAY,CAAC,CAAA;IAClD,GAAG,CAAC,GAAG,CAAC,IAAI,GAAG,OAAO,EAAE,gBAAU,CAAC,OAAO,CAAC,CAAA;AAC7C,CAAC,CAAA"}
