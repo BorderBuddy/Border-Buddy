@@ -1,5 +1,6 @@
 const resolve = require('path').resolve
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 const paths = {
@@ -13,6 +14,7 @@ module.exports = {
   ],
   output: {
     path: resolve(__dirname, 'dist'),
+    publicPath: resolve(paths.distFolder),
     filename: 'bundle.js'
   },
   mode: 'development',
@@ -29,7 +31,7 @@ module.exports = {
       {
         test: /\.s(a|c)ss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ]
@@ -39,6 +41,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'bundle.compiled.css'
     }),
     new CopyPlugin([
       {
@@ -57,6 +62,5 @@ module.exports = {
       '/api': 'http://localhost:3000'
     },
     watchContentBase: true,
-    publicPath: resolve(paths.distFolder)
   }
 }
