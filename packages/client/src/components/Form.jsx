@@ -14,7 +14,7 @@ const Form = (props) => (
     <Divider />
     <h3>Personal and Contact Details</h3>
     <p><em>Tell us about yourself, so our lawyers can can best assist you.</em></p>
-    <div className="clearfix">
+    {/* <div className="clearfix">
       <div className="field-container col-12 md-col md-col-6">
         <StyledField
           name="name"
@@ -143,7 +143,7 @@ const Form = (props) => (
       </div>
     </div>
     {props.children /* renders the AdminExtension part of the form or any other additional fields you may want */ }
-    <div>
+   {/* <div>
       <Button
         type="submit"
         label="Register"
@@ -173,7 +173,7 @@ const Form = (props) => (
           />
         </div>
       }
-    </div>
+    </div> */}
   </form>
 );
 

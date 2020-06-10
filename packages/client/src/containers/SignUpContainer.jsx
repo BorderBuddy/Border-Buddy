@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import { Dialog, Button } from '@material-ui/Core'
+import { Dialog, Button, DialogActions } from '@material-ui/Core'
 import Form from '../components/FormContainer'
 import FlightConfirmation from '../components/FlightConfirmation'
 import { signUpTraveler } from '../actions/signUp'
@@ -47,41 +47,41 @@ class SignUpContainer extends Component {
   }
 
   render () {
-    const confirmActions = [
-      <Button
-        label="Cancel"
-        variant='contained'
-        color='primary'
-        onClick={this.handleClose}
-      />,
-      <Button
-        id="submit-flight-confirmation"
-        label="Submit"
-        variant='text'
-        color='primary'
-        onClick={this.confirmSubmit}
-      />
-    ]
-
-    const cancelActions = [
-      <Button
-        label="OK"
-        variant='contained'
-        color='primary'
-        onClick={this.handleClose}
-      />
-    ]
-
     return (
       <div>
         <Form handleSubmit={this.handleSubmit} extraFields={[]} formTitle="Traveler Registration" />
         <Dialog
           title="Confirm Submission"
-          actions={(this.props.flight) ? confirmActions : cancelActions}
           modal={true}
           open={this.state.open}
         >
-          <FlightConfirmation flight={this.props.flight} />
+          <DialogActions>
+            {this.props.flight ?
+              <Fragment>
+                <Button
+                  label="Cancel"
+                  variant='contained'
+                  color='primary'
+                  onClick={this.handleClose}
+                />
+                <Button
+                  id="submit-flight-confirmation"
+                  label="Submit"
+                  variant='text'
+                  color='primary'
+                  onClick={this.confirmSubmit}
+                />
+              </Fragment>
+            :
+              <Button
+                label="OK"
+                variant='contained'
+                color='primary'
+                onClick={this.handleClose}
+              />
+            }
+          </DialogActions>
+          <FlightConfirmation flight={this.props.flight} /> 
         </Dialog>
       </div>
     )
