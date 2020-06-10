@@ -1,13 +1,9 @@
-node_modules/**
-dist/fund.js
-dist/fund.js.map
-dist/stylesheets/**
-.vscode/settings.json
+dist
+.vscode
 .idea
 .env
 npm-debug.log*
 .npmrc
-flow-typed/
+flow-typed
 .DS_Store
-api/.DS_Store
 node_modules
