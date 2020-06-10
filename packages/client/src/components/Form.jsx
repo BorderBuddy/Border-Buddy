@@ -1,6 +1,6 @@
 import React from 'react';
 import StyledField from './Field';
-import {RaisedButton, MenuItem, Divider} from 'material-ui';
+import {Button, MenuItem, Divider} from '@material-ui/core';
 import {TextField, DatePicker, SelectField, AutoComplete} from 'redux-form-material-ui';
 import AirlinePicker from './AirlinePicker';
 import {required, phone, email, validateCode, uppercase} from '../utils/validations';
@@ -144,25 +144,28 @@ const Form = (props) => (
     </div>
     {props.children /* renders the AdminExtension part of the form or any other additional fields you may want */ }
     <div>
-      <RaisedButton
+      <Button
         type="submit"
         label="Register"
+        variant='contained'
         className="submit-traveler-registration"
         disabled={!props.valid}
-        primary={true}
+        color='primary'
         style={formStyle.submitButton}
       />
       {
         props.showAdditionalButtons &&
         <div>
-          <RaisedButton 
+          <Button 
             label="Text Traveler" 
+            variant='contained'
             onClick={props.sendText} 
             style={formStyle.adminButton} 
             labelColor="#2d6ea8" 
           />
-          <RaisedButton 
+          <Button 
             label="Delete Traveler" 
+            variant='contained'
             onClick={props.deleteTraveler} 
             style={formStyle.adminButton} 
             backgroundColor="#bd1c11" 

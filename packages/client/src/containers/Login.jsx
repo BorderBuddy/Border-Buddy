@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from '../components/Admin/Login';
 import { login } from '../actions/auth';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
+// import { AppBar, IconButton } from '@material-ui/Core'
+// import {ActionFlightTakeoff} from '@material-ui/Icon'
 
 class LoginContainer extends Component {
   constructor(props) {

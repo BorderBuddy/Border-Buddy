@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import TravelerRow from './TravelerRow'
 
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '@material-ui/core';
 import { 
 	nameStyle, 
 	phoneStyle,

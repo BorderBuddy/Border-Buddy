@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { browserHistory } from 'react-router'
+// TODO: Deal with the migration from browserHistory
+// import { browserHistory } from 'react-router'
 import {
   SET_AUTH,
   LOGIN_REQUEST,
@@ -49,7 +50,7 @@ export const login = (email, password) => dispatch => {
     .post('/api/auth/local', { email, password })
     .then(response => {
       window.localStorage.setItem('accessToken', response.data.token)
-      browserHistory.push('/admin/travelers')
+      // browserHistory.push('/admin/travelers')
       return dispatch(loginSuccess(response.data))
     })
     .catch(err => {
@@ -87,7 +88,7 @@ export const signout = () => dispatch => {
     .then(() => {
       window.localStorage.clear()
       dispatch(logout(null))
-      browserHistory.push('/login')
+      // browserHistory.push('/login')
     })
     .catch(err => console.error(err))
 }
