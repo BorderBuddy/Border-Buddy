@@ -77,11 +77,19 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
+<<<<<<< HEAD
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.tsx");
+=======
+/******/ 	__webpack_require__.p = "/Users/thearae/border-buddy-development/packages/client/dist";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+>>>>>>> fixed ht reloading
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10292,7 +10300,11 @@ eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ?
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Navbar = void 0;\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst Button_1 = __importDefault(__webpack_require__(/*! @material-ui/core/Button */ \"./node_modules/@material-ui/core/esm/Button/index.js\"));\nconst react_router_dom_1 = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\nconst style = {\n    width: '100%'\n};\nexports.Navbar = () => (react_1.default.createElement(\"div\", { className: \"navbar col-12\" },\n    react_1.default.createElement(\"div\", { className: \"inline-block col-4\" },\n        react_1.default.createElement(Button_1.default, { component: react_router_dom_1.Link, to: '/why', variant: 'contained', color: 'primary', disableElevation: true, style: style }, \"Why Border Buddy?\")),\n    react_1.default.createElement(\"div\", { className: \"inline-block col-4\" },\n        react_1.default.createElement(Button_1.default, { component: react_router_dom_1.Link, to: '/register', variant: 'contained', color: 'primary', disableElevation: true, style: style }, \"Register\")),\n    react_1.default.createElement(\"div\", { className: \"inline-block col-4\" },\n        react_1.default.createElement(Button_1.default, { component: react_router_dom_1.Link, to: '/about', variant: 'contained', color: 'primary', disableElevation: true, style: style }, \"About Us\"))));\n\n\n//# sourceURL=webpack:///./src/components/Navbar.jsx?");
+=======
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Navbar = void 0;\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst Button_1 = __importDefault(__webpack_require__(/*! @material-ui/core/Button */ \"./node_modules/@material-ui/core/esm/Button/index.js\"));\nconst react_router_dom_1 = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\nconst style = {\n    width: '100%'\n};\nexports.Navbar = () => (react_1.default.createElement(\"div\", { className: \"navbar col-12\" },\n    react_1.default.createElement(\"div\", { className: \"inline-block col-4\" },\n        react_1.default.createElement(Button_1.default, { component: react_router_dom_1.Link, to: '/why', variant: 'contained', color: 'primary', disableElevation: true, style: style }, \"Why Border Buddy?\")),\n    react_1.default.createElement(\"div\", { className: \"inline-block col-4\" },\n        react_1.default.createElement(Button_1.default, { component: react_router_dom_1.Link, to: '/about', variant: 'contained', color: 'primary', disableElevation: true, style: style }, \"About Us\"))));\n\n\n//# sourceURL=webpack:///./src/components/Navbar.jsx?");
+>>>>>>> fixed ht reloading
 
 /***/ }),
 
@@ -10332,6 +10344,21 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexport
 
 /***/ }),
 
+<<<<<<< HEAD
+=======
+/***/ "./src/containers/Homepage.jsx":
+/*!*************************************!*\
+  !*** ./src/containers/Homepage.jsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Homepage = void 0;\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst Footer_1 = __webpack_require__(/*! ../components/Footer */ \"./src/components/Footer.jsx\");\nconst Navbar_1 = __webpack_require__(/*! ../components/Navbar */ \"./src/components/Navbar.jsx\");\nexports.Homepage = (props) => {\n    return (react_1.default.createElement(\"div\", { id: \"homepage\" },\n        react_1.default.createElement(\"div\", { id: \"banner\", className: \"col-12\" },\n            react_1.default.createElement(\"img\", { style: styles.image, src: \"images/logos-png/BB_Logo-Type-White.png\" })),\n        react_1.default.createElement(Navbar_1.Navbar, null),\n        props.children,\n        react_1.default.createElement(Footer_1.Footer, null)));\n};\nconst styles = {\n    image: {\n        display: 'block',\n        margin: 'auto',\n        width: '50%'\n    }\n};\n\n\n//# sourceURL=webpack:///./src/containers/Homepage.jsx?");
+
+/***/ }),
+
+>>>>>>> fixed ht reloading
 /***/ "./src/containers/Root.jsx":
 /*!*********************************!*\
   !*** ./src/containers/Root.jsx ***!
@@ -10340,7 +10367,11 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexport
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Root = void 0;\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst react_redux_1 = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\nconst routes_1 = __webpack_require__(/*! ../routes */ \"./src/routes.js\");\nconst Footer_1 = __webpack_require__(/*! ../components/Footer */ \"./src/components/Footer.jsx\");\nconst Navbar_1 = __webpack_require__(/*! ../components/Navbar */ \"./src/components/Navbar.jsx\");\nconst styles_1 = __webpack_require__(/*! @material-ui/core/styles */ \"./node_modules/@material-ui/core/esm/styles/index.js\");\nconst muiTheme_1 = __importDefault(__webpack_require__(/*! ../utils/muiTheme */ \"./src/utils/muiTheme.jsx\"));\n// eslint-disable-next-line react/prop-types\nexports.Root = ({ store }) => (react_1.default.createElement(react_redux_1.Provider, { store: store },\n    react_1.default.createElement(styles_1.ThemeProvider, { theme: muiTheme_1.default },\n        react_1.default.createElement(\"div\", { id: \"banner\", className: \"col-12\" },\n            react_1.default.createElement(\"img\", { style: styles.image, src: \"images/logos-png/BB_Logo-Type-White.png\" })),\n        react_1.default.createElement(Navbar_1.Navbar, null),\n        react_1.default.createElement(Router, null, routes_1.getRoutes()),\n        react_1.default.createElement(Footer_1.Footer, null))));\nconst styles = {\n    image: {\n        display: 'block',\n        margin: 'auto',\n        width: '50%'\n    }\n};\n\n\n//# sourceURL=webpack:///./src/containers/Root.jsx?");
+=======
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.Root = void 0;\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst react_redux_1 = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\nconst react_router_dom_1 = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\nconst routes_1 = __webpack_require__(/*! ../routes */ \"./src/routes.js\");\nconst styles_1 = __webpack_require__(/*! @material-ui/core/styles */ \"./node_modules/@material-ui/core/esm/styles/index.js\");\nconst muiTheme_1 = __importDefault(__webpack_require__(/*! ../utils/muiTheme */ \"./src/utils/muiTheme.jsx\"));\n// eslint-disable-next-line react/prop-types\nexports.Root = ({ store }) => (react_1.default.createElement(react_redux_1.Provider, { store: store },\n    react_1.default.createElement(styles_1.ThemeProvider, { theme: muiTheme_1.default },\n        react_1.default.createElement(react_router_dom_1.BrowserRouter, null, routes_1.getRoutes()))));\n\n\n//# sourceURL=webpack:///./src/containers/Root.jsx?");
+>>>>>>> fixed ht reloading
 
 /***/ }),
 
@@ -10472,7 +10503,11 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getRoutes = void 0;\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst react_router_dom_1 = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\nconst ConnectedSignUpContainer_1 = __importDefault(__webpack_require__(/*! ./connectedComponents/ConnectedSignUpContainer */ \"./src/connectedComponents/ConnectedSignUpContainer.jsx\"));\nconst About_1 = __webpack_require__(/*! ./components/About */ \"./src/components/About.jsx\");\nconst WhyBorderBuddy_1 = __webpack_require__(/*! ./components/WhyBorderBuddy */ \"./src/components/WhyBorderBuddy.jsx\");\nexports.getRoutes = () => (react_1.default.createElement(react_router_dom_1.Switch, null,\n    react_1.default.createElement(react_router_dom_1.Route, { exact: true, path: \"/why\", component: WhyBorderBuddy_1.WhyBorderBuddy }),\n    react_1.default.createElement(react_router_dom_1.Route, { exact: true, path: \"/register\", component: ConnectedSignUpContainer_1.default }),\n    react_1.default.createElement(react_router_dom_1.Route, { exact: true, path: \"/about\", component: About_1.About }),\n    react_1.default.createElement(react_router_dom_1.Route, { component: WhyBorderBuddy_1.WhyBorderBuddy })));\n// const App = () => (\n//   <Switch>\n//     <Route exact path=\"/\" component={Home} />\n//     <Route path=\"/about\" component={About} />\n//     <Route path=\"/contact\" component={Contact} />\n//   </Switch>\n// )\n\n\n//# sourceURL=webpack:///./src/routes.js?");
+=======
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getRoutes = void 0;\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst react_router_dom_1 = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\n// Components\nconst Homepage_1 = __webpack_require__(/*! ./containers/Homepage */ \"./src/containers/Homepage.jsx\");\nconst ConnectedSignUpContainer_1 = __importDefault(__webpack_require__(/*! ./connectedComponents/ConnectedSignUpContainer */ \"./src/connectedComponents/ConnectedSignUpContainer.jsx\"));\nconst About_1 = __webpack_require__(/*! ./components/About */ \"./src/components/About.jsx\");\nconst WhyBorderBuddy_1 = __webpack_require__(/*! ./components/WhyBorderBuddy */ \"./src/components/WhyBorderBuddy.jsx\");\nexports.getRoutes = () => (react_1.default.createElement(Homepage_1.Homepage, null,\n    react_1.default.createElement(react_router_dom_1.Switch, null,\n        react_1.default.createElement(react_router_dom_1.Route, { path: \"/why\" },\n            react_1.default.createElement(WhyBorderBuddy_1.WhyBorderBuddy, null)),\n        react_1.default.createElement(react_router_dom_1.Route, { path: \"/register\" },\n            react_1.default.createElement(ConnectedSignUpContainer_1.default, null)),\n        react_1.default.createElement(react_router_dom_1.Route, { path: \"/about\" },\n            react_1.default.createElement(About_1.About, null)),\n        react_1.default.createElement(react_router_dom_1.Route, { path: \"/\" },\n            react_1.default.createElement(react_router_dom_1.Redirect, { path: '/', to: '/why' })))));\n// const App = () => (\n//   <Switch>\n//     <Route exact path=\"/\" component={Home} />\n//     <Route path=\"/about\" component={About} />\n//     <Route path=\"/contact\" component={Contact} />\n//   </Switch>\n// )\n\n\n//# sourceURL=webpack:///./src/routes.js?");
+>>>>>>> fixed ht reloading
 
 /***/ }),
 
@@ -10533,6 +10568,20 @@ eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ?
 "use strict";
 eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.numbersOnly = exports.minimumLength = exports.validateCode = exports.uppercase = exports.email = exports.phone = exports.required = void 0;\nconst axios_1 = __importDefault(__webpack_require__(/*! axios */ \"./node_modules/axios/index.js\"));\nexports.required = value => value == null || value === '' ? 'Required' : undefined;\nexports.phone = value => value && !/^\\d{10}$/.test(value)\n    ? 'Invalid phone, please enter as \"5552224444\"' : undefined;\nexports.email = value => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i.test(value)\n    ? 'Invalid email address' : undefined;\nexports.uppercase = value => value && value !== value.toUpperCase() ? 'Must be uppercase' : undefined;\nexports.validateCode = values => {\n    return axios_1.default.get(`/api/flight/code?code=${values.airlineCode}`)\n        .then(response => console.log(response.data))\n        .catch(() => {\n        throw { airlineCode: 'Airline code not found!' };\n    });\n};\nexports.minimumLength = value => value.length < 8 ? 'Must be at least 8 characters long' : undefined;\nexports.numbersOnly = value => value && !/^[0-9]+$/i.test(value) ? 'Please only put the country code number only' : undefined;\n\n\n//# sourceURL=webpack:///./src/utils/validations.jsx?");
 
+<<<<<<< HEAD
+=======
+/***/ }),
+
+/***/ 0:
+/*!*****************************!*\
+  !*** multi ./src/index.tsx ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__(/*! /Users/thearae/border-buddy-development/packages/client/src/index.tsx */\"./src/index.tsx\");\n\n\n//# sourceURL=webpack:///multi_./src/index.tsx?");
+
+>>>>>>> fixed ht reloading
 /***/ })
 
 /******/ });
