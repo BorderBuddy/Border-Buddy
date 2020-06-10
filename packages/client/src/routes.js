@@ -25,23 +25,25 @@ import {
 } from './utils/hooks'
 
 export const getRoutes = () => (
-  <Switch>
-    <Route path="/why" component={WhyBorderBuddy}/>
-    <Route path="/register" component={ConnectedSignUpContainer}/>
-    <Route path="/about" component={About}/>
-    <Route component={WhyBorderBuddy} />
+  <Homepage>
+    <Switch>
+      <Route path="/why" component={WhyBorderBuddy}/>
+      <Route path="/register" component={ConnectedSignUpContainer}/>
+      <Route path="/about" component={About}/>
+      <Route component={WhyBorderBuddy} />
 
-    {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
-    {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
-    <IndexRedirect to="/admin/travelers" />
-    <Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
-    <Route path="travelers/add" component={AddTravelerContainer} />
-    <Route path="travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
-    <Route path="createuser" component={AdminSignUp} />
-    <Route path="updateprofile" component={UpdateUserContainer} />
-    </Route>
-    <Route path="/login" component={Login} /> */}
-  </Switch>
+      {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
+      {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
+      <IndexRedirect to="/admin/travelers" />
+      <Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
+      <Route path="travelers/add" component={AddTravelerContainer} />
+      <Route path="travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
+      <Route path="createuser" component={AdminSignUp} />
+      <Route path="updateprofile" component={UpdateUserContainer} />
+      </Route>
+      <Route path="/login" component={Login} /> */}
+    </Switch>
+  </Homepage>
 )
 
 // const App = () => (
