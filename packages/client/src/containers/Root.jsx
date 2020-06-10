@@ -15,9 +15,9 @@ export const Root = ({ store }) => (
         <img style={styles.image} src="images/logos-png/BB_Logo-Type-White.png" />
       </div>
       <Navbar/>
-      <Router>
+      {/* <Router>
         {getRoutes()}
-      </Router>
+      </Router> */}
       <Footer/>
     </MuiThemeProvider>
   </Provider>
