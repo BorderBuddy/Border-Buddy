@@ -1,7 +1,5 @@
 node_modules/**
-dist/fund.js
-dist/fund.js.map
-dist/stylesheets/**
+packages/client/dist/**
 .vscode/settings.json
 .idea
 .env
