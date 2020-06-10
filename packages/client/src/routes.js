@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 
 // Components
-import { Homepage } from './containers/Homepage'
 import AdminContainer from './containers/AdminContainer'
 import AllTravelers from './containers/AllTravelers'
 import SingleTravelerContainer from './containers/SingleTravelerContainer'
@@ -25,12 +24,11 @@ import {
 } from './utils/hooks'
 
 export const getRoutes = () => (
-  <Switch>
-      <Route exact path="/why" component={WhyBorderBuddy}/>
-      <Route exact path="/register" component={ConnectedSignUpContainer}/>
-      <Route exact path="/about" component={About}/>
-      <Route component={WhyBorderBuddy} />
-
+    <Switch>   
+      <Route path="/why" component={WhyBorderBuddy}/>
+      <Route path="/register" component={ConnectedSignUpContainer}/>
+      <Route path="/about" component={About}/>
+      <Route component={WhyBorderBuddy}/>
       {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
       {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
       <IndexRedirect to="/admin/travelers" />
@@ -41,7 +39,8 @@ export const getRoutes = () => (
       <Route path="updateprofile" component={UpdateUserContainer} />
       </Route>
       <Route path="/login" component={Login} /> */}
-  </Switch>
+    </Switch>
+  
 )
 
 // const App = () => (
