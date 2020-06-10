@@ -12,7 +12,6 @@ import UpdateUserContainer from './containers/UpdateUserContainer'
 import Success from './containers/Success'
 import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer'
 import AddTravelerContainer from './containers/AddTravelerContainer'
-
 import { About } from './components/About'
 import { WhyBorderBuddy } from './components/WhyBorderBuddy'
 
@@ -26,7 +25,6 @@ import {
 } from './utils/hooks'
 
 export const getRoutes = () => (
-  <Homepage/>>
   <Switch>
       <Route exact path="/why" component={WhyBorderBuddy}/>
       <Route exact path="/register" component={ConnectedSignUpContainer}/>
@@ -42,9 +40,8 @@ export const getRoutes = () => (
       <Route path="createuser" component={AdminSignUp} />
       <Route path="updateprofile" component={UpdateUserContainer} />
       </Route>
-    <Route path="/login" component={Login} /> */}
-    </Switch>
-
+      <Route path="/login" component={Login} /> */}
+  </Switch>
 )
 
 // const App = () => (
