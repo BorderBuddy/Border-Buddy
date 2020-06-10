@@ -19,9 +19,9 @@ export const Navbar = () => (
           Why Border Buddy?
       </Button>
     </div>
-    <div className="inline-block col-4">
+    {/* <div className="inline-block col-4">
       <Button component={Link} to={'/register'} variant='contained' color='primary' disableElevation style={style}>Register</Button>
-    </div>
+    </div> */}
     <div className="inline-block col-4">
       <Button component={Link} to={'/about'} variant='contained' color='primary' disableElevation style={style}>About Us</Button>
     </div>
