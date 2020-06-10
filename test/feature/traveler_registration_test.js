@@ -1,14 +1,13 @@
-// import Nightmare from 'nightmare';
-// import {expect} from 'chai';
-// import {cleanDatabase, rootURL} from './feature_helpers';
+// import Nightmare from 'nightmare'
+// import { expect } from 'chai'
+// import { cleanDatabase, rootURL } from './feature_helpers'
 
-// require('./nightmare_helpers');
+// require('./nightmare_helpers')
 
-// describe('BorderBuddy', function() {
+// describe('BorderBuddy', function () {
+//   this.timeout(20000) // avoids auto-fail after 15s
 
-//   this.timeout(20000); // avoids auto-fail after 15s
-
-//   beforeEach(cleanDatabase);
+//   beforeEach(cleanDatabase)
 
 //   it('allows a user to register as a traveler', () => {
 //     const nightmare = new Nightmare({
@@ -17,10 +16,10 @@
 //       gotoTimeout: 5000,
 //       typeInterval: 20,
 //       openDevTools: {
-//         mode: "detach"
+//         mode: 'detach'
 //       }
 //     })
-//       .viewport(1280, 1024);
+//       .viewport(1280, 1024)
 
 //     return nightmare.goto(rootURL())
 //       .wait('#homepage')
@@ -59,20 +58,20 @@
 //       .mouseDownUpOnElementContaining('tr', 'Jane')
 //       .wait(500)
 //       .evaluate(() => {
-//         return document.querySelector('#root').innerHTML;
+//         return document.querySelector('#root').innerHTML
 //       })
 //       .end()
 //       .then((result) => {
-//         expect(result).to.contain('Jane Citizen');
-//         expect(result).to.contain('Iranian');
-//         expect(result).to.contain('jane@example.com');
-//         expect(result).to.contain('5554567890');
-//         expect(result).to.contain('UA');
-//         expect(result).to.contain('88');
-//         expect(result).to.contain('Jennifer Citizen');
-//         expect(result).to.contain('Mother');
-//         expect(result).to.contain('5555678901');
-//         expect(result).to.contain('Chinese');
+//         expect(result).to.contain('Jane Citizen')
+//         expect(result).to.contain('Iranian')
+//         expect(result).to.contain('jane@example.com')
+//         expect(result).to.contain('5554567890')
+//         expect(result).to.contain('UA')
+//         expect(result).to.contain('88')
+//         expect(result).to.contain('Jennifer Citizen')
+//         expect(result).to.contain('Mother')
+//         expect(result).to.contain('5555678901')
+//         expect(result).to.contain('Chinese')
 //       })
-//   });
-// });
+//   })
+// })

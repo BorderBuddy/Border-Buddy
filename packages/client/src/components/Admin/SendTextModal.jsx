@@ -1,13 +1,14 @@
 import React from 'react';
-import {Dialog, FlatButton} from 'material-ui';
+import {Dialog, Button} from '@material-ui/core';
 
 export default ({ open, success, handleClose }) => {
   const actions = [
-    <FlatButton 
+    <Button 
       key={1}
       label="OK"
-      primary={true}
-      onTouchTap={handleClose}
+      variant='contained'
+      color='primary'
+      onClick={handleClose}
     />
   ];
 

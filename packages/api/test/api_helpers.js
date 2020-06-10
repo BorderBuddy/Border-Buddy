@@ -1,7 +1,7 @@
-import chai from 'chai';
-import chaiHttp from 'chai-http';
+import chai from 'chai'
+import chaiHttp from 'chai-http'
 
-chai.use(chaiHttp);
+chai.use(chaiHttp)
 
-global.chai = chai;
-global.expect = chai.expect;
+global.chai = chai
+global.expect = chai.expect
