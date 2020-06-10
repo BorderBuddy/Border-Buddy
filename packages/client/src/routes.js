@@ -31,7 +31,6 @@ export const getRoutes = () => (
       <Route path="/register" component={ConnectedSignUpContainer}/>
       <Route path="/about" component={About}/>
       <Route component={WhyBorderBuddy} />
-
       {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
       {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
       <IndexRedirect to="/admin/travelers" />
