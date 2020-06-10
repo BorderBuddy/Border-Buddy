@@ -54,9 +54,10 @@ module.exports = {
   ],
   devServer: {
     contentBase: resolve(__dirname, 'dist'),
-    port: 8000,
+    historyApiFallback: true,
     hot: true,
-    inline: true,
+    port:8000,
+    publicPath: '/',
     headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
       '/api': 'http://localhost:3000'
