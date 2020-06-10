@@ -26,9 +26,9 @@ import {
 
 export const getRoutes = () => (
   <Switch>
-    <Route exact path="/why" component={WhyBorderBuddy}/>
-    <Route exact path="/register" component={ConnectedSignUpContainer}/>
-    <Route exact path="/about" component={About}/>
+    <Route path="/why" component={WhyBorderBuddy}/>
+    <Route path="/register" component={ConnectedSignUpContainer}/>
+    <Route path="/about" component={About}/>
     <Route component={WhyBorderBuddy} />
 
     {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
