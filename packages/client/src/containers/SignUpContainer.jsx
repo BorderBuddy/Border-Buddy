@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import { Dialog, Button, DialogActions } from '@material-ui/Core'
+import { Dialog, Button } from '@material-ui/core'
 import Form from '../components/FormContainer'
 import FlightConfirmation from '../components/FlightConfirmation'
 import { signUpTraveler } from '../actions/signUp'
