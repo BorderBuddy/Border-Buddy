@@ -12,9 +12,9 @@ export const Root = ({ store }) => (
   <Provider store={store}>
     <MuiThemeProvider theme={muiTheme}>
       <BrowserRouter>
-        <Navbar/>
+        {/* <Navbar/> */}
         {getRoutes()}
-        <Footer/>
+        {/* <Footer/> */}
       </BrowserRouter>
     </MuiThemeProvider>
   </Provider>
