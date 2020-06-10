@@ -53,7 +53,7 @@ module.exports = {
     ])
   ],
   devServer: {
-    contentBase: resolve(__dirname, 'dist', 'src'),
+    contentBase: resolve(__dirname, 'dist'),
     port: 8000,
     hot: true,
     inline: true,
