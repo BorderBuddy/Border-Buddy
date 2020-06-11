@@ -11,8 +11,6 @@ app.use(helmet())
 
 db.authenticate().then(() => {
   app.listen(port, () => {
-    // console.log(`all envs: ${JSON.stringify(process.env, null, 2)}`)
-    // console.log(`process.env.npm_config_dev: ${process.env.npm_config_dev}`)
     console.log(`${emoji.ear} listening on ${port} ${emoji.ear}`)
   })
 })

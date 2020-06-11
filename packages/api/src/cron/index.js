@@ -1,6 +1,6 @@
 const { CronJob } = require('cron')
 const jobs = require('./jobs')
-const db = require('../dist/database')
+const db = require('../database')
 
 /* SCHEDULED JOBS:
 
