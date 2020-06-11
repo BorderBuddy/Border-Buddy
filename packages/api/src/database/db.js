@@ -2,15 +2,15 @@
 
 import Sequelize from 'sequelize'
 import { config } from '../config'
-const env = config.env || 'development'
-const dbConfig = config.database[env]
+const { env, database } = config
+const dbConfig = database[env]
 
 const baseConfig = {
   define: {
     // stop sequelize from pluralizing model names to get table names
     freezeTableName: true
   },
-  logging: ['development'].includes(env)
+  logging: (env === 'development') ? console.log : false
 }
 
 let sequelize
