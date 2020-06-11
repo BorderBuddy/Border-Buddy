@@ -1,6 +1,6 @@
 const { CronJob } = require('cron')
 const jobs = require('./jobs')
-const db = require('../api/dist/database')
+const db = require('../dist/database')
 
 /* SCHEDULED JOBS:
 
@@ -33,7 +33,7 @@ const setUnconfirmedToAtRisk = new CronJob({
   timeZone: 'America/New_York'
 })
 
-db.didSync
+db.authenticate()
   .then(() => {
     landFlightsAndTextTravelers.start()
     setUnconfirmedToAtRisk.start()
