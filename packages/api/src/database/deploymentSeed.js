@@ -15,7 +15,7 @@ const seedUsers = () => db.Promise.each(users, user => {
   })
 })
 
-db.didSync
+db.authenticate()
   .then(() => ({ force: true }))
   .then(seedUsers)
   .then(users => console.log(chalk.blue(`Seeded ${users.length} users...`)))
