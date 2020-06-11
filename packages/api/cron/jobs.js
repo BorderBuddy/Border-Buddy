@@ -1,8 +1,8 @@
-import { Traveler, Flight, User } from '../api/dist/database/models'
+import { Traveler, Flight, User } from '../dist/database/models'
 import axios from 'axios'
-import { Twilio } from '../api/dist/twilio/twilio.controller'
-import { config } from '../api/dist/config2'
-import { statusByCodeAndDate } from '../api/dist/flight/flight.query'
+import { Twilio } from '../dist/twilio/twilio.controller'
+import { config } from '../dist/config2'
+import { statusByCodeAndDate } from '../dist/flight/flight.query'
 const Promise = require('bluebird')
 
 const askIfTravelerOk = traveler => {
