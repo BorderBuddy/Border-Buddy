@@ -4,7 +4,7 @@
     ],
     "ext": "ts",
     "ignore": [
-        "test/**/*.ts"
+        "test/**/*"
     ],
     "exec": "npm_config_dev=true ts-node ./src/index.js"
 }

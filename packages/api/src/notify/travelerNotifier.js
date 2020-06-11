@@ -1,4 +1,4 @@
-import { config } from '../config2'
+import { config } from '../config'
 import chalk from 'chalk'
 const defaultClient = require('twilio')(config.twilio.accountSid, config.twilio.authToken)
 
