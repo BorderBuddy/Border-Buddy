@@ -1,4 +1,4 @@
-import { config } from '../src/config2'
+import { config } from '../src/config'
 import TravelerNotifier from '../src/notify/travelerNotifier'
 import './unit_helpers'
 
