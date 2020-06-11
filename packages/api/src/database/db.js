@@ -1,8 +1,9 @@
 'use strict'
 
 import Sequelize from 'sequelize'
-const env = process.env.NODE_ENV || 'development'
-const config = require('../config/config')[env]
+import { config } from '../config'
+const env = config.env || 'development'
+const dbConfig = config.database[env]
 
 const baseConfig = {
   define: {
@@ -12,10 +13,11 @@ const baseConfig = {
   logging: ['development'].includes(env)
 }
 
-// if (config.use_env_variable) {
-//   let sequelize = new Sequelize(process.env[config.use_env_variable], baseConfig)
-// } else {
-const sequelize = new Sequelize(config.database, config.username, config.password, Object.assign({}, baseConfig, config))
-// }
+let sequelize
+if (dbConfig.use_env_variable) {
+  sequelize = new Sequelize(process.env[dbConfig.use_env_variable], baseConfig)
+} else {
+  sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, Object.assign({}, baseConfig, dbConfig))
+}
 
 module.exports = sequelize

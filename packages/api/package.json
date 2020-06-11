@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "worker": "ts-node cron",
+    "dev:worker": "ts-node ./src/cron",
+    "worker": "node ./dist/cron",
     "build": "npm run clean && tsc && mkdir -p ./dist/public && mkdir -p ./src/public",
     "test": "NODE_ENV=test mocha -r ts-node/register 'test/**/*'",
     "clean": "rm -rf dist && rm -rf ./src/public",

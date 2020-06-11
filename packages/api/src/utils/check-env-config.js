@@ -1,6 +1,6 @@
 const varNotSet = 'NOT_SET'
 
-module.exports = function checkEnv (keys, cb) {
+export const checkEnv = (keys, cb) => {
   const keysNotSet = []
   const keysAndValues = []
   keys.forEach((key) => {
