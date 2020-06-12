@@ -17,7 +17,7 @@ export function verifyToken (token, repository = Repository) {
         return
       }
 
-      userRepository.findById(user.id).then(foundUser => {
+      userRepository.findByPk(user.id).then(foundUser => {
         if (!foundUser) {
           reject(new Error('User not found'))
         } else {

@@ -21,7 +21,7 @@ export function login (req, res, next) {
 
 export function isAuthenticated (req, res, next) {
   const token = req.headers.authorization
-
+  console.log(token)
   verifyToken(token)
     .then(user => {
       const tokenResponse = signToken(user.id)
