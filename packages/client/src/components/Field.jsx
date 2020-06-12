@@ -2,7 +2,7 @@ import React from 'react';
 // import {Field} from 'redux-form';
 import {required, phone, email, validateCode, uppercase} from '../utils/validations';
 import {formStyle} from './Admin/styles';
-import {TextField} from '@material-ui/core';
+import {TextField, FormHelperText, FormControl, InputLabel, Select} from '@material-ui/core';
 
 export const RenderTextField = ({
   label,
@@ -23,22 +23,60 @@ export const RenderTextField = ({
     />
   )
 }
+export const RenderAirlinePicker = ({ 
+  input,
+  label,
+  meta: { 
+    asyncValidating,
+    touched,
+    error, 
+    invalid},
+    ...custom
+}) => {
+  return (
+    <TextField
+      name={name}
+      className={asyncValidating ? 'async-validating' : ''}
+      helperText={touched && error}
+      error={touched && invalid}
+      label={label}
+      {...input}
+      {...custom}
+    />
+  )
+}
 
+const renderFromHelper = ({ touched, error }) => {
+  if (!(touched && error)) {
+    return
+  } else {
+    return <FormHelperText>{touched && error}</FormHelperText>
+  }
+}
 
-// export const renderTextField = ({
-//   label,
-//   input,
-//   meta: { touched, invalid, error },
-//   ...custom
-// }) => (
-//   <TextField
-//     name={props.name}
-//     className={`traveler-${name}`}
-//     label={label}
-//     placeholder={label}
-//     error={touched && invalid}
-//     helperText={touched && error}
-//     {...input}
-//     {...custom}
-//   />
-// )
+export const RenderSelectField = ({
+  input,
+  name,
+  label,
+  meta: { touched, error },
+  children,
+  ...custom
+}) => {
+  return (
+    <FormControl error={touched && error} style={formStyle.select}>
+      <InputLabel htmlFor={name}>{label}</InputLabel>
+      <Select
+        {...input}
+        {...custom}
+        inputProps={{
+          name: {name},
+          id: {name},
+        }}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  )
+}
+

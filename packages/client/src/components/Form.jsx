@@ -1,9 +1,8 @@
 import React from 'react';
-import {RenderTextField} from './Field';
+import {RenderTextField, RenderSelectField, RenderAirlinePicker} from './Field';
 import {Field} from 'redux-form';
-import {Button, MenuItem, Divider, TextField, DatePicker, Select} from '@material-ui/core';
+import {Button, MenuItem, Divider, DatePicker} from '@material-ui/core';
 import {AutoComplete} from 'redux-form-material-ui';
-import AirlinePicker from './AirlinePicker';
 import {required, phone, email, validateCode, uppercase} from '../utils/validations';
 import countryCodes from '../utils/countryCodes';
 import { formStyle } from './Admin/styles';
@@ -15,7 +14,7 @@ const Form = (props) => (
     <Divider />
     <h3>Personal and Contact Details</h3>
     <p><em>Tell us about yourself, so our lawyers can can best assist you.</em></p>
-     <div className="clearfix">
+    <div className="clearfix">
       <div className="field-container col-12 md-col md-col-6">
         <Field
           name="name"
@@ -36,16 +35,18 @@ const Form = (props) => (
           label="Nationality"
         />
       </div>
-      {/* <div className="field-container col-12 md-col md-col-6">
+      <div className="field-container col-12 md-col md-col-6">
         <Field
           name="requireInterpreter"
-          component={SelectField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
+          component={RenderSelectField}
           label="Are you comfortable speaking English?"
         >
-          <MenuItem value="false" primaryText="Yes"/>
-          <MenuItem value="true" primaryText="No"/>
-        </StyledField>
-      </div> */}
+          <option value="false">Yes</option> 
+          <option value="true">No</option> 
+        </Field>
+      </div>
       <div className="field-container col-12 md-col md-col-6">
         <Field
           name="preferredLanguage"
@@ -86,17 +87,19 @@ const Form = (props) => (
           validate={[required, phone]}
         />
       </div>
-      {/* <div className="field-container col-12 md-col md-col-6">
+      <div className="field-container col-12 md-col md-col-6">
         <Field
           name="connectivity"
-          component={SelectField}
+          style={formStyle.input}
+          component={RenderSelectField}
+          underlineFocusStyle={formStyle.underline}
           label="Do you have a smartphone?"
           validate={!props.isAdmin ? required : undefined}
         >
-          <MenuItem className="traveler-has-phone-option" value="true" primaryText="Yes"/>
-          <MenuItem className="traveler-has-no-phone-option" value="false" primaryText="No"/>
-        </StyledField>
-      </div> */}
+          <option className="traveler-has-phone-option" value="true" primaryText="Yes">Yes</option>
+          <option className="traveler-has-no-phone-option" value="false" primaryText="No">No</option>
+        </Field>
+      </div>
     </div>
     <div className="clearfix">
       <h3>Travel details</h3>
@@ -110,14 +113,16 @@ const Form = (props) => (
           format={null} // eliminates error in Redux Form Material UI
         />
       </div> */}
-      {/* <div className="field-container col-12 md-col sm-col-6 md-col-4">
+      <div className="field-container col-12 md-col sm-col-6 md-col-4">
         <Field
           name="airlineCode"
-          component={AirlinePicker}
+          style={formStyle.input}
+          underlineFocusStyle={formStyle.underline}
+          component={RenderAirlinePicker}
           validate={!props.isAdmin ? [uppercase, required] : uppercase}
           label="Airline code"
         />
-      </div> */}
+      </div>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
         <Field
           name="flightNum"
@@ -159,7 +164,7 @@ const Form = (props) => (
           style={formStyle.input}
           label="Relationship to you"
         />
-       </div>
+      </div>
     </div>
     {/* {props.children /* renders the AdminExtension part of the form or any other additional fields you may want */ }
     <div> 
