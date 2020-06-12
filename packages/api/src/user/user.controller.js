@@ -72,7 +72,7 @@ export function changePassword (req, res) {
   const oldPass = String(req.body.oldPassword)
   const newPass = String(req.body.newPassword)
 
-  return User.findById(userId)
+  return User.findByPk(userId)
     .then(user => {
       if (user.authenticate(oldPass)) {
         user.update({ password: newPass })
@@ -93,7 +93,7 @@ export function update (req, res, next) {
   const phone = req.body.phone
   const email = req.body.email
 
-  return User.findById(userId)
+  return User.findByPk(userId)
     .then(user => {
       user.phone = phone || user.phone
       user.email = email || user.email
@@ -118,7 +118,7 @@ export function update (req, res, next) {
 
 export function me (req, res, next) {
   const userId = req.headers.user.id
-  User.findById(userId, {
+  User.findByPk(userId, {
     attributes: {
       exclude: ['salt', 'password']
     }

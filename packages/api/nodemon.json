@@ -1,8 +1,7 @@
 {
     "watch": [
-        "src"
+        "src/**/*"
     ],
-    "ext": "ts",
     "ignore": [
         "test/**/*"
     ],
