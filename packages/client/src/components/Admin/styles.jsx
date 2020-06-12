@@ -72,6 +72,12 @@ export const formStyle = {
     paddingTop: "1em",
     marginBottom: "1em"
   },
+  select: {
+    width: '100%',
+    color: 'black',
+    marginTop: "1em",
+    marginBottom: "1em"
+  },
   error: {
     color: '#bd1c11'
   },
