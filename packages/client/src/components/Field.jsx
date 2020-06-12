@@ -1,24 +1,44 @@
 import React from 'react';
-import {Field} from 'redux-form';
+// import {Field} from 'redux-form';
 import {required, phone, email, validateCode, uppercase} from '../utils/validations';
 import {formStyle} from './Admin/styles';
+import {TextField} from '@material-ui/core';
 
-const StyledField = (props) => {
+export const RenderTextField = ({
+  label,
+  name,
+  input,
+  meta: {touched, invalid, error},
+  ...custom
+}) => {
   return (
-    <Field
-      name={props.name}
+    <TextField
+      name={name}
       className={`traveler-${name}`}
-      hintStyle={formStyle.label}
-      underlineFocusStyle={formStyle.underline}
-      errorStyle={formStyle.error}
-      style={formStyle.input}
-      validate={props.validate}
-      hintText={props.hintText}
-      component={props.component}
-      validate={props.validate}
-      {...props}
+      error={touched && invalid}
+      helperText={touched && error}
+      label={label}
+      {...input}
+      {...custom}
     />
   )
 }
 
-export default StyledField;
+
+// export const renderTextField = ({
+//   label,
+//   input,
+//   meta: { touched, invalid, error },
+//   ...custom
+// }) => (
+//   <TextField
+//     name={props.name}
+//     className={`traveler-${name}`}
+//     label={label}
+//     placeholder={label}
+//     error={touched && invalid}
+//     helperText={touched && error}
+//     {...input}
+//     {...custom}
+//   />
+// )
