@@ -37,7 +37,7 @@ export function getAllTravelers (req, res, next) {
 }
 
 export function getById (req, res, next) {
-  return Traveler.findById(req.params.id, { include: [{ all: true }] })
+  return Traveler.findByPk(req.params.id, { include: [{ all: true }] })
     .then(traveler => {
       res.status(200).json(traveler)
     })

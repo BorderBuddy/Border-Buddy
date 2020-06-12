@@ -1,4 +1,5 @@
 import { checkEnv } from '../utils/check-env-config'
+import sequelizeConf from './sequelize'
 
 const envs = [
   'DB_PASSWORD',
@@ -22,9 +23,7 @@ checkEnv(envs, (envNotSet, confirmedEnv) => {
 })
 
 const {
-  DB_PASSWORD,
   NODE_ENV,
-  DATABASE_URL,
   SESSION_SECRET,
   PORT,
   TWILIO_PHONE_NUM,
@@ -40,7 +39,9 @@ const {
 export const config = {
   env: NODE_ENV || 'development',
   port: PORT || 3000,
-  secrets: SESSION_SECRET,
+  secrets: {
+    session: SESSION_SECRET
+  },
   twilio: {
     adminPhone: TWILIO_PHONE_NUM,
     messagingSid: TWILIO_MESSAGING_SID,
@@ -51,22 +52,6 @@ export const config = {
   FLIGHT_STATS_ID,
   NAZ_NUM,
   TAREK_NUM,
-  // config used by sequelize
-  database: {
-    development: {
-      username: 'postgres',
-      password: DB_PASSWORD,
-      database: 'BorderBuddy',
-      dialect: 'postgres'
-    },
-    test: {
-      username: 'postgres',
-      password: DB_PASSWORD,
-      database: 'BorderBuddy_test',
-      dialect: 'postgres'
-    },
-    production: {
-      use_env_variable: DATABASE_URL
-    }
-  }
+  // config used by sequelize at sequelize.js
+  database: sequelizeConf
 }
