@@ -69,6 +69,7 @@ export const formStyle = {
     width: '80%',
     color: 'black',
     marginTop: "1em",
+    paddingTop: "1em",
     marginBottom: "1em"
   },
   error: {
