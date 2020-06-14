@@ -1,14 +1,14 @@
-import React from 'react';
-import {RenderTextField, RenderSelectField, RenderAirlinePicker} from './Field';
-import {Field} from 'redux-form';
-import {Button, MenuItem, Divider, DatePicker} from '@material-ui/core';
-import {AutoComplete} from 'redux-form-material-ui';
-import {required, phone, email, validateCode, uppercase} from '../utils/validations';
-import countryCodes from '../utils/countryCodes';
-import { formStyle } from './Admin/styles';
+import React from 'react'
+import {RenderTextField, RenderSelectField, RenderAirlinePicker} from './Field'
+import {Field} from 'redux-form'
+import {Button, MenuItem, Divider, DatePicker} from '@material-ui/core'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import {required, phone, email, validateCode, uppercase} from '../utils/validations'
+import countryCodes from '../utils/countryCodes'
+import { formStyle } from './Admin/styles'
+import { CountryCodePicker } from './CountryCodePicker'
 
 const Form = (props) => (
-
   <form style={formStyle.form} onSubmit={props.handleSubmit}>
     <h1 style={formStyle.header}>{props.formTitle}</h1>
     <Divider />
@@ -66,17 +66,21 @@ const Form = (props) => (
           label="Email"
         />
       </div>
-      {/* <div className="field-container col-12 md-col md-col-6">
+
+
+      <div className="field-container col-12 md-col md-col-6">
         <Field
           name="countryCode"
-          component={AutoComplete}
-          label="Country Phone Code"
+          component={CountryCodePicker}
+          style={formStyle.input}
+          underlineFocusStyle={formStyle.underline}
+          labelText="Country Phone Code"
+          filter={Autocomplete.caseInsensitiveFilter}
           validate={required}
-          dataSource={Object.values(countryCodes)}
-          filter={AutoComplete.caseInsensitiveFilter}
-          fullWidth={true}
         />
-      </div> */}
+      </div>
+
+
       <div className="field-container col-12 md-col md-col-6">
         <Field
           name="phone"

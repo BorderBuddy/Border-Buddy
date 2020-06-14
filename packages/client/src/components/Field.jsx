@@ -1,6 +1,4 @@
 import React from 'react';
-// import {Field} from 'redux-form';
-import {required, phone, email, validateCode, uppercase} from '../utils/validations';
 import {formStyle} from './Admin/styles';
 import {TextField, FormHelperText, FormControl, InputLabel, Select} from '@material-ui/core';
 

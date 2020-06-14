@@ -1,35 +1,26 @@
 import React from 'react';
-import { AutoComplete, MenuItem } from '@material-ui/core';
+import { TextField } from '@material-ui/core'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 import countryCodes from '../utils/countryCodes'
+import {formStyle} from './Admin/styles';
 
-const CountryCodePicker = ({ input, label, style, floatingLabelStyle, underlineFocusStyle, errorStyle, meta: { touched, error }}) => {
-  
-  const data = countryCodes.map(country => ({
-    nameAndCode: `${country.name} - ${country.dial_code}`,
-    code: country.value
-  }))
-
-  const dataSourceConfig = {
-    text: 'nameAndCode',
-    value: 'code'
-  };
+export const CountryCodePicker = ({ 
+    labelText,
+    // input,
+    name,
+    meta: { touched, invalid, error },
+    ...custom
+}) => {
+  console.log(countryCodes)
   return (
-    <AutoComplete
-      {...input}
-      searchText={input.value}
-      floatingLabelText={label}
-      floatingLabelStyle={floatingLabelStyle}
-      underlineFocusStyle={underlineFocusStyle}
-      errorStyle={errorStyle}
-      errorText={touched && error && `${error}`}
-      style={style}
-      filter={AutoComplete.caseInsensitiveFilter}
-      openOnFocus={true}
-      dataSource={data}
-      dataSourceConfig={dataSourceConfig}
-      name="countryCode"
-    />  
+    <Autocomplete
+      // {...input}
+      {...custom}
+      filter={Autocomplete.caseInsensitiveFilter}
+      options={countryCodes}
+      getOptionLabel={(option) => option.label}
+      renderInput={(params) =>
+        <TextField {...params} label={labelText} style={formStyle.autoComplete} />}
+    />
   )
 }
-
-export default CountryCodePicker;
