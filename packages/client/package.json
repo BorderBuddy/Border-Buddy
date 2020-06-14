@@ -10,6 +10,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@material-ui/core": "^4.10.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "^4.10.0",
     "@material-ui/utils": "^4.9.12",
     "axios": "^0.19.2",
