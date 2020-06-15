@@ -47,8 +47,8 @@ export function getById (req, res, next) {
 export function updateOne (req, res, next) {
   const travelerDetails = req.body
   travelerDetails.id = req.params.id
-  travelerDetails.connectivity = (travelerDetails.connectivity == 'true')
-  travelerDetails.requireInterpreter = (travelerDetails.requireInterpreter == 'true')
+  travelerDetails.connectivity = (travelerDetails.connectivity === 'true')
+  travelerDetails.requireInterpreter = (travelerDetails.requireInterpreter === 'true')
 
   createOrUpdateTravelerUseCase({
     repository: Repository,
