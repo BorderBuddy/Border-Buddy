@@ -1,6 +1,6 @@
-import React from 'react';
-import {formStyle} from './Admin/styles';
-import {TextField, FormHelperText, FormControl, InputLabel, Select} from '@material-ui/core';
+import React from 'react'
+import {formStyle} from './Admin/styles'
+import {TextField, FormHelperText, FormControl, InputLabel, Select} from '@material-ui/core'
 
 export const RenderTextField = ({
   label,
@@ -23,6 +23,7 @@ export const RenderTextField = ({
 }
 export const RenderAirlinePicker = ({ 
   input,
+  name,
   label,
   meta: { 
     asyncValidating,
@@ -78,3 +79,27 @@ export const RenderSelectField = ({
   )
 }
 
+export const RenderDatePicker = ({ 
+  name,
+  label,
+  input,
+  meta: { 
+    touched,
+    error, 
+    invalid},
+  ...custom
+}) => {
+  return (
+    <TextField
+      style={formStyle.select}
+      label={label}
+      type="date"
+      {...custom}
+      {...input}
+      name={name}
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
+  )
+}
