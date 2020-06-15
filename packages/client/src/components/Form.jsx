@@ -1,10 +1,9 @@
 import React from 'react'
-import {RenderTextField, RenderSelectField, RenderAirlinePicker} from './Field'
+import {RenderTextField, RenderSelectField, RenderAirlinePicker, RenderDatePicker} from './Field'
 import {Field} from 'redux-form'
-import {Button, MenuItem, Divider, DatePicker} from '@material-ui/core'
+import {Button, Divider} from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {required, phone, email, validateCode, uppercase} from '../utils/validations'
-import countryCodes from '../utils/countryCodes'
 import { formStyle } from './Admin/styles'
 import { CountryCodePicker } from './CountryCodePicker'
 
@@ -108,15 +107,16 @@ const Form = (props) => (
     <div className="clearfix">
       <h3>Travel details</h3>
       <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
-      {/* <div className="field-container col-12 md-col sm-col-6 md-col-4">
+      <div className="field-container col-12 md-col sm-col-6 md-col-4">
         <Field
           name="arrivalTime"
-          component={DatePicker}
+          style={formStyle.input}
+          component={RenderDatePicker}
+          underlineFocusStyle={formStyle.underline}
           validate={!props.isAdmin ? required : undefined}
           label="What day do you arrive?"
-          format={null} // eliminates error in Redux Form Material UI
         />
-      </div> */}
+      </div>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
         <Field
           name="airlineCode"

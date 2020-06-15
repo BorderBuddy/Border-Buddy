@@ -6,18 +6,17 @@ import {formStyle} from './Admin/styles';
 
 export const CountryCodePicker = ({ 
     labelText,
-    // input,
     name,
     meta: { touched, invalid, error },
     ...custom
 }) => {
-  console.log(countryCodes)
   return (
     <Autocomplete
-      // {...input}
       {...custom}
       filter={Autocomplete.caseInsensitiveFilter}
       options={countryCodes}
+      helperText={touched && error}
+      error={touched && invalid}
       getOptionLabel={(option) => option.label}
       renderInput={(params) =>
         <TextField {...params} label={labelText} style={formStyle.autoComplete} />}
