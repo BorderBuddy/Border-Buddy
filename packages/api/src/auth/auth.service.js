@@ -31,7 +31,9 @@ export function verifyToken (token, repository = Repository) {
 export function protectedEndpoint (endpoint, tokenVerifier = verifyToken) {
   return (req, res, next) => {
     tokenVerifier(req.headers.authorization)
-      .then(() => endpoint(req, res, next))
+      .then(() => {
+        endpoint(req, res, next)
+      })
       .catch(() =>
         res
           .status(401)
