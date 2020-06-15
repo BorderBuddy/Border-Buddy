@@ -74,15 +74,9 @@ export const formStyle = {
   },
   select: {
     width: '100%',
-    color: 'black',
-    marginTop: "1em",
-    marginBottom: "1em"
   },
   autoComplete: {
-    color: 'black',
     paddingTop: "1em",
-    marginTop: "1em",
-    marginBottom: "1em"
   },
   error: {
     color: '#bd1c11'
