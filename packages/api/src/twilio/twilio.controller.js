@@ -1,25 +1,26 @@
 import { config } from '../config'
 import { Traveler } from '../database/models/travelers'
 import { User } from '../database/models/user'
-import _ from 'lodash'
+import { isEmpty } from 'lodash'
 import Promise from 'bluebird'
 
 export const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken)
 
 // admin hits this api to send text to users
 export const sendText = (req, res, next) => {
-  if (_.isEmpty(req.body)) {
+  if (isEmpty(req.body)) {
     return res.status(404).end()
   }
 
-  Twilio.sendMessage({
-    to: req.body.to,
-    from: config.twilio.adminPhone,
-    body: req.body.message
-  }, (err, result) => {
-    if (err) console.error(err)
-    return res.status(200).json(result)
-  })
+  Twilio.messages
+    .create({
+      to: req.body.to,
+      from: config.twilio.adminPhone,
+      body: req.body.message
+    }, (err, result) => {
+      if (err) console.error(err)
+      return res.status(200).json(result)
+    })
 }
 
 // webhook from twilio will hit this route
@@ -64,15 +65,16 @@ export const notifyAdminOfNewTravelerSignUp = (traveler) => {
   return User.findAll()
     .then((adminUsers) => {
       return Promise.each(adminUsers, user => {
-        Twilio.sendMessage({
-          to: user.phone,
-          from: config.twilio.adminPhone,
-          body: `New Traveler: ${traveler.name} has just registered on Border Buddy.` +
+        Twilio.messages
+          .create({
+            to: user.phone,
+            from: config.twilio.adminPhone,
+            body: `New Traveler: ${traveler.name} has just registered on Border Buddy.` +
       'Check https://border-buddy.com/admin for more details.'
-        }, (err, result) => {
-          if (err) console.error(err)
-          return { result, traveler }
-        })
+          }, (err, result) => {
+            if (err) console.error(err)
+            return { result, traveler }
+          })
       })
         .then((ok) => {
           console.log(ok)
