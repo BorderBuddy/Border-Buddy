@@ -17,6 +17,7 @@ export default (app) => {
   app.get(base + '/me', protectedEndpoint(me))
   app.get(base + '/:id', protectedEndpoint(show))
   app.post(base + '/', protectedEndpoint(create))
+  // FIXME: bug in this update user route -- password required
   app.put(base + '/:id', protectedEndpoint(update))
   app.put(base + '/:id/password', protectedEndpoint(changePassword))
   app.delete(base + '/:id', protectedEndpoint(destroy))
