@@ -7,7 +7,7 @@ describe('TravelerNotifier', () => {
   let notifier
 
   beforeEach(() => {
-    client = { sendMessage: sinon.spy() }
+    client = { messages: { create: sinon.spy() } }
     notifier = new TravelerNotifier({ client })
   })
 
@@ -20,7 +20,7 @@ describe('TravelerNotifier', () => {
     })
 
     it('sends a notification to the traveler', () => {
-      expect(client.sendMessage).to.have.been.calledWith({
+      expect(client.messages.create).to.have.been.calledWith({
         to: '5551231234',
         from: config.twilio.adminPhone,
         body: sinon.match('Thanks for registering with BorderBuddy, Traveler Name!')

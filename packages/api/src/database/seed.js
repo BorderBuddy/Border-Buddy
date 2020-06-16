@@ -8,9 +8,9 @@ tomorrow.setDate(tomorrow.getDate() + 1)
 const threeHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 3)
 
 const users = [
-  { email: 'andrew@borderbuddy.us', password: '12345678', phone: '8607163066' },
+  { email: 'andrew@borderbuddy.us', password: '12345678', phone: '1234567890' },
   { email: 'dillon@borderbuddy.us', password: '12345678', phone: '1234567890' },
-  { email: 'aaron@borderbuddy.us', password: 'password', phone: '1234567890' },
+  { email: 'aaron@borderbuddy.us', password: 'password', phone: '3233655969' },
   { email: 'admin@borderbuddy.us', password: '12345678', phone: '1234567890' }
 ]
 
