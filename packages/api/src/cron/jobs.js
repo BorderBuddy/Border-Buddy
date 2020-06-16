@@ -7,30 +7,32 @@ const Promise = require('bluebird')
 
 const askIfTravelerOk = traveler => {
   return new Promise((resolve, reject) => {
-    Twilio.sendMessage({
-      to: `+${traveler.countryCode}${traveler.phone}`,
-      from: config.twilio.adminPhone,
-      body: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`
-    }, (err, result) => {
-      if (err) reject(err)
-      else resolve(result)
-    })
+    Twilio.messages
+      .create({
+        to: `+${traveler.countryCode}${traveler.phone}`,
+        from: config.twilio.adminPhone,
+        body: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`
+      }, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
   })
 }
 
 const alertAssignedAtRisk = (number, traveler) => {
   return new Promise((resolve, reject) => {
-    Twilio.sendMessage({
-      to: number,
-      from: config.twilio.adminPhone,
-      body: `ALERT! ${traveler.name} has not checked in and has been marked AT RISK.`
-    }, (err, result) => {
-      if (err) reject(err)
-      else {
-        console.log(result)
-        resolve(result)
-      }
-    })
+    Twilio.messages
+      .create({
+        to: number,
+        from: config.twilio.adminPhone,
+        body: `ALERT! ${traveler.name} has not checked in and has been marked AT RISK.`
+      }, (err, result) => {
+        if (err) reject(err)
+        else {
+          console.log(result)
+          resolve(result)
+        }
+      })
   })
 }
 
