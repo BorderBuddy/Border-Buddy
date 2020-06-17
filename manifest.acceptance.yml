@@ -3,7 +3,7 @@ applications:
   instances: 1
   memory: 512M
   disk_quota: 2048M
-  command: npm run migrate && npm run start
+  command: npm run build && npm run migrate && npm run start
   routes:
   - route: border-buddy.cfapps.io
   buildpack: nodejs_buildpack
