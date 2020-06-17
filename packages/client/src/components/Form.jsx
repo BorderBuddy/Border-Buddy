@@ -65,8 +65,6 @@ const Form = (props) => (
           label="Email"
         />
       </div>
-
-
       <div className="field-container col-12 md-col md-col-6">
         <Field
           name="countryCode"
@@ -78,8 +76,6 @@ const Form = (props) => (
           validate={required}
         />
       </div>
-
-
       <div className="field-container col-12 md-col md-col-6">
         <Field
           name="phone"

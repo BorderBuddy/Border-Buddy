@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Testing from '../components/Admin/AppBar'
+import RenderAppBar from '../components/Admin/AppBar'
 import { signout } from '../actions/auth'
 
 class AppBarMenu extends Component {
@@ -15,7 +15,7 @@ class AppBarMenu extends Component {
 
   render() {
     return (
-      <Testing/>
+      <RenderAppBar onSignoutClick={this.onSignoutClick}/>
     )
   }
 }
