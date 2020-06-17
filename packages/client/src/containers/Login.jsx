@@ -1,35 +1,33 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Login from '../components/Admin/Login';
-import { login } from '../actions/auth';
-// import { AppBar, IconButton } from '@material-ui/Core'
-// import {ActionFlightTakeoff} from '@material-ui/Icon'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import Login from "../components/Admin/Login"
+import { login } from "../actions/auth"
 
 class LoginContainer extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      email: '',
-      password: ''
-    };
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      email: "",
+      password: "",
+    }
+    this.handleEmailChange = this.handleEmailChange.bind(this)
+    this.handlePasswordChange = this.handlePasswordChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleEmailChange(e) {
-    this.setState({ email: e.target.value });
+    this.setState({ email: e.target.value })
   }
 
   handlePasswordChange(e) {
-    this.setState({ password: e.target.value });
+    this.setState({ password: e.target.value })
   }
 
   handleSubmit(e) {
-    const { email, password } = this.state;
-    e.preventDefault();
-    this.props.login(email, password);
+    const { email, password } = this.state
+    e.preventDefault()
+    this.props.login(email, password)
   }
 
   render() {
@@ -42,16 +40,16 @@ class LoginContainer extends Component {
           auth={this.props.auth}
         />
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = ({ auth }) => ({
-  auth
-});
+  auth,
+})
 
-const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(login(email, password))
-});
+const mapDispatchToProps = (dispatch) => ({
+  login: (email, password) => dispatch(login(email, password)),
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

@@ -30,7 +30,10 @@ export const getRoutes = () => (
       <Route path="/why" component={WhyBorderBuddy}/>
       <Route path="/register" component={ConnectedSignUpContainer}/>
       <Route path="/about" component={About}/>
+      <Route path="/admin" component={AdminContainer} />
+      <Route path="/login" component={Login} />
       <Route component={WhyBorderBuddy} />
+
       {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
       {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
       <IndexRedirect to="/admin/travelers" />
@@ -40,7 +43,7 @@ export const getRoutes = () => (
       <Route path="createuser" component={AdminSignUp} />
       <Route path="updateprofile" component={UpdateUserContainer} />
       </Route>
-      <Route path="/login" component={Login} /> */}
+      */}
     </Switch>
   </Homepage>
 )
