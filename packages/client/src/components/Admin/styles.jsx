@@ -19,13 +19,9 @@ export const travelerStatusStyle = {
 export const signupLoginStyle = {
   card: {
     margin: '5em auto',
+    textAlign: 'center',
     width: '50%',
     padding: '2em'
-  },
-  form: {
-    margin: '1em auto',
-    display: 'block',
-    width: '75%'
   },
   button: {
     margin: '2em auto',

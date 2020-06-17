@@ -180,7 +180,7 @@ const Form = (props) => (
         disabled={!props.valid}
         color='primary'
         style={formStyle.submitButton}
-      />
+      > Register</Button>
       {
         props.showAdditionalButtons &&
         <div>
@@ -190,7 +190,7 @@ const Form = (props) => (
             onClick={props.sendText} 
             style={formStyle.adminButton} 
             labelColor="#2d6ea8" 
-          />
+          >Text Traveler</Button>
           <Button 
             label="Delete Traveler" 
             variant='contained'
@@ -198,11 +198,11 @@ const Form = (props) => (
             style={formStyle.adminButton} 
             backgroundColor="#bd1c11" 
             labelColor="#FFFFFF" 
-          />
+          >Delete Traveler</Button>
         </div>
       }
     </div>
   </form>
-);
+)
 
-export default Form;
+export default Form
