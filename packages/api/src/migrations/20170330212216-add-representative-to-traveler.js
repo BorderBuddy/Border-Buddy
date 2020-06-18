@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -14,11 +14,11 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'set null'
       }
-    );
+    )
   },
   down: function (queryInterface, Sequelize) {
     return queryInterface.removeColumn(
       'traveler',
-      'representative');
+      'representative')
   }
-};
+}
