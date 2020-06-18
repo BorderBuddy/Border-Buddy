@@ -4,8 +4,9 @@
   "description": "",
   "scripts": {
     "build": "webpack --config webpack.prod.config.js",
-    "dev": "webpack-dev-server --config webpack.dev.config.js",
-    "test": "jest"
+    "dev": "webpack-dev-server --config webpack.dev.config.js --open",
+    "test": "NODE_ENV=test mocha -r ts-node/register 'test/**/*_test.js'",
+    "test:jest": "NODE_ENV=test jest"
   },
   "license": "Apache-2.0",
   "dependencies": {
