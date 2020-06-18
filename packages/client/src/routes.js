@@ -25,33 +25,28 @@ import {
 } from './utils/hooks'
 
 export const getRoutes = () => (
-  <Homepage>
+  // <Homepage>
+  //   <Switch>
+  //     <Route path="/why" component={WhyBorderBuddy}/>
+  //     <Route path="/register" component={ConnectedSignUpContainer}/>
+  //     <Route path="/about" component={About}/>
+  //     <Route path="/login" component={Login} />
+  //     <Route component={WhyBorderBuddy} />
+  //   </Switch>
+  // </Homepage>
+  <AdminContainer>
     <Switch>
-      <Route path="/why" component={WhyBorderBuddy}/>
-      <Route path="/register" component={ConnectedSignUpContainer}/>
-      <Route path="/about" component={About}/>
-      <Route path="/admin" component={AdminContainer} />
-      <Route path="/login" component={Login} />
+      {/* <Route path="/admin" component={AdminContainer} /> */}
+      <Route path="/admin/travelers" render={() => {
+        onTravelersListEnter()
+        return <AllTravelers/>
+        }} />
+      <Route path="/admin/travelers/add" component={AddTravelerContainer} />
+      <Route path="/admin/travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
+      <Route path="/admin/createuser" component={AdminSignUp} />
+      <Route path="/admin/updateprofile" component={UpdateUserContainer} />
       <Route component={WhyBorderBuddy} />
-
-      {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}
-      {/* <Route path="/admin" component={AdminContainer} onEnter={onAdminEnter}>
-      <IndexRedirect to="/admin/travelers" />
-      <Route path="travelers" component={AllTravelers} onEnter={onTravelersListEnter} />
-      <Route path="travelers/add" component={AddTravelerContainer} />
-      <Route path="travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
-      <Route path="createuser" component={AdminSignUp} />
-      <Route path="updateprofile" component={UpdateUserContainer} />
-      </Route>
-      */}
     </Switch>
-  </Homepage>
+  </AdminContainer>
 )
-
-// const App = () => (
-//   <Switch>
-//     <Route exact path="/" component={Home} />
-//     <Route path="/about" component={About} />
-//     <Route path="/contact" component={Contact} />
-//   </Switch>
-// )
+ {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}  
