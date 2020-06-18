@@ -1,45 +1,64 @@
-import React, {Component} from 'react';
-import TravelerRow from './TravelerRow'
+import React, { Component } from "react"
+import TravelerRow from "./TravelerRow"
 
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from '@material-ui/core';
-import { 
-	nameStyle, 
-	phoneStyle,
-	countryCodeStyle,
-	emailStyle,
-	nationalityStyle, 
-	idStyle, 
-	flightCodeStyle,
-	flightNumStyle,
-	flightStatusStyle,
-	arrivalTimeStyle,
-	travelerStatusStyle
-} from './styles';
-export default ({ travelers, selectTraveler }) => (
-	
-	
-	<Table selectable={false}>
-	    <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
-	      <TableRow>
-	        <TableHeaderColumn style={idStyle}>ID</TableHeaderColumn>
-	        <TableHeaderColumn style={nameStyle}>Name</TableHeaderColumn>
-					<TableHeaderColumn style={countryCodeStyle}>Code</TableHeaderColumn>
-	        <TableHeaderColumn style={phoneStyle}>Phone</TableHeaderColumn>
-					<TableHeaderColumn style={emailStyle}>Email</TableHeaderColumn>
-	        <TableHeaderColumn style={nationalityStyle} >Nationality</TableHeaderColumn>
-	        <TableHeaderColumn style={flightCodeStyle}>Airline Code</TableHeaderColumn>
-	        <TableHeaderColumn style={flightNumStyle}>Flight #</TableHeaderColumn>
-	        <TableHeaderColumn style={arrivalTimeStyle}>Arrival Time</TableHeaderColumn>
-	        <TableHeaderColumn style={flightStatusStyle}>Flight Status</TableHeaderColumn>
-	        <TableHeaderColumn style={travelerStatusStyle}>Traveler Status</TableHeaderColumn>
-	      </TableRow>
-	    </TableHeader>
-	    <TableBody className="all-travelers">
-	      {
-					travelers && travelers.map((traveler) =>
-						<TravelerRow traveler={traveler} key={traveler.id} />)
-	      }
-	    </TableBody>
-	  </Table>
+import {
+	Table,
+	TableContainer,
+  TableBody,
+  TableHead,
+  TableCell,
+	TableRow,
+	Paper
+} from "@material-ui/core"
 
+import {
+  nameStyle,
+  phoneStyle,
+  countryCodeStyle,
+  emailStyle,
+  nationalityStyle,
+  idStyle,
+  flightCodeStyle,
+  flightNumStyle,
+  flightStatusStyle,
+  arrivalTimeStyle,
+  travelerStatusStyle,
+} from "./styles"
+
+export default ({travelers}) => (
+	<TableContainer component={Paper}>
+		<Table aria-label="traveler table">
+			<TableHead>
+				<TableRow>
+					<TableCell style={idStyle}>ID</TableCell>
+					<TableCell style={nameStyle}>Name</TableCell>
+					<TableCell style={countryCodeStyle}>Code</TableCell>
+					<TableCell style={phoneStyle}>Phone</TableCell>
+					<TableCell style={emailStyle}>Email</TableCell>
+					<TableCell style={nationalityStyle}>
+						Nationality
+					</TableCell>
+					<TableCell style={flightCodeStyle}>
+						Airline Code
+					</TableCell>
+					<TableCell style={flightNumStyle}>Flight #</TableCell>
+					<TableCell style={arrivalTimeStyle}>
+						Arrival Time
+					</TableCell>
+					<TableCell style={flightStatusStyle}>
+						Flight Status
+					</TableCell>
+					<TableCell style={travelerStatusStyle}>
+						Traveler Status
+					</TableCell>
+				</TableRow>
+			</TableHead>
+			<TableBody className="all-travelers">
+				{travelers &&
+					travelers.map((traveler) => (
+						<TravelerRow traveler={traveler} key={traveler.id} />
+					))}
+			</TableBody>
+		</Table>
+	</TableContainer>
 )
