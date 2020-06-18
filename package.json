@@ -4,7 +4,9 @@
   "description": "Your Border Buddy",
   "main": "index.js",
   "scripts": {
-    "test-local": "NODE_ENV=test LOCAL=1 ./run-tests.sh",
+    "build:test:db": "NODE_ENV=test ./setup-test-database.sh",
+    "migrate": "lerna run --scope api migrate",
+    "seed": "lerna run --scope api seed",
     "worker": "babel-node cron",
     "push:acceptance": "cf push -f manifest.acceptance.yml",
     "push:production": "cf push -f manifest.production.yml",
