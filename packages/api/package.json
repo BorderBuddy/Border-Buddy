@@ -11,9 +11,8 @@
     "dev": "nodemon",
     "start": "node ./dist/index.js",
     "migrate": "sequelize db:migrate",
-    "test:migrate": "NODE_ENV=test sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
-    "seed": "node dist/database/seed.js",
+    "seed": "ts-node ./src/database/seed.js",
     "deploy-seed": "node dist/database/deploymentSeed.js"
   },
   "license": "Apache-2.0",
@@ -40,6 +39,7 @@
   "devDependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@types/bluebird": "^3.5.32",
     "@types/cors": "^2.8.6",
@@ -58,7 +58,7 @@
     "nodemon": "^1.19.1",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0",
-    "ts-node": "^8.2.0",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.3"
   }
 }
