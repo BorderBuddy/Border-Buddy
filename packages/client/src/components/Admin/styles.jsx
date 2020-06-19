@@ -64,11 +64,10 @@ export const adminSignUp={
     textAlign: "center",
   },
   input: {
-    width: "80%",
+    width: "100%",
     color: "black",
-    marginTop: "1em",
+    margin: "1em, 2em, 1em, 2em",
     paddingTop: "1em",
-    marginBottom: "1em",
   },
 }
 
