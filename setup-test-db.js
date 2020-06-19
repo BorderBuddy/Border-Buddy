@@ -12,5 +12,6 @@ pgtools.createdb(config, 'BorderBuddy_test', function (err, res) {
     console.error(err)
     process.exit(-1)
   }
+  console.log('no errors creating db...maybe')
   console.log(res)
 })
