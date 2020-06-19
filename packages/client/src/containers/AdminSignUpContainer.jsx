@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import AdminSignUp from "../components/Admin/AdminSignUp"
 import { signup, updateUser } from "../actions/auth"
-import { Dialog, Button } from "@material-ui/core"
+import { Dialog, Button, DialogActions, DialogTitle, DialogContent } from "@material-ui/core"
 
 class AdminSignUpContainer extends Component {
   constructor(props) {
@@ -54,14 +54,6 @@ class AdminSignUpContainer extends Component {
   }
 
   render() {
-    let actions = [
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={this.handleClose}
-      >OK</Button>,
-    ]
-
     return (
       <div>
         <AdminSignUp
@@ -71,16 +63,24 @@ class AdminSignUpContainer extends Component {
           handleSubmit={this.handleSubmit}
         />
         <Dialog
-          title="Creating New Admin..."
-          actions={actions}
           open={this.state.open}
           modal={true}
         >
-          {this.state.createdSuccess ? (
-            <h4>New admin created successfully!</h4>
-          ) : (
-            <h4>There was a problem trying to create a new admin</h4>
-          )}
+          <DialogTitle>Creating New Admin...</DialogTitle>
+          <DialogContent>
+            {this.state.createdSuccess ? (
+              <h4>New admin created successfully!</h4>
+            ) : (
+              <h4>There was a problem trying to create a new admin</h4>
+            )}
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.handleClose}
+            >OK</Button>
+          </DialogActions>
         </Dialog>
       </div>
     )
