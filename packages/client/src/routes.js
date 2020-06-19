@@ -37,12 +37,13 @@ export const getRoutes = () => (
   <AdminContainer>
     <Switch>
       {/* <Route path="/admin" component={AdminContainer} /> */}
+      
+      <Route path="/admin/travelers/add" component={AddTravelerContainer} />
+      <Route path="/admin/travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
       <Route path="/admin/travelers" render={() => {
         onTravelersListEnter()
         return <AllTravelers/>
-        }} />
-      <Route path="/admin/travelers/add" component={AddTravelerContainer} />
-      <Route path="/admin/travelers/:id" component={SingleTravelerContainer} onEnter={onSingleTravelerEnter} />
+      }} />
       <Route path="/admin/createuser" component={AdminSignUp} />
       <Route path="/admin/updateprofile" component={UpdateUserContainer} />
       <Route component={WhyBorderBuddy} />
