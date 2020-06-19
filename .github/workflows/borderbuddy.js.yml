@@ -44,23 +44,23 @@ jobs:
     - name: Bootstrap Lerna
       run: npm run lerna:bootstrap
     
-    - name: Test Postgres BorderBuddy_test db connection
-      run: npm run build:test:db
-      env:
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
+    # - name: Test Postgres BorderBuddy_test db connection
+      # run: npm run build:test:db
+      # env:
+          # POSTGRES_HOST: localhost
+          # POSTGRES_PORT: 5432
 
     - name: Run migrations 
       run: npm run migrate
      
-    # - name: Seed the database
-      # run: npm run seed
+    - name: Seed the database
+      run: npm run seed
 
-    # - name: Build packages
-      # run: npm run build --if-present
+    - name: Build packages
+      run: npm run build --if-present
     
-    # - name: Run mocha tests
-      # run: npm test
+    - name: Run mocha tests
+      run: npm test
 env:
   NODE_ENV: test
   SESSION_SECRET: ${{secrets.SESSION_SECRET}}
