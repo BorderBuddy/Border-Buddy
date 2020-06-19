@@ -40,6 +40,7 @@
   "homepage": "https://github.com/EmilyDev/Hack-The-Ban.git",
   "dependencies": {
     "lerna": "^3.22.0",
+    "pg": "^8.2.1",
     "pgtools": "^0.3.0"
   },
   "devDependencies": {
