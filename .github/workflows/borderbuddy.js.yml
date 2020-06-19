@@ -44,7 +44,7 @@ jobs:
     - name: Bootstrap Lerna
       run: npm run lerna:bootstrap
     
-    - name: Create Postgres BorderBuddy_test DB
+    - name: Test Postgres BorderBuddy_test db connection
       run: npm run build:test:db
       env:
           POSTGRES_HOST: localhost
