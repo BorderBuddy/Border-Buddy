@@ -29,7 +29,7 @@ export const onTravelersListEnter = () => {
   store.dispatch(fetchAllTravelers())
 }
 
-export const onSingleTravelerEnter = ({ params }) => {
+export const onSingleTravelerEnter = ({ match: {params} }) => {
   store.dispatch(fetchSelectedTraveler(params.id))
 }
 
