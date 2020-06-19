@@ -14,9 +14,10 @@
     "build-client": "lerna run --scope client build",
     "build-api": "lerna run --scope api build",
     "copy-assets": "cp -R ./packages/client/dist/* ./packages/api/dist/public && cp -R ./packages/client/dist/* ./packages/api/src/public",
-    "build": "lerna bootstrap && npm run build-client && npm run build-api && npm run copy-assets",
-    "dev": "lerna bootstrap && lerna run dev --stream --parallel",
-    "test": "lerna bootstrap && lerna run test"
+    "build": "npm run build-client && npm run build-api && npm run copy-assets",
+    "dev": "lerna run dev --stream --parallel",
+    "test": "lerna run test",
+    "test:jest": "lerna run --scope client test:jest"
   },
   "repository": {
     "type": "git",
