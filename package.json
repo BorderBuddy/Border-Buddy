@@ -4,7 +4,7 @@
   "description": "Your Border Buddy",
   "main": "index.js",
   "scripts": {
-    "build:test:db": "NODE_ENV=test ./setup-test-database.sh",
+    "build:test:db": "NODE_ENV=test node ./setup-test-db.js",
     "migrate": "lerna run --scope api migrate",
     "seed": "lerna run --scope api seed",
     "worker": "babel-node cron",
@@ -38,7 +38,8 @@
   },
   "homepage": "https://github.com/EmilyDev/Hack-The-Ban.git",
   "dependencies": {
-    "lerna": "^3.22.0"
+    "lerna": "^3.22.0",
+    "pgtools": "^0.3.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.1.0",
