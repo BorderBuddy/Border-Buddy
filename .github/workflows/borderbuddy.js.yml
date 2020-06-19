@@ -2,7 +2,7 @@ name: Border Buddy CI
 
 on:
   push:
-    branches: [ ci-setup ]
+    branches: [ ci-setup-hotfix ]
   pull_request:
     branches: [ develop ]
 
