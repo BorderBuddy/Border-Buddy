@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SingleTraveler from '../components/Admin/SingleTraveler'
-import { browserHistory } from 'react-router'
+import { useHistory as history } from 'react-router'
 import { updateTraveler, sendText, deleteTraveler } from '../actions/selectedTraveler'
 import { checkFlight } from '../actions/flight'
 import { SignUpConfirmation } from '../components/SignUpConfirmation'
@@ -11,6 +11,7 @@ import DeleteTravelerConfirmation from '../components/Admin/DeleteTravelerConfir
 class SingleTravelerContainer extends Component {
   constructor (props) {
     super(props)
+    console.log(props)
 
     this.state = {
       open: false,
@@ -45,15 +46,15 @@ class SingleTravelerContainer extends Component {
   }
 
   confirmSubmit (e) {
-    if (!this.props.flight) browserHistory.push('/admin/travelers')
+    if (!this.props.flight) history.push('/admin/travelers')
     else {
-      const { updateTraveler, routeParams } = this.props
+      const { updateTraveler, match: { params } } = this.props
       const { values } = this.props.form.travelerForm
       // TODO: get time off of flight if need be
       values.countryCode = values.countryCode.split('-')[1].slice(2)
-      updateTraveler(values, routeParams.id)
+      updateTraveler(values, params.id)
         .then(() => {
-          browserHistory.push('/admin/travelers')
+          history.push('/admin/travelers')
         })
     }
   }
@@ -70,11 +71,11 @@ class SingleTravelerContainer extends Component {
 
   deleteTravelerConfirm (e) {
     e.preventDefault()
-    const { deleteTraveler, routeParams } = this.props
-    deleteTraveler(routeParams.id)
+    const { deleteTraveler, match: { params } } = this.props
+    deleteTraveler(params.id)
       .then(() => {
         this.handleDeleteTravelerClose()
-        browserHistory.push('/admin/travelers')
+        history.push('/admin/travelers')
       })
   }
 
@@ -99,7 +100,7 @@ class SingleTravelerContainer extends Component {
       <div>
         <SingleTraveler
           onSubmit={submit}
-          id={this.props.params.id}
+          id={this.props.match.params.id}
           sendText={this.sendText}
           representatives={this.props.users}
           deleteTraveler={this.openDeleteTravelerModal}/>
