@@ -8,8 +8,10 @@ module.exports = {
     dialect: 'postgres'
   },
   test: {
+    host: 'postgres',
+    port: 5432,
     username: 'postgres',
-    password: DB_PASSWORD,
+    password: 'postgres',
     database: 'BorderBuddy_test',
     dialect: 'postgres'
   },
