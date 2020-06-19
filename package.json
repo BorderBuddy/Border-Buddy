@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:test:db": "node ./setup-test-db.js",
+    "lerna:bootstrap": "lerna bootstrap",
     "migrate": "lerna run --scope api migrate",
     "seed": "lerna run --scope api seed",
     "worker": "babel-node cron",
