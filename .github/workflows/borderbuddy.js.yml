@@ -19,9 +19,9 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: postgres
+          # POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          # POSTGRES_DB: postgres
         ports:
           - 5432:5432 
         options: >-
@@ -44,7 +44,10 @@ jobs:
     
     - name: Setup Postgres DB
       run: npm run build:test:db
+      run: npm run migrate
+      run: npm run seed
       env:
+          NODE_ENV: test
           # The hostname used to communicate with the PostgreSQL service container
           POSTGRES_HOST: postgres
           # The default PostgreSQL port
