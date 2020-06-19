@@ -4,7 +4,7 @@
   "description": "Your Border Buddy",
   "main": "index.js",
   "scripts": {
-    "build:test:db": "NODE_ENV=test node ./setup-test-db.js",
+    "build:test:db": "node ./setup-test-db.js",
     "migrate": "lerna run --scope api migrate",
     "seed": "lerna run --scope api seed",
     "worker": "babel-node cron",
