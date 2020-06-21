@@ -25,6 +25,21 @@ export const onAdminEnter = () => {
     })
 }
 
+export const loggedIn = () =>{
+  store.dispatch(checkToken())
+    .then(() => {
+      if (!window.localStorage.accessToken) {
+        return false
+      } else {
+        return true
+      }
+    })
+    .catch(err => {
+      console.error('Cookie Expired', err)
+      return false
+    })
+}
+
 export const onTravelersListEnter = () => {
   store.dispatch(fetchAllTravelers())
 }
@@ -36,7 +51,9 @@ export const onSingleTravelerEnter = ({ match: {params} }) => {
 export const onSuccessEnter = () => {
   const { signUpTraveler } = store.getState()
   if (!signUpTraveler) {
-    history.push('/')
+    return false
+  } else {
+    return true
   }
 }
 
