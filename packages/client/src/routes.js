@@ -18,39 +18,46 @@ import { WhyBorderBuddy } from './components/WhyBorderBuddy'
 // Router Hooks
 import {
   onSuccessEnter,
-  onSuccessLeave,
-  onAdminEnter,
   onTravelersListEnter,
-  onSingleTravelerEnter
+  onSingleTravelerEnter,
+  loggedIn
 } from './utils/hooks'
 
-export const getRoutes = () => (
-  // <Homepage>
-  //   <Switch>
-  //     <Route path="/why" component={WhyBorderBuddy}/>
-  //     <Route path="/register" component={ConnectedSignUpContainer}/>
-  //     <Route path="/about" component={About}/>
-  //     <Route path="/login" component={Login} />
-  //     <Route component={WhyBorderBuddy} />
-  //   </Switch>
-  // </Homepage>
-  <AdminContainer>
-    <Switch>
-      {/* <Route path="/admin" component={AdminContainer} /> */}
-      
-      <Route path="/admin/travelers/add" component={AddTravelerContainer} />
-      <Route path="/admin/travelers/:id" render={(props) => {
-        onSingleTravelerEnter(props)
-        return <SingleTravelerContainer {...props}/>
-      }} />
-      <Route path="/admin/travelers" render={() => {
-        onTravelersListEnter()
-        return <AllTravelers/>
-      }} />
-      <Route path="/admin/createuser" component={AdminSignUp} />
-      <Route path="/admin/updateprofile" component={UpdateUserContainer} />
-      <Route component={WhyBorderBuddy} />
-    </Switch>
-  </AdminContainer>
-)
- {/* <Route path="success" component={Success} onEnter={onSuccessEnter} onLeave={onSuccessLeave} /> */}  
+export const getRoutes = () => {
+  if (loggedIn()) {
+    return (
+      <AdminContainer>
+        <Switch>
+          <Route exact path="/admin/travelers/add" component={AddTravelerContainer} />
+          <Route path="/admin/travelers/:id" render={(props) => {
+            onSingleTravelerEnter(props)
+            return <SingleTravelerContainer {...props}/>
+          }} />
+          <Route path="/admin/travelers" render={() => {
+            onTravelersListEnter()
+            return <AllTravelers/>
+          }} />
+          <Route exact path="/admin/createuser" component={AdminSignUp} />
+          <Route exact path="/admin/updateprofile" component={UpdateUserContainer} />
+          <Route component={WhyBorderBuddy} />
+        </Switch>
+      </AdminContainer>
+    ) 
+  } else {
+    return (
+      <Homepage>
+        <Switch>
+          <Route exact path="/why" component={WhyBorderBuddy}/>
+          <Route exact path="/register" component={ConnectedSignUpContainer}/>
+          <Route exact path="/about" component={About}/>
+          <Route exact path="/login" component={Login} />
+          <Route exact path='/success' render={() => {
+            onSuccessEnter()
+            return <Success/>
+          }}/>
+          <Route component={WhyBorderBuddy} />
+        </Switch>
+      </Homepage>
+    )
+  }
+}
