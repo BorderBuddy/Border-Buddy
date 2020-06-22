@@ -1,21 +1,23 @@
 'use strict'
 
 import Sequelize from 'sequelize'
-const env = process.env.NODE_ENV || 'development'
-const config = require('../config/config')[env]
+import { config } from '../config'
+const { env, database } = config
+const dbConfig = database[env]
 
 const baseConfig = {
   define: {
     // stop sequelize from pluralizing model names to get table names
     freezeTableName: true
   },
-  logging: ['development'].includes(env)
+  logging: (env === 'development') ? console.log : false
 }
 
-// if (config.use_env_variable) {
-//   let sequelize = new Sequelize(process.env[config.use_env_variable], baseConfig)
-// } else {
-const sequelize = new Sequelize(config.database, config.username, config.password, Object.assign({}, baseConfig, config))
-// }
+let sequelize
+if (dbConfig.use_env_variable) {
+  sequelize = new Sequelize(process.env[dbConfig.use_env_variable], baseConfig)
+} else {
+  sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, Object.assign({}, baseConfig, dbConfig))
+}
 
 module.exports = sequelize

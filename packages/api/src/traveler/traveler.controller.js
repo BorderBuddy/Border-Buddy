@@ -37,7 +37,7 @@ export function getAllTravelers (req, res, next) {
 }
 
 export function getById (req, res, next) {
-  return Traveler.findById(req.params.id, { include: [{ all: true }] })
+  return Traveler.findByPk(req.params.id, { include: [{ all: true }] })
     .then(traveler => {
       res.status(200).json(traveler)
     })
@@ -47,8 +47,8 @@ export function getById (req, res, next) {
 export function updateOne (req, res, next) {
   const travelerDetails = req.body
   travelerDetails.id = req.params.id
-  travelerDetails.connectivity = (travelerDetails.connectivity == 'true')
-  travelerDetails.requireInterpreter = (travelerDetails.requireInterpreter == 'true')
+  travelerDetails.connectivity = (travelerDetails.connectivity === 'true')
+  travelerDetails.requireInterpreter = (travelerDetails.requireInterpreter === 'true')
 
   createOrUpdateTravelerUseCase({
     repository: Repository,

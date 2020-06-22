@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { User } from '../database/models/user'
-import { config } from '../config2'
+import { config } from '../config'
 
 function validationError (res, statusCode) {
   statusCode = statusCode || 422
@@ -45,7 +45,7 @@ export function show (req, res, next) {
     return
   };
   var userId = req.params.id
-  return User.find({
+  return User.findOne({
     where: {
       id: userId
     }
@@ -67,14 +67,14 @@ export function destroy (req, res) {
     .catch(handleError(res))
 }
 
-export function changePassword (req, res) {
-  const userId = req.user.id
+export function changePassword (req, res, next) {
+  const userId = req.params.id
   const oldPass = String(req.body.oldPassword)
   const newPass = String(req.body.newPassword)
 
-  return User.findById(userId)
+  return User.findByPk(userId)
     .then(user => {
-      if (user.authenticate(oldPass)) {
+      if (user.authenticate(user, oldPass)) {
         user.update({ password: newPass })
           .then((user) => {
             res.status(204).end()
@@ -93,14 +93,14 @@ export function update (req, res, next) {
   const phone = req.body.phone
   const email = req.body.email
 
-  return User.findById(userId)
+  return User.findByPk(userId)
     .then(user => {
       user.phone = phone || user.phone
       user.email = email || user.email
       return user.save()
     })
     .then(user => {
-      if (oldPass && !user.authenticate(oldPass)) {
+      if (oldPass && !user.authenticate(user, oldPass)) {
         res.sendStatus(401)
         return user
       }
@@ -116,18 +116,20 @@ export function update (req, res, next) {
     .catch(next)
 }
 
-export function me (req, res, next) {
+export const me = (req, res, next) => {
   const userId = req.headers.user.id
-  User.findById(userId, {
+  User.findByPk(userId, {
     attributes: {
       exclude: ['salt', 'password']
     }
   })
     .then(user => {
       if (!user) {
-        return res.status(401).end()
+        return res.status(401)
       }
       res.json(user)
     })
-    .catch(err => next(err))
+    .catch(err => {
+      next(err)
+    })
 }

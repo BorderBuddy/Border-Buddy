@@ -4,7 +4,7 @@ import {
 } from '../constants'
 
 import axios from 'axios'
-import { browserHistory } from 'react-router'
+import { useHistory as history } from 'react-router'
 
 const setSignupTraveler = traveler => ({
   type: SET_SIGNUP_TRAVELER,
@@ -19,8 +19,8 @@ export const signUpTraveler = (traveler, isAdmin) => {
     axios.post('/api/traveler/', traveler)
       .then(res => {
         dispatch(setSignupTraveler(res.data))
-        if (!isAdmin) browserHistory.push('/success')
-        else browserHistory.push('/admin/travelers')
+        if (!isAdmin) history.push('/success')
+        else history.push('/admin/travelers')
       })
       .catch(console.error)
   }

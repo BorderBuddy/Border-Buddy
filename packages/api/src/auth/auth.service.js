@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { config } from '../config2'
+import { config } from '../config'
 import { Repository } from '../database/models'
 
 export function signToken (id) {
@@ -17,7 +17,7 @@ export function verifyToken (token, repository = Repository) {
         return
       }
 
-      userRepository.findById(user.id).then(foundUser => {
+      userRepository.findByPk(user.id).then(foundUser => {
         if (!foundUser) {
           reject(new Error('User not found'))
         } else {
@@ -31,7 +31,9 @@ export function verifyToken (token, repository = Repository) {
 export function protectedEndpoint (endpoint, tokenVerifier = verifyToken) {
   return (req, res, next) => {
     tokenVerifier(req.headers.authorization)
-      .then(() => endpoint(req, res, next))
+      .then(() => {
+        endpoint(req, res, next)
+      })
       .catch(() =>
         res
           .status(401)

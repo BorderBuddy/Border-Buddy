@@ -82,7 +82,7 @@ describe('auth.service', () => {
       beforeEach(() => {
         mockRepository = {
           users: {
-            findById: sinon.stub()
+            findByPk: sinon.stub()
           }
         }
       })
@@ -91,7 +91,7 @@ describe('auth.service', () => {
         it('returns a rejected promise', () => {
           const token = signToken(1234567890)
 
-          mockRepository.users.findById.withArgs(1234567890)
+          mockRepository.users.findByPk.withArgs(1234567890)
             .returns(Promise.resolve(null))
 
           return verifyToken(token, mockRepository)
@@ -104,7 +104,7 @@ describe('auth.service', () => {
         it('returns a resolved promise', () => {
           const token = signToken(2345678901)
 
-          mockRepository.users.findById.withArgs(2345678901)
+          mockRepository.users.findByPk.withArgs(2345678901)
             .returns(Promise.resolve({ a: 'user' }))
 
           return verifyToken(token, mockRepository)
