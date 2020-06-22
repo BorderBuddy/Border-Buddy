@@ -5,20 +5,21 @@ import { setFlight } from './flight'
 export const setSelectedTraveler = selectedTraveler => ({ type: SET_SELECTED_TRAVELER, selectedTraveler })
 
 export const fetchSelectedTraveler = (id) => dispatch => {
-  // return axios.get(`/api/traveler/${id}`, {
-  //   headers: {
-  //     Authorization: window.localStorage.accessToken
-  //   }
-  // })
-  //   .then(traveler => {
-  //     traveler = traveler.data
-  //     dispatch(setSelectedTraveler(traveler))
-  //     dispatch(setFlight(traveler.flight || {}))
-  //   })
-  //   .catch(err => console.error(err))
-  const traveler = { id:'1231', email: '1234@abc.com', countryCode: '1', phone: '8084982097', name: 'Dirron Pewers', status: 'transit', connectivity: true, nationality: 'Syria', flightId: 1 }
-  return dispatch(setSelectedTraveler(traveler))
-  //dispatch(setFlight(traveler.flight || {}))
+  return axios.get(`/api/traveler/${id}`, {
+    headers: {
+      Authorization: window.localStorage.accessToken
+    }
+  })
+  .then(traveler => {
+      traveler = traveler.data
+      dispatch(setSelectedTraveler(traveler))
+      dispatch(setFlight(traveler.flight || {}))
+  })
+  .catch(err => console.error(err))
+
+  //for offline dev
+  // const traveler = { id:'1231', email: '1234@abc.com', countryCode: '1', phone: '8084982097', name: 'Dirron Pewers', status: 'transit', connectivity: true, nationality: 'Syria', flightId: 1 }
+  // return dispatch(setSelectedTraveler(traveler))
 }
 
 export const updateTraveler = (traveler, id, _window = window) => dispatch => {

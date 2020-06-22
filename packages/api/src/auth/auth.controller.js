@@ -2,7 +2,6 @@ import passport from 'passport'
 import { signToken, verifyToken } from './auth.service'
 
 export function login (req, res, next) {
-  console.log('login called')
   passport.authenticate('local', function (err, user, info) {
     var error = err || info
     if (error) {
@@ -21,7 +20,6 @@ export function login (req, res, next) {
 
 export function isAuthenticated (req, res, next) {
   const token = req.headers.authorization
-
   verifyToken(token)
     .then(user => {
       const tokenResponse = signToken(user.id)
