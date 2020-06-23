@@ -53,11 +53,9 @@ jobs:
     - name: Build packages
       run: npm run build --if-present
     
-    - name: Run mocha tests
+    - name: Run all tests
       run: npm test
 
-    - name: Run Jest tests
-      run: npm run test:jest
 env:
   NODE_ENV: test
   SESSION_SECRET: ${{secrets.SESSION_SECRET}}
