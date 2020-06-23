@@ -5,17 +5,18 @@ const today = new Date()
 const tomorrow = new Date()
 tomorrow.setDate(tomorrow.getDate() + 1)
 
-const threeHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 3)
+const fiveDaysAgo = new Date(new Date() - 1000 * 60 * 60 * 5 * 24)
 
 const users = [
   { email: 'andrew@borderbuddy.us', password: '12345678', phone: '1234567890' },
   { email: 'dillon@borderbuddy.us', password: '12345678', phone: '1234567890' },
-  { email: 'aaron@borderbuddy.us', password: '12345678', phone: '1234567890' },
+  { email: 'aaron@borderbuddy.us', password: '12345678', phone: '3233655969' },
   { email: 'admin@borderbuddy.us', password: '12345678', phone: '1234567890' }
 ]
 
 /*
 * ATTN: Do not change this test data because controller/flight.dev's fixtures depend on it
+FIXME: Dummy flight info needs to be outside the range of the orderByArrival method on Traveler
 */
 const dummyFlights = [{
   flightNum: '88',
@@ -33,7 +34,7 @@ const dummyFlights = [{
   flightNum: '6020',
   airlineCode: 'KL',
   status: 'scheduled',
-  arrivalTime: threeHoursAgo
+  arrivalTime: fiveDaysAgo
 }
 ]
 

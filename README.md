@@ -3,7 +3,7 @@ Rebasing from private repo into the shared repo on develop branch
 # Border Buddy
 
 [![Stories in Ready](https://badge.waffle.io/BorderBuddy/Border-Buddy.png?label=ready&title=Ready)](https://waffle.io/BorderBuddy/Border-Buddy)
-[![CircleCI](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master.svg?style=svg&circle-token=e6542681d7c1b67287fe02caf10508ed6087dd03)](https://circleci.com/gh/BorderBuddy/Border-Buddy/tree/master)
+![](https://github.com/arntzy/border-buddy-development/workflows/Border%20Buddy%20CI/badge.svg)
 
 ## Getting Started
 
@@ -36,7 +36,13 @@ $ createdb BorderBuddy_test
 $ npm install
 ```
 
-- Migrate
+- Bootstrap Lerna 
+
+```
+$ npm run lerna:bootstrap
+```
+
+- Migrate 
 
 ```
 $ npm run migrate
@@ -64,7 +70,6 @@ $ ./node_modules/.bin/sequelize migration:create --name [insert-name-of-migratio
 $ ./node_modules/.bin/sequelize --help (for other stuff)
 
 ```
-
 
 ### Running the app
 
@@ -96,6 +101,6 @@ webpack-dev-server will proxy through any requests to 8080 to the API running on
 
 ## Testing
 
-Tests use [Mocha](http://mochajs.org/) and [Chai.js](http://chaijs.com/). New tests should be included in the `test` directory (see `test/example.js` for an example test). We are also using Jest for testing our Redux actions.
+Tests use [Mocha](http://mochajs.org/) and [Chai.js](http://chaijs.com/). We are also using Jest for testing our Redux actions.
 
-To execute the test suite locally, run `npm run test-local`.
+To execute the test suite locally, run `npm test`.

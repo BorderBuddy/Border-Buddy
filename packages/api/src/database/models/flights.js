@@ -1,6 +1,6 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
-import {Traveler} from './travelers';
+import { Traveler } from './travelers'
+const Sequelize = require('sequelize')
+const db = require('../db')
 
 export const Flight = db.define('flight', {
   flightNum: {
@@ -24,37 +24,32 @@ export const Flight = db.define('flight', {
   },
   arrivalTime: {
     type: Sequelize.DATE,
-    allowNull: false,
+    allowNull: false
   }
-}, {
-  classMethods: {
-    findFlightsToLand: function () {
-      const now = new Date();
+})
 
-      return Flight.findAll({
-        where: {
-          arrivalTime: {
-            $lt: now
-          },
-          status: 'scheduled'
-        }
-      })
-        .then(flights => flights)
-        .catch(err => console.error(err));
+Flight.findFlightsToLand = () => {
+  const now = new Date()
+
+  return Flight.findAll({
+    where: {
+      arrivalTime: {
+        $lt: now
+      },
+      status: 'scheduled'
     }
-  },
+  })
+    .then(flights => flights)
+    .catch(err => console.error(err))
+}
 
-  instanceMethods: {
-    landFlight: function () {
-      return this.update({status: 'arrived'})
-        .then(flight => {
-          return Traveler.update(
-            {status: 'unconfirmed'},
-            {where: {flightId: flight.id}, returning: true});
-        })
-        .spread((count, travelers) => travelers)
-        .catch(err => console.error(err));
-    }
-  }
-
-});
+Flight.prototype.landFlight = () => {
+  return this.update({ status: 'arrived' })
+    .then(flight => {
+      return Traveler.update(
+        { status: 'unconfirmed' },
+        { where: { flightId: flight.id }, returning: true })
+    })
+    .spread((count, travelers) => travelers)
+    .catch(err => console.error(err))
+}

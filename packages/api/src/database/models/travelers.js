@@ -57,9 +57,10 @@ Traveler.setToAtRisk = () => {
     .catch(err => console.error(err))
 }
 
-Traveler.orderByArrival = () => {
-  return Traveler.findAll({
+Traveler.orderByArrival = async () => {
+  const orderedTravelers = await Traveler.findAll({
     include: [{ all: true }],
     order: [[Flight, 'arrivalTime', 'DESC']]
   })
+  return orderedTravelers
 }
