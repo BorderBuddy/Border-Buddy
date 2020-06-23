@@ -16,7 +16,8 @@
     "build": "npm run build-client && npm run build-api && npm run copy-assets",
     "dev": "lerna run dev --stream --parallel",
     "test": "lerna run test && npm run test:jest",
-    "test:jest": "lerna run --scope client test:jest"
+    "test:jest": "lerna run --scope client test:jest",
+    "start": "lerna run --scope api start"
   },
   "repository": {
     "type": "git",
