@@ -25,19 +25,20 @@ export const onAdminEnter = () => {
     })
 }
 
-export const loggedIn = () =>{
-  store.dispatch(checkToken())
-    .then(() => {
+export const loggedIn = async () => {
+  const token = await store.dispatch(checkToken())
+  try {
+    if (token === 200) {
       if (!window.localStorage.accessToken) {
         return false
       } else {
         return true
       }
-    })
-    .catch(err => {
-      console.error('Cookie Expired', err)
-      return false
-    })
+    }
+  } catch (err) {
+    console.log('Cookie Expired', err)
+    return false
+  }
 }
 
 export const onTravelersListEnter = () => {
