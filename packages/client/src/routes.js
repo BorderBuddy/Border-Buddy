@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
 
 // Components
 import { Homepage } from './containers/Homepage'
@@ -23,41 +23,62 @@ import {
   loggedIn
 } from './utils/hooks'
 
-export const getRoutes = () => {
-  if (loggedIn()) {
-    return (
-      <AdminContainer>
-        <Switch>
-          <Route exact path="/admin/travelers/add" component={AddTravelerContainer} />
-          <Route path="/admin/travelers/:id" render={(props) => {
-            onSingleTravelerEnter(props)
-            return <SingleTravelerContainer {...props}/>
-          }} />
-          <Route path="/admin/travelers" render={() => {
-            onTravelersListEnter()
-            return <AllTravelers/>
-          }} />
-          <Route exact path="/admin/createuser" component={AdminSignUp} />
-          <Route exact path="/admin/updateprofile" component={UpdateUserContainer} />
-          <Route component={WhyBorderBuddy} />
-        </Switch>
-      </AdminContainer>
-    ) 
-  } else {
-    return (
-      <Homepage>
-        <Switch>
-          <Route exact path="/why" component={WhyBorderBuddy}/>
-          <Route exact path="/register" component={ConnectedSignUpContainer}/>
-          <Route exact path="/about" component={About}/>
-          <Route exact path="/login" component={Login} />
-          <Route exact path='/success' render={() => {
-            onSuccessEnter()
-            return <Success/>
-          }}/>
-          <Route component={WhyBorderBuddy} />
-        </Switch>
-      </Homepage>
-    )
+
+
+class GetRoutes extends Component {
+  state={
+    loggedInState: false,
+    ready: false,
   }
+  async componentDidMount(){
+    const isloggedin = await loggedIn()
+    console.log("IS LOGGED IN: "+isloggedin)
+    this.setState({ready: true, loggedInState: isloggedin})
+  }
+  render () { 
+    if(this.state.ready && this.state.loggedInState){
+      return <LoggedInApp/>
+    } else {
+      return <LoggedOutApp/>
+    }
+  }
+}
+export default GetRoutes
+
+const LoggedInApp = () => {
+  return (
+    <AdminContainer>
+      <Switch>
+        <Route path="/admin/travelers/add"><AddTravelerContainer/></Route>
+        <Route path="/admin/travelers/:id" render={(props) => {
+          onSingleTravelerEnter(props)
+          return <SingleTravelerContainer {...props}/>
+        }} />
+        <Route path="/admin/travelers" render={() => {
+          onTravelersListEnter()
+          return <AllTravelers/>
+        }} />
+        <Route path="/admin/createuser"><AdminSignUp/></Route>
+        <Route path="/admin/updateprofile"><UpdateUserContainer/></Route>
+        <Route component={WhyBorderBuddy} />
+      </Switch>
+    </AdminContainer>
+  )
+}
+const LoggedOutApp = () => {
+  return (
+    <Homepage>
+      <Switch>
+        <Route path="/why" component={WhyBorderBuddy}/>
+        <Route path="/register" component={ConnectedSignUpContainer}/>
+        <Route path="/about" component={About}/>
+        <Route path="/login" component={Login} />
+        <Route path='/success' render={() => {
+          onSuccessEnter()
+          return <Success/>
+        }}/>
+        <Route component={WhyBorderBuddy} />
+      </Switch>
+    </Homepage>
+  )
 }

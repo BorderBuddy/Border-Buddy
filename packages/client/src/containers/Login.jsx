@@ -27,7 +27,9 @@ class LoginContainer extends Component {
   handleSubmit(e) {
     const { email, password } = this.state
     e.preventDefault()
-    this.props.login(email, password)
+    if (this.props.login(email, password)) {
+      this.props.history.push('/admin/travelers')
+    }
   }
 
   render() {
