@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useHistory as history } from 'react-router'
+// import { useHistory as history } from 'react-router-dom'
 import {
   SET_AUTH,
   LOGIN_REQUEST,
@@ -43,14 +43,14 @@ export const logout = () => ({
   error: false
 })
 
-export const login = (email, password) => dispatch => {
+export const login = (email, password, props) => dispatch => {
   dispatch(loginRequest())
   return axios
     .post('/api/auth/local', { email, password })
     .then(response => {
-      window.localStorage.setItem('accessToken', response.data.token)
-      history.push('/admin/travelers')
-      return dispatch(loginSuccess(response.data))
+      window.localStorage.setItem('accessToken', response.data.token) 
+      dispatch(loginSuccess(response.data))
+      return true
     })
     .catch(err => {
       console.log(err)
@@ -68,20 +68,24 @@ export const signup = (user, _window = window) => () => {
     .catch(err => console.error('ERROR!', err))
 }
 
-export const checkToken = () => (dispatch, getState) => {
-  return axios
-    .get('/api/auth/checkToken', {
-      headers: {
-        Authorization: getState().auth.user.token
-      }
-    })
-    .then(response => {
-      dispatch(loginSuccess(response.data))
-    })
-    .catch(err => dispatch(loginFailure(err.response.data.message)))
+export const checkToken = () => async (dispatch, getState) => {
+  const res = await axios.get('/api/auth/checkToken', {
+    headers: {
+      Authorization: getState().auth.user.token
+    }
+  })
+  try{
+    if(res.status === 200){
+      dispatch(loginSuccess(res.data))
+      return res.status
+    }
+  } catch(err ){
+    dispatch(loginFailure(err.res.data.message))
+    return err
+  }
 }
 
-export const signout = () => dispatch => {
+export const signout = ({history}) => dispatch => {
   axios
     .post('/api/auth/logout')
     .then(() => {
