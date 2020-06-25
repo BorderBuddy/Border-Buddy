@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { User } from '../database/models/user'
 import { config } from '../config'
+import { parseJwt } from '../utils/parseJwt'
 
 function validationError (res, statusCode) {
   statusCode = statusCode || 422
@@ -43,7 +44,7 @@ export function create (req, res) {
 export function show (req, res, next) {
   if (!req.params) {
     return
-  };
+  }
   var userId = req.params.id
   return User.findOne({
     where: {
@@ -117,8 +118,8 @@ export function update (req, res, next) {
 }
 
 export const me = (req, res, next) => {
-  const userId = req.headers.user.id
-  User.findByPk(userId, {
+  const jwtPayload = parseJwt(req.headers.authorization)
+  User.findByPk((jwtPayload.id), {
     attributes: {
       exclude: ['salt', 'password']
     }
