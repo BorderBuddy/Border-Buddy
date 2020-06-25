@@ -17,7 +17,6 @@ const users = [
 
 /*
 * ATTN: Do not change this test data because controller/flight.dev's fixtures depend on it
-FIXME: Dummy flight info needs to be outside the range of the orderByArrival method on Traveler
 */
 const dummyFlights = [{
   flightNum: '88',
