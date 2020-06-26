@@ -1,5 +1,5 @@
 import { store } from '../index'
-import { useHistory as history } from 'react-router'
+import { push } from 'react-router-redux'
 
 // thunk action creators
 import { fetchAllTravelers } from '../actions/travelers'
@@ -14,14 +14,15 @@ export const onAdminEnter = () => {
   store.dispatch(checkToken())
     .then(() => {
       if (!window.localStorage.accessToken) {
-        history.push('/login')
+        store.dispatch(push('/login'))
       } else {
         store.dispatch(fetchAllUsers())
+        store.dispatch(push('/travelers'))
       }
     })
     .catch(err => {
       console.error('Cookie Expired', err)
-      history.push('/login')
+      store.dispatch(push('/login'))
     })
 }
 

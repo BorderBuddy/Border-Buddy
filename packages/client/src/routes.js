@@ -22,6 +22,7 @@ import {
   onSingleTravelerEnter,
   loggedIn
 } from './utils/hooks'
+import { PersonPinSharp } from '@material-ui/icons'
 
 
 
@@ -30,13 +31,13 @@ class GetRoutes extends Component {
     loggedInState: false,
     ready: false,
   }
-  async componentDidMount(){
+  async componentWillMount() {
     const isloggedin = await loggedIn()
-    console.log("IS LOGGED IN: "+isloggedin)
-    this.setState({ready: true, loggedInState: isloggedin})
+    this.setState({loggedInState: isloggedin})
   }
+
   render () { 
-    if(this.state.ready && this.state.loggedInState){
+    if (this.state.loggedInState) {
       return <LoggedInApp/>
     } else {
       return <LoggedOutApp/>
@@ -47,20 +48,23 @@ export default GetRoutes
 
 const LoggedInApp = () => {
   return (
-    <AdminContainer>
+    <AdminContainer {...this.props}>
       <Switch>
-        <Route path="/admin/travelers/add"><AddTravelerContainer/></Route>
-        <Route path="/admin/travelers/:id" render={(props) => {
+        <Route exact path="/traveler/add"><AddTravelerContainer/></Route>
+        <Route exact path="/travelers/:id" render={(props) => {
           onSingleTravelerEnter(props)
           return <SingleTravelerContainer {...props}/>
         }} />
-        <Route path="/admin/travelers" render={() => {
+        <Route exact path="/travelers" render={(props) => {
+          onTravelersListEnter()
+          return <AllTravelers {...props}/>
+        }} />
+        <Route exact path="/createuser"><AdminSignUp/></Route>
+        <Route exact path="/updateprofile"><UpdateUserContainer/></Route>
+        <Route render={() => {
           onTravelersListEnter()
           return <AllTravelers/>
         }} />
-        <Route path="/admin/createuser"><AdminSignUp/></Route>
-        <Route path="/admin/updateprofile"><UpdateUserContainer/></Route>
-        <Route component={WhyBorderBuddy} />
       </Switch>
     </AdminContainer>
   )

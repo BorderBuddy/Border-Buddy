@@ -1,5 +1,5 @@
 import React from "react"
-import { useHistory as history } from "react-router"
+import { useHistory } from "react-router-dom"
 import { TableRow, TableCell } from "@material-ui/core"
 import {
   nameStyle,
@@ -17,6 +17,7 @@ import {
 } from "./styles"
 
 export default ({ traveler }) => {
+  const history = useHistory()
   const {
     id,
     name,
@@ -32,7 +33,7 @@ export default ({ traveler }) => {
   const color = setStatusColor(travelerStatus)
   return (
     <TableRow
-      onTouchTap={() => history.push(`/admin/travelers/${traveler.id}`)}
+      onClick={() => history.push(`/travelers/${traveler.id}`)}
     >
       <TableCell style={idStyle}>{id}</TableCell>
       <TableCell style={nameStyle}>{name}</TableCell>

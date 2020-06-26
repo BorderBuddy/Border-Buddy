@@ -6,11 +6,11 @@ import {
   Typography,
   CardContent,
 } from "@material-ui/core"
-import { useHistory as history } from "react-router"
+import { useHistory } from "react-router-dom"
 import { setStatusColor } from "./styles"
 
 const AllTravelersMobile = ({ travelers }) => {
-  console.log(travelers)
+  const history = useHistory()
   return (
     <div>
       {travelers.map((traveler, i) => {
@@ -71,7 +71,7 @@ const AllTravelersMobile = ({ travelers }) => {
                 color="primary"
                 variant="contained"
                 onClick={() =>
-                  history.push(`/admin/travelers/${traveler.id}`)
+                  history.push(`/travelers/${traveler.id}`)
                 }
               >
                 View/Edit Traveler
