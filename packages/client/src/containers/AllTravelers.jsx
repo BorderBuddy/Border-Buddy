@@ -21,9 +21,9 @@ class AllTravelersContainer extends Component {
 
   mobileOrDesktop(travelers) {
     if (this.state.width > 1100) {
-      return <RenderAllTravelers travelers={travelers} />
+      return <RenderAllTravelers travelers={travelers} history={this.props.history}/>
     } else {
-      return <AllTravelersMobile travelers={travelers} />
+      return <AllTravelersMobile travelers={travelers} history={this.props.history}/>
     }
   }
 

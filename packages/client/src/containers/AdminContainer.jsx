@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import { useHistory as history, Link } from 'react-router-dom'
-import { Toolbar, Container, IconButton, Button , AppBar} from '@material-ui/core'
+import { withRouter } from 'react-router-dom'
+import { Toolbar, Container, IconButton, Button, AppBar} from '@material-ui/core'
 import RenderAppBarMenu from './AppBarMenu'
 
 const style = {
@@ -18,7 +18,7 @@ const style = {
   }
 }
 
-export default class AdminContainer extends Component {
+class AdminContainer extends Component {
   render () {
     return (
       <Fragment>
@@ -26,14 +26,14 @@ export default class AdminContainer extends Component {
           <Toolbar style={{ backgroundColor: '#2d6ea8' }}>
             <IconButton
               id="btn-all-travelers"
-              onClick={() => history.push('/admin/travelers')}>
+              onClick={() => this.props.history.push('/travelers')}>
               <img src="/images/logos-png/BB_Logo_03-White.png" style={style.icon}/>
             </IconButton>
             <Button
               style={style.button}
               id="add-new-traveler"
               varitant='text'
-              onClick={() => history.push('/admin/travelers/add')}>
+              onClick={() => this.props.history.push('/travelers/add')}>
                 Add Traveler
             </Button>
             <RenderAppBarMenu/>
@@ -46,3 +46,4 @@ export default class AdminContainer extends Component {
     )
   }
 }
+export default withRouter(AdminContainer)
