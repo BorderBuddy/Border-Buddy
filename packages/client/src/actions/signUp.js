@@ -4,7 +4,7 @@ import {
 } from '../constants'
 
 import axios from 'axios'
-import { browserHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 const setSignupTraveler = traveler => ({
   type: SET_SIGNUP_TRAVELER,
@@ -12,9 +12,9 @@ const setSignupTraveler = traveler => ({
 })
 
 export const signUpTraveler = (traveler, isAdmin) => {
+  const history = useHistory()
   if (traveler.countryCode[0] === '+') traveler.countryCode = traveler.countryCode.slice(1)
   // NOTE: we really should make the code an enum
-
   return dispatch => {
     axios.post('/api/traveler/', traveler)
       .then(res => {

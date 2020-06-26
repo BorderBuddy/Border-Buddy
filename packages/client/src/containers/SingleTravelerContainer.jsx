@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SingleTraveler from '../components/Admin/SingleTraveler'
-import { useHistory as history } from 'react-router'
 import { updateTraveler, sendText, deleteTraveler } from '../actions/selectedTraveler'
 import { checkFlight } from '../actions/flight'
 import { SignUpConfirmation } from '../components/SignUpConfirmation'
@@ -54,7 +53,7 @@ class SingleTravelerContainer extends Component {
       values.countryCode = values.countryCode.split('-')[1].slice(2)
       updateTraveler(values, params.id)
         .then(() => {
-          history.push('/admin/travelers')
+          this.props.history.push('/admin/travelers')
         })
     }
   }
@@ -75,7 +74,7 @@ class SingleTravelerContainer extends Component {
     deleteTraveler(params.id)
       .then(() => {
         this.handleDeleteTravelerClose()
-        history.push('/admin/travelers')
+        this.props.history.push('/admin/travelers')
       })
   }
 
@@ -95,7 +94,6 @@ class SingleTravelerContainer extends Component {
 
   render () {
     const submit = this.props.flight.arrivalTime > Date.now() ? this.handleSubmit : this.confirmSubmit
-
     return (
       <div>
         <SingleTraveler

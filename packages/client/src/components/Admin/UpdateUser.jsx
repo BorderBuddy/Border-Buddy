@@ -18,7 +18,7 @@ class UpdateUser extends Component {
   render () {
     const style = adminSignUp
     const {
-      handleSubmit, pristine, submitting,
+      handleSubmit, submitting,
       handleEmailChange, handleOldPasswordChange, handleNewPasswordChange, handlePhoneChange, valid
     } = this.props
 

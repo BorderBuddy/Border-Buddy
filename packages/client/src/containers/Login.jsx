@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import Login from "../components/Admin/Login"
-import { login } from "../actions/auth"
+import { login, checkToken} from "../actions/auth"
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -24,12 +24,10 @@ class LoginContainer extends Component {
     this.setState({ password: e.target.value })
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     const { email, password } = this.state
     e.preventDefault()
-    if (this.props.login(email, password)) {
-      this.props.history.push('/admin/travelers')
-    }
+    this.props.login(email, password)
   }
 
   render() {
