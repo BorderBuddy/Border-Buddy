@@ -17,7 +17,9 @@
     "dev": "lerna run dev --stream --parallel",
     "test": "lerna run test && npm run test:jest",
     "test:jest": "lerna run --scope client test:jest",
-    "start": "lerna run --scope api start"
+    "start": "lerna run --scope api start",
+    "todo": "lerna run todo",
+    "todo-ci": "lerna run todo-ci"
   },
   "repository": {
     "type": "git",

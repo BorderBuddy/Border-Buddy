@@ -13,7 +13,9 @@
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "seed": "ts-node ./src/database/seed.js",
-    "deploy-seed": "node dist/database/deploymentSeed.js"
+    "deploy-seed": "node dist/database/deploymentSeed.js",
+    "todo": "leasot -x 'src/**/*.[j|t]s'",
+    "todo-ci": "leasot -x --reporter markdown 'src/**/*.[j|t]s' > TODO.md"
   },
   "license": "Apache-2.0",
   "dependencies": {
@@ -54,6 +56,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "chai-subset": "^1.6.0",
+    "leasot": "^11.1.0",
     "mocha": "^7.2.0",
     "nodemon": "^1.19.1",
     "sinon": "^9.0.2",

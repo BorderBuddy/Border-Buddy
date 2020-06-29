@@ -10,7 +10,7 @@ const fiveDaysAgo = new Date(new Date() - 1000 * 60 * 60 * 5 * 24)
 const users = [
   { email: 'andrew@borderbuddy.us', password: '12345678', phone: '1234567890' },
   { email: 'dillon@borderbuddy.us', password: '12345678', phone: '1234567890' },
-  { email: 'aaron@borderbuddy.us', password: '12345678', phone: '3233655969' },
+  { email: 'aaron@borderbuddy.us', password: '12345678', phone: '1234567890' },
   { email: 'admin@borderbuddy.us', password: '12345678', phone: '1234567890' }
 ]
 
