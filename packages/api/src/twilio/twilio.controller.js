@@ -77,7 +77,7 @@ export const notifyAdminOfNewTravelerSignUp = (traveler) => {
           })
       })
         .then((ok) => {
-          console.log(ok)
+          // console.log(ok)
           return traveler
         })
     })

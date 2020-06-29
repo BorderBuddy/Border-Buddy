@@ -5,6 +5,7 @@ import TravelerNotifier from '../notify/travelerNotifier'
 import createOrUpdateTravelerUseCase from '../useCase/createOrUpdateTraveler'
 import { notifyAdminOfNewTravelerSignUp } from '../twilio/twilio.controller'
 
+// TODO: write this to be simpler?
 export const createNewTraveler = (req, res, next) => {
   const travelerDetails = req.body
   const travelerNotifier = new TravelerNotifier()
