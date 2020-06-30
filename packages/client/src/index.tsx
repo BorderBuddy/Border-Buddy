@@ -1,13 +1,82 @@
 import 'isomorphic-fetch'
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Root } from './containers/Root'
+import { Route, Switch } from 'react-router-dom'
 import configureStore, { history } from './store'
-export const store = configureStore()
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'connected-react-router'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import customTheme from './utils/muiTheme'
 
+// Components
+import { Homepage } from './containers/Homepage'
+import AdminContainer from './containers/AdminContainer'
+import AllTravelers from './containers/AllTravelers'
+import SingleTravelerContainer from './containers/SingleTravelerContainer'
+import Login from './containers/Login'
+import AdminSignUp from './containers/AdminSignUpContainer'
+import UpdateUserContainer from './containers/UpdateUserContainer'
+import Success from './containers/Success'
+import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer'
+import AddTravelerContainer from './containers/AddTravelerContainer'
+import { About } from './components/About'
+import { WhyBorderBuddy } from './components/WhyBorderBuddy'
+
+// Router Hooks
+import {
+  onSuccessEnter,
+  onTravelersListEnter,
+  onSingleTravelerEnter,
+} from './utils/hooks'
 require('./style/index.scss')
 
-const App = () => (
-  <Root store={store} history={history} />
-)
+export const store = configureStore()
+
+class App extends Component {
+  render() {
+    return (
+      <MuiThemeProvider theme={customTheme}>
+        <Provider store={store}>
+          <ConnectedRouter history={history}>
+            {localStorage.getItem('accessToken') ?
+              <AdminContainer {...this.props}>
+                <Switch>
+                  <Route exact path="/traveler/add"><AddTravelerContainer/></Route>
+                  <Route exact path="/travelers/:id" render={(props) => {
+                    onSingleTravelerEnter(props)
+                    return <SingleTravelerContainer {...props}/>
+                  }} />
+                  <Route exact path="/travelers" render={(props) => {
+                    onTravelersListEnter()
+                    return <AllTravelers {...props}/>
+                  }} />
+                  <Route exact path="/createuser"><AdminSignUp/></Route>
+                  <Route exact path="/updateprofile"><UpdateUserContainer/></Route>
+                  <Route render={() => {
+                    onTravelersListEnter()
+                    return <AllTravelers/>
+                  }} />
+                </Switch>
+              </AdminContainer>
+              :
+              <Homepage>
+                <Switch>
+                  <Route exact path="/why" ><WhyBorderBuddy/></Route>
+                  <Route exact path="/register" ><ConnectedSignUpContainer/></Route>
+                  <Route exact path="/about" ><About/></Route>
+                  <Route exact path="/login" ><Login /></Route>
+                  <Route exact path='/success' render={() => {
+                    onSuccessEnter()
+                    return <Success/>
+                  }}/>
+                  <Route component={WhyBorderBuddy} />
+                </Switch>
+              </Homepage>
+            }
+          </ConnectedRouter>
+        </Provider>
+      </MuiThemeProvider>
+    )
+  }
+}
 ReactDOM.render(<App />, document.getElementById('root'))
