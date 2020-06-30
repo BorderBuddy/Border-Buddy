@@ -1,36 +1,36 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import Login from "../components/Admin/Login"
-import { login, checkToken} from "../actions/auth"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Login from '../components/Admin/Login'
+import { login } from '../actions/auth'
 
 class LoginContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: ''
     }
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleEmailChange(e) {
+  handleEmailChange (e) {
     this.setState({ email: e.target.value })
   }
 
-  handlePasswordChange(e) {
+  handlePasswordChange (e) {
     this.setState({ password: e.target.value })
   }
 
-  async handleSubmit(e) {
+  async handleSubmit (e) {
     const { email, password } = this.state
     e.preventDefault()
     this.props.login(email, password)
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Login
@@ -45,11 +45,11 @@ class LoginContainer extends Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
-  auth,
+  auth
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (email, password) => dispatch(login(email, password)),
+  login: (email, password) => dispatch(login(email, password))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)
