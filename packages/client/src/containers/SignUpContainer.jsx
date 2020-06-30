@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import { Dialog, Button, DialogActions } from '@material-ui/Core'
+import { Dialog, Button, DialogActions } from '@material-ui/core'
 import Form from '../components/FormContainer'
 import FlightConfirmation from '../components/FlightConfirmation'
 import { signUpTraveler } from '../actions/signUp'
@@ -56,8 +56,8 @@ class SignUpContainer extends Component {
           open={this.state.open}
         >
           <DialogActions>
-            {this.props.flight ?
-              <Fragment>
+            {this.props.flight
+              ? <Fragment>
                 <Button
                   label="Cancel"
                   variant='contained'
@@ -72,8 +72,7 @@ class SignUpContainer extends Component {
                   onClick={this.confirmSubmit}
                 />
               </Fragment>
-            :
-              <Button
+              : <Button
                 label="OK"
                 variant='contained'
                 color='primary'
@@ -81,7 +80,7 @@ class SignUpContainer extends Component {
               />
             }
           </DialogActions>
-          <FlightConfirmation flight={this.props.flight} /> 
+          <FlightConfirmation flight={this.props.flight} />
         </Dialog>
       </div>
     )
