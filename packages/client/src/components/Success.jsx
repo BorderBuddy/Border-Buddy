@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-export default ({ signUpTraveler }) => (
+export const Success = ({ signUpTraveler }) => (
   <div id="success-container">
     <h2 className="center">Success!</h2>
     <h3 className="center">{`Hello, ${signUpTraveler.name}!`}</h3>

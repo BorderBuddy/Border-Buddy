@@ -24,19 +24,18 @@ import {
 } from './utils/hooks'
 import { PersonPinSharp } from '@material-ui/icons'
 
-
-
 class GetRoutes extends Component {
   state={
     loggedInState: false,
-    ready: false,
-  }
-  async componentWillMount() {
-    const isloggedin = await loggedIn()
-    this.setState({loggedInState: isloggedin})
+    ready: false
   }
 
-  render () { 
+  async componentWillMount () {
+    const isloggedin = await loggedIn()
+    this.setState({ loggedInState: isloggedin })
+  }
+
+  render () {
     if (this.state.loggedInState) {
       return <LoggedInApp/>
     } else {

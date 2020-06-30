@@ -26,20 +26,20 @@ import { WhyBorderBuddy } from './components/WhyBorderBuddy'
 import {
   onSuccessEnter,
   onTravelersListEnter,
-  onSingleTravelerEnter,
+  onSingleTravelerEnter
 } from './utils/hooks'
 require('./style/index.scss')
 
 export const store = configureStore()
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <MuiThemeProvider theme={customTheme}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
-            {localStorage.getItem('accessToken') ?
-              <AdminContainer {...this.props}>
+            {localStorage.getItem('accessToken')
+              ? <AdminContainer {...this.props}>
                 <Switch>
                   <Route exact path="/traveler/add"><AddTravelerContainer/></Route>
                   <Route exact path="/travelers/:id" render={(props) => {
@@ -58,17 +58,16 @@ class App extends Component {
                   }} />
                 </Switch>
               </AdminContainer>
-              :
-              <Homepage>
+              : <Homepage>
                 <Switch>
                   <Route exact path="/why" ><WhyBorderBuddy/></Route>
                   <Route exact path="/register" ><ConnectedSignUpContainer/></Route>
                   <Route exact path="/about" ><About/></Route>
                   <Route exact path="/login" ><Login /></Route>
-                  <Route exact path='/success' render={() => {
+                  {/* <Route exact path='/success' render={(props) => {
                     onSuccessEnter()
-                    return <Success/>
-                  }}/>
+                    return <Success {...props} />
+                  }}/> */}
                   <Route component={WhyBorderBuddy} />
                 </Switch>
               </Homepage>
