@@ -36,7 +36,6 @@ const loginFailure = (state, { payload: { fetching, error } }) => ({
   fetching,
   error
 })
-// TODO: check this function
 const logout = (state, { payload: { fetching }, error }) => ({
   ...state,
   fetching,
