@@ -66,7 +66,7 @@ module.exports = {
         )
       })
       .then(() => {
-        queryInterface.createTable(
+        return queryInterface.createTable(
           'traveler', {
             id: {
               type: Sequelize.INTEGER,
