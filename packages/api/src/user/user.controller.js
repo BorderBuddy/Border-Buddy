@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { User } from '../database/models/user'
 import { config } from '../config'
+import { parseJwt } from '../utils/parseJwt'
 
 function validationError (res, statusCode) {
   statusCode = statusCode || 422
@@ -40,10 +41,11 @@ export function create (req, res) {
     .catch(validationError(res))
 }
 
+// TODO: don't return password or salt
 export function show (req, res, next) {
   if (!req.params) {
     return
-  };
+  }
   var userId = req.params.id
   return User.findOne({
     where: {
@@ -67,14 +69,15 @@ export function destroy (req, res) {
     .catch(handleError(res))
 }
 
-export function changePassword (req, res, next) {
+export const changePassword = (req, res, next) => {
   const userId = req.params.id
-  const oldPass = String(req.body.oldPassword)
-  const newPass = String(req.body.newPassword)
+  const oldPass = req.body.oldPassword
+  const newPass = req.body.newPassword
 
   return User.findByPk(userId)
-    .then(user => {
-      if (user.authenticate(user, oldPass)) {
+    .then(async user => {
+      const oldPassMatches = await user.authenticate(user, oldPass)
+      if (oldPassMatches) {
         user.update({ password: newPass })
           .then((user) => {
             res.status(204).end()
@@ -86,39 +89,43 @@ export function changePassword (req, res, next) {
     })
 }
 
-export function update (req, res, next) {
+export const update = (req, res, next) => {
   const userId = req.body.id
-  const oldPass = String(req.body.oldPassword)
-  const newPass = String(req.body.newPassword)
+  const oldPass = req.body.oldPassword
+  const newPass = req.body.newPassword
   const phone = req.body.phone
   const email = req.body.email
 
   return User.findByPk(userId)
-    .then(user => {
-      user.phone = phone || user.phone
-      user.email = email || user.email
-      return user.save()
-    })
-    .then(user => {
-      if (oldPass && !user.authenticate(user, oldPass)) {
-        res.sendStatus(401)
-        return user
-      }
-      if (newPass) {
-        return user.update({
-          password: newPass
+    .then(async user => {
+      const oldPassMatches = await user.authenticate(user, oldPass)
+      if (oldPassMatches) {
+        user.update({
+          phone: phone || user.phone,
+          email: email || user.email
         })
+          .then((user) => {
+            if (newPass) {
+              user.update({
+                password: newPass
+              })
+                .then((user) => {
+                  res.status(200).json(user)
+                })
+            } else {
+              res.status(200).json(user)
+            }
+          })
+          .catch(validationError(res))
       } else {
-        return user
+        return res.status(403).end()
       }
     })
-    .then(user => res.status(200).json(user))
-    .catch(next)
 }
 
 export const me = (req, res, next) => {
-  const userId = req.headers.user.id
-  User.findByPk(userId, {
+  const jwtPayload = parseJwt(req.headers.authorization)
+  User.findByPk((jwtPayload.id), {
     attributes: {
       exclude: ['salt', 'password']
     }
