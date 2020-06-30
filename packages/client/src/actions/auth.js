@@ -48,15 +48,17 @@ export const login = (email, password, props) => (dispatch) => {
   dispatch(loginRequest())
   return axios
     .post("/api/auth/local", { email, password })
-    .then((response) => {
-      window.localStorage.setItem("accessToken", response.data.token)
-      dispatch(loginSuccess(response.data))
+    .then((res) => {
+      console.log("just logged in and setting the token")
+      window.localStorage.setItem("accessToken", res.data.token)
+      dispatch(loginSuccess(res.data))
       dispatch(push("/travelers"))
-      return true
+      return res.status
     })
     .catch((err) => {
-      console.log(err)
-      return dispatch(loginFailure(err.response.data.message))
+      console.log("there was an error loging in: "+err)
+      dispatch(loginFailure(err.res.data.message))
+      return err
     })
 }
 
@@ -71,21 +73,17 @@ export const signup = (user, _window = window) => () => {
 }
 
 export const checkToken = () => async (dispatch, getState) => {
-  const res = await axios.get("/api/auth/checkToken", {
-    headers: {
-      Authorization: getState().auth.user.token,
-    }
-  })
   try {
-    if (res.status === 200) {
-      dispatch(loginSuccess(res.data))
-      return res.status
-    } else {
-      dispatch(loginFailure(res.data.message))
-      return false
-    }
+    const res = await axios.get("/api/auth/checkToken", {
+      headers: {
+        Authorization: getState().auth.user.token,
+      }
+    })
+    console.log(res)
+
+    return res
   } catch (err) {
-    dispatch(loginFailure(err.res.data.message))
+    dispatch(loginFailure(err))
     return err
   }
 }
