@@ -26,17 +26,17 @@ class SignUpContainer extends Component {
     const { signUpTraveler, flight } = this.props
     const { values } = this.props.form.travelerForm
     values.countryCode = values.countryCode.split('-')[1].slice(2)
-    const travelerInfo = Object.assign({}, values, { arrivalTime: flight.arrivalTimeUtc })
+    const travelerInfo = Object.assign({}, values, { scheduledArrivalTime: flight.arrivalTimeUtc })
     signUpTraveler(travelerInfo)
     this.handleClose()
   }
 
   handleSubmit (e) {
     e.preventDefault()
-    const { flightNum, airlineCode, arrivalTime } = this.props.form.travelerForm.values
-    const day = arrivalTime.getDate()
-    const year = arrivalTime.getYear() + 1900
-    const month = arrivalTime.getMonth() + 1
+    const { flightNum, airlineCode, scheduledArrivalTime } = this.props.form.travelerForm.values
+    const day = scheduledArrivalTime.getDate()
+    const year = scheduledArrivalTime.getYear() + 1900
+    const month = scheduledArrivalTime.getMonth() + 1
     this.props.checkFlight(airlineCode, flightNum, year, month, day)
       .then(() => {
         this.setState({ open: true })

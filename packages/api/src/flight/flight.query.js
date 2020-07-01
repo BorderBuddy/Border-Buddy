@@ -8,7 +8,7 @@ export const airlineByCode = code =>
   baseline + `/airlines/rest/v1/json/iata/${code}` + keys
 
 export const statusByCodeAndDate = (code, flightNum, year, month, day) =>
-  baseline + `/flightstatus/rest/v2/json/flight/status/${code}/${flightNum}/arr/${year}/${month}/${day}${keys}
+  baseline + `/flightstatus/rest/v2/json/flight/status/${code}/${flightNum}/arr/${year}/${month}/${day}${keys}`
 
 // alternative query using flightStats unique flightId
 export const statusByFlightStatsFlightId = (flightId) =>

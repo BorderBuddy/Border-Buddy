@@ -22,19 +22,19 @@ const dummyFlights = [{
   flightNum: '88',
   airlineCode: 'UA',
   status: 'scheduled',
-  arrivalTime: today
+  scheduledArrivalTime: today
 },
 {
   flightNum: '88',
   airlineCode: 'UA',
   status: 'scheduled',
-  arrivalTime: tomorrow
+  scheduledArrivalTime: tomorrow
 },
 {
   flightNum: '6020',
   airlineCode: 'KL',
   status: 'scheduled',
-  arrivalTime: fiveDaysAgo
+  scheduledArrivalTime: fiveDaysAgo
 }
 ]
 

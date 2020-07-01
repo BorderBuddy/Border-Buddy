@@ -1,6 +1,6 @@
-import React from "react"
-import { useHistory } from "react-router-dom"
-import { TableRow, TableCell } from "@material-ui/core"
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import { TableRow, TableCell } from '@material-ui/core'
 import {
   nameStyle,
   countryCodeStyle,
@@ -11,10 +11,10 @@ import {
   flightCodeStyle,
   flightNumStyle,
   flightStatusStyle,
-  arrivalTimeStyle,
+  scheduledArrivalTimeStyle,
   travelerStatusStyle,
-  setStatusColor,
-} from "./styles"
+  setStatusColor
+} from './styles'
 
 export default ({ traveler }) => {
   const history = useHistory()
@@ -25,11 +25,11 @@ export default ({ traveler }) => {
     email,
     nationality,
     status: travelerStatus,
-    countryCode,
+    countryCode
   } = traveler
-  const { airlineCode, flightNum, arrivalTime, status: flightStatus } =
+  const { airlineCode, flightNum, scheduledArrivalTime, status: flightStatus } =
     traveler.flight || {}
-  const timeString = new Date(arrivalTime).toLocaleString()
+  const timeString = new Date(scheduledArrivalTime).toLocaleString()
   const color = setStatusColor(travelerStatus)
   return (
     <TableRow
@@ -43,7 +43,7 @@ export default ({ traveler }) => {
       <TableCell style={nationalityStyle}>{nationality}</TableCell>
       <TableCell style={flightCodeStyle}>{airlineCode}</TableCell>
       <TableCell style={flightNumStyle}>{flightNum}</TableCell>
-      <TableCell style={arrivalTimeStyle}>{timeString}</TableCell>
+      <TableCell style={scheduledArrivalTimeStyle}>{timeString}</TableCell>
       <TableCell style={flightStatusStyle}>{flightStatus}</TableCell>
       <TableCell style={Object.assign({}, travelerStatusStyle, { color })}>
         {travelerStatus}

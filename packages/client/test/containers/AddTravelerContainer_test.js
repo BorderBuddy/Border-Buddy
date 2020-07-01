@@ -60,19 +60,19 @@ describe('Component: Admin/AddTraveler', () => {
     })
 
     describe('when flight information is present', () => {
-      let arrivalTime
+      let scheduledArrivalTime
       let formWithFlightInfo
       let defaultPropsWithFlightInfo
 
       beforeEach(() => {
-        arrivalTime = new Date()
+        scheduledArrivalTime = new Date()
 
         formWithFlightInfo = {
           travelerForm: {
             values: Object.assign({}, defaultFormValues.travelerForm.values, {
               airlineCode: 'FF',
               flightNum: '123',
-              arrivalTime: arrivalTime
+              scheduledArrivalTime: scheduledArrivalTime
             })
           }
         }
@@ -92,9 +92,9 @@ describe('Component: Admin/AddTraveler', () => {
         expect(checkFlightSpy).to.have.been.calledWith(
           'FF',
           '123',
-          arrivalTime.getYear() + 1900,
-          arrivalTime.getMonth() + 1,
-          arrivalTime.getDate()
+          scheduledArrivalTime.getYear() + 1900,
+          scheduledArrivalTime.getMonth() + 1,
+          scheduledArrivalTime.getDate()
         )
       })
     })
