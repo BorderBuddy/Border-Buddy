@@ -5,12 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { required, phone, email, uppercase, validateCode, numbersOnly } from '../../utils/validations'
 import AirlinePicker from '../AirlinePicker'
 
-
 export class AddTraveler extends React.Component {
-  constructor () {
-    super()
-  }
-
   render () {
     const { handleSubmit, valid } = this.props
     const style = {
@@ -45,11 +40,11 @@ export class AddTraveler extends React.Component {
           return <MenuItem key={index} value={rep.id} primaryText={first3Chars(rep.email)} className="traveler-assign-to-option" />
         })
       )
-    };
+    }
 
     const first3Chars = (text) => {
       return text.substring(0, 3).toUpperCase()
-    };
+    }
 
     return (
       <form data-test="single-traveler-form" style={style.form} onSubmit={handleSubmit}>
@@ -314,5 +309,4 @@ export default reduxForm({
   form: 'adminAddTraveler',
   asyncValidate: validateCode,
   asyncBlurFields: ['airlineCode']
-})(Ad)
-raveler);
+})(AddTraveler)
