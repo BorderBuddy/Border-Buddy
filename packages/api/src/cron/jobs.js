@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Twilio } from '../twilio/twilio.controller'
 import { config } from '../config'
 import { statusByCodeAndDate } from '../flight/flight.query'
-const Promise = require('bluebird')
+// import { Promise } from 'bluebird'
 
 const askIfTravelerOk = traveler => {
   return new Promise((resolve, reject) => {
@@ -48,21 +48,26 @@ const didFlightLandTwoHoursAgo = flight => {
     .then(response => {
       if (response.data.error) {
         if (response.data.error.errorCode === 'DATE_OUT_OF_RANGE') {
-          // we should have validation that keeps users from signing up for flights in the past
+          // TODO: we should have validation that keeps users from signing up for flights in the past
           return true
         } else {
           throw new Error(response.data.error.errorMessage)
         }
       } else {
-        const { operationalTimes } = response.data.flightStatuses[0]
-        if (!operationalTimes || !operationalTimes.actualGateArrival && !operationalTimes.actualRunwayArrival) {
+        const { operationalTimes, status } = response.data.flightStatuses[0]
+        // TODO: Process Status for edge cases (see chart below)
+        if (status === 'L') {
+        // if (!operationalTimes || !operationalTimes.actualGateArrival && !operationalTimes.actualRunwayArrival) {
+        //   return false
+        // }
+          const realArrival = operationalTimes.actualGateArrival
+            ? new Date(operationalTimes.actualGateArrival.dateUtc)
+            : new Date(operationalTimes.actualRunwayArrival.dateUtc)
+
+          return twoHoursAgo > realArrival
+        } else {
           return false
         }
-        const realArrival = operationalTimes.actualGateArrival
-          ? new Date(operationalTimes.actualGateArrival.dateUtc)
-          : new Date(operationalTimes.actualRunwayArrival.dateUtc)
-
-        return twoHoursAgo > realArrival
       }
     })
     .catch(err => console.error(err))
@@ -123,3 +128,16 @@ module.exports = {
       .catch(err => console.error(err))
   }
 }
+
+// From FlightStats API
+// The current status of the flight.
+// Value	Description
+// A	Active
+// C	Canceled
+// D	Diverted
+// DN	Data source needed
+// L	Landed
+// NO	Not Operational
+// R	Redirected
+// S	Scheduled
+// U	Unknown
