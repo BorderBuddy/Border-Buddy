@@ -1,5 +1,5 @@
+packages/client/dist/**
 dist
-.vscode
 .idea
 .env
 npm-debug.log*
