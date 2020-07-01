@@ -53,6 +53,9 @@ jobs:
     - name: Build packages
       run: npm run build --if-present
     
+    - name: Generate TODO files
+      run: npm run todo-ci
+
     - name: Run all tests
       run: npm test
 
