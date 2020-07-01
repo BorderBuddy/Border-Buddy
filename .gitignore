@@ -1,3 +1,4 @@
+packages/client/dist
 dist
 .vscode
 .idea
@@ -7,4 +8,6 @@ npm-debug.log*
 flow-typed
 .DS_Store
 node_modules
+packages/api/dist
+packages/api/dist/**
 packages/api/src/public

@@ -1,17 +1,18 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { getRoutes } from '../routes'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
-import muiTheme from '../utils/muiTheme'
+import { ConnectedRouter } from 'connected-react-router'
+import GetRoutes from '../routes'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import customTheme from '../utils/muiTheme'
+
 
 // eslint-disable-next-line react/prop-types
-export const Root = ({ store }) => (
-  <Provider store={store}>
-    <MuiThemeProvider theme={muiTheme}>
-      <BrowserRouter>
-        {getRoutes()}
-      </BrowserRouter>
-    </MuiThemeProvider>
-  </Provider>
+export const Root = ({store, history}) => (
+  <MuiThemeProvider theme={customTheme}>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <GetRoutes />
+      </ConnectedRouter>
+    </Provider>
+  </MuiThemeProvider>
 )
