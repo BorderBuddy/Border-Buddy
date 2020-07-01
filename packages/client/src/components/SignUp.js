@@ -252,13 +252,12 @@ const SignUp = ({ handleSubmit, valid }) => {
           />
         </div>
       </div>
-    <)
-}m>
-  );
-};
+    </form>
+  )
+}
 
 export default reduxForm({
-  form:  ignUp',  // a unique identifier for this form
+  form: 'signUp', // a unique identifier for this form
   asyncValidate: validateCode,
   asyncBlurFields: ['airlineCode']
-)(SignUp);
+})(SignUp)
