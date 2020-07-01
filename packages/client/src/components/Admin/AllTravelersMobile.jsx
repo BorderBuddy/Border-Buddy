@@ -30,11 +30,11 @@ const AllTravelersMobile = ({ travelers }) => {
         const style = {
           passengerStatus: {
             color,
-      'bold'ontWeight: "old",
-          },
+            fontWeight: 'bold'
+          }
         }
         return (
-          <Card key={i}'2em'e={{ margin: "2em" }}>
+          <Card key={i} style={{ margin: '2em' }}>
             <CardContent>
               <Typography variant="h5">{name}</Typography>
               <Typography variant="subtitle1">Traveler ID: {id}</Typography>
@@ -52,8 +52,8 @@ const AllTravelersMobile = ({ travelers }) => {
                   Nationality: {nationality}
                 </Typography>
               </CardContent>
-              <CardCont                sName="">
-								<Typography variant="h5">Flight Information </Typography>
+              <CardContent className="">
+                <Typography variant="h5">Flight Information </Typography>
                 <Typography variant="body2">
                   Airline Code: {airlineCode}
                 </Typography>
