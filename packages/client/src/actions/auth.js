@@ -52,7 +52,6 @@ export const login = (email, password) => (dispatch) => {
       console.log('just logged in and setting the token')
       window.localStorage.setItem('accessToken', res.data.token)
       dispatch(loginSuccess(res.data))
-      dispatch(push('/travelers'))
       return res.status
     })
     .catch((err) => {

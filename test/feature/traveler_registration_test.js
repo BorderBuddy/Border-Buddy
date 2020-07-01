@@ -38,7 +38,7 @@
 //       .wait('.traveler-has-phone-option')
 //       .mouseDownUpOnElement('.traveler-has-phone-option div')
 //       .wait(500) // wait for traveler has smart phone select dropdown to disappear
-//       .mouseDownUpOnElement('input[name="arrivalTime"]')
+//       .mouseDownUpOnElement('input[name="scheduledArrivalTime"]')
 //       .wait(500) // wait for arrival time modal to animate in
 //       .mouseDownUpOnElementContaining('button', 'Ok')
 //       .type('input[name="airlineCode"]', 'UA')

@@ -37,10 +37,10 @@ const alertAssignedAtRisk = (number, traveler) => {
 }
 
 const didFlightLandTwoHoursAgo = flight => {
-  const { arrivalTime, airlineCode, flightNum } = flight
-  const date = arrivalTime.getDate()
-  const year = arrivalTime.getYear() + 1900
-  const month = arrivalTime.getMonth() + 1
+  const { scheduledArrivalTime, airlineCode, flightNum } = flight
+  const date = scheduledArrivalTime.getDate()
+  const year = scheduledArrivalTime.getYear() + 1900
+  const month = scheduledArrivalTime.getMonth() + 1
 
   const twoHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 2)
 
