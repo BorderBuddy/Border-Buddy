@@ -1,11 +1,11 @@
-import React from 'react';
-import {reduxForm, Field} from 'redux-form';
-import {Button, MenuItem} from '@material-ui/core';
-import {TextField, DatePicker, SelectField} from 'redux-form-material-ui';
-import AirlinePicker from './AirlinePicker';
-import {required, phone, email, validateCode, uppercase, numbersOnly} from '../utils/validations';
+import React from 'react'
+import { reduxForm, Field } from 'redux-form'
+import { Button, MenuItem } from '@material-ui/core'
+import { TextField, DatePicker, SelectField } from 'redux-form-material-ui'
+import AirlinePicker from './AirlinePicker'
+import { required, phone, email, validateCode, uppercase, numbersOnly } from '../utils/validations'
 
-const SignUp = ({handleSubmit, valid}) => {
+const SignUp = ({ handleSubmit, valid }) => {
   const style = {
     form: {
       display: 'block',
@@ -15,7 +15,7 @@ const SignUp = ({handleSubmit, valid}) => {
     input: {
       width: '80%',
       margin: '1%',
-      color: 'black',
+      color: 'black'
     },
     error: {
       color: '#bd1c11'
@@ -32,7 +32,7 @@ const SignUp = ({handleSubmit, valid}) => {
       marginBottom: '2em',
       width: '80%'
     }
-  };
+  }
 
   return (
     <form style={style.form} onSubmit={handleSubmit}>
@@ -157,7 +157,7 @@ const SignUp = ({handleSubmit, valid}) => {
         <h2>Travel details</h2>
         <div className="field-container col-12 md-col sm-col-6 md-col-4">
           <Field
-            name="arrivalTime"
+            name="scheduledArrivalTime"
             className="traveler-arrival-time"
             component={DatePicker}
             validate={required}
@@ -252,12 +252,13 @@ const SignUp = ({handleSubmit, valid}) => {
           />
         </div>
       </div>
-    </form>
+    <)
+}m>
   );
 };
 
 export default reduxForm({
-  form: 'signUp',  // a unique identifier for this form
+  form:  ignUp',  // a unique identifier for this form
   asyncValidate: validateCode,
   asyncBlurFields: ['airlineCode']
-})(SignUp);
+)(SignUp);
