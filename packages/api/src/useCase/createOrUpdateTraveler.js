@@ -1,5 +1,5 @@
 function flightDetailsSubmitted (travelerDetails) {
-  return travelerDetails.flightNum && travelerDetails.airlineCode && travelerDetails.arrivalTime
+  return travelerDetails.flightNum && travelerDetails.airlineCode && travelerDetails.scheduledArrivalTime
 }
 
 function shouldSendTextMessage (traveler, travelNotifier) {
@@ -13,7 +13,7 @@ export default function createOrUpdateTraveler ({ repository, travelerDetails, c
       where: {
         flightNum: travelerDetails.flightNum,
         airlineCode: travelerDetails.airlineCode,
-        arrivalTime: travelerDetails.arrivalTime
+        scheduledArrivalTime: travelerDetails.scheduledArrivalTime
       }
     })
   } else {

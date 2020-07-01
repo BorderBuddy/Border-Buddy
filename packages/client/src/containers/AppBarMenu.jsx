@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import AppBarMenu from '../components/Admin/AppBarMenu';
-import { signout } from '../actions/auth';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import RenderAppBar from '../components/Admin/AppBar'
+import { signout } from '../actions/auth'
 
-class AppBarMenuContainer extends Component {
+class AppBarMenu extends Component {
   constructor(props) {
     super(props)
     this.onSignoutClick = this.onSignoutClick.bind(this);
   }
 
   onSignoutClick() {
-    this.props.signout();
+    this.props.signout()
   }
 
   render() {
     return (
-      <AppBarMenu 
-        onSignoutClick={this.onSignoutClick}
-      />
+      <RenderAppBar onSignoutClick={this.onSignoutClick}/>
     )
   }
 }
@@ -26,4 +24,4 @@ const mapDispatchToProps = dispatch => ({
   signout: () => dispatch(signout())
 })
 
-export default connect(null, mapDispatchToProps)(AppBarMenuContainer);
+export default connect(null, mapDispatchToProps)(AppBarMenu)

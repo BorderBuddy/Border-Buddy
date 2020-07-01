@@ -1,18 +1,13 @@
-import React from 'react';
-import { TextField, DatePicker, SelectField } from 'redux-form-material-ui';
-import { MenuItem, Button } from '@material-ui/core';
-import { Field, reduxForm } from 'redux-form';
-import { required, phone, email, uppercase, validateCode, numbersOnly } from '../../utils/validations';
-import AirlinePicker from '../AirlinePicker';
-
+import React from 'react'
+import { TextField, DatePicker, SelectField } from 'redux-form-material-ui'
+import { MenuItem, Button } from '@material-ui/core'
+import { Field, reduxForm } from 'redux-form'
+import { required, phone, email, uppercase, validateCode, numbersOnly } from '../../utils/validations'
+import AirlinePicker from '../AirlinePicker'
 
 export class AddTraveler extends React.Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    const { handleSubmit, valid } = this.props;
+  render () {
+    const { handleSubmit, valid } = this.props
     const style = {
       form: {
         display: 'block',
@@ -22,7 +17,7 @@ export class AddTraveler extends React.Component {
       input: {
         width: '80%',
         margin: '1%',
-        color: 'black',
+        color: 'black'
       },
       error: {
         color: '#bd1c11'
@@ -37,19 +32,19 @@ export class AddTraveler extends React.Component {
         display: 'block',
         margin: '1em auto'
       }
-    };
+    }
 
     const menuItems = (representatives) => {
       return (
         representatives && representatives.map((rep, index) => {
-          return <MenuItem key={index} value={rep.id} primaryText={first3Chars(rep.email)} className="traveler-assign-to-option" />;
+          return <MenuItem key={index} value={rep.id} primaryText={first3Chars(rep.email)} className="traveler-assign-to-option" />
         })
-      );
-    };
+      )
+    }
 
     const first3Chars = (text) => {
-      return text.substring(0, 3).toUpperCase();
-    };
+      return text.substring(0, 3).toUpperCase()
+    }
 
     return (
       <form data-test="single-traveler-form" style={style.form} onSubmit={handleSubmit}>
@@ -179,7 +174,7 @@ export class AddTraveler extends React.Component {
             <h2>Travel details</h2>
             <div className="field-container col-12 md-col md-col-4">
               <Field
-                name="arrivalTime"
+                name="scheduledArrivalTime"
                 component={DatePicker}
                 format={null}
                 floatingLabelText="What day do you arrive?"
@@ -314,4 +309,4 @@ export default reduxForm({
   form: 'adminAddTraveler',
   asyncValidate: validateCode,
   asyncBlurFields: ['airlineCode']
-})(AddTraveler);
+})(AddTraveler)

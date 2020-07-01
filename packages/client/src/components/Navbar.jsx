@@ -3,7 +3,8 @@ import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 
 const style = {
-  width: '100%'
+  width: '100%',
+  color: 'white'
 }
 
 export const Navbar = () => (
@@ -12,18 +13,17 @@ export const Navbar = () => (
       <Button
         component={Link}
         to={'/why'}
-        variant='contained'
-        color='primary'
+        variant='text'
         disableElevation
         style={style}>
           Why Border Buddy?
       </Button>
     </div>
     <div className="inline-block col-4">
-      <Button component={Link} to={'/register'} variant='contained' color='primary' disableElevation style={style}>Register</Button>
+      <Button component={Link} to={'/register'} variant='text' disableElevation style={style}>Register</Button>
     </div>
     <div className="inline-block col-4">
-      <Button component={Link} to={'/about'} variant='contained' color='primary' disableElevation style={style}>About Us</Button>
+      <Button component={Link} to={'/about'} variant='text' disableElevation style={style}>About Us</Button>
     </div>
   </div>
 )

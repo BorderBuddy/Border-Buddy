@@ -1,14 +1,13 @@
-import React from 'react';
-import StyledField from './Field';
-import {Button, MenuItem, Divider} from '@material-ui/core';
-import {TextField, DatePicker, SelectField, AutoComplete} from 'redux-form-material-ui';
-import AirlinePicker from './AirlinePicker';
-import {required, phone, email, validateCode, uppercase} from '../utils/validations';
-import countryCodes from '../utils/countryCodes';
-import { formStyle } from './Admin/styles';
+import React from 'react'
+import { RenderTextField, RenderSelectField, RenderAirlinePicker, RenderDatePicker } from './Field'
+import { Field } from 'redux-form'
+import { Button, Divider } from '@material-ui/core'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import { required, phone, email, validateCode, uppercase } from '../utils/validations'
+import { formStyle } from './Admin/styles'
+import { CountryCodePicker } from './CountryCodePicker'
 
 const Form = (props) => (
-
   <form style={formStyle.form} onSubmit={props.handleSubmit}>
     <h1 style={formStyle.header}>{props.formTitle}</h1>
     <Divider />
@@ -16,103 +15,122 @@ const Form = (props) => (
     <p><em>Tell us about yourself, so our lawyers can can best assist you.</em></p>
     <div className="clearfix">
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField
+        <Field
           name="name"
-          component={TextField}
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
           validate={required}
-          hintText="Name"
+          label="Name"
         />
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField 
+        <Field
           name="nationality"
-          component={TextField}
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
           validate={!props.isAdmin ? required : undefined}
-          hintText="Nationality"
+          label="Nationality"
         />
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField
+        <Field
           name="requireInterpreter"
-          component={SelectField}
-          hintText="Are you comfortable speaking English?"
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
+          component={RenderSelectField}
+          label="Are you comfortable speaking English?"
         >
-          <MenuItem value="false" primaryText="Yes"/>
-          <MenuItem value="true" primaryText="No"/>
-        </StyledField>
+          <option value="false">Yes</option>
+          <option value="true">No</option>
+        </Field>
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField
+        <Field
           name="preferredLanguage"
-          component={TextField}
-          hintText="Preferred language(s)"
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
+          label="Preferred language(s)"
         />
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField
+        <Field
           name="email"
-          component={TextField}
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
           validate={!props.isAdmin ? [required, email] : email}
-          hintText="Email"
+          label="Email"
         />
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField
+        <Field
           name="countryCode"
-          component={AutoComplete}
-          hintText="Country Phone Code"
+          component={CountryCodePicker}
+          style={formStyle.input}
+          underlineFocusStyle={formStyle.underline}
+          labelText="Country Phone Code"
+          filter={Autocomplete.caseInsensitiveFilter}
           validate={required}
-          dataSource={Object.values(countryCodes)}
-          filter={AutoComplete.caseInsensitiveFilter}
-          fullWidth={true}
         />
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField
+        <Field
           name="phone"
-          component={TextField}
-          hintText="Phone Number"
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
+          label="Phone Number"
           validate={[required, phone]}
         />
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <StyledField
+        <Field
           name="connectivity"
-          component={SelectField}
-          hintText="Do you have a smartphone?"
+          style={formStyle.input}
+          component={RenderSelectField}
+          underlineFocusStyle={formStyle.underline}
+          label="Do you have a smartphone?"
           validate={!props.isAdmin ? required : undefined}
         >
-          <MenuItem className="traveler-has-phone-option" value="true" primaryText="Yes"/>
-          <MenuItem className="traveler-has-no-phone-option" value="false" primaryText="No"/>
-        </StyledField>
+          <option className="traveler-has-phone-option" value="true" primaryText="Yes">Yes</option>
+          <option className="traveler-has-no-phone-option" value="false" primaryText="No">No</option>
+        </Field>
       </div>
     </div>
     <div className="clearfix">
       <h3>Travel details</h3>
       <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
-        <StyledField
-          name="arrivalTime"
-          component={DatePicker}
+        <Field
+          name="scheduledArrivalTime"
+          style={formStyle.input}
+          component={RenderDatePicker}
+          underlineFocusStyle={formStyle.underline}
           validate={!props.isAdmin ? required : undefined}
-          hintText="What day do you arrive?"
-          format={null} // eliminates error in Redux Form Material UI
+          label="What day do you arrive?"
         />
       </div>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
-        <StyledField
+        <Field
           name="airlineCode"
-          component={AirlinePicker}
+          style={formStyle.input}
+          underlineFocusStyle={formStyle.underline}
+          component={RenderAirlinePicker}
           validate={!props.isAdmin ? [uppercase, required] : uppercase}
           label="Airline code"
         />
       </div>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
-        <StyledField
+        <Field
           name="flightNum"
-          component={TextField}
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
           validate={!props.isAdmin ? required : undefined}
-          hintText="Flight number"
+          label="Flight number"
         />
       </div>
     </div>
@@ -120,29 +138,35 @@ const Form = (props) => (
       <h3>Emergency contact</h3>
       <p><em>Who can we contact if we can't get in touch with you?</em></p>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
-        <StyledField
+        <Field
           name="secondaryContactName"
-          component={TextField}
-          hintText="Name"
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
+          label="Name"
         />
       </div>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
-        <StyledField
+        <Field
           name="secondaryContactPhone"
-          component={TextField}
-          hintText="Phone Number"
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
+          label="Phone Number"
           validate={[phone]}
         />
       </div>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
-        <StyledField
+        <Field
           name="secondaryContactRelation"
-          component={TextField}
-          hintText="Relationship to you"
+          component={RenderTextField}
+          underlineFocusStyle={formStyle.underline}
+          style={formStyle.input}
+          label="Relationship to you"
         />
       </div>
     </div>
-    {props.children /* renders the AdminExtension part of the form or any other additional fields you may want */ }
+    {/* {props.children /* renders the AdminExtension part of the form or any other additional fields you may want */ }
     <div>
       <Button
         type="submit"
@@ -152,29 +176,29 @@ const Form = (props) => (
         disabled={!props.valid}
         color='primary'
         style={formStyle.submitButton}
-      />
+      > Register</Button>
       {
         props.showAdditionalButtons &&
         <div>
-          <Button 
-            label="Text Traveler" 
+          <Button
+            label="Text Traveler"
             variant='contained'
-            onClick={props.sendText} 
-            style={formStyle.adminButton} 
-            labelColor="#2d6ea8" 
-          />
-          <Button 
-            label="Delete Traveler" 
+            onClick={props.sendText}
+            style={formStyle.adminButton}
+            labelColor="#2d6ea8"
+          >Text Traveler</Button>
+          <Button
+            label="Delete Traveler"
             variant='contained'
-            onClick={props.deleteTraveler} 
-            style={formStyle.adminButton} 
-            backgroundColor="#bd1c11" 
-            labelColor="#FFFFFF" 
-          />
+            onClick={props.deleteTraveler}
+            style={formStyle.adminButton}
+            backgroundColor="#bd1c11"
+            labelColor="#FFFFFF"
+          >Delete Traveler</Button>
         </div>
       }
     </div>
   </form>
-);
+)
 
-export default Form;
+export default Form

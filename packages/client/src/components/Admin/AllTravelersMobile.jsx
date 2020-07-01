@@ -1,56 +1,87 @@
-import React, { Component} from 'react';
-import { Button, Card, CardActions, CardTitle, CardText } from '@material-ui/core';
-import { browserHistory } from 'react-router';
-import { setStatusColor } from './styles';
+import React, { Component } from 'react'
+import {
+  Button,
+  Card,
+  CardActions,
+  Typography,
+  CardContent
+} from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
+import { setStatusColor } from './styles'
 
 const AllTravelersMobile = ({ travelers }) => {
+  const history = useHistory()
   return (
     <div>
-      { 
-        travelers.map((traveler, i) => {
-          const { id, name, phone, email, nationality, status: travelerStatus, countryCode } = traveler;
-          const { airlineCode, flightNum, arrivalTime, status: flightStatus } = traveler.flight || {};
-          const timeString = (new Date(arrivalTime)).toLocaleString();
-          const color = setStatusColor(travelerStatus);
-          const style = {
-            passengerStatus: {
-              color, "fontWeight": "bold",
-            }
+      {travelers.map((traveler, i) => {
+        const {
+          id,
+          name,
+          phone,
+          email,
+          nationality,
+          status: travelerStatus,
+          countryCode
+        } = traveler
+        const { airlineCode, flightNum, scheduledArrivalTime, status: flightStatus } =
+          traveler.flight || {}
+        const timeString = new Date(scheduledArrivalTime).toLocaleString()
+        const color = setStatusColor(travelerStatus)
+        const style = {
+          passengerStatus: {
+            color,
+            fontWeight: 'bold'
           }
-          return (
-            <div key={i} style={{ margin: '2em'}}>
-              <Card>
-                <CardTitle title={`${name}`} subtitle={`Traveler ID: ${id}`} />
-                  <div className="field-container col-6 sm-col sm-col-6">
-                    <CardTitle title="Traveler Information" />
-                    <CardText style={style.passengerStatus}>{`Traveler Status: ${travelerStatus}`}</CardText>
-                    <CardText>{`Country Code: +${countryCode}`}</CardText>
-                    <CardText>{`Phone: ${phone}`}</CardText>
-                    <CardText>{`Email: ${email}`}</CardText>
-                    <CardText>{`Nationality: ${nationality}`}</CardText>
-                  </div>
-                  <CardTitle title="Flight Information" />
-                  <div className="field-container col-6 sm-col sm-col-6">
-                    <CardText>{`Airline Code: ${airlineCode}`}</CardText>
-                    <CardText>{`Flight #: ${flightNum}`}</CardText>
-                    <CardText>{`ArrivalTime: ${timeString}`}</CardText>
-                    <CardText>{`Flight Status: ${flightStatus}`}</CardText>
-                  </div>
-                <CardActions>
-                  <Button 
-                    label="View/Edit Traveler"
-                    color='primary'
-                    variant='contained'
-                    onTouchTap={() => browserHistory.push(`/admin/travelers/${traveler.id}`)}
-                  />
-                </CardActions>
-              </Card>
-            </div>
-          )
-        })
-      }
+        }
+        return (
+          <Card key={i} style={{ margin: '2em' }}>
+            <CardContent>
+              <Typography variant="h5">{name}</Typography>
+              <Typography variant="subtitle1">Traveler ID: {id}</Typography>
+              <CardContent className="">
+                <Typography variant="h5">Traveler Information</Typography>
+                <Typography variant="body2" style={style.passengerStatus}>
+                  Traveler Status: {travelerStatus}
+                </Typography>
+                <Typography variant="body2">
+                  Country Code: +{countryCode}
+                </Typography>
+                <Typography variant="body2">Phone: {phone}</Typography>
+                <Typography variant="body2">Email: {email}</Typography>
+                <Typography variant="body2">
+                  Nationality: {nationality}
+                </Typography>
+              </CardContent>
+              <CardContent className="">
+                <Typography variant="h5">Flight Information </Typography>
+                <Typography variant="body2">
+                  Airline Code: {airlineCode}
+                </Typography>
+                <Typography variant="body2">Flight #: {flightNum}</Typography>
+                <Typography variant="body2">
+                  ArrivalTime: {timeString}
+                </Typography>
+                <Typography variant="body2">
+                  Flight Status: {flightStatus}
+                </Typography>
+              </CardContent>
+            </CardContent>
+            <CardActions>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() =>
+                  history.push(`/travelers/${traveler.id}`)
+                }
+              >
+                View/Edit Traveler
+              </Button>
+            </CardActions>
+          </Card>
+        )
+      })}
     </div>
   )
 }
 
-export default AllTravelersMobile;
+export default AllTravelersMobile
