@@ -19,12 +19,15 @@ export const Flight = db.define('flight', {
   },
   status: {
     type: Sequelize.ENUM,
-    values: ['arrived', 'delayed', 'scheduled'], // TODO: arrived means landed + 2hrs. want to change this.
+    values: ['arrived', 'delayed', 'scheduled'],
     defaultValue: 'scheduled'
   },
-  arrivalTime: {
+  scheduledArrivalTime: {
     type: Sequelize.DATE,
     allowNull: false
+  },
+  actualArrivalTime: {
+    type: Sequelize.DATE
   }
 })
 
@@ -33,7 +36,7 @@ Flight.findFlightsToLand = () => {
 
   return Flight.findAll({
     where: {
-      arrivalTime: {
+      scheduledArrivalTime: {
         $lt: now
       },
       status: 'scheduled'

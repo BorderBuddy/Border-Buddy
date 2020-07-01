@@ -1,13 +1,13 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import {
   Button,
   Card,
   CardActions,
   Typography,
-  CardContent,
-} from "@material-ui/core"
-import { useHistory } from "react-router-dom"
-import { setStatusColor } from "./styles"
+  CardContent
+} from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
+import { setStatusColor } from './styles'
 
 const AllTravelersMobile = ({ travelers }) => {
   const history = useHistory()
@@ -21,20 +21,20 @@ const AllTravelersMobile = ({ travelers }) => {
           email,
           nationality,
           status: travelerStatus,
-          countryCode,
+          countryCode
         } = traveler
-        const { airlineCode, flightNum, arrivalTime, status: flightStatus } =
+        const { airlineCode, flightNum, scheduledArrivalTime, status: flightStatus } =
           traveler.flight || {}
-        const timeString = new Date(arrivalTime).toLocaleString()
+        const timeString = new Date(scheduledArrivalTime).toLocaleString()
         const color = setStatusColor(travelerStatus)
         const style = {
           passengerStatus: {
             color,
-            fontWeight: "bold",
+      'bold'ontWeight: "old",
           },
         }
         return (
-          <Card key={i} style={{ margin: "2em" }}>
+          <Card key={i}'2em'e={{ margin: "2em" }}>
             <CardContent>
               <Typography variant="h5">{name}</Typography>
               <Typography variant="subtitle1">Traveler ID: {id}</Typography>
@@ -52,7 +52,7 @@ const AllTravelersMobile = ({ travelers }) => {
                   Nationality: {nationality}
                 </Typography>
               </CardContent>
-              <CardContent className="">
+              <CardCont                sName="">
 								<Typography variant="h5">Flight Information </Typography>
                 <Typography variant="body2">
                   Airline Code: {airlineCode}

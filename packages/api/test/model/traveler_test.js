@@ -27,12 +27,12 @@ describe('Model: Traveler', () => {
   })
 })
 
-function createTravelerWithFlight (travelerName, arrivalTime) {
+function createTravelerWithFlight (travelerName, scheduledArrivalTime) {
   return Flight.create({
     flightNum: 1884,
     airlineCode: 'B6',
     status: 'scheduled',
-    arrivalTime: arrivalTime
+    scheduledArrivalTime: scheduledArrivalTime
   }).then((flight) => {
     Traveler.create({
       name: travelerName,
