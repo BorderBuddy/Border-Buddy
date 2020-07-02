@@ -1,39 +1,46 @@
 import React from 'react'
 import { formStyle } from './Admin/styles'
 import { TextField, FormHelperText, FormControl, InputLabel, Select } from '@material-ui/core'
+import { useField } from 'formik'
 
-// {props => {
-//   const {
-//     values,
-//     touched,
-//     errors,
-//     dirty,
-//     isSubmitting,
-//     handleChange,
-//     handleBlur,
-//     handleSubmit,
-//     handleReset
-//   } = props;
+// NOTE:
+// Formik will automagically inject onChange, onBlur, name, and value props
+// of the field designated by the name prop to the (custom) component.
+export const RenderTextField = ({ label, ...props }) => {
+  const [field, meta, helpers] = useField(props.field)
+  const { touched, invalid, error } = meta
 
-export const RenderTextField = ({
-  label,
-  name,
-  input,
-  meta: { touched, invalid, error },
-  ...custom
-}) => {
   return (
     <TextField
-      name={name}
       className={`traveler-${name}`}
+      name={name}
+      label={label}
       error={touched && invalid}
       helperText={touched && error}
-      label={label}
-      {...input}
-      {...custom}
+      {...field }
     />
   )
 }
+// OLD VERSION
+// export const RenderTextField = ({
+//   label,
+//   name,
+//   input,
+//   meta: { touched, invalid, error },
+//   ...custom
+// }) => {
+//   return (
+//     <TextField
+//       name={name}
+//       className={`traveler-${name}`}
+//       error={touched && invalid}
+//       helperText={touched && error}
+//       label={label}
+//       {...input}
+//       {...custom}
+//     />
+//   )
+// }
 export const RenderAirlinePicker = ({
   input,
   name,

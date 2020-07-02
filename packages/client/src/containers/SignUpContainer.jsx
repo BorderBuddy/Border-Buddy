@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
+// import { reduxForm } from 'redux-form'
 import { Dialog, Button, DialogActions } from '@material-ui/core'
-import Form from '../components/FormContainer'
+// import Form from '../components/FormContainer'
+import { RegisterForm } from '../components/RegisterForm'
 import FlightConfirmation from '../components/FlightConfirmation'
 import { signUpTraveler } from '../actions/signUp'
 import { checkFlight } from '../actions/flight'
@@ -49,7 +50,7 @@ class SignUpContainer extends Component {
   render () {
     return (
       <div>
-        <Form handleSubmit={this.handleSubmit} extraFields={[]} formTitle="Traveler Registration" />
+        <RegisterForm handleSubmit={this.handleSubmit} extraFields={[]} formTitle="Traveler Registration" />
         <Dialog
           title="Confirm Submission"
           modal={true}
