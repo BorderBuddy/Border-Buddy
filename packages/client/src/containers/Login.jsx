@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import Login from "../components/Admin/Login"
-import { login, checkToken} from "../actions/auth"
+import { login } from "../actions/auth"
+import api from '../api/api'
+
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -27,10 +29,17 @@ class LoginContainer extends Component {
   async handleSubmit(e) {
     const { email, password } = this.state
     e.preventDefault()
-    this.props.login(email, password)
+    try {
+      const res = await api.login(email, password)
+      console.log(res)
+      this.props.login(res)
+      this.props.history.push('/travelers')
+    } catch (err) {
+      console.error("ERROR!", err)
+    }
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Login
