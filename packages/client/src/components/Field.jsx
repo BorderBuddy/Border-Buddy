@@ -1,12 +1,25 @@
 import React from 'react'
-import {formStyle} from './Admin/styles'
-import {TextField, FormHelperText, FormControl, InputLabel, Select} from '@material-ui/core'
+import { formStyle } from './Admin/styles'
+import { TextField, FormHelperText, FormControl, InputLabel, Select } from '@material-ui/core'
+
+// {props => {
+//   const {
+//     values,
+//     touched,
+//     errors,
+//     dirty,
+//     isSubmitting,
+//     handleChange,
+//     handleBlur,
+//     handleSubmit,
+//     handleReset
+//   } = props;
 
 export const RenderTextField = ({
   label,
   name,
   input,
-  meta: {touched, invalid, error},
+  meta: { touched, invalid, error },
   ...custom
 }) => {
   return (
@@ -21,16 +34,17 @@ export const RenderTextField = ({
     />
   )
 }
-export const RenderAirlinePicker = ({ 
+export const RenderAirlinePicker = ({
   input,
   name,
   label,
-  meta: { 
+  meta: {
     asyncValidating,
     touched,
-    error, 
-    invalid},
-    ...custom
+    error,
+    invalid
+  },
+  ...custom
 }) => {
   return (
     <TextField
@@ -47,7 +61,7 @@ export const RenderAirlinePicker = ({
 
 const renderFromHelper = ({ touched, error }) => {
   if (!(touched && error)) {
-    return
+
   } else {
     return <FormHelperText>{touched && error}</FormHelperText>
   }
@@ -68,8 +82,8 @@ export const RenderSelectField = ({
         {...input}
         {...custom}
         inputProps={{
-          name: {name},
-          id: {name},
+          name: { name },
+          id: { name }
         }}
       >
         {children}
@@ -79,14 +93,15 @@ export const RenderSelectField = ({
   )
 }
 
-export const RenderDatePicker = ({ 
+export const RenderDatePicker = ({
   name,
   label,
   input,
-  meta: { 
+  meta: {
     touched,
-    error, 
-    invalid},
+    error,
+    invalid
+  },
   ...custom
 }) => {
   return (
@@ -98,7 +113,7 @@ export const RenderDatePicker = ({
       {...input}
       name={name}
       InputLabelProps={{
-        shrink: true,
+        shrink: true
       }}
     />
   )
