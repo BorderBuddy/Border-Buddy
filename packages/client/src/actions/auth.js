@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios"
 import { push } from 'connected-react-router'
 
 import {
@@ -6,8 +6,9 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT
-} from '../constants'
+  LOGOUT,
+} from "../constants"
+import { isNull } from "util"
 
 export const setAuth = (auth) => ({ type: SET_AUTH, auth })
 export const loginRequest = () => ({
@@ -44,21 +45,11 @@ export const logout = () => ({
   error: false
 })
 
-export const login = (email, password) => (dispatch) => {
+export const login = (res) => (dispatch) => {
+  console.log(`in auth actions ${res}`)
   dispatch(loginRequest())
-  return axios
-    .post('/api/auth/local', { email, password })
-    .then((res) => {
-      console.log('just logged in and setting the token')
-      window.localStorage.setItem('accessToken', res.data.token)
-      dispatch(loginSuccess(res.data))
-      return res.status
-    })
-    .catch((err) => {
-      console.log('there was an error loging in: ' + err)
-      dispatch(loginFailure(err.res.data.message))
-      return err
-    })
+  window.localStorage.setItem("accessToken", res.data.token)
+  dispatch(loginSuccess(res.data))
 }
 
 export const signup = (user, _window = window) => () => {
