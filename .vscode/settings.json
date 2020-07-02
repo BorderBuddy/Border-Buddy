@@ -1,12 +1,12 @@
 {
-    "eslint.enable": true,
     "eslint.validate": [
         "javascript",
         "javascriptreact",
         "typescript",
         "typescriptreact",
     ],
+    "editor.formatOnType": false,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-      }
+      "source.fixAll.eslint": true
+    }
 }
