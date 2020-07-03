@@ -50,7 +50,7 @@ class SignUpContainer extends Component {
   render () {
     return (
       <div>
-        <RegisterForm handleSubmit={this.handleSubmit} extraFields={[]} formTitle="Traveler Registration" />
+        <RegisterForm handleSubmit={this.handleSubmit} isAdmin={false} extraFields={[]} formTitle="Traveler Registration" />
         <Dialog
           title="Confirm Submission"
           modal={true}
