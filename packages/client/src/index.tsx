@@ -28,7 +28,7 @@ import UserContext from './userContext'
 import {
   onSuccessEnter,
   onTravelersListEnter,
-  onSingleTravelerEnter,
+  onSingleTravelerEnter
 } from './utils/hooks'
 require('./style/index.scss')
 

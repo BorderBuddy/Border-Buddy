@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import axios from "axios"
+=======
+import axios from 'axios'
+>>>>>>> develop
 import { push } from 'connected-react-router'
 
 import {
@@ -6,43 +10,48 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+<<<<<<< HEAD
   LOGOUT,
 } from "../constants"
 import { isNull } from "util"
+=======
+  LOGOUT
+} from '../constants'
+>>>>>>> develop
 
 export const setAuth = (auth) => ({ type: SET_AUTH, auth })
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
   payload: {
-    fetching: true,
+    fetching: true
   },
-  error: false,
+  error: false
 })
 
 export const loginSuccess = (user) => ({
   type: LOGIN_SUCCESS,
   payload: {
     fetching: false,
-    user,
+    user
   },
-  error: false,
+  error: false
 })
 
 export const loginFailure = (message) => ({
   type: LOGIN_FAILURE,
   payload: {
     error: new Error(message),
-    fetching: false,
+    fetching: false
   },
-  error: true,
+  error: true
 })
 
 export const logout = () => ({
   type: LOGOUT,
   payload: {
-    fetching: false,
+    fetching: false
   },
-  error: false,
+  error: false
 })
 
 export const login = (res) => (dispatch) => {
@@ -54,19 +63,19 @@ export const login = (res) => (dispatch) => {
 
 export const signup = (user, _window = window) => () => {
   return axios
-    .post("/api/user", user, {
+    .post('/api/user', user, {
       headers: {
-        Authorization: _window.localStorage.accessToken,
-      },
+        Authorization: _window.localStorage.accessToken
+      }
     })
-    .catch((err) => console.error("ERROR!", err))
+    .catch((err) => console.error('ERROR!', err))
 }
 
 export const checkToken = () => async (dispatch, getState) => {
   try {
-    const res = await axios.get("/api/auth/checkToken", {
+    const res = await axios.get('/api/auth/checkToken', {
       headers: {
-        Authorization: getState().auth.user.token,
+        Authorization: getState().auth.user.token
       }
     })
     console.log(res)
@@ -80,21 +89,21 @@ export const checkToken = () => async (dispatch, getState) => {
 
 export const signout = () => (dispatch) => {
   axios
-    .post("/api/auth/logout")
+    .post('/api/auth/logout')
     .then(() => {
       window.localStorage.clear()
       dispatch(logout(null))
-      dispatch(push("/login"))
+      dispatch(push('/login'))
     })
     .catch((err) => console.error(err))
 }
 
 export const whoAmI = () => (dispatch) => {
   return axios
-    .get("/api/auth/checkToken", {
+    .get('/api/auth/checkToken', {
       headers: {
-        Authorization: window.localStorage.accessToken,
-      },
+        Authorization: window.localStorage.accessToken
+      }
     })
     .then((res) => {
       dispatch(setAuth(res.data))
@@ -106,8 +115,8 @@ export const updateUser = (user) => (dispatch) => {
   return axios
     .put(`/api/user/${user.id}`, user, {
       headers: {
-        Authorization: window.localStorage.accessToken,
-      },
+        Authorization: window.localStorage.accessToken
+      }
     })
     .then((res) => {
       dispatch(setAuth(res.data))

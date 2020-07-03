@@ -79,10 +79,10 @@ class SingleTravelerContainer extends Component {
   }
 
   handleSubmit (e) {
-    const { flightNum, airlineCode, arrivalTime } = this.props.form.travelerForm.values
-    const day = arrivalTime.getDate()
-    const year = arrivalTime.getYear() + 1900
-    const month = arrivalTime.getMonth() + 1
+    const { flightNum, airlineCode, scheduledArrivalTime } = this.props.form.travelerForm.values
+    const day = scheduledArrivalTime.getDate()
+    const year = scheduledArrivalTime.getYear() + 1900
+    const month = scheduledArrivalTime.getMonth() + 1
     this.props.checkFlight(airlineCode, flightNum, year, month, day)
       .then(() => {
         this.setState({ open: true })
@@ -93,7 +93,7 @@ class SingleTravelerContainer extends Component {
   }
 
   render () {
-    const submit = this.props.flight.arrivalTime > Date.now() ? this.handleSubmit : this.confirmSubmit
+    const submit = this.props.flight.scheduledArrivalTime > Date.now() ? this.handleSubmit : this.confirmSubmit
     return (
       <div>
         <SingleTraveler
