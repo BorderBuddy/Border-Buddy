@@ -24,6 +24,7 @@ const api = {
     try {
       const res = await axios.post("/api/auth/logout")
       logout()
+      window.localStorage.clear()
       return res.data
     } catch (err) {
       return err
@@ -45,9 +46,9 @@ const api = {
       return err
     }
   },
-  checkToken: async () => {
+  checkToken: async (token) => {
     try {
-      const res = await axios.get(`/api/auth/checkToken`)
+      const res = await axios.get(`/api/auth/checkToken`, token)
       saveUser(res.data.id)
       if (loginCallback) {
         loginCallback(res.data.id)

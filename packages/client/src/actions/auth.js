@@ -1,23 +1,11 @@
-<<<<<<< HEAD
 import axios from "axios"
-=======
-import axios from 'axios'
->>>>>>> develop
-import { push } from 'connected-react-router'
-
 import {
   SET_AUTH,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-<<<<<<< HEAD
   LOGOUT,
 } from "../constants"
-import { isNull } from "util"
-=======
-  LOGOUT
-} from '../constants'
->>>>>>> develop
 
 export const setAuth = (auth) => ({ type: SET_AUTH, auth })
 export const loginRequest = () => ({
@@ -88,14 +76,7 @@ export const checkToken = () => async (dispatch, getState) => {
 }
 
 export const signout = () => (dispatch) => {
-  axios
-    .post('/api/auth/logout')
-    .then(() => {
-      window.localStorage.clear()
-      dispatch(logout(null))
-      dispatch(push('/login'))
-    })
-    .catch((err) => console.error(err))
+  dispatch(logout(null))
 }
 
 export const whoAmI = () => (dispatch) => {
