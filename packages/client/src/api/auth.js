@@ -45,7 +45,7 @@ const api = {
       return err
     }
   },
-  checkToken: async (id) => {
+  checkToken: async () => {
     try {
       const res = await axios.get(`/api/auth/checkToken`)
       saveUser(res.data.id)
