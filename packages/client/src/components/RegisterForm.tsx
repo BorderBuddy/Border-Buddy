@@ -1,34 +1,55 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { RenderTextField, RenderSelectField, RenderAirlinePicker, RenderDatePicker } from './Field'
-import { required, phone, email, validateCode, uppercase } from '../utils/validations'
-import { CountryCodePicker } from './CountryCodePicker'
+// import { RenderTextField, RenderSelectField, RenderAirlinePicker, RenderDatePicker } from './Field'
+import { required, phone, email, validateCode, uppercase, yupValidationSchema } from '../utils/validations'
+// import { CountryCodePicker } from './CountryCodePicker'
+import countryCodes from '../utils/countryCodes'
 import * as Yup from 'yup'
 // import { Field } from 'redux-form'
 // import { Button, Divider } from '@material-ui/core'
 // import Autocomplete from '@material-ui/lab/Autocomplete'
 import { formStyle } from './Admin/styles'
-
+import {
+  fieldToTextField,
+  TextField,
+  TextFieldProps,
+  Select,
+  Switch
+} from 'formik-material-ui'
+import { MenuItem } from '@material-ui/core'
+import MuiTextField from '@material-ui/core/TextField'
+import { Autocomplete, AutocompleteRenderInputParams } from 'formik-material-ui-lab'
+export const DisplayFormikState = (props: any) =>
+  <div style={{ margin: '1rem 0' }}>
+    <h3 style={{ fontFamily: 'monospace' }} />
+    <pre
+      style={{
+        background: '#f6f8fa',
+        fontSize: '.65rem',
+        padding: '.5rem'
+      }}
+    >
+      <strong>props</strong> ={' '}
+      {JSON.stringify(props, null, 2)}
+    </pre>
+  </div>
 export const RegisterForm = (props:any) => {
   console.log(`RegisterForm props passed: ${JSON.stringify(props)}`)
-  const {
-    values,
-    touched,
-    errors,
-    dirty,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    handleReset
-  } = props
+  const { isAdmin } = props
+
   return (
     <Formik
       initialValues={{
         name: '',
         nationality: '',
-        requireInterpreter: 'false'
-
+        requireInterpreter: 'false',
+        preferredLanguage: 'English',
+        email: '',
+        countryCode: {
+          code: 1,
+          label: 'USA or Canada - +1'
+        },
+        connectivity: 'true'
       }}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -36,173 +57,173 @@ export const RegisterForm = (props:any) => {
           setSubmitting(false)
         }, 400)
       }}
-      validationSchema={Yup.object().shape({
-        name: Yup.string()
-          .required('Name required'),
-        nationality: Yup.string()
-          .required('Nationality required'),
-        email: Yup.string()
-          .email('Not a valid email')
-          .required('Email required')
-      })}
+      validationSchema={yupValidationSchema(isAdmin)}
     >
-      {({ isSubmitting }) => (
-        <Form>
-          <Field
-            name="name"
-            component={RenderTextField}
-            underlineFocusStyle={formStyle.underline}
-            style={formStyle.input}
-            // validate={required}
-            label="Name"
-          />
-          {/* <ErrorMessage name="name" component="div" /> */}
+      {props => {
+        const {
+          values,
+          touched,
+          errors,
+          dirty,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          handleReset
+        } = props
+        return (
+          <Form>
+            <Field
+              name="name"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+              label="Name"
+            />
 
-          {/* TODO: make nationality a drop down list of countries */}
-          <Field
-            name="nationality"
-            component={RenderTextField}
-            underlineFocusStyle={formStyle.underline}
-            style={formStyle.input}
-            // validate={!props.isAdmin ? required : undefined}
-            label="Nationality"
-          />
-          {/* <ErrorMessage name="nationality" component="div" /> */}
+            <Field
+              name="nationality"
+              label="Nationality"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+            />
 
-          <Field
-            name="requireInterpreter"
-            as="select"
-            placeholder="Are you comfortable speaking English?"
-            // underlineFocusStyle={formStyle.underline} */}
-            // component={RenderSelectField}
-            // style={formStyle.input}
-          >
-            {/* TODO: These values are strings right now which smells funny,
-          but only strings can be passed to value in option.
-          Consider making it a radio button? */}
-            <option value='true'>No</option>
-            <option value='false'>Yes</option>
-          </Field>
-          <ErrorMessage name='requireInterpreter' component='div'/>
+            <Field
+              name='requireInterpreter'
+              label='Are you comfortable speaking English?'
+              component={TextField}
+              select
+              type='text'
+              variant='standard'
+              helperText='Please select Yes or No'
+              InputLabelProps={{
+                shrink: false
+              }}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+              // margin='normal'
+            >
+              <MenuItem value="true">No</MenuItem>
+              <MenuItem value="false">Yes</MenuItem>
+            </Field>
 
-          <Field
-            name="preferredLanguage"
-            // component={RenderTextField}
-            // underlineFocusStyle={formStyle.underline}
-            // style={formStyle.input}
-            placeholder="Preferred language(s)"
-          />
-          <ErrorMessage name='preferredLanguage' component='div' />
+            <Field
+              name="preferredLanguage"
+              label="Preferred language(s)"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+            />
 
-          <Field
-            name="email"
-            // component={RenderTextField}
-            // underlineFocusStyle={formStyle.underline}
-            // style={formStyle.input}
-            // validate={!props.isAdmin ? [required, email] : email}
-            placeholder="Email"
-          />
-          <ErrorMessage name='email' component='div'/>
+            <Field
+              name="email"
+              label="Email"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+            />
 
-          <Field
-            name="countryCode"
-            // component={CountryCodePicker}
-            // style={formStyle.input}
-            // underlineFocusStyle={formStyle.underline}
-            // labelText="Country Phone Code"
-            // filter={Autocomplete.caseInsensitiveFilter}
-            // validate={required}
-            placeholder='Country Phone Code'
-          />
-          <ErrorMessage name='countryCode' component='div'/>
+            <Field
+              name="countryCode"
+              // multiple
+              component={Autocomplete}
+              options={countryCodes}
+              getOptionLabel={(option: any) => option.label}
+              getOptionSelected={(option: { label: string }, value: { label: string }) => value.label === option.label}
+              renderInput={(params: AutocompleteRenderInputParams) => {
+                return (
+                  <MuiTextField
+                    {...params}
+                    error={touched.countryCode && !!errors.countryCode}
+                    helperText={touched.countryCode && errors.countryCode}
+                    label="Country Phone Code"
+                  // style={formStyle.input}
+                  // underlineFocusStyle={formStyle.underline}
+                  />
+                )
+              }
+              }
+            />
 
-          <Field
-            name="phone"
-            // component={RenderTextField}
-            // underlineFocusStyle={formStyle.underline}
-            // style={formStyle.input}
-            placeholder="Phone Number"
-          // validate={[required, phone]}
-          />
-          <ErrorMessage name='phone' component='div'/>
+            <Field
+              name="phone"
+              label="Phone Number"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+            />
 
-          <Field
-            name="connectivity"
-            as='select'
-            // style={formStyle.input}
-            // component={RenderSelectField}
-            // underlineFocusStyle={formStyle.underline}
-            placeholder="Do you have a smartphone?"
-          // validate={!props.isAdmin ? required : undefined}
-          >
-            <option className="traveler-has-phone-option" value="true">Yes</option>
-            <option className="traveler-has-no-phone-option" value="false">No</option>
-          </Field>
-          <ErrorMessage name='connectivity' component='div'/>
+            <Field
+              name="connectivity"
+              label="Do you have a smartphone?"
+              component={TextField}
+              select
+              // style={formStyle.input}
+              // underlineFocusStyle={formStyle.underline}
+            >
+              <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
+              <MenuItem className="traveler-has-no-phone-option" value="false">No</MenuItem>
+            </Field>
 
-          <Field
-            name="scheduledArrivalTime"
-            // style={formStyle.input}
-            // component={RenderDatePicker}
-            // underlineFocusStyle={formStyle.underline}
-            // validate={!props.isAdmin ? required : undefined}
-            placeholder="What day do you arrive?"
-          />
-          <ErrorMessage name='scheduledArrivalTime' component='div'/>
+            <Field
+              name="scheduledArrivalTime"
+              // style={formStyle.input}
+              // component={RenderDatePicker}
+              // underlineFocusStyle={formStyle.underline}
+              // validate={!props.isAdmin ? required : undefined}
+              label="What day do you arrive?"
+            />
 
-          <Field
-            name="airlineCode"
-            // style={formStyle.input}
-            // underlineFocusStyle={formStyle.underline}
-            // component={RenderAirlinePicker}
-            // validate={!props.isAdmin ? [uppercase, required] : uppercase}
-            placeholder="Airline code"
-          />
-          <ErrorMessage name='airlineCode' component='div'/>
+            <Field
+              name="airlineCode"
+              // style={formStyle.input}
+              // underlineFocusStyle={formStyle.underline}
+              // component={RenderAirlinePicker}
+              // validate={!props.isAdmin ? [uppercase, required] : uppercase}
+              label="Airline code"
+            />
 
-          <Field
-            name="flightNum"
-            // component={RenderTextField}
-            // underlineFocusStyle={formStyle.underline}
-            // style={formStyle.input}
-            // validate={!props.isAdmin ? required : undefined}
-            placeholder="Flight number"
-          />
-          <ErrorMessage name='flightNum' component='div' />
+            <Field
+              name="flightNum"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+              validate={!isAdmin ? required : undefined}
+              label="Flight number"
+            />
 
-          <Field
-            name="secondaryContactName"
-            // component={RenderTextField}
-            // underlineFocusStyle={formStyle.underline}
-            // style={formStyle.input}
-            placeholder="Name"
-          />
-          <ErrorMessage name='secondaryContactName' component='div' />
+            <Field
+              name="secondaryContactName"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+              label="Name"
+            />
 
-          <Field
-            name="secondaryContactPhone"
-            // component={RenderTextField}
-            // underlineFocusStyle={formStyle.underline}
-            // style={formStyle.input}
-            placeholder="Phone Number"
-          // validate={[phone]}
-          />
-          <ErrorMessage name='secondaryContactPhone' component='div' />
+            <Field
+              name="secondaryContactPhone"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+              label="Phone Number"
+              validate={[phone]}
+            />
 
-          <Field
-            name="secondaryContactRelation"
-            // component={RenderTextField}
-            // underlineFocusStyle={formStyle.underline}
-            // style={formStyle.input}
-            placeholder="Relationship to you"
-          />
-          <ErrorMessage name='secondaryContactRelation' component='div' />
-
-          <button type="submit" disabled={isSubmitting}>
+            <Field
+              name="secondaryContactRelation"
+              component={TextField}
+              // underlineFocusStyle={formStyle.underline}
+              // style={formStyle.input}
+              label="Relationship to you"
+            />
+            <DisplayFormikState {...props} />
+            <button type="submit" disabled={isSubmitting}>
             Register
-          </button>
-        </Form>
-      )}
+            </button>
+          </Form>
+        )
+      }}
     </Formik>
   )
 }
@@ -229,7 +250,7 @@ export const RegisterForm = (props:any) => {
 //           component={RenderTextField}
 //           underlineFocusStyle={formStyle.underline}
 //           style={formStyle.input}
-//           validate={!props.isAdmin ? required : undefined}
+//           validate={!isAdmin ? required : undefined}
 //           label="Nationality"
 //         />
 //       </div>
@@ -260,7 +281,7 @@ export const RegisterForm = (props:any) => {
 //           component={RenderTextField}
 //           underlineFocusStyle={formStyle.underline}
 //           style={formStyle.input}
-//           validate={!props.isAdmin ? [required, email] : email}
+//           validate={!isAdmin ? [required, email] : email}
 //           label="Email"
 //         />
 //       </div>
