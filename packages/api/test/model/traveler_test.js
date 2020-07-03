@@ -5,12 +5,14 @@ import { expect } from 'chai'
 
 describe('Model: Traveler', () => {
   beforeEach(() => {
-    return Traveler.truncate().then(() => {
-      return Promise.all([
-        createTravelerWithFlight('Andrew G', new Date() - oneDay()),
-        createTravelerWithFlight('Emily Ho', new Date()),
-        createTravelerWithFlight('Dillon P', new Date() - 4 * oneDay())
-      ])
+    return new Promise((resolve, reject) => {
+      Traveler.truncate().then(() => {
+        resolve(Promise.all([
+          createTravelerWithFlight('Andrew G', new Date() - oneDay()),
+          createTravelerWithFlight('Emily Ho', new Date()),
+          createTravelerWithFlight('Dillon P', new Date() - 4 * oneDay())
+        ]))
+      })
     })
   })
 
@@ -23,32 +25,32 @@ describe('Model: Traveler', () => {
       })
     })
   })
-
-  function createTravelerWithFlight (travelerName, arrivalTime) {
-    return Flight.create({
-      flightNum: 1884,
-      airlineCode: 'B6',
-      status: 'scheduled',
-      arrivalTime: arrivalTime
-    }).then((flight) => {
-      Traveler.create({
-        name: travelerName,
-        nationality: 'Human',
-        email: 'emily@example.com',
-        phone: 123456789,
-        connectivity: true,
-        secondaryContactPhone: 123456789,
-        secondaryContactName: 'secondaryContactName',
-        secondaryContactRelation: 'secondaryContactRelation',
-        requireInterpreter: false,
-        preferredLanguage: 'English',
-        status: 'transit',
-        flightId: flight.id
-      })
-    })
-  }
-
-  function oneDay () {
-    return 24 * 60 * 60 * 1000
-  }
 })
+
+function createTravelerWithFlight (travelerName, scheduledArrivalTime) {
+  return Flight.create({
+    flightNum: 1884,
+    airlineCode: 'B6',
+    status: 'scheduled',
+    scheduledArrivalTime: scheduledArrivalTime
+  }).then((flight) => {
+    Traveler.create({
+      name: travelerName,
+      nationality: 'Human',
+      email: 'emily@example.com',
+      phone: 123456789,
+      connectivity: true,
+      secondaryContactPhone: 123456789,
+      secondaryContactName: 'secondaryContactName',
+      secondaryContactRelation: 'secondaryContactRelation',
+      requireInterpreter: false,
+      preferredLanguage: 'English',
+      status: 'transit',
+      flightId: flight.id
+    })
+  })
+}
+
+function oneDay () {
+  return 24 * 60 * 60 * 1000
+}

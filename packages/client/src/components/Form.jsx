@@ -1,9 +1,9 @@
 import React from 'react'
-import {RenderTextField, RenderSelectField, RenderAirlinePicker, RenderDatePicker} from './Field'
-import {Field} from 'redux-form'
-import {Button, Divider} from '@material-ui/core'
+import { RenderTextField, RenderSelectField, RenderAirlinePicker, RenderDatePicker } from './Field'
+import { Field } from 'redux-form'
+import { Button, Divider } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import {required, phone, email, validateCode, uppercase} from '../utils/validations'
+import { required, phone, email, validateCode, uppercase } from '../utils/validations'
 import { formStyle } from './Admin/styles'
 import { CountryCodePicker } from './CountryCodePicker'
 
@@ -25,7 +25,7 @@ const Form = (props) => (
         />
       </div>
       <div className="field-container col-12 md-col md-col-6">
-        <Field 
+        <Field
           name="nationality"
           component={RenderTextField}
           underlineFocusStyle={formStyle.underline}
@@ -42,8 +42,8 @@ const Form = (props) => (
           component={RenderSelectField}
           label="Are you comfortable speaking English?"
         >
-          <option value="false">Yes</option> 
-          <option value="true">No</option> 
+          <option value="false">Yes</option>
+          <option value="true">No</option>
         </Field>
       </div>
       <div className="field-container col-12 md-col md-col-6">
@@ -105,7 +105,7 @@ const Form = (props) => (
       <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
       <div className="field-container col-12 md-col sm-col-6 md-col-4">
         <Field
-          name="arrivalTime"
+          name="scheduledArrivalTime"
           style={formStyle.input}
           component={RenderDatePicker}
           underlineFocusStyle={formStyle.underline}
@@ -167,7 +167,7 @@ const Form = (props) => (
       </div>
     </div>
     {/* {props.children /* renders the AdminExtension part of the form or any other additional fields you may want */ }
-    <div> 
+    <div>
       <Button
         type="submit"
         label="Register"
@@ -180,20 +180,20 @@ const Form = (props) => (
       {
         props.showAdditionalButtons &&
         <div>
-          <Button 
-            label="Text Traveler" 
+          <Button
+            label="Text Traveler"
             variant='contained'
-            onClick={props.sendText} 
-            style={formStyle.adminButton} 
-            labelColor="#2d6ea8" 
+            onClick={props.sendText}
+            style={formStyle.adminButton}
+            labelColor="#2d6ea8"
           >Text Traveler</Button>
-          <Button 
-            label="Delete Traveler" 
+          <Button
+            label="Delete Traveler"
             variant='contained'
-            onClick={props.deleteTraveler} 
-            style={formStyle.adminButton} 
-            backgroundColor="#bd1c11" 
-            labelColor="#FFFFFF" 
+            onClick={props.deleteTraveler}
+            style={formStyle.adminButton}
+            backgroundColor="#bd1c11"
+            labelColor="#FFFFFF"
           >Delete Traveler</Button>
         </div>
       }

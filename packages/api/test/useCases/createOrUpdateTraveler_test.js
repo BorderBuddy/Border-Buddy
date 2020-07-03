@@ -29,7 +29,7 @@ describe('createOrUpdateTraveler', () => {
     flightDetails = {
       flightNum: '1234',
       airlineCode: 'TEST',
-      arrivalTime: '1970-01-01'
+      scheduledArrivalTime: '1970-01-01'
     }
 
     repository = {

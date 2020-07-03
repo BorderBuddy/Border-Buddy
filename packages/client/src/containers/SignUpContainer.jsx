@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import { Dialog, Button, DialogActions } from '@material-ui/Core'
+import { Dialog, Button, DialogActions } from '@material-ui/core'
 import Form from '../components/FormContainer'
 import FlightConfirmation from '../components/FlightConfirmation'
 import { signUpTraveler } from '../actions/signUp'
@@ -26,17 +26,17 @@ class SignUpContainer extends Component {
     const { signUpTraveler, flight } = this.props
     const { values } = this.props.form.travelerForm
     values.countryCode = values.countryCode.split('-')[1].slice(2)
-    const travelerInfo = Object.assign({}, values, { arrivalTime: flight.arrivalTimeUtc })
+    const travelerInfo = Object.assign({}, values, { scheduledArrivalTime: flight.arrivalTimeUtc })
     signUpTraveler(travelerInfo)
     this.handleClose()
   }
 
   handleSubmit (e) {
     e.preventDefault()
-    const { flightNum, airlineCode, arrivalTime } = this.props.form.travelerForm.values
-    const day = arrivalTime.getDate()
-    const year = arrivalTime.getYear() + 1900
-    const month = arrivalTime.getMonth() + 1
+    const { flightNum, airlineCode, scheduledArrivalTime } = this.props.form.travelerForm.values
+    const day = scheduledArrivalTime.getDate()
+    const year = scheduledArrivalTime.getYear() + 1900
+    const month = scheduledArrivalTime.getMonth() + 1
     this.props.checkFlight(airlineCode, flightNum, year, month, day)
       .then(() => {
         this.setState({ open: true })
@@ -56,8 +56,8 @@ class SignUpContainer extends Component {
           open={this.state.open}
         >
           <DialogActions>
-            {this.props.flight ?
-              <Fragment>
+            {this.props.flight
+              ? <Fragment>
                 <Button
                   label="Cancel"
                   variant='contained'
@@ -72,8 +72,7 @@ class SignUpContainer extends Component {
                   onClick={this.confirmSubmit}
                 />
               </Fragment>
-            :
-              <Button
+              : <Button
                 label="OK"
                 variant='contained'
                 color='primary'
@@ -81,7 +80,7 @@ class SignUpContainer extends Component {
               />
             }
           </DialogActions>
-          <FlightConfirmation flight={this.props.flight} /> 
+          <FlightConfirmation flight={this.props.flight} />
         </Dialog>
       </div>
     )
