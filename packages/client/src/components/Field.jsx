@@ -12,7 +12,7 @@ export const RenderTextField = ({ label, ...props }) => {
 
   return (
     <TextField
-      className={`traveler-${name}`}
+      // className={`traveler-${name}`}
       name={name}
       label={label}
       error={touched && invalid}
@@ -21,26 +21,28 @@ export const RenderTextField = ({ label, ...props }) => {
     />
   )
 }
-// OLD VERSION
-// export const RenderTextField = ({
-//   label,
-//   name,
-//   input,
-//   meta: { touched, invalid, error },
-//   ...custom
-// }) => {
-//   return (
-//     <TextField
-//       name={name}
-//       className={`traveler-${name}`}
-//       error={touched && invalid}
-//       helperText={touched && error}
-//       label={label}
-//       {...input}
-//       {...custom}
-//     />
-//   )
-// }
+
+export const RenderSelectField = ({ label, children, ...props }) => {
+  // console.log(props)
+  // console.log(props.field)
+  const [meta] = useField(props.field)
+  const { touched, error } = meta
+  return (
+    <FormControl error={touched && error} style={formStyle.select}>
+      <InputLabel htmlFor={name}>{label}</InputLabel>
+      <Select
+        inputProps={{
+          name: { name },
+          id: { name }
+        }}
+      >
+        {children}
+      </Select>
+      {renderFromHelper({ touched, error })}
+    </FormControl>
+  )
+}
+
 export const RenderAirlinePicker = ({
   input,
   name,
@@ -72,32 +74,6 @@ const renderFromHelper = ({ touched, error }) => {
   } else {
     return <FormHelperText>{touched && error}</FormHelperText>
   }
-}
-
-export const RenderSelectField = ({
-  input,
-  name,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => {
-  return (
-    <FormControl error={touched && error} style={formStyle.select}>
-      <InputLabel htmlFor={name}>{label}</InputLabel>
-      <Select
-        {...input}
-        {...custom}
-        inputProps={{
-          name: { name },
-          id: { name }
-        }}
-      >
-        {children}
-      </Select>
-      {renderFromHelper({ touched, error })}
-    </FormControl>
-  )
 }
 
 export const RenderDatePicker = ({
