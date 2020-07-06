@@ -37,7 +37,8 @@ export const RegisterForm = (props:any) => {
     formTitle,
     showAdditionalButtons,
     sendText,
-    deleteTraveler
+    deleteTraveler,
+    handleSubmit
   } = props
 
   return (
@@ -53,16 +54,17 @@ export const RegisterForm = (props:any) => {
             code: 1,
             label: 'USA or Canada - +1'
           },
+          phone: '',
           connectivity: 'true',
           flightNum: '',
           secondaryContactName: '',
           secondaryContactPhone: '',
           secondaryContactRelation: '',
-          scheduledArrivalTime: '',
+          scheduledArrivalTime: new Date(),
           airlineCode: ''
 
         }}
-        onSubmit={props.handleSubmit}
+        onSubmit={handleSubmit}
         // From Example
         // onSubmit={(values, { setSubmitting }) => {
         //   setTimeout(() => {
@@ -70,6 +72,7 @@ export const RegisterForm = (props:any) => {
         //     setSubmitting(false)
         //   }, 400)
         // }}
+        validateOnChange={false}
         validationSchema={yupValidationSchema(isAdmin)}
       >
         {props => {
@@ -90,7 +93,6 @@ export const RegisterForm = (props:any) => {
                   <Field
                     name="name"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                     label="Name"
                   />
@@ -100,7 +102,6 @@ export const RegisterForm = (props:any) => {
                     name="nationality"
                     label="Nationality"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   />
                 </div>
@@ -111,12 +112,9 @@ export const RegisterForm = (props:any) => {
                     component={TextField}
                     select
                     type='text'
-                    variant='standard'
-                    helperText='Please select Yes or No'
                     InputLabelProps={{
-                      shrink: false
+                      shrink: true
                     }}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   >
                     <MenuItem value="true">No</MenuItem>
@@ -128,7 +126,6 @@ export const RegisterForm = (props:any) => {
                     name="preferredLanguage"
                     label="Preferred language(s)"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   />
                 </div>
@@ -137,7 +134,6 @@ export const RegisterForm = (props:any) => {
                     name="email"
                     label="Email"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   />
                 </div>
@@ -156,7 +152,6 @@ export const RegisterForm = (props:any) => {
                           helperText={touched.countryCode && errors.countryCode}
                           label="Country Phone Code"
                           style={formStyle.input}
-                          // underlineFocusStyle={formStyle.underline}
                         />
                       )
                     }
@@ -168,7 +163,6 @@ export const RegisterForm = (props:any) => {
                     name="phone"
                     label="Phone Number"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   />
                 </div>
@@ -179,7 +173,6 @@ export const RegisterForm = (props:any) => {
                     component={TextField}
                     select
                     style={formStyle.input}
-                    underlineFocusStyle={formStyle.underline}
                   >
                     <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
                     <MenuItem className="traveler-has-no-phone-option" value="false">No</MenuItem>
@@ -194,8 +187,8 @@ export const RegisterForm = (props:any) => {
                     name="scheduledArrivalTime"
                     label="What day do you arrive?"
                     component={DatePicker}
+                    format="MM/dd/yyyy"
                     style={formStyle.input}
-                    underlineFocusStyle={formStyle.underline}
                   />
                 </div>
                 <div className="field-container col-12 md-col sm-col-6 md-col-4">
@@ -204,7 +197,6 @@ export const RegisterForm = (props:any) => {
                     label="Airline code"
                     component={TextField}
                     style={formStyle.input}
-                    underlineFocusStyle={formStyle.underline}
                   />
                 </div>
                 <div className="field-container col-12 md-col sm-col-6 md-col-4">
@@ -212,20 +204,18 @@ export const RegisterForm = (props:any) => {
                     name="flightNum"
                     label="Flight number"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   />
                 </div>
               </div>
               <div className="clearfix">
-                <h3>Travel details</h3>
-                <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
+                <h3>Emergency contact</h3>
+                <p><em>Who can we contact if we can't get in touch with you?</em></p>
                 <div className="field-container col-12 md-col sm-col-6 md-col-4">
                   <Field
                     name="secondaryContactName"
                     label="Name"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   />
                 </div>
@@ -234,7 +224,6 @@ export const RegisterForm = (props:any) => {
                     name="secondaryContactPhone"
                     label="Phone Number"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   />
                 </div>
@@ -243,7 +232,6 @@ export const RegisterForm = (props:any) => {
                     name="secondaryContactRelation"
                     label="Relationship to you"
                     component={TextField}
-                    underlineFocusStyle={formStyle.underline}
                     style={formStyle.input}
                   />
                 </div>
