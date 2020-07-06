@@ -23,6 +23,7 @@ class SignUpContainer extends Component {
     this.setState({ open: false })
   }
 
+  // TODO: We have to set the values in context to be able to use them for confirmation
   confirmSubmit () {
     const { signUpTraveler, flight } = this.props
     const { values } = this.props.form.travelerForm
@@ -32,9 +33,8 @@ class SignUpContainer extends Component {
     this.handleClose()
   }
 
-  handleSubmit (e) {
-    e.preventDefault()
-    const { flightNum, airlineCode, scheduledArrivalTime } = this.props.form.travelerForm.values
+  handleSubmit (values) {
+    const { flightNum, airlineCode, scheduledArrivalTime } = values
     const day = scheduledArrivalTime.getDate()
     const year = scheduledArrivalTime.getYear() + 1900
     const month = scheduledArrivalTime.getMonth() + 1

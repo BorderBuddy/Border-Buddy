@@ -26,7 +26,7 @@ export const minimumLength = value => value.length < 8 ? 'Must be at least 8 cha
 export const numbersOnly = value => value && !/^[0-9]+$/i.test(value) ? 'Please only put the country code number only' : undefined
 
 export const phoneRegExp = /^\d{10}$/
-// Yup validation for easier validations:
+
 export const yupValidationSchema = isAdmin => Yup.object().shape(
   {
     name: Yup.string()
@@ -41,7 +41,9 @@ export const yupValidationSchema = isAdmin => Yup.object().shape(
         .required('Required')
       : Yup.string()
         .email('Invalid email address'),
-    // TODO: countryCode:
+    countryCode: Yup
+      .object()
+      .required('Required'),
     phone: Yup.string()
       .required('Required')
       .matches(phoneRegExp, 'Invalid phone, please enter as 5552224444'),
@@ -58,11 +60,22 @@ export const yupValidationSchema = isAdmin => Yup.object().shape(
     scheduledArrivalTime: !isAdmin
       ? Yup.date().required('Required')
       : null,
+    // TODO: Let's make a list of the airline codes instead of hitting an async API
     airlineCode: !isAdmin
       ? Yup.string()
         .required('Required')
-        .uppercase('Must be uppercase')
-      // TODO: custom async validation here
+        .uppercase()
+        .test(
+          'isValidAirlineCode',
+          'Airline code not found!',
+          async (value) => {
+            return await axios.get(`/api/flight/code?code=${value}`)
+              .then((response) => {
+                return response.status === 200
+              })
+              .catch(() => false)
+          }
+        )
       : Yup.string()
         .uppercase('Must be uppercase')
   }
