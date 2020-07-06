@@ -48,6 +48,22 @@ export const yupValidationSchema = isAdmin => Yup.object().shape(
     connectivity: !isAdmin
       ? Yup.string()
         .required('Required')
-      : null
+      : null,
+    flightNum: !isAdmin
+      ? Yup.string()
+        .required()
+      : null,
+    secondaryContactPhone: Yup.string()
+      .matches(phoneRegExp, 'Invalid phone, please enter as 5552224444'),
+    scheduledArrivalTime: !isAdmin
+      ? Yup.date().required('Required')
+      : null,
+    airlineCode: !isAdmin
+      ? Yup.string()
+        .required('Required')
+        .uppercase('Must be uppercase')
+      // TODO: custom async validation here
+      : Yup.string()
+        .uppercase('Must be uppercase')
   }
 )
