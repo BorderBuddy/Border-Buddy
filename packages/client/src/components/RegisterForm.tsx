@@ -1,24 +1,20 @@
 import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field } from 'formik'
 // import { RenderTextField, RenderSelectField, RenderAirlinePicker, RenderDatePicker } from './Field'
-import { required, phone, email, validateCode, uppercase, yupValidationSchema } from '../utils/validations'
+import { yupValidationSchema } from '../utils/validations'
 // import { CountryCodePicker } from './CountryCodePicker'
 import countryCodes from '../utils/countryCodes'
-import * as Yup from 'yup'
 // import { Field } from 'redux-form'
-// import { Button, Divider } from '@material-ui/core'
 // import Autocomplete from '@material-ui/lab/Autocomplete'
 import { formStyle } from './Admin/styles'
-import {
-  fieldToTextField,
-  TextField,
-  TextFieldProps,
-  Select,
-  Switch
-} from 'formik-material-ui'
-import { MenuItem } from '@material-ui/core'
+import { TextField } from 'formik-material-ui'
+import { DatePicker } from 'formik-material-ui-pickers'
+import { MenuItem, Divider, Button } from '@material-ui/core'
 import MuiTextField from '@material-ui/core/TextField'
 import { Autocomplete, AutocompleteRenderInputParams } from 'formik-material-ui-lab'
+import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+
 export const DisplayFormikState = (props: any) =>
   <div style={{ margin: '1rem 0' }}>
     <h3 style={{ fontFamily: 'monospace' }} />
@@ -33,200 +29,269 @@ export const DisplayFormikState = (props: any) =>
       {JSON.stringify(props, null, 2)}
     </pre>
   </div>
+
 export const RegisterForm = (props:any) => {
   console.log(`RegisterForm props passed: ${JSON.stringify(props)}`)
-  const { isAdmin } = props
+  const {
+    isAdmin,
+    formTitle,
+    showAdditionalButtons,
+    sendText,
+    deleteTraveler
+  } = props
 
   return (
-    <Formik
-      initialValues={{
-        name: '',
-        nationality: '',
-        requireInterpreter: 'false',
-        preferredLanguage: 'English',
-        email: '',
-        countryCode: {
-          code: 1,
-          label: 'USA or Canada - +1'
-        },
-        connectivity: 'true'
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          setSubmitting(false)
-        }, 400)
-      }}
-      validationSchema={yupValidationSchema(isAdmin)}
-    >
-      {props => {
-        const {
-          values,
-          touched,
-          errors,
-          dirty,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          handleReset
-        } = props
-        return (
-          <Form>
-            <Field
-              name="name"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-              label="Name"
-            />
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Formik
+        initialValues={{
+          name: '',
+          nationality: '',
+          requireInterpreter: 'false',
+          preferredLanguage: 'English',
+          email: '',
+          countryCode: {
+            code: 1,
+            label: 'USA or Canada - +1'
+          },
+          connectivity: 'true',
+          flightNum: '',
+          secondaryContactName: '',
+          secondaryContactPhone: '',
+          secondaryContactRelation: '',
+          scheduledArrivalTime: '',
+          airlineCode: ''
 
-            <Field
-              name="nationality"
-              label="Nationality"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-            />
-
-            <Field
-              name='requireInterpreter'
-              label='Are you comfortable speaking English?'
-              component={TextField}
-              select
-              type='text'
-              variant='standard'
-              helperText='Please select Yes or No'
-              InputLabelProps={{
-                shrink: false
-              }}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-              // margin='normal'
-            >
-              <MenuItem value="true">No</MenuItem>
-              <MenuItem value="false">Yes</MenuItem>
-            </Field>
-
-            <Field
-              name="preferredLanguage"
-              label="Preferred language(s)"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-            />
-
-            <Field
-              name="email"
-              label="Email"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-            />
-
-            <Field
-              name="countryCode"
-              // multiple
-              component={Autocomplete}
-              options={countryCodes}
-              getOptionLabel={(option: any) => option.label}
-              getOptionSelected={(option: { label: string }, value: { label: string }) => value.label === option.label}
-              renderInput={(params: AutocompleteRenderInputParams) => {
-                return (
-                  <MuiTextField
-                    {...params}
-                    error={touched.countryCode && !!errors.countryCode}
-                    helperText={touched.countryCode && errors.countryCode}
-                    label="Country Phone Code"
-                  // style={formStyle.input}
-                  // underlineFocusStyle={formStyle.underline}
+        }}
+        onSubmit={props.handleSubmit}
+        // From Example
+        // onSubmit={(values, { setSubmitting }) => {
+        //   setTimeout(() => {
+        //     alert(JSON.stringify(values, null, 2))
+        //     setSubmitting(false)
+        //   }, 400)
+        // }}
+        validationSchema={yupValidationSchema(isAdmin)}
+      >
+        {props => {
+          const {
+            touched,
+            errors,
+            isSubmitting,
+            submitForm
+          } = props
+          return (
+            <Form style={formStyle.form}>
+              <h1 style={formStyle.header}>{formTitle}</h1>
+              <Divider />
+              <h3>Personal and Contact Details</h3>
+              <p><em>Tell us about yourself, so our lawyers can can best assist you.</em></p>
+              <div className="clearfix">
+                <div className="field-container col-12 md-col md-col-6">
+                  <Field
+                    name="name"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                    label="Name"
                   />
-                )
+                </div>
+                <div className="field-container col-12 md-col md-col-6">
+                  <Field
+                    name="nationality"
+                    label="Nationality"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  />
+                </div>
+                <div className="field-container col-12 md-col md-col-6">
+                  <Field
+                    name='requireInterpreter'
+                    label='Are you comfortable speaking English?'
+                    component={TextField}
+                    select
+                    type='text'
+                    variant='standard'
+                    helperText='Please select Yes or No'
+                    InputLabelProps={{
+                      shrink: false
+                    }}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  >
+                    <MenuItem value="true">No</MenuItem>
+                    <MenuItem value="false">Yes</MenuItem>
+                  </Field>
+                </div>
+                <div className="field-container col-12 md-col md-col-6">
+                  <Field
+                    name="preferredLanguage"
+                    label="Preferred language(s)"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  />
+                </div>
+                <div className="field-container col-12 md-col md-col-6">
+                  <Field
+                    name="email"
+                    label="Email"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  />
+                </div>
+                <div className="field-container col-12 md-col md-col-6">
+                  <Field
+                    name="countryCode"
+                    component={Autocomplete}
+                    options={countryCodes}
+                    getOptionLabel={(option: any) => option.label}
+                    getOptionSelected={(option: { label: string }, value: { label: string }) => value.label === option.label}
+                    renderInput={(params: AutocompleteRenderInputParams) => {
+                      return (
+                        <MuiTextField
+                          {...params}
+                          error={touched.countryCode && !!errors.countryCode}
+                          helperText={touched.countryCode && errors.countryCode}
+                          label="Country Phone Code"
+                          style={formStyle.input}
+                          // underlineFocusStyle={formStyle.underline}
+                        />
+                      )
+                    }
+                    }
+                  />
+                </div>
+                <div className="field-container col-12 md-col md-col-6">
+                  <Field
+                    name="phone"
+                    label="Phone Number"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  />
+                </div>
+                <div className="field-container col-12 md-col md-col-6">
+                  <Field
+                    name="connectivity"
+                    label="Do you have a smartphone?"
+                    component={TextField}
+                    select
+                    style={formStyle.input}
+                    underlineFocusStyle={formStyle.underline}
+                  >
+                    <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
+                    <MenuItem className="traveler-has-no-phone-option" value="false">No</MenuItem>
+                  </Field>
+                </div>
+              </div>
+              <div className="clearfix">
+                <h3>Travel details</h3>
+                <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
+                <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  <Field
+                    name="scheduledArrivalTime"
+                    label="What day do you arrive?"
+                    component={DatePicker}
+                    style={formStyle.input}
+                    underlineFocusStyle={formStyle.underline}
+                  />
+                </div>
+                <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  <Field
+                    name="airlineCode"
+                    label="Airline code"
+                    component={TextField}
+                    style={formStyle.input}
+                    underlineFocusStyle={formStyle.underline}
+                  />
+                </div>
+                <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  <Field
+                    name="flightNum"
+                    label="Flight number"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  />
+                </div>
+              </div>
+              <div className="clearfix">
+                <h3>Travel details</h3>
+                <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
+                <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  <Field
+                    name="secondaryContactName"
+                    label="Name"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  />
+                </div>
+                <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  <Field
+                    name="secondaryContactPhone"
+                    label="Phone Number"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  />
+                </div>
+                <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  <Field
+                    name="secondaryContactRelation"
+                    label="Relationship to you"
+                    component={TextField}
+                    underlineFocusStyle={formStyle.underline}
+                    style={formStyle.input}
+                  />
+                </div>
+              </div>
+              <DisplayFormikState {...props} />
+              <div>
+                <Button
+                  variant='contained'
+                  className="submit-traveler-registration"
+                  disabled={isSubmitting}
+                  color='primary'
+                  style={formStyle.submitButton}
+                  onClick={submitForm}
+                >
+                  Register
+                </Button>
+              </div>
+              {
+                showAdditionalButtons &&
+        <div>
+          <Button
+            variant='contained'
+            onClick={sendText}
+            style={formStyle.adminButton}
+            // labelColor="#2d6ea8"
+          >
+            Text Traveler
+          </Button>
+
+          <Button
+            variant='contained'
+            onClick={deleteTraveler}
+            style={formStyle.adminButton}
+            // backgroundColor="#bd1c11"
+            // labelColor="#FFFFFF"
+          >
+            Delete Traveler
+          </Button>
+        </div>
               }
-              }
-            />
-
-            <Field
-              name="phone"
-              label="Phone Number"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-            />
-
-            <Field
-              name="connectivity"
-              label="Do you have a smartphone?"
-              component={TextField}
-              select
-              // style={formStyle.input}
-              // underlineFocusStyle={formStyle.underline}
-            >
-              <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
-              <MenuItem className="traveler-has-no-phone-option" value="false">No</MenuItem>
-            </Field>
-
-            <Field
-              name="scheduledArrivalTime"
-              // style={formStyle.input}
-              // component={RenderDatePicker}
-              // underlineFocusStyle={formStyle.underline}
-              // validate={!props.isAdmin ? required : undefined}
-              label="What day do you arrive?"
-            />
-
-            <Field
-              name="airlineCode"
-              // style={formStyle.input}
-              // underlineFocusStyle={formStyle.underline}
-              // component={RenderAirlinePicker}
-              // validate={!props.isAdmin ? [uppercase, required] : uppercase}
-              label="Airline code"
-            />
-
-            <Field
-              name="flightNum"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-              validate={!isAdmin ? required : undefined}
-              label="Flight number"
-            />
-
-            <Field
-              name="secondaryContactName"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-              label="Name"
-            />
-
-            <Field
-              name="secondaryContactPhone"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-              label="Phone Number"
-              validate={[phone]}
-            />
-
-            <Field
-              name="secondaryContactRelation"
-              component={TextField}
-              // underlineFocusStyle={formStyle.underline}
-              // style={formStyle.input}
-              label="Relationship to you"
-            />
-            <DisplayFormikState {...props} />
-            <button type="submit" disabled={isSubmitting}>
-            Register
-            </button>
-          </Form>
-        )
-      }}
-    </Formik>
+            </Form>
+          )
+        }}
+      </Formik>
+    </MuiPickersUtilsProvider>
   )
 }
+
 // const Form = (props) => (
 //   <form style={formStyle.form} onSubmit={props.handleSubmit}>
 //     <h1 style={formStyle.header}>{props.formTitle}</h1>
