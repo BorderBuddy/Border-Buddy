@@ -21,6 +21,7 @@ import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpConta
 import AddTravelerContainer from './containers/AddTravelerContainer'
 import { About } from './components/About'
 import { WhyBorderBuddy } from './components/WhyBorderBuddy'
+import RegisterForm from './components/RegisterForm'
 
 // Router Hooks
 import {
@@ -61,7 +62,7 @@ class App extends Component {
               : <Homepage>
                 <Switch>
                   <Route exact path="/why" ><WhyBorderBuddy/></Route>
-                  <Route exact path="/register" ><ConnectedSignUpContainer/></Route>
+                  <Route exact path="/register" ><RegisterForm/></Route>
                   <Route exact path="/about" ><About/></Route>
                   <Route exact path="/login" ><Login /></Route>
                   {/* <Route exact path='/success' render={(props) => {
