@@ -1,4 +1,4 @@
-packages/client/dist
+packages/client/dist/**
 dist
 .idea
 .env
