@@ -8,7 +8,6 @@ import Login from './containers/Login'
 import AdminSignUp from './containers/AdminSignUpContainer'
 import UpdateUserContainer from './containers/UpdateUserContainer'
 import { Success } from './components/Success'
-import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer'
 import AddTravelerContainer from './containers/AddTravelerContainer'
 import { About } from './components/About'
 import { WhyBorderBuddy } from './components/WhyBorderBuddy'
@@ -26,7 +25,9 @@ export const getRoutes = () => (
     {/* TODO: add actual homepage */}
     <Route exact path="/" ><WhyBorderBuddy /></Route>
     <Route exact path="/why" ><WhyBorderBuddy /></Route>
-    <Route exact path="/register" ><RegisterForm /></Route>
+    <Route exact path="/register" render ={(props) => {
+      return <RegisterForm {...props} />
+    }} />
     <Route exact path="/about" ><About /></Route>
     <Route exact path="/login" render={(props) => {
       return <Login {...props} />
