@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 // import { RenderTextField, RenderSelectField, RenderAirlinePicker, RenderDatePicker } from './Field'
 import { yupValidationSchema } from '../utils/validations'
@@ -14,32 +14,58 @@ import MuiTextField from '@material-ui/core/TextField'
 import { Autocomplete, AutocompleteRenderInputParams } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import { DisplayFormikState } from './DisplayFormikState'
+import { SubmissionConfirmation } from './SubmissionConfirmation'
+import { signUpTraveler } from '../actions/signUp'
+import { checkFlight } from '../actions/flight'
+import { connect } from 'react-redux'
 
-export const DisplayFormikState = (props: any) =>
-  <div style={{ margin: '1rem 0' }}>
-    <h3 style={{ fontFamily: 'monospace' }} />
-    <pre
-      style={{
-        background: '#f6f8fa',
-        fontSize: '.65rem',
-        padding: '.5rem'
-      }}
-    >
-      <strong>props</strong> ={' '}
-      {JSON.stringify(props, null, 2)}
-    </pre>
-  </div>
-
-export const RegisterForm = (props:any) => {
+const RegisterForm = (props:any) => {
   console.log(`RegisterForm props passed: ${JSON.stringify(props)}`)
+
+  const [state, setState] = useState({
+    open: false
+  })
+
   const {
-    isAdmin,
-    formTitle,
+    // isAdmin,
+    // formTitle,
     showAdditionalButtons,
     sendText,
     deleteTraveler,
-    handleSubmit
+    flight
   } = props
+
+  const isAdmin = false
+  const formTitle = 'Traveler Registration'
+
+  const handleClose = () => {
+    setState({ open: false })
+  }
+
+  const confirmSubmit = (values: any) => {
+    const { flight } = props
+    const travelerInfo = Object.assign({}, values, {
+      scheduledArrivalTime: flight.arrivalTimeUtc,
+      countryCode: values.countryCode.code
+    })
+    props.signUpTraveler(travelerInfo)
+    handleClose()
+  }
+
+  const handleSubmit = (values: any) => {
+    const { flightNum, airlineCode, scheduledArrivalTime } = values
+    const day = scheduledArrivalTime.getDate()
+    const year = scheduledArrivalTime.getYear() + 1900
+    const month = scheduledArrivalTime.getMonth() + 1
+    props.checkFlight(airlineCode, flightNum, year, month, day)
+      .then(() => {
+        setState({ open: true })
+      })
+      .catch(() => {
+        setState({ open: false })
+      })
+  }
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -83,182 +109,182 @@ export const RegisterForm = (props:any) => {
             submitForm
           } = props
           return (
-            <Form style={formStyle.form}>
-              <h1 style={formStyle.header}>{formTitle}</h1>
-              <Divider />
-              <h3>Personal and Contact Details</h3>
-              <p><em>Tell us about yourself, so our lawyers can can best assist you.</em></p>
-              <div className="clearfix">
-                <div className="field-container col-12 md-col md-col-6">
-                  <Field
-                    name="name"
-                    component={TextField}
-                    style={formStyle.input}
-                    label="Name"
-                  />
+            <div>
+              <Form style={formStyle.form}>
+                <h1 style={formStyle.header}>{formTitle}</h1>
+                <Divider />
+                <h3>Personal and Contact Details</h3>
+                <p><em>Tell us about yourself, so our lawyers can can best assist you.</em></p>
+                <div className="clearfix">
+                  <div className="field-container col-12 md-col md-col-6">
+                    <Field
+                      name="name"
+                      component={TextField}
+                      style={formStyle.input}
+                      label="Name"
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col md-col-6">
+                    <Field
+                      name="nationality"
+                      label="Nationality"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col md-col-6">
+                    <Field
+                      name='requireInterpreter'
+                      label='Are you comfortable speaking English?'
+                      component={TextField}
+                      select
+                      type='text'
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      style={formStyle.input}
+                    >
+                      <MenuItem value="true">No</MenuItem>
+                      <MenuItem value="false">Yes</MenuItem>
+                    </Field>
+                  </div>
+                  <div className="field-container col-12 md-col md-col-6">
+                    <Field
+                      name="preferredLanguage"
+                      label="Preferred language(s)"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col md-col-6">
+                    <Field
+                      name="email"
+                      label="Email"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col md-col-6">
+                    <Field
+                      name="countryCode"
+                      component={Autocomplete}
+                      options={countryCodes}
+                      getOptionLabel={(option: any) => option.label}
+                      getOptionSelected={(option: { label: string }, value: { label: string }) => value.label === option.label}
+                      renderInput={(params: AutocompleteRenderInputParams) => {
+                        return (
+                          <MuiTextField
+                            {...params}
+                            error={touched.countryCode && !!errors.countryCode}
+                            helperText={touched.countryCode && errors.countryCode}
+                            label="Country Phone Code"
+                            style={formStyle.input}
+                          />
+                        )
+                      }
+                      }
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col md-col-6">
+                    <Field
+                      name="phone"
+                      label="Phone Number"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col md-col-6">
+                    <Field
+                      name="connectivity"
+                      label="Do you have a smartphone?"
+                      component={TextField}
+                      select
+                      style={formStyle.input}
+                    >
+                      <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
+                      <MenuItem className="traveler-has-no-phone-option" value="false">No</MenuItem>
+                    </Field>
+                  </div>
                 </div>
-                <div className="field-container col-12 md-col md-col-6">
-                  <Field
-                    name="nationality"
-                    label="Nationality"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
+                <div className="clearfix">
+                  <h3>Travel details</h3>
+                  <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
+                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                    <Field
+                      name="scheduledArrivalTime"
+                      label="What day do you arrive?"
+                      component={DatePicker}
+                      format="MM/dd/yyyy"
+                      style={formStyle.input}
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                    <Field
+                      name="airlineCode"
+                      label="Airline code"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                    <Field
+                      name="flightNum"
+                      label="Flight number"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
                 </div>
-                <div className="field-container col-12 md-col md-col-6">
-                  <Field
-                    name='requireInterpreter'
-                    label='Are you comfortable speaking English?'
-                    component={TextField}
-                    select
-                    type='text'
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                    style={formStyle.input}
+                <div className="clearfix">
+                  <h3>Emergency contact</h3>
+                  <p><em>Who can we contact if we can't get in touch with you?</em></p>
+                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                    <Field
+                      name="secondaryContactName"
+                      label="Name"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                    <Field
+                      name="secondaryContactPhone"
+                      label="Phone Number"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
+                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                    <Field
+                      name="secondaryContactRelation"
+                      label="Relationship to you"
+                      component={TextField}
+                      style={formStyle.input}
+                    />
+                  </div>
+                </div>
+                <DisplayFormikState {...props} />
+                <div>
+                  <Button
+                    variant='contained'
+                    className="submit-traveler-registration"
+                    disabled={isSubmitting}
+                    color='primary'
+                    style={formStyle.submitButton}
+                    onClick={submitForm}
                   >
-                    <MenuItem value="true">No</MenuItem>
-                    <MenuItem value="false">Yes</MenuItem>
-                  </Field>
-                </div>
-                <div className="field-container col-12 md-col md-col-6">
-                  <Field
-                    name="preferredLanguage"
-                    label="Preferred language(s)"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
-                </div>
-                <div className="field-container col-12 md-col md-col-6">
-                  <Field
-                    name="email"
-                    label="Email"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
-                </div>
-                <div className="field-container col-12 md-col md-col-6">
-                  <Field
-                    name="countryCode"
-                    component={Autocomplete}
-                    options={countryCodes}
-                    getOptionLabel={(option: any) => option.label}
-                    getOptionSelected={(option: { label: string }, value: { label: string }) => value.label === option.label}
-                    renderInput={(params: AutocompleteRenderInputParams) => {
-                      return (
-                        <MuiTextField
-                          {...params}
-                          error={touched.countryCode && !!errors.countryCode}
-                          helperText={touched.countryCode && errors.countryCode}
-                          label="Country Phone Code"
-                          style={formStyle.input}
-                        />
-                      )
-                    }
-                    }
-                  />
-                </div>
-                <div className="field-container col-12 md-col md-col-6">
-                  <Field
-                    name="phone"
-                    label="Phone Number"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
-                </div>
-                <div className="field-container col-12 md-col md-col-6">
-                  <Field
-                    name="connectivity"
-                    label="Do you have a smartphone?"
-                    component={TextField}
-                    select
-                    style={formStyle.input}
-                  >
-                    <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
-                    <MenuItem className="traveler-has-no-phone-option" value="false">No</MenuItem>
-                  </Field>
-                </div>
-              </div>
-              <div className="clearfix">
-                <h3>Travel details</h3>
-                <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
-                <div className="field-container col-12 md-col sm-col-6 md-col-4">
-                  <Field
-                    name="scheduledArrivalTime"
-                    label="What day do you arrive?"
-                    component={DatePicker}
-                    format="MM/dd/yyyy"
-                    style={formStyle.input}
-                  />
-                </div>
-                <div className="field-container col-12 md-col sm-col-6 md-col-4">
-                  <Field
-                    name="airlineCode"
-                    label="Airline code"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
-                </div>
-                <div className="field-container col-12 md-col sm-col-6 md-col-4">
-                  <Field
-                    name="flightNum"
-                    label="Flight number"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
-                </div>
-              </div>
-              <div className="clearfix">
-                <h3>Emergency contact</h3>
-                <p><em>Who can we contact if we can't get in touch with you?</em></p>
-                <div className="field-container col-12 md-col sm-col-6 md-col-4">
-                  <Field
-                    name="secondaryContactName"
-                    label="Name"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
-                </div>
-                <div className="field-container col-12 md-col sm-col-6 md-col-4">
-                  <Field
-                    name="secondaryContactPhone"
-                    label="Phone Number"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
-                </div>
-                <div className="field-container col-12 md-col sm-col-6 md-col-4">
-                  <Field
-                    name="secondaryContactRelation"
-                    label="Relationship to you"
-                    component={TextField}
-                    style={formStyle.input}
-                  />
-                </div>
-              </div>
-              <DisplayFormikState {...props} />
-              <div>
-                <Button
-                  variant='contained'
-                  className="submit-traveler-registration"
-                  disabled={isSubmitting}
-                  color='primary'
-                  style={formStyle.submitButton}
-                  onClick={submitForm}
-                >
                   Register
-                </Button>
-              </div>
-              {
-                showAdditionalButtons &&
+                  </Button>
+                </div>
+                {
+                  showAdditionalButtons &&
         <div>
           <Button
             variant='contained'
             onClick={sendText}
             style={formStyle.adminButton}
             // labelColor="#2d6ea8"
-          >
-            Text Traveler
+          > Text Traveler
           </Button>
 
           <Button
@@ -267,18 +293,38 @@ export const RegisterForm = (props:any) => {
             style={formStyle.adminButton}
             // backgroundColor="#bd1c11"
             // labelColor="#FFFFFF"
-          >
-            Delete Traveler
+          >Delete Traveler
           </Button>
         </div>
-              }
-            </Form>
+                }
+              </Form>
+              <SubmissionConfirmation
+                open={state.open}
+                flight={flight}
+                handleClose={handleClose}
+                confirmSubmit={confirmSubmit}
+              />
+            </div>
           )
         }}
       </Formik>
     </MuiPickersUtilsProvider>
   )
 }
+
+/* ---------------------------REDUX CONTAINER--------------------------- */
+
+const mapStateToProps = ({ flight } : any) => ({ flight })
+
+const mapDispatchToProps = (dispatch: any) => ({
+  signUpTraveler: (traveler: any) => dispatch(signUpTraveler(traveler)),
+  checkFlight: (code: any, flightNum: any, year: any, month: any, day: any) => dispatch(checkFlight(code, flightNum, year, month, day))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegisterForm)
 
 // const Form = (props) => (
 //   <form style={formStyle.form} onSubmit={props.handleSubmit}>
