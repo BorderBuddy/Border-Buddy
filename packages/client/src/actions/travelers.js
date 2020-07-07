@@ -21,11 +21,7 @@ export const setAllTravelers = travelers => ({
 
 export const fetchAllTravelers = () => dispatch => {
   return axios
-    .get('/api/traveler', {
-      headers: {
-        Authorization: window.localStorage.accessToken
-      }
-    })
+    .get('/api/traveler')
     .then(travelers => dispatch(setAllTravelers(travelers.data)))
     .catch(err => console.error(err.response.data))
   // return dispatch(setAllTravelers(dummyTravelers)) //this is for dev offline work

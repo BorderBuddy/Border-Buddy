@@ -25,6 +25,10 @@ export const signUpTraveler = (traveler, isAdmin) => {
   }
 }
 
+// export const signUpTraveler = res => {
+//   return dispatch => dispatch(setSignupTraveler(res.data))
+// }
+
 export const clearSignUpTraveler = () => ({
   type: CLEAR_SIGNUP_TRAVELER
 })
