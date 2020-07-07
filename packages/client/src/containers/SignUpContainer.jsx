@@ -8,6 +8,7 @@ import FlightConfirmation from '../components/FlightConfirmation'
 import { signUpTraveler } from '../actions/signUp'
 import { checkFlight } from '../actions/flight'
 import { useFormikContext, Formik, Form, Field } from 'formik'
+import api from '../api/api'
 
 const SignUpContainer = (props) => {
   console.log(`props to SignUpContainer: ${JSON.stringify(props)}`)
@@ -20,15 +21,31 @@ const SignUpContainer = (props) => {
     setState({ open: false })
   }
 
-  const confirmSubmit = () => {
-    const { values } = useFormikContext()
-    const { signUpTraveler, flight } = props
-    console.log(values)
-    // const { values } = props.form.travelerForm
-    // values.countryCode = values.countryCode.split('-')[1].slice(2)
+  // const confirmSubmit = () => {
+  //   const { values } = useFormikContext()
+  //   const { signUpTraveler, flight } = props
+  //   console.log(values)
+  //   // const { values } = props.form.travelerForm
+  //   // values.countryCode = values.countryCode.split('-')[1].slice(2)
+  //   const travelerInfo = Object.assign({}, values, { scheduledArrivalTime: flight.arrivalTimeUtc })
+  //   signUpTraveler(travelerInfo)
+  //   handleClose()
+
+  const confirmSubmit = async () => {
+    const { signUpTraveler, flight } = this.props
+    const { values } = this.props.form.travelerForm
+    values.countryCode = values.countryCode.split('-')[1].slice(2)
     const travelerInfo = Object.assign({}, values, { scheduledArrivalTime: flight.arrivalTimeUtc })
-    signUpTraveler(travelerInfo)
-    handleClose()
+    try {
+      if (travelerInfo.countryCode[0] === '+') travelerInfo.countryCode = travelerInfo.countryCode.slice(1)
+      const res = await api.createTraveler(travelerInfo)
+      signUpTraveler(res)
+      if (!this.props.user) this.props.history.push('/success', ...res)
+      else this.props.history.push('/travelers')
+      this.handleClose()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   const handleSubmit = (formValues) => {
@@ -86,7 +103,7 @@ const SignUpContainer = (props) => {
 const mapStateToProps = ({ form, flight }) => ({ form, flight })
 
 const mapDispatchToProps = dispatch => ({
-  signUpTraveler: traveler => dispatch(signUpTraveler(traveler)),
+  signUpTraveler: res => dispatch(signUpTraveler(res)),
   checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 })
 
