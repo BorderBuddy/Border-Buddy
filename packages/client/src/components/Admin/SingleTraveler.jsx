@@ -63,7 +63,7 @@ const mapStateToProps = ({ selectedTraveler }) => {
       flightNum,
       flightStatus,
       representative,
-      contryCoe: countryCodes[countryCode]
+      countryCode: countryCodes[countryCode]
     }
   }
 }

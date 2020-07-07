@@ -4,6 +4,7 @@ import {
 } from '../constants'
 
 import axios from 'axios'
+// FIXME: This hook causes an error at the moment
 // import { useHistory } from 'react-router-dom'
 
 const setSignupTraveler = traveler => ({
@@ -13,8 +14,6 @@ const setSignupTraveler = traveler => ({
 
 export const signUpTraveler = (traveler, isAdmin) => {
   // const history = useHistory()
-  if (traveler.countryCode[0] === '+') traveler.countryCode = traveler.countryCode.slice(1)
-  // NOTE: we really should make the code an enum
   return dispatch => {
     axios.post('/api/traveler/', traveler)
       .then(res => {

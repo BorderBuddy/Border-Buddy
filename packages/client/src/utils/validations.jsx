@@ -20,6 +20,18 @@ export const validateCode = values => {
       throw { airlineCode: 'Airline code not found!' }
     })
 }
+export const asyncValidateAirlineCode = async value => {
+  return await axios.get(`/api/flight/code?code=${value}`)
+    .then((response) => {
+      return response.status === 200
+    })
+    .catch(() => false)
+}
+export const validateAirlineCode = value => {
+  // TODO: Complete this hardcoded list in another file
+  const airlineCodes = ['KL', 'UA']
+  return airlineCodes.includes(value)
+}
 
 export const minimumLength = value => value.length < 8 ? 'Must be at least 8 characters long' : undefined
 
@@ -60,7 +72,6 @@ export const yupValidationSchema = isAdmin => Yup.object().shape(
     scheduledArrivalTime: !isAdmin
       ? Yup.date().required('Required')
       : null,
-    // TODO: Let's make a list of the airline codes instead of hitting an async API
     airlineCode: !isAdmin
       ? Yup.string()
         .required('Required')
@@ -68,13 +79,7 @@ export const yupValidationSchema = isAdmin => Yup.object().shape(
         .test(
           'isValidAirlineCode',
           'Airline code not found!',
-          async (value) => {
-            return await axios.get(`/api/flight/code?code=${value}`)
-              .then((response) => {
-                return response.status === 200
-              })
-              .catch(() => false)
-          }
+          validateAirlineCode
         )
       : Yup.string()
         .uppercase('Must be uppercase')

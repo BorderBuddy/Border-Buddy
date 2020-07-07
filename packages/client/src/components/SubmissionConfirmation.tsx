@@ -21,13 +21,13 @@ export const SubmissionConfirmation = (props : any) => {
         {flight
           ? <Fragment>
             <Button
-              variant='contained'
+              variant='text'
               color='primary'
               onClick={() => handleClose()}
             >Cancel</Button>
             <Button
               id="submit-flight-confirmation"
-              variant='text'
+              variant='contained'
               color='primary'
               onClick={() => confirmSubmit(values)}
             >Submit</Button>
