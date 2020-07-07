@@ -45,34 +45,13 @@ export const logout = () => ({
 export const login = (res) => (dispatch) => {
   console.log(`in auth actions ${res}`)
   dispatch(loginRequest())
-  window.localStorage.setItem("accessToken", res.data.token)
-  dispatch(loginSuccess(res.data))
+  dispatch(loginSuccess(res))
 }
 
 export const signup = (user, _window = window) => () => {
   return axios
-    .post('/api/user', user, {
-      headers: {
-        Authorization: _window.localStorage.accessToken
-      }
-    })
+    .post('/api/user', user)
     .catch((err) => console.error('ERROR!', err))
-}
-
-export const checkToken = () => async (dispatch, getState) => {
-  try {
-    const res = await axios.get('/api/auth/checkToken', {
-      headers: {
-        Authorization: getState().auth.user.token
-      }
-    })
-    console.log(res)
-
-    return res
-  } catch (err) {
-    dispatch(loginFailure(err))
-    return err
-  }
 }
 
 export const signout = () => (dispatch) => {
@@ -81,11 +60,7 @@ export const signout = () => (dispatch) => {
 
 export const whoAmI = () => (dispatch) => {
   return axios
-    .get('/api/auth/checkToken', {
-      headers: {
-        Authorization: window.localStorage.accessToken
-      }
-    })
+    .get('/api/auth/checkToken')
     .then((res) => {
       dispatch(setAuth(res.data))
     })
@@ -94,11 +69,7 @@ export const whoAmI = () => (dispatch) => {
 
 export const updateUser = (user) => (dispatch) => {
   return axios
-    .put(`/api/user/${user.id}`, user, {
-      headers: {
-        Authorization: window.localStorage.accessToken
-      }
-    })
+    .put(`/api/user/${user.id}`, user)
     .then((res) => {
       dispatch(setAuth(res.data))
     })

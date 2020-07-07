@@ -46,9 +46,9 @@ const api = {
       return err
     }
   },
-  checkToken: async (token) => {
+  checkToken: async () => {
     try {
-      const res = await axios.get(`/api/auth/checkToken`, token)
+      const res = await axios.get(`/api/auth/checkToken`)
       saveUser(res.data.id)
       if (loginCallback) {
         loginCallback(res.data.id)
