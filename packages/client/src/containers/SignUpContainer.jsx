@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { Dialog, Button, DialogActions } from '@material-ui/core'
 // import Form from '../components/FormContainer'
@@ -6,93 +6,78 @@ import { RegisterForm } from '../components/RegisterForm'
 import FlightConfirmation from '../components/FlightConfirmation'
 import { signUpTraveler } from '../actions/signUp'
 import { checkFlight } from '../actions/flight'
-import api from '../api/api'
+import { useFormikContext, Formik, Form, Field } from 'formik'
 
-class SignUpContainer extends Component {
-  constructor () {
-    super()
-    this.state = {
-      open: false
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.confirmSubmit = this.confirmSubmit.bind(this)
+const SignUpContainer = (props) => {
+  console.log(`props to SignUpContainer: ${JSON.stringify(props)}`)
+
+  const [state, setState] = useState({
+    open: false
+  })
+
+  const handleClose = () => {
+    setState({ open: false })
   }
 
-  handleClose () {
-    this.setState({ open: false })
-  }
-
-  async confirmSubmit () {
-    const { signUpTraveler, flight } = this.props
-    const { values } = this.props.form.travelerForm
-    values.countryCode = values.countryCode.split('-')[1].slice(2)
+  const confirmSubmit = () => {
+    const { values } = useFormikContext()
+    const { signUpTraveler, flight } = props
+    console.log(values)
+    // const { values } = props.form.travelerForm
+    // values.countryCode = values.countryCode.split('-')[1].slice(2)
     const travelerInfo = Object.assign({}, values, { scheduledArrivalTime: flight.arrivalTimeUtc })
-    try {
-      if (travelerInfo.countryCode[0] === '+') travelerInfo.countryCode = travelerInfo.countryCode.slice(1)
-      const res = await api.createTraveler(travelerInfo)
-      signUpTraveler(res)
-      if (!this.props.user) this.props.history.push('/success', ...res)
-      else this.props.history.push('/travelers')
-      this.handleClose()
-    } catch (err) {
-      console.error(err)
-    }
+    signUpTraveler(travelerInfo)
+    handleClose()
   }
 
-  handleSubmit (values) {
-    const { flightNum, airlineCode, scheduledArrivalTime } = values
+  const handleSubmit = (formValues) => {
+    const { flightNum, airlineCode, scheduledArrivalTime } = formValues
     const day = scheduledArrivalTime.getDate()
     const year = scheduledArrivalTime.getYear() + 1900
     const month = scheduledArrivalTime.getMonth() + 1
-    this.props.checkFlight(airlineCode, flightNum, year, month, day)
+    props.checkFlight(airlineCode, flightNum, year, month, day)
       .then(() => {
-        this.setState({ open: true })
+        setState({ open: true })
       })
       .catch(() => {
-        this.setState({ open: false })
+        setState({ open: false })
       })
   }
 
-  render () {
-    return (
-      <div>
-        <RegisterForm handleSubmit={this.handleSubmit} isAdmin={false} extraFields={[]} formTitle="Traveler Registration" />
-        <Dialog
-          title="Confirm Submission"
-          modal={true}
-          open={this.state.open}
-        >
-          <DialogActions>
-            {this.props.flight
-              ? <Fragment>
-                <Button
-                  label="Cancel"
-                  variant='contained'
-                  color='primary'
-                  onClick={this.handleClose}
-                />
-                <Button
-                  id="submit-flight-confirmation"
-                  label="Submit"
-                  variant='text'
-                  color='primary'
-                  onClick={this.confirmSubmit}
-                />
-              </Fragment>
-              : <Button
-                label="OK"
+  return (
+    <div>
+      <RegisterForm handleSubmit={handleSubmit} isAdmin={false} extraFields={[]} formTitle="Traveler Registration" />
+      <Dialog
+        title="Confirm Submission"
+        modal={true}
+        open={state.open}
+      >
+        <DialogActions>
+          {props.flight
+            ? <Fragment>
+              <Button
                 variant='contained'
                 color='primary'
-                onClick={this.handleClose}
-              />
-            }
-          </DialogActions>
-          <FlightConfirmation flight={this.props.flight} />
-        </Dialog>
-      </div>
-    )
-  }
+                onClick={handleClose}
+              >Cancel</Button>
+              <Button
+                id="submit-flight-confirmation"
+                variant='text'
+                color='primary'
+                onClick={confirmSubmit}
+              >Submit</Button>
+            </Fragment>
+            : <Button
+              variant='contained'
+              color='primary'
+              onClick={handleClose}
+            >OK</Button>
+          }
+        </DialogActions>
+        <FlightConfirmation flight={props.flight} />
+      </Dialog>
+    </div>
+  )
 }
 
 /* ---------------------------REDUX CONTAINER--------------------------- */
