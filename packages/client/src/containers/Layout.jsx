@@ -3,7 +3,7 @@ import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
 import RenderAppBar from '../components/Admin/AppBar'
 import api from '../api/api'
-import { LoggedIn, LoggedOut } from '../auth/AuthService'
+import { LoggedIn, LoggedOut } from '../auth/authService'
 import { getRoutes } from '../routes'
 
 class Homepage extends Component {
