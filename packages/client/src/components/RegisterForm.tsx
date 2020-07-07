@@ -21,7 +21,7 @@ const RegisterForm = (props:any) => {
   const [state, setState] = useState({
     open: false
   })
-
+  console.log(props)
   const {
     showAdditionalButtons,
     sendText,
