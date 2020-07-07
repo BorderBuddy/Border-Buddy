@@ -20,12 +20,14 @@ const api = {
       return res.data
     }
   },
-  createTraveler: async (travelerAttributes) => {
+  createTraveler: async (traveler) => {
     try {
-      const res = await axios.post(`/api/traveler/create`, travelerAttributes)
+      // TODO: change the api to have a matching consistent endpoint pattern
+      // const res = await axios.post(`/api/traveler/create`, traveler)
+      const res = axios.post('/api/traveler/', traveler)
       return res.data
-    } catch ({ res }) {
-      return res.data
+    } catch (err) {
+      return err
     }
   },
   getTravelers: async () => {

@@ -3,26 +3,13 @@ import {
   CLEAR_SIGNUP_TRAVELER
 } from '../constants'
 
-import axios from 'axios'
-import { push } from 'connected-react-router'
-
 const setSignupTraveler = traveler => ({
   type: SET_SIGNUP_TRAVELER,
   traveler
 })
 
-export const signUpTraveler = (traveler, isAdmin) => {
-  if (traveler.countryCode[0] === '+') traveler.countryCode = traveler.countryCode.slice(1)
-  // NOTE: we really should make the code an enum
-  return dispatch => {
-    axios.post('/api/traveler/', traveler)
-      .then(res => {
-        dispatch(setSignupTraveler(res.data))
-        if (!isAdmin) dispatch(push('/success'))
-        else dispatch(push('/travelers'))
-      })
-      .catch(console.error)
-  }
+export const signUpTraveler = res => {
+  return dispatch => dispatch(setSignupTraveler(res.data))
 }
 
 export const clearSignUpTraveler = () => ({
