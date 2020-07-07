@@ -15,10 +15,9 @@ import { SubmissionConfirmation } from './SubmissionConfirmation'
 import { signUpTraveler } from '../actions/signUp'
 import { checkFlight } from '../actions/flight'
 import { connect } from 'react-redux'
+import api from '../api/api'
 
 const RegisterForm = (props:any) => {
-  console.log(`RegisterForm props passed: ${JSON.stringify(props)}`)
-
   const [state, setState] = useState({
     open: false
   })
@@ -38,14 +37,21 @@ const RegisterForm = (props:any) => {
     setState({ open: false })
   }
 
-  const confirmSubmit = (values: any) => {
+  const confirmSubmit = async (values: any) => {
     const { flight } = props
     const travelerInfo = Object.assign({}, values, {
       scheduledArrivalTime: flight.arrivalTimeUtc,
       countryCode: values.countryCode.code
     })
-    props.signUpTraveler(travelerInfo)
-    handleClose()
+    try {
+      const res = await api.createTraveler(travelerInfo)
+      props.signUpTraveler(res)
+      if (!props.user) props.history.push('/success', ...res)
+      else props.history.push('/travelers')
+      handleClose()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   const handleSubmit = (values: any) => {

@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 
 const api = {
   getUser: async (id) => {
@@ -19,7 +19,7 @@ const api = {
   },
   createUser: async (userAttributes) => {
     try {
-      const res = await axios.post(`/api/user/create`, userAttributes)
+      const res = await axios.post('/api/user/create', userAttributes)
       return res.data
     } catch ({ res }) {
       return res.data
@@ -27,11 +27,11 @@ const api = {
   },
   getUsers: async () => {
     try {
-      const res = await axios.get(`/api/users`)
+      const res = await axios.get('/api/user')
       return res.data
     } catch ({ res }) {
       return res.data
     }
-  },
+  }
 }
 export default api
