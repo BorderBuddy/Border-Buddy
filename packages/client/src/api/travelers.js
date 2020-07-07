@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 
 const api = {
   getTraveler: async (id) => {
@@ -24,7 +24,7 @@ const api = {
     try {
       // TODO: change the api to have a matching consistent endpoint pattern
       // const res = await axios.post(`/api/traveler/create`, traveler)
-      const res = axios.post('/api/traveler/', traveler)
+      const res = await axios.post('/api/traveler/', traveler)
       return res.data
     } catch (err) {
       return err
@@ -32,7 +32,7 @@ const api = {
   },
   getTravelers: async () => {
     try {
-      const res = await axios.get(`/api/travelers`)
+      const res = await axios.get('/api/travelers')
       return res.data
     } catch ({ res }) {
       return res.data
@@ -45,7 +45,7 @@ const api = {
     } catch ({ res }) {
       return res.data
     }
-  },
+  }
 }
 
 export default api

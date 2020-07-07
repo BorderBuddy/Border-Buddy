@@ -12,12 +12,13 @@ import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpConta
 import AddTravelerContainer from './containers/AddTravelerContainer'
 import { About } from './components/About'
 import { WhyBorderBuddy } from './components/WhyBorderBuddy'
-import { LoggedIn } from './auth/AuthService'
+import { LoggedIn } from './auth/authService'
+import RegisterForm from './components/RegisterForm'
 
 // Router Hooks
 import {
   onTravelersListEnter,
-  onSingleTravelerEnter,
+  onSingleTravelerEnter
 } from './utils/hooks'
 
 export const getRoutes = () => (
@@ -25,7 +26,7 @@ export const getRoutes = () => (
     {/* TODO: add actual homepage */}
     <Route exact path="/" ><WhyBorderBuddy /></Route>
     <Route exact path="/why" ><WhyBorderBuddy /></Route>
-    <Route exact path="/register" ><ConnectedSignUpContainer /></Route>
+    <Route exact path="/register" ><RegisterForm /></Route>
     <Route exact path="/about" ><About /></Route>
     <Route exact path="/login" render={(props) => {
       return <Login {...props} />
