@@ -4,7 +4,7 @@ import RenderAllTravelers from '../components/Admin/AllTravelers'
 import AllTravelersMobile from '../components/Admin/AllTravelersMobile'
 
 class AllTravelersContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       view: null,
@@ -12,14 +12,14 @@ class AllTravelersContainer extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('resize', () => {
       const width = window.innerWidth
       this.setState({ width })
     })
   }
 
-  mobileOrDesktop(travelers) {
+  mobileOrDesktop (travelers) {
     if (this.state.width > 1100) {
       return <RenderAllTravelers travelers={travelers} history={this.props.history}/>
     } else {

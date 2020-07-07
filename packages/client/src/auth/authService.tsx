@@ -40,9 +40,10 @@ function setLoginTokens (tokens: any) {
 
 function setBearer () {
   const bearer = getToken()
+  console.log(bearer)
 
   if (bearer) {
-    axios.defaults.headers.Authorization = `Authorization ${bearer}`
+    axios.defaults.headers.common['Authorization'] = bearer
   }
 }
 

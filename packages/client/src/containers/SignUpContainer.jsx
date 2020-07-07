@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
 import { Dialog, Button, DialogActions } from '@material-ui/core'
 import Form from '../components/FormContainer'
 import FlightConfirmation from '../components/FlightConfirmation'
 import { signUpTraveler } from '../actions/signUp'
 import { checkFlight } from '../actions/flight'
+import api from '../api/api'
 
 class SignUpContainer extends Component {
   constructor () {
@@ -22,13 +22,21 @@ class SignUpContainer extends Component {
     this.setState({ open: false })
   }
 
-  confirmSubmit () {
+  async confirmSubmit () {
     const { signUpTraveler, flight } = this.props
     const { values } = this.props.form.travelerForm
     values.countryCode = values.countryCode.split('-')[1].slice(2)
     const travelerInfo = Object.assign({}, values, { scheduledArrivalTime: flight.arrivalTimeUtc })
-    signUpTraveler(travelerInfo)
-    this.handleClose()
+    try {
+      if (travelerInfo.countryCode[0] === '+') travelerInfo.countryCode = travelerInfo.countryCode.slice(1)
+      const res = await api.createTraveler(travelerInfo)
+      signUpTraveler(res)
+      if (!this.props.user) this.props.history.push('/success', ...res)
+      else this.props.history.push('/travelers')
+      this.handleClose()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   handleSubmit (e) {
@@ -92,7 +100,7 @@ class SignUpContainer extends Component {
 const mapStateToProps = ({ form, flight }) => ({ form, flight })
 
 const mapDispatchToProps = dispatch => ({
-  signUpTraveler: traveler => dispatch(signUpTraveler(traveler)),
+  signUpTraveler: res => dispatch(signUpTraveler(res)),
   checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day))
 })
 
