@@ -1,10 +1,10 @@
-import React from "react"
-import axios from "axios"
+import React from 'react'
+import axios from 'axios'
 
-const ID_TOKEN_KEY = "Authorization"
+const ID_TOKEN_KEY = 'Authorization'
 
 function saveUser (userID: any) {
-  localStorage.setItem("User", JSON.stringify(userID))
+  localStorage.setItem('User', JSON.stringify(userID))
 }
 
 function logout () {
@@ -40,10 +40,10 @@ function setLoginTokens (tokens: any) {
 
 function setBearer () {
   const bearer = getToken()
-  console.log(bearer)
+  // console.log(bearer)
 
   if (bearer) {
-    axios.defaults.headers.common['Authorization'] = bearer
+    axios.defaults.headers.common.Authorization = bearer
   }
 }
 
@@ -104,13 +104,13 @@ function isTokenExpired (token: any) {
 }
 
 class LoggedIn extends React.Component {
-  render() {
+  render () {
     return isLoggedIn() ? this.props.children : null
   }
 }
 
 class LoggedOut extends React.Component {
-  render() {
+  render () {
     return !isLoggedIn() ? this.props.children : null
   }
 }
@@ -137,5 +137,5 @@ export {
   loggedInUser,
   loginCallback,
   LoggedIn,
-  LoggedOut,
+  LoggedOut
 }
