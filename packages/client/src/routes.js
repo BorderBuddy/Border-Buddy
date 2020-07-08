@@ -25,9 +25,7 @@ export const getRoutes = () => (
     {/* TODO: add actual homepage */}
     <Route exact path="/" ><WhyBorderBuddy /></Route>
     <Route exact path="/why" ><WhyBorderBuddy /></Route>
-    <Route exact path="/register" render ={(props) => {
-      return <RegisterForm {...props} />
-    }} />
+    <Route exact path="/register"><RegisterForm/></Route>
     <Route exact path="/about" ><About /></Route>
     <Route exact path="/login" render={(props) => {
       return <Login {...props} />
