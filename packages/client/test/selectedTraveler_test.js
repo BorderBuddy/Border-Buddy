@@ -1,4 +1,4 @@
-import { updateTraveler, sendText } from '../src/actions/selectedTraveler'
+import { updateTraveler, sendText, deleteTraveler } from '../src/actions/selectedTraveler'
 import './unit_helpers'
 import axios from 'axios'
 
@@ -43,12 +43,14 @@ describe('SelectedTraveler', () => {
   describe('delete traveler information', () => {
     it('sends a delete request to traveler api with accessToken', () => {
       const window = { localStorage: { accessToken: 'accessToken' } }
-      sinon.stub(axios, 'delete').callsFake((url, traveler, headers) => {
-        expect(url).to.equal('/api/travelers/1')
+      sinon.stub(axios, 'delete').callsFake((url, headers) => {
+        expect(url).to.equal('/api/traveler/1')
         expect(headers.headers.Authorization).to.equal('accessToken')
         return new Promise((resolve, reject) => {
         })
       })
+
+      deleteTraveler(1, window)()
     })
   })
 })
