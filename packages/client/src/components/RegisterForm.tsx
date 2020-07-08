@@ -259,7 +259,7 @@ const RegisterForm = (props:any) => {
                     />
                   </div>
                 </div>
-                <DisplayFormikState {...props} />
+                {/* <DisplayFormikState {...props} /> */}
                 <div>
                   <Button
                     variant='contained'
