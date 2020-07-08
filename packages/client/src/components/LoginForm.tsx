@@ -1,13 +1,9 @@
 import React from 'react'
-// import { reduxForm, Field } from 'redux-form'
-// import { RenderTextField } from './Field'
 import { Card, Button } from '@material-ui/core'
 import { signupLoginStyle, formStyle } from './Admin/styles'
 import { Formik, Form, Field } from 'formik'
-// const required = value => (value == null ? 'Required' : undefined)
 import * as Yup from 'yup'
 import { TextField } from 'formik-material-ui'
-import { DisplayFormikState } from './DisplayFormikState'
 
 export const LoginForm = ({
   handleSubmit,
@@ -68,10 +64,8 @@ export const LoginForm = ({
             >ERROR: {auth.error.message}
             </p>
           }
-          {/* <DisplayFormikState {...props} /> */}
           <Button
             type="submit"
-            // label="Login"
             disabled={pristine || submitting}
             variant='contained'
             color='primary'
@@ -82,7 +76,3 @@ export const LoginForm = ({
     </Formik>
   )
 }
-
-// export default reduxForm({
-//   form: 'adminLogin'
-// })(AdminLogin)
