@@ -1,15 +1,15 @@
-import React, { Fragment } from "react"
-import { useHistory } from "react-router-dom"
-import { Menu, IconButton, MenuItem } from "@material-ui/core"
-import { MoreVert } from "@material-ui/icons"
+import React, { Fragment } from 'react'
+import { useHistory } from 'react-router-dom'
+import { Menu, IconButton, MenuItem } from '@material-ui/core'
+import { MoreVert } from '@material-ui/icons'
 
 const style = {
   icon: {
-    color: "white",
-  },
+    color: 'black'
+  }
 }
 
-export default function RenderAppBar({ onSignoutClick }) {
+export const RenderAppBar = ({ onSignoutClick }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const history = useHistory()
   const handleClick = (event) => {
@@ -40,16 +40,16 @@ export default function RenderAppBar({ onSignoutClick }) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose} >
-        <MenuItem onClick={() => handleClose("/travelers")}>
+        <MenuItem onClick={() => handleClose('/travelers')}>
           All Travelers
         </MenuItem>
-        <MenuItem onClick={() => handleClose("/createuser")}>
+        <MenuItem onClick={() => handleClose('/createuser')}>
           Create New User
         </MenuItem>
-        <MenuItem onClick={() => handleClose("/updateprofile")}>
+        <MenuItem onClick={() => handleClose('/updateprofile')}>
           Update Profile
         </MenuItem>
-        <MenuItem onClick={() => handleClose("onSignoutClick")}>
+        <MenuItem onClick={() => handleClose('onSignoutClick')}>
           Sign out
         </MenuItem>
       </Menu>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
-import RenderAppBar from '../components/Admin/AppBar'
+import { RenderAppBar } from '../components/Admin/AppBar'
 import api from '../api/api'
 import { LoggedIn, LoggedOut } from '../auth/authService'
 import { getRoutes } from '../routes'
@@ -31,6 +31,7 @@ class Homepage extends Component {
           />
         </div>
         <LoggedIn>
+          {/* Logged In */}
           <RenderAppBar onSignoutClick={this.onSignoutClick} />
         </LoggedIn>
         <LoggedOut>
