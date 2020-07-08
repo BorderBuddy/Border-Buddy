@@ -6,7 +6,7 @@
     "build": "webpack --config webpack.prod.config.js",
     "dev": "webpack-dev-server --config webpack.dev.config.js",
     "test": "mocha -r ts-node/register 'test/**/*_test.js'",
-    "test:jest": "jest",
+    "test:jest": "jest --passWithNoTests",
     "todo": "leasot -x 'src/**/*'",
     "todo-ci": "leasot -x --reporter markdown 'src/**/*' > TODO.md"
   },
