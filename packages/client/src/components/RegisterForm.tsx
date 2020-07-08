@@ -16,12 +16,13 @@ import { signUpTraveler } from '../actions/signUp'
 import { checkFlight } from '../actions/flight'
 import { connect } from 'react-redux'
 import api from '../api/api'
+import { useHistory } from 'react-router-dom'
 
 const RegisterForm = (props:any) => {
   const [state, setState] = useState({
     open: false
   })
-  console.log(props)
+  const history = useHistory()
   const {
     showAdditionalButtons,
     sendText,
@@ -46,9 +47,9 @@ const RegisterForm = (props:any) => {
     try {
       const res = await api.createTraveler(travelerInfo)
       props.signUpTraveler(res)
-      if (!props.user) props.history.push('/success', ...res)
-      else props.history.push('/travelers')
       handleClose()
+      if (!props.user) history.push('/success', { res: res })
+      else history.push('/travelers')
     } catch (err) {
       console.error(err)
     }

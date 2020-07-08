@@ -8,8 +8,8 @@ const setSignupTraveler = traveler => ({
   traveler
 })
 
-export const signUpTraveler = res => {
-  return dispatch => dispatch(setSignupTraveler(res))
+export const signUpTraveler = traveler => {
+  return dispatch => dispatch(setSignupTraveler(traveler))
 }
 
 export const clearSignUpTraveler = () => ({
