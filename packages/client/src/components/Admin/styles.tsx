@@ -20,7 +20,7 @@ export const travelerStatusStyle = {
 export const signupLoginStyle = {
   card: {
     margin: '5em auto',
-    textAlign: 'center',
+    // textAlign: 'center',
     width: '50%',
     padding: '2em'
   },
@@ -30,14 +30,14 @@ export const signupLoginStyle = {
     width: '50%'
   },
   title: {
-    textAlign: 'center'
+    // textAlign: 'center'
   },
   error: {
-    textAlign: 'center',
+    // textAlign: 'center',
     color: 'red'
   },
   loader: {
-    textAlign: 'center'
+    // textAlign: 'center'
   }
 }
 
