@@ -14,7 +14,7 @@ export const travelerStatusStyle = {
   width: '8vw',
   textAlign: 'left',
   color,
-  fontWeight: 'bold'
+  fontWeight: 'bold',
 }
 
 export const signupLoginStyle = {
@@ -22,23 +22,23 @@ export const signupLoginStyle = {
     margin: '5em auto',
     // textAlign: 'center',
     width: '50%',
-    padding: '2em'
+    padding: '2em',
   },
   button: {
     margin: '2em auto',
     display: 'block',
-    width: '50%'
+    width: '50%',
   },
   title: {
     // textAlign: 'center'
   },
   error: {
     // textAlign: 'center',
-    color: 'red'
+    color: 'red',
   },
   loader: {
     // textAlign: 'center'
-  }
+  },
 }
 
 export const adminSignUp = {
@@ -46,29 +46,29 @@ export const adminSignUp = {
     margin: '2em auto',
     textAlign: 'center',
     width: '80%',
-    padding: '2em'
+    padding: '2em',
   },
   button: {
     margin: '2em auto',
     display: 'block',
-    width: '50%'
+    width: '50%',
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   error: {
     textAlign: 'center',
-    color: 'red'
+    color: 'red',
   },
   loader: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   input: {
     width: '100%',
     color: 'black',
     margin: '1em, 2em, 1em, 2em',
-    paddingTop: '1em'
-  }
+    paddingTop: '1em',
+  },
 }
 
 export const setStatusColor = (status: string) => {
@@ -90,39 +90,39 @@ export const formStyle = {
   form: {
     display: 'block',
     width: '80%',
-    margin: '5em auto'
+    margin: '5em auto',
   },
   input: {
     width: '80%',
     color: 'black',
     marginTop: '1em',
     paddingTop: '1em',
-    marginBottom: '1em'
+    marginBottom: '1em',
   },
   select: {
-    width: '100%'
+    width: '100%',
   },
   autoComplete: {
-    paddingTop: '1em'
+    paddingTop: '1em',
   },
   error: {
-    color: '#bd1c11'
+    color: '#bd1c11',
   },
   label: {
-    color: '#526B5C'
+    color: '#526B5C',
   },
   underline: {
-    color: '#526B5C'
+    color: '#526B5C',
   },
   adminButton: {
     marginBottom: '2em',
-    width: '50%'
+    width: '50%',
   },
   submitButton: {
     marginBottom: '2em',
-    width: '100%'
+    width: '100%',
   },
   header: {
-    textAlign: 'center' as const
-  }
+    textAlign: 'center' as const,
+  },
 }

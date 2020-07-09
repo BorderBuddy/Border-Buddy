@@ -17,7 +17,7 @@ import RegisterForm from './components/RegisterForm'
 // Router Hooks
 import {
   onTravelersListEnter,
-  onSingleTravelerEnter
+  onSingleTravelerEnter,
 } from './utils/hooks'
 
 export const getRoutes = () => (
@@ -41,10 +41,6 @@ export const getRoutes = () => (
       }} />
       <Route exact path="/createuser"><AdminSignUp /></Route>
       <Route exact path="/updateprofile"><UpdateUserContainer /></Route>
-      <Route render={() => {
-        onTravelersListEnter()
-        return <AllTravelers />
-      }} />
     </LoggedIn>
     <Route component={WhyBorderBuddy} />
   </Switch>
