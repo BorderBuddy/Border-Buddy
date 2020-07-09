@@ -11,7 +11,7 @@ export const LoginForm = ({
   submitting,
   handleEmailChange,
   handlePasswordChange,
-  auth
+  auth,
 } : any) => {
   const style = signupLoginStyle
 
@@ -19,7 +19,7 @@ export const LoginForm = ({
     <Formik
       initialValues={{
         email: '',
-        password: ''
+        password: '',
       }}
       onSubmit={handleSubmit}
       validateOnChange={false}
@@ -30,7 +30,7 @@ export const LoginForm = ({
               .email()
               .required(),
             password: Yup.string()
-              .required()
+              .required(),
           })}
     >
       <Card style={style.card} >
