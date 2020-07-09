@@ -41,12 +41,6 @@ export const logout = () => ({
   },
   error: false,
 })
-
-// export const login = (res) => (dispatch) => {
-//   dispatch(loginRequest())
-//   dispatch(loginSuccess(res))
-// }
-
 export const signup = (user, _window = window) => () => {
   return axios
     .post('/api/user', user)
