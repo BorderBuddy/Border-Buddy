@@ -5,7 +5,7 @@ import { MoreVert } from '@material-ui/icons'
 
 const style = {
   icon: {
-    color: 'black'
+    color: 'white'
   }
 }
 
