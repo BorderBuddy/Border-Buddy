@@ -3,8 +3,16 @@ import {
   setLoginTokens,
   saveUser,
   loginCallback,
-  logout
+  logout,
 } from '../auth/authService'
+
+class LoginError extends Error {
+  constructor (message) {
+    super(message)
+    this.name = 'LoginError'
+    this.message = message
+  }
+}
 
 const api = {
   login: async (email, password) => {
@@ -17,7 +25,10 @@ const api = {
       }
       return res.data
     } catch (err) {
-      return err
+      // TODO: not sure if this is the best way to handle this,
+      // but simply returning the err means you would have to check the object
+      // on the other end. This way will trigger the try/catch...
+      throw new LoginError('Unsuccessful login')
     }
   },
   logout: async () => {
@@ -58,6 +69,6 @@ const api = {
       window.localStorage.clear()
       return err
     }
-  }
+  },
 }
 export default api
