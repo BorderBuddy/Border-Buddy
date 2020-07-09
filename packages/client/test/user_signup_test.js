@@ -16,7 +16,6 @@ describe('User', () => {
       sinon.stub(axios, 'post').callsFake((url, user, headers) => {
         expect(url).to.equal('/api/user')
         expect(user.name).to.equal('Jane Austen')
-        expect(headers.headers.Authorization).to.equal('accessToken')
         return new Promise((resolve, reject) => {
         })
       })
