@@ -16,7 +16,6 @@ describe('SelectedTraveler', () => {
       sinon.stub(axios, 'put').callsFake((url, traveler, headers) => {
         expect(url).to.equal('/api/traveler/1')
         expect(traveler.name).to.equal('Jane Austen')
-        expect(headers.headers.Authorization).to.equal('accessToken')
         return new Promise((resolve, reject) => {
         })
       })
@@ -32,7 +31,6 @@ describe('SelectedTraveler', () => {
       sinon.stub(axios, 'post').callsFake((url, message, headers) => {
         expect(url).to.equal('/api/twilio/send')
         expect(message.to).to.equal('+15553334444')
-        expect(headers.headers.Authorization).to.equal('accessToken')
         return new Promise((resolve, reject) => {
         })
       })
@@ -45,7 +43,6 @@ describe('SelectedTraveler', () => {
       const window = { localStorage: { accessToken: 'accessToken' } }
       sinon.stub(axios, 'delete').callsFake((url, headers) => {
         expect(url).to.equal('/api/traveler/1')
-        expect(headers.headers.Authorization).to.equal('accessToken')
         return new Promise((resolve, reject) => {
         })
       })

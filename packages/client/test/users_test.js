@@ -15,7 +15,6 @@ describe('Action: Users', () => {
 
       sinon.stub(axios, 'get').callsFake((url, headers) => {
         expect(url).to.equal('/api/user')
-        expect(headers.headers.Authorization).to.equal('accessToken')
         return new Promise((resolve, reject) => {
         })
       })
