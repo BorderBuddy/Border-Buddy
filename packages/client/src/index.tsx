@@ -11,7 +11,11 @@ import { loggedInUser, setLoginCallback } from './auth/AuthService'
 
 // Components
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Layout from './containers/Layout'
+=======
+import { Layout } from './containers/Layout'
+>>>>>>> fixed logout click
 import UserContext from './userContext'
 =======
 import { Homepage } from './containers/Homepage'
@@ -65,7 +69,7 @@ class App extends Component {
 <<<<<<< HEAD
           <Router>
             <UserContext.Provider value={ { user: this.state.user ? this.state.user : {} } }>
-              <Layout props={this.props}/>
+              <Layout/>
             </UserContext.Provider>
           </Router>
 =======
