@@ -10,7 +10,7 @@ import api from './api/api'
 import { loggedInUser, setLoginCallback } from './auth/authService'
 
 // Components
-import Layout from './containers/Layout'
+import { Layout } from './containers/Layout'
 import UserContext from './userContext'
 
 require('./style/index.scss')
@@ -48,7 +48,7 @@ class App extends Component {
         <Provider store={store}>
           <Router>
             <UserContext.Provider value={ { user: this.state.user ? this.state.user : {} } }>
-              <Layout props={this.props}/>
+              <Layout/>
             </UserContext.Provider>
           </Router>
         </Provider>

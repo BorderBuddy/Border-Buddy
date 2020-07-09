@@ -56,7 +56,6 @@ const api = {
       return res.data
     } catch (err) {
       window.localStorage.clear()
-      logout()
       return err
     }
   }
