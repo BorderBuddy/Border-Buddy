@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const style = {
   color: 'white',
-  backgroundColor: '#2d6ea8'
+  backgroundColor: '#2d6ea8',
 }
 
 export const Navbar = () => (

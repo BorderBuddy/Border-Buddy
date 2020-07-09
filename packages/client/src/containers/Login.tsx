@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { LoginForm } from '../components/LoginForm'
-import { login } from '../actions/auth'
+import { loginRequest, loginSuccess, loginFailure } from '../actions/auth'
 import api from '../api/api'
 import { useHistory } from 'react-router-dom'
 
@@ -10,12 +10,14 @@ const Login = (props:any) => {
 
   const handleSubmit = async (values: any) => {
     const { email, password } = values
+    props.loginRequest()
     try {
       const res = await api.login(email, password)
-      props.login(res)
+      props.loginSuccess(res)
       history.push('/travelers')
     } catch (err) {
-      console.error('ERROR!', err)
+      props.loginFailure(err.message)
+      console.error(err)
     }
   }
 
@@ -34,6 +36,8 @@ const Login = (props:any) => {
 const mapStateToProps = ({ auth }: any) => ({ auth })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  login: (response: any) => dispatch(login(response))
+  loginRequest: () => dispatch(loginRequest()),
+  loginSuccess: () => dispatch(loginSuccess()),
+  loginFailure: (message: any) => dispatch(loginFailure(message)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

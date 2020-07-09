@@ -4,49 +4,48 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT
+  LOGOUT,
 } from '../constants'
 
 export const setAuth = (auth) => ({ type: SET_AUTH, auth })
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
   payload: {
-    fetching: true
+    fetching: true,
   },
-  error: false
+  error: false,
 })
 
 export const loginSuccess = (user) => ({
   type: LOGIN_SUCCESS,
   payload: {
     fetching: false,
-    user
+    user,
   },
-  error: false
+  error: false,
 })
 
 export const loginFailure = (message) => ({
   type: LOGIN_FAILURE,
   payload: {
     error: new Error(message),
-    fetching: false
+    fetching: false,
   },
-  error: true
+  error: true,
 })
 
 export const logout = () => ({
   type: LOGOUT,
   payload: {
-    fetching: false
+    fetching: false,
   },
-  error: false
+  error: false,
 })
 
-export const login = (res) => (dispatch) => {
-  console.log(`in auth actions ${res}`)
-  dispatch(loginRequest())
-  dispatch(loginSuccess(res))
-}
+// export const login = (res) => (dispatch) => {
+//   dispatch(loginRequest())
+//   dispatch(loginSuccess(res))
+// }
 
 export const signup = (user, _window = window) => () => {
   return axios
