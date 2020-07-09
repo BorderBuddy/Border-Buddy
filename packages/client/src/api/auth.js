@@ -23,8 +23,8 @@ const api = {
   logout: async () => {
     try {
       const res = await axios.post('/api/auth/logout')
-      logout()
       window.localStorage.clear()
+      logout()
       return res.data
     } catch (err) {
       return err
@@ -55,6 +55,8 @@ const api = {
       }
       return res.data
     } catch (err) {
+      window.localStorage.clear()
+      logout()
       return err
     }
   }
