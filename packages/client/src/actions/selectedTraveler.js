@@ -17,9 +17,7 @@ export const fetchSelectedTraveler = (id) => dispatch => {
   // return dispatch(setSelectedTraveler(traveler))
 }
 export const updateTraveler = (traveler, id, _window = window) => dispatch => {
-  return axios.put(`/api/traveler/${id}`, traveler, {
-    headers: { Authorization: _window.localStorage.accessToken }
-  })
+  return axios.put(`/api/traveler/${id}`, traveler)
     .then(response => {
       traveler = response.data
       dispatch(setSelectedTraveler(traveler))
@@ -32,8 +30,6 @@ export const sendText = (traveler, _window = window) => () => {
     {
       to: `+${traveler.countryCode}${traveler.phone}`,
       message: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`
-    }, {
-      headers: { Authorization: _window.localStorage.accessToken }
     })
     .then((res) => {
       console.log('message sent!', res.data)
@@ -41,9 +37,7 @@ export const sendText = (traveler, _window = window) => () => {
     .catch(err => console.error(err))
 }
 export const deleteTraveler = (id, _window = window) => dispatch => {
-  return axios.delete(`/api/traveler/${id}`, {
-    headers: { Authorization: _window.localStorage.accessToken }
-  })
+  return axios.delete(`/api/traveler/${id}`)
     .then((data) => {
       console.log('***********traveler deleted*************', data)
     })
