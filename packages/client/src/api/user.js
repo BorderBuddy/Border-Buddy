@@ -11,7 +11,7 @@ const api = {
   },
   updateUser: async (id, userAttributes) => {
     try {
-      const res = await axios.put(`/api/user/${id}/update`, userAttributes)
+      const res = await axios.put(`/api/user/${id}`, userAttributes)
       return res.data
     } catch ({ res }) {
       return res.data
@@ -19,7 +19,7 @@ const api = {
   },
   createUser: async (userAttributes) => {
     try {
-      const res = await axios.post('/api/user/create', userAttributes)
+      const res = await axios.post('/api/user', userAttributes)
       return res.data
     } catch ({ res }) {
       return res.data
@@ -32,6 +32,6 @@ const api = {
     } catch ({ res }) {
       return res.data
     }
-  }
+  },
 }
 export default api
