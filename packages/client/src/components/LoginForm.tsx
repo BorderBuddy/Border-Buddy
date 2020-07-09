@@ -61,7 +61,7 @@ export const LoginForm = ({
             auth.error &&
             <p
               style={style.error}
-            >ERROR: {auth.error.message}
+            >{auth.error.message}
             </p>
           }
           <Button

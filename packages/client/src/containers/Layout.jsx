@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Toolbar, IconButton, Button, AppBar, Container } from '@material-ui/core'
 import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
@@ -64,22 +64,22 @@ const styles = {
     margin: '2em auto',
     display: 'block',
     width: '50%',
-    color: 'white'
+    color: 'white',
   },
   icon: {
-    maxHeight: '1.5em'
+    maxHeight: '1.5em',
   },
   container: {
     marginTop: '2em',
-    marginBottom: '4em'
+    marginBottom: '4em',
   },
   toolbar: {
-    backgroundColor: '#2d6ea8'
+    backgroundColor: '#2d6ea8',
   },
   image: {
     display: 'block',
     margin: 'auto',
     width: '50%',
-    maxHeight: '2em'
-  }
+    maxHeight: '2em',
+  },
 }
