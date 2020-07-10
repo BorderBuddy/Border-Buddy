@@ -20,14 +20,14 @@ import { useHistory } from 'react-router-dom'
 
 const RegisterForm = (props:any) => {
   const [state, setState] = useState({
-    open: false
+    open: false,
   })
   const history = useHistory()
   const {
     showAdditionalButtons,
     sendText,
     deleteTraveler,
-    flight
+    flight,
   } = props
 
   // TODO: isAdmin will be set by user context in props eventually
@@ -42,7 +42,7 @@ const RegisterForm = (props:any) => {
     const { flight } = props
     const travelerInfo = Object.assign({}, values, {
       scheduledArrivalTime: flight.arrivalTimeUtc,
-      countryCode: values.countryCode.code
+      countryCode: values.countryCode.code,
     })
     try {
       const res = await api.createTraveler(travelerInfo)
@@ -55,17 +55,20 @@ const RegisterForm = (props:any) => {
     }
   }
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: any, {setSubmitting} : any) => {
     const { flightNum, airlineCode, scheduledArrivalTime } = values
+    // TODO: This looks insane, but knowing javascript dates -- maybe it's okay?
     const day = scheduledArrivalTime.getDate()
     const year = scheduledArrivalTime.getYear() + 1900
     const month = scheduledArrivalTime.getMonth() + 1
     props.checkFlight(airlineCode, flightNum, year, month, day)
       .then(() => {
         setState({ open: true })
+        setSubmitting(false)
       })
       .catch(() => {
         setState({ open: false })
+        setSubmitting(false)
       })
   }
 
@@ -80,7 +83,7 @@ const RegisterForm = (props:any) => {
           email: '',
           countryCode: {
             code: 1,
-            label: 'USA or Canada - +1'
+            label: 'USA or Canada - +1',
           },
           phone: '',
           connectivity: 'true',
@@ -89,7 +92,7 @@ const RegisterForm = (props:any) => {
           secondaryContactPhone: '',
           secondaryContactRelation: '',
           scheduledArrivalTime: new Date(),
-          airlineCode: ''
+          airlineCode: '',
 
         }}
         onSubmit={handleSubmit}
@@ -101,7 +104,7 @@ const RegisterForm = (props:any) => {
             touched,
             errors,
             isSubmitting,
-            submitForm
+            submitForm,
           } = props
           return (
             <div>
@@ -136,7 +139,7 @@ const RegisterForm = (props:any) => {
                       select
                       type='text'
                       InputLabelProps={{
-                        shrink: true
+                        shrink: true,
                       }}
                       style={formStyle.input}
                     >
@@ -314,10 +317,10 @@ const mapStateToProps = ({ flight } : any) => ({ flight })
 
 const mapDispatchToProps = (dispatch: any) => ({
   signUpTraveler: (traveler: any) => dispatch(signUpTraveler(traveler)),
-  checkFlight: (code: any, flightNum: any, year: any, month: any, day: any) => dispatch(checkFlight(code, flightNum, year, month, day))
+  checkFlight: (code: any, flightNum: any, year: any, month: any, day: any) => dispatch(checkFlight(code, flightNum, year, month, day)),
 })
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(RegisterForm)

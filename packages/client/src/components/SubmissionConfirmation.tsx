@@ -9,7 +9,7 @@ export const SubmissionConfirmation = (props : any) => {
     flight,
     open,
     handleClose,
-    confirmSubmit
+    confirmSubmit,
   } = props
 
   return (
