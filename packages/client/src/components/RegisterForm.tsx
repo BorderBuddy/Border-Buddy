@@ -57,7 +57,6 @@ const RegisterForm = (props:any) => {
 
   const handleSubmit = (values: any, {setSubmitting} : any) => {
     const { flightNum, airlineCode, scheduledArrivalTime } = values
-    // TODO: This looks insane, but knowing javascript dates -- maybe it's okay?
     const day = scheduledArrivalTime.getDate()
     const year = scheduledArrivalTime.getYear() + 1900
     const month = scheduledArrivalTime.getMonth() + 1
