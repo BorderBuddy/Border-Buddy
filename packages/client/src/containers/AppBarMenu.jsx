@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import RenderAppBar from '../components/Admin/AppBar'
 import { signout } from '../actions/auth'
+import api from '../api/api'
 
 class AppBarMenu extends Component {
   constructor(props) {
@@ -9,8 +10,14 @@ class AppBarMenu extends Component {
     this.onSignoutClick = this.onSignoutClick.bind(this);
   }
 
-  onSignoutClick() {
-    this.props.signout()
+  async onSignoutClick() {
+    try {
+      await api.logout()
+      this.props.signout()
+      this.props.history.push('/')
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   render() {

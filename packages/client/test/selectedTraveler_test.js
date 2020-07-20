@@ -1,4 +1,4 @@
-import { updateTraveler, sendText } from '../src/actions/selectedTraveler'
+import { updateTraveler, sendText, deleteTraveler } from '../src/actions/selectedTraveler'
 import './unit_helpers'
 import axios from 'axios'
 
@@ -16,7 +16,6 @@ describe('SelectedTraveler', () => {
       sinon.stub(axios, 'put').callsFake((url, traveler, headers) => {
         expect(url).to.equal('/api/traveler/1')
         expect(traveler.name).to.equal('Jane Austen')
-        expect(headers.headers.Authorization).to.equal('accessToken')
         return new Promise((resolve, reject) => {
         })
       })
@@ -32,7 +31,6 @@ describe('SelectedTraveler', () => {
       sinon.stub(axios, 'post').callsFake((url, message, headers) => {
         expect(url).to.equal('/api/twilio/send')
         expect(message.to).to.equal('+15553334444')
-        expect(headers.headers.Authorization).to.equal('accessToken')
         return new Promise((resolve, reject) => {
         })
       })
@@ -43,12 +41,13 @@ describe('SelectedTraveler', () => {
   describe('delete traveler information', () => {
     it('sends a delete request to traveler api with accessToken', () => {
       const window = { localStorage: { accessToken: 'accessToken' } }
-      sinon.stub(axios, 'delete').callsFake((url, traveler, headers) => {
-        expect(url).to.equal('/api/travelers/1')
-        expect(headers.headers.Authorization).to.equal('accessToken')
+      sinon.stub(axios, 'delete').callsFake((url, headers) => {
+        expect(url).to.equal('/api/traveler/1')
         return new Promise((resolve, reject) => {
         })
       })
+
+      deleteTraveler(1, window)()
     })
   })
 })

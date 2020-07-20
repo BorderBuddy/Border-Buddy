@@ -6,7 +6,7 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "standard"
+        "standard-trailing-commas"
     ],
     "globals": {
         "Atomics": "readonly",
