@@ -5,48 +5,48 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const paths = {
   distFolder: resolve(__dirname, 'dist'),
-  assetsFolder: resolve(__dirname, 'assets')
+  assetsFolder: resolve(__dirname, 'assets'),
 }
 
 module.exports = {
   entry: resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
-  mode: 'development',
+  mode: 'production',
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   module: {
     rules: [
       {
         test: /\.(t|j)sx?$/,
         use: { loader: 'ts-loader' },
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.s(a|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader'
-        ]
-      }
-    ]
+          'sass-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: resolve(__dirname, 'src', 'index.html')
+      template: resolve(__dirname, 'src', 'index.html'),
     }),
     new MiniCssExtractPlugin({
-      filename: 'bundle.compiled.css'
+      filename: 'bundle.compiled.css',
     }),
     new CopyPlugin([
       {
         from: resolve(paths.assetsFolder, 'images'),
-        to: resolve(paths.distFolder, 'images')
-      }
-    ])
-  ]
+        to: resolve(paths.distFolder, 'images'),
+      },
+    ]),
+  ],
 }

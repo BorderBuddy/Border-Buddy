@@ -7,31 +7,11 @@ import { Provider } from 'react-redux'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import customTheme from './utils/muiTheme'
 import api from './api/api'
-import { loggedInUser, setLoginCallback } from './auth/AuthService'
+import { loggedInUser, setLoginCallback } from './auth/authService'
 
 // Components
-<<<<<<< HEAD
-<<<<<<< HEAD
-import Layout from './containers/Layout'
-=======
 import { Layout } from './containers/Layout'
->>>>>>> fixed logout click
 import UserContext from './userContext'
-=======
-import { Homepage } from './containers/Homepage'
-import AdminContainer from './containers/AdminContainer'
-import AllTravelers from './containers/AllTravelers'
-import SingleTravelerContainer from './containers/SingleTravelerContainer'
-import Login from './containers/Login'
-import AdminSignUp from './containers/AdminSignUpContainer'
-import UpdateUserContainer from './containers/UpdateUserContainer'
-import Success from './containers/Success'
-import ConnectedSignUpContainer from './connectedComponents/ConnectedSignUpContainer'
-import AddTravelerContainer from './containers/AddTravelerContainer'
-import { About } from './components/About'
-import { WhyBorderBuddy } from './components/WhyBorderBuddy'
-import RegisterForm from './components/RegisterForm'
->>>>>>> add submitting form
 
 require('./style/index.scss')
 
@@ -66,50 +46,11 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={customTheme}>
         <Provider store={store}>
-<<<<<<< HEAD
           <Router>
             <UserContext.Provider value={ { user: this.state.user ? this.state.user : {} } }>
               <Layout/>
             </UserContext.Provider>
           </Router>
-=======
-          <ConnectedRouter history={history}>
-            {localStorage.getItem('accessToken')
-              ? <AdminContainer {...this.props}>
-                <Switch>
-                  <Route exact path="/traveler/add"><AddTravelerContainer/></Route>
-                  <Route exact path="/travelers/:id" render={(props) => {
-                    onSingleTravelerEnter(props)
-                    return <SingleTravelerContainer {...props}/>
-                  }} />
-                  <Route exact path="/travelers" render={(props) => {
-                    onTravelersListEnter()
-                    return <AllTravelers {...props}/>
-                  }} />
-                  <Route exact path="/createuser"><AdminSignUp/></Route>
-                  <Route exact path="/updateprofile"><UpdateUserContainer/></Route>
-                  <Route render={() => {
-                    onTravelersListEnter()
-                    return <AllTravelers/>
-                  }} />
-                </Switch>
-              </AdminContainer>
-              : <Homepage>
-                <Switch>
-                  <Route exact path="/why" ><WhyBorderBuddy/></Route>
-                  <Route exact path="/register" ><RegisterForm/></Route>
-                  <Route exact path="/about" ><About/></Route>
-                  <Route exact path="/login" ><Login /></Route>
-                  {/* <Route exact path='/success' render={(props) => {
-                    onSuccessEnter()
-                    return <Success {...props} />
-                  }}/> */}
-                  <Route component={WhyBorderBuddy} />
-                </Switch>
-              </Homepage>
-            }
-          </ConnectedRouter>
->>>>>>> add submitting form
         </Provider>
       </MuiThemeProvider>
     )
