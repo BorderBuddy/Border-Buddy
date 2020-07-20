@@ -1,3 +1,5 @@
+Rebasing from private repo into the shared repo on develop branch
+
 # Border Buddy
 
 [![Stories in Ready](https://badge.waffle.io/BorderBuddy/Border-Buddy.png?label=ready&title=Ready)](https://waffle.io/BorderBuddy/Border-Buddy)
@@ -5,12 +7,12 @@
 
 ## Getting Started
 
-Initial setup: 
+Initial setup:
 
 ### Database setup:
 
 - Install/start postgres. You can find installers via the [Postgres website](https://www.postgresql.org/download/), or you can use a package manager like Homebrew:
- 
+
 ```
 $ brew install postgres
 $ brew services start postgres
@@ -33,14 +35,14 @@ $ createdb BorderBuddy_test
 $ npm install
 ```
 
-- Migrate 
+- Migrate
 
 ```
 $ npm run migrate
 ```
 
 **To rollback the last migration, run:**
- 
+
 ```
 $ npm run migrate:undo
 ```
@@ -71,7 +73,7 @@ To create the production bundle file (output as `dist/fund.js`), run:
 $ npm run build
 ```
 
-To run the API, run: 
+To run the API, run:
 
 Navigate to localhost:3000.
 
