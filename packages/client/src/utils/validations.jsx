@@ -31,6 +31,7 @@ export const asyncValidateAirlineCode = async value => {
 }
 // hardcoded airline codes json taken from
 // https://raw.githubusercontent.com/npow/airline-codes/master/airlines.json
+// TODO: It can be updated with a script every once in a while if we want...
 export const validateAirlineCode = value => {
   const code = airlines.find(el => el.iata === value)
   return code !== undefined
