@@ -4,7 +4,7 @@
   "description": "Your Border Buddy",
   "main": "index.js",
   "scripts": {
-    "lerna:bootstrap": "lerna bootstrap -- --production",
+    "lerna:bootstrap": "lerna bootstrap",
     "migrate": "lerna run --scope api migrate",
     "seed": "lerna run --scope api seed",
     "worker": "lerna run --scope api worker",
@@ -20,6 +20,9 @@
     "start": "lerna run --scope api start",
     "todo": "lerna run todo",
     "todo-ci": "lerna run todo-ci"
+  },
+  "engines": {
+    "node": "14.2.0"
   },
   "husky": {
     "hooks": {

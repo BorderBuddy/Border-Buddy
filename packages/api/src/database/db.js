@@ -8,14 +8,14 @@ const dbConfig = database[env]
 const baseConfig = {
   define: {
     // stop sequelize from pluralizing model names to get table names
-    freezeTableName: true
+    freezeTableName: true,
   },
-  logging: (env === 'development') ? console.log : false
+  logging: (env === 'development') ? console.log : false,
 }
 
 let sequelize
 if (dbConfig.use_env_variable) {
-  sequelize = new Sequelize(process.env[dbConfig.use_env_variable], baseConfig)
+  sequelize = new Sequelize(dbConfig.use_env_variable, baseConfig)
 } else {
   sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, Object.assign({}, baseConfig, dbConfig))
 }
