@@ -22,6 +22,9 @@
     "todo-ci": "lerna run todo-ci",
     "clean": "lerna run clean && rm -rf node_modules"
   },
+  "engines": {
+    "node": "14.2.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm test",

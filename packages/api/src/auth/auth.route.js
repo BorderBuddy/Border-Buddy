@@ -43,3 +43,4 @@ export default (app) => {
     app.post(base + '/local', login)
   }
 }
+
