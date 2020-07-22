@@ -25,6 +25,7 @@ export const signupLoginStyle = {
     padding: '2em',
   },
   button: {
+    backgroundColor: '#2d6ea8',
     margin: '2em auto',
     display: 'block',
     width: '50%',
@@ -49,6 +50,7 @@ export const adminSignUp = {
     padding: '2em',
   },
   button: {
+    backgroundColor: '#2d6ea8',
     margin: '2em auto',
     display: 'block',
     width: '50%',
@@ -93,7 +95,7 @@ export const formStyle = {
     margin: '5em auto',
   },
   input: {
-    width: '80%',
+    width: '100%',
     color: 'black',
     marginTop: '1em',
     paddingTop: '1em',
@@ -115,12 +117,14 @@ export const formStyle = {
     color: '#526B5C',
   },
   adminButton: {
-    marginBottom: '2em',
+    marginTop: '2em',
     width: '50%',
+    backgroundColor: '#2d6ea8',
   },
   submitButton: {
-    marginBottom: '2em',
+    marginTop: '2em',
     width: '100%',
+    backgroundColor: '#2d6ea8',
   },
   header: {
     textAlign: 'center' as const,

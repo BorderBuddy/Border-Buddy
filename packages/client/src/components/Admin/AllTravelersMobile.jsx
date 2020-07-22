@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   Button,
   Card,
   CardActions,
   Typography,
-  CardContent
+  CardContent,
+  Grid,
 } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { setStatusColor } from './styles'
@@ -21,7 +22,7 @@ const AllTravelersMobile = ({ travelers }) => {
           email,
           nationality,
           status: travelerStatus,
-          countryCode
+          countryCode,
         } = traveler
         const { airlineCode, flightNum, scheduledArrivalTime, status: flightStatus } =
           traveler.flight || {}
@@ -30,46 +31,46 @@ const AllTravelersMobile = ({ travelers }) => {
         const style = {
           passengerStatus: {
             color,
-            fontWeight: 'bold'
-          }
+            fontWeight: 'bold',
+          },
         }
         return (
           <Card key={i} style={{ margin: '2em' }}>
             <CardContent>
-              <Typography variant="h5">{name}</Typography>
-              <Typography variant="subtitle1">Traveler ID: {id}</Typography>
-              <CardContent className="">
-                <Typography variant="h5">Traveler Information</Typography>
-                <Typography variant="body2" style={style.passengerStatus}>
+              <Grid container direction='row'><Typography variant="h5">{name}</Typography></Grid>
+              <Grid container direction='row'><Typography variant="subtitle1">Traveler ID: {id}</Typography></Grid>
+              <Grid container style={{marginTop: '1em'}}>
+                <Grid container direction='row'><Typography display='block' variant="h6">Traveler Information</Typography></Grid>
+                <Grid container direction='row'><Typography display='block'variant="body2" style={style.passengerStatus}>
                   Traveler Status: {travelerStatus}
-                </Typography>
-                <Typography variant="body2">
+                </Typography></Grid>
+                <Grid container direction='row'><Typography display='block' variant="body2">
                   Country Code: +{countryCode}
-                </Typography>
-                <Typography variant="body2">Phone: {phone}</Typography>
-                <Typography variant="body2">Email: {email}</Typography>
-                <Typography variant="body2">
+                </Typography></Grid>
+                <Grid container direction='row'><Typography display='block' variant="body2">Phone: {phone}</Typography></Grid>
+                <Grid container direction='row'><Typography display='block' variant="body2">Email: {email}</Typography></Grid>
+                <Grid container direction='row'><Typography display='block' variant="body2">
                   Nationality: {nationality}
-                </Typography>
-              </CardContent>
-              <CardContent className="">
-                <Typography variant="h5">Flight Information </Typography>
-                <Typography variant="body2">
+                </Typography></Grid>
+              </Grid>
+              <Grid container style={{marginTop: '1em'}}>
+                <Grid container direction='row'><Typography display='block' variant="h6">Flight Information </Typography></Grid>
+                <Grid container direction='row'><Typography display='block' variant="body2">
                   Airline Code: {airlineCode}
-                </Typography>
-                <Typography variant="body2">Flight #: {flightNum}</Typography>
-                <Typography variant="body2">
+                </Typography></Grid>
+                <Grid container direction='row'><Typography display='block' variant="body2">Flight #: {flightNum}</Typography></Grid>
+                <Grid container direction='row'><Typography display='block' variant="body2">
                   ArrivalTime: {timeString}
-                </Typography>
-                <Typography variant="body2">
+                </Typography></Grid>
+                <Grid container direction='row'><Typography display='block' variant="body2">
                   Flight Status: {flightStatus}
-                </Typography>
-              </CardContent>
+                </Typography></Grid>
+              </Grid>
             </CardContent>
-            <CardActions>
+            <CardActions justify='space-around'>
               <Button
-                color="primary"
-                variant="contained"
+                style={{color: '#2d6ea8'}}
+                variant="text"
                 onClick={() =>
                   history.push(`/travelers/${traveler.id}`)
                 }
