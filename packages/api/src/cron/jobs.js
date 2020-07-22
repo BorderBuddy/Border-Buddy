@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Twilio } from '../twilio/twilio.controller'
 import { config } from '../config'
 import { statusByCodeAndDate } from '../flight/flight.query'
-// import { Promise } from 'bluebird'
+import { Promise } from 'bluebird'
 
 const askIfTravelerOk = traveler => {
   return new Promise((resolve, reject) => {
