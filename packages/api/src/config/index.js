@@ -18,7 +18,7 @@ const envs = [
 ]
 
 checkEnv(envs, (envNotSet, confirmedEnv) => {
-  console.log(`envs not explicitly set (might be injected): ${envNotSet}`)
+  console.log(`envs not set: ${envNotSet}`)
   // console.log(`confirmed envs: ${JSON.stringify(confirmedEnv)}`)
 })
 
