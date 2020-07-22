@@ -5,7 +5,7 @@ import countryCodes from '../utils/countryCodes'
 import { formStyle } from './Admin/styles'
 import { TextField } from 'formik-material-ui'
 import { DatePicker } from 'formik-material-ui-pickers'
-import { MenuItem, Divider, Button } from '@material-ui/core'
+import { MenuItem, Divider, Button, Grid, Typography } from '@material-ui/core'
 import MuiTextField from '@material-ui/core/TextField'
 import { Autocomplete, AutocompleteRenderInputParams } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
@@ -106,31 +106,30 @@ const RegisterForm = (props:any) => {
             submitForm,
           } = props
           return (
-            <div>
+            <Grid container >
               <Form style={formStyle.form}>
                 <h1 style={formStyle.header}>{formTitle}</h1>
                 <Divider />
-                <h3>Personal and Contact Details</h3>
-                <p><em>Tell us about yourself, so our lawyers can can best assist you.</em></p>
-                <div className="clearfix">
-                  <div className="field-container col-12 md-col md-col-6">
+                <Typography variant='h5' display='block'>Personal and Contact Details</Typography>
+                <Typography variant='caption' paragraph><em>Tell us about yourself, so our lawyers can can best assist you.</em></Typography>
+                <Grid container direction='row' alignItems='center' justify='space-around'>
+                  <Grid item xs={11} sm={5} md={3}>
                     <Field
                       name="name"
                       component={TextField}
                       style={formStyle.input}
-                      // underlineFocusStyle={formStyle.underline}
                       label="Name"
                     />
-                  </div>
-                  <div className="field-container col-12 md-col md-col-6">
+                  </Grid>
+                  <Grid item xs={11} sm={5} md={3}>
                     <Field
                       name="nationality"
                       label="Nationality"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                  <div className="field-container col-12 md-col md-col-6">
+                  </Grid>
+                  <Grid item xs={11} sm={5} md={3}>
                     <Field
                       name='requireInterpreter'
                       label='Are you comfortable speaking English?'
@@ -145,24 +144,24 @@ const RegisterForm = (props:any) => {
                       <MenuItem value="true">No</MenuItem>
                       <MenuItem value="false">Yes</MenuItem>
                     </Field>
-                  </div>
-                  <div className="field-container col-12 md-col md-col-6">
+                  </Grid>
+                  <Grid item xs={11} sm={5} md={3}>
                     <Field
                       name="preferredLanguage"
                       label="Preferred language(s)"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                  <div className="field-container col-12 md-col md-col-6">
+                  </Grid>
+                  <Grid item xs={11} sm={5} md={3}>
                     <Field
                       name="email"
                       label="Email"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                  <div className="field-container col-12 md-col md-col-6">
+                  </Grid>
+                  <Grid item xs={11} sm={5} md={3}>
                     <Field
                       name="countryCode"
                       component={Autocomplete}
@@ -182,16 +181,16 @@ const RegisterForm = (props:any) => {
                       }
                       }
                     />
-                  </div>
-                  <div className="field-container col-12 md-col md-col-6">
+                  </Grid>
+                  <Grid item xs={11} sm={5} md={3}>
                     <Field
                       name="phone"
                       label="Phone Number"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                  <div className="field-container col-12 md-col md-col-6">
+                  </Grid>
+                  <Grid item xs={11} sm={5} md={3}>
                     <Field
                       name="connectivity"
                       label="Do you have a smartphone?"
@@ -202,12 +201,12 @@ const RegisterForm = (props:any) => {
                       <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
                       <MenuItem className="traveler-has-no-phone-option" value="false">No</MenuItem>
                     </Field>
-                  </div>
-                </div>
-                <div className="clearfix">
-                  <h3>Travel details</h3>
-                  <p><em>Tell us when your flight arrives, so we know when to check in with you.</em></p>
-                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  </Grid>
+                </Grid>
+                <Typography variant='h5' display='block'>Travel details</Typography>
+                <Typography variant='caption' paragraph><em>Tell us when your flight arrives, so we know when to check in with you.</em></Typography>
+                <Grid container direction='row' alignItems='center' justify='space-around'>
+                  <Grid item xs={11} sm={3}>
                     <Field
                       name="scheduledArrivalTime"
                       label="What day do you arrive?"
@@ -215,54 +214,54 @@ const RegisterForm = (props:any) => {
                       format="MM/dd/yyyy"
                       style={formStyle.input}
                     />
-                  </div>
-                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  </Grid>
+                  <Grid item xs={11} sm={3}>
                     <Field
                       name="airlineCode"
                       label="Airline code"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  </Grid>
+                  <Grid item xs={11} sm={3}>
                     <Field
                       name="flightNum"
                       label="Flight number"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                </div>
-                <div className="clearfix">
-                  <h3>Emergency contact</h3>
-                  <p><em>Who can we contact if we can't get in touch with you?</em></p>
-                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  </Grid>
+                </Grid>
+                <Typography variant='h5' display='block'>Emergency contact</Typography>
+                <Typography variant='caption' paragraph><em>Who can we contact if we can't get in touch with you?</em></Typography>
+                <Grid container direction='row' alignItems='center' justify='space-around'>
+                  <Grid item xs={11} sm={3}>
                     <Field
                       name="secondaryContactName"
                       label="Name"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  </Grid>
+                  <Grid item xs={11} sm={3}>
                     <Field
                       name="secondaryContactPhone"
                       label="Phone Number"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                  <div className="field-container col-12 md-col sm-col-6 md-col-4">
+                  </Grid>
+                  <Grid item xs={11} sm={3}>
                     <Field
                       name="secondaryContactRelation"
                       label="Relationship to you"
                       component={TextField}
                       style={formStyle.input}
                     />
-                  </div>
-                </div>
+                  </Grid>
+                </Grid>
                 {/* <DisplayFormikState {...props} /> */}
-                <div>
+                <Grid>
                   <Button
                     variant='contained'
                     className="submit-traveler-registration"
@@ -273,27 +272,24 @@ const RegisterForm = (props:any) => {
                   >
                   Register
                   </Button>
-                </div>
+                </Grid>
                 {
                   showAdditionalButtons &&
-        <div>
-          <Button
-            variant='contained'
-            onClick={sendText}
-            style={formStyle.adminButton}
-            // labelColor="#2d6ea8"
-          > Text Traveler
-          </Button>
+                  <Grid>
+                    <Button
+                      variant='contained'
+                      onClick={sendText}
+                      style={formStyle.adminButton}
+                    > Text Traveler
+                    </Button>
 
-          <Button
-            variant='contained'
-            onClick={deleteTraveler}
-            style={formStyle.adminButton}
-            // backgroundColor="#bd1c11"
-            // labelColor="#FFFFFF"
-          >Delete Traveler
-          </Button>
-        </div>
+                    <Button
+                      variant='contained'
+                      onClick={deleteTraveler}
+                      style={formStyle.adminButton}
+                    >Delete Traveler
+                    </Button>
+                  </Grid>
                 }
               </Form>
               <SubmissionConfirmation
@@ -302,7 +298,7 @@ const RegisterForm = (props:any) => {
                 handleClose={handleClose}
                 confirmSubmit={confirmSubmit}
               />
-            </div>
+            </Grid>
           )
         }}
       </Formik>
