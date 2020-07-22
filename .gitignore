@@ -1,10 +1,9 @@
-packages/client/dist/**
-dist
+dist/
 .idea
 .env
 npm-debug.log*
 .npmrc
 flow-typed
 .DS_Store
-node_modules
-packages/api/src/public
+node_modules/
+/packages/api/src/public
