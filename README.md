@@ -1,8 +1,6 @@
-Testing failure on push only...
-
 # Border Buddy
 
-![](https://github.com/arntzy/border-buddy-development/workflows/Border%20Buddy%20CI/badge.svg)
+![](https://github.com/BorderBuddy/Border-Buddy/workflows/Border%20Buddy%20CI/badge.svg)
 
 ## Getting Started
 
