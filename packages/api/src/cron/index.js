@@ -24,14 +24,14 @@ const db = require('../database')
 const landFlightsAndTextTravelers = new CronJob({
   cronTime: '0 11,25,41,56 * * * *',
   onTick: jobs.landFlightsAndTextTravelers,
-  timeZone: 'America/New_York'
+  timeZone: 'America/New_York',
 })
 
 // once every fifteen min, at :10 :25 :40 :55
 const setUnconfirmedToAtRisk = new CronJob({
   cronTime: '0 10,24,40,55 * * * *',
   onTick: jobs.setToAtRisk,
-  timeZone: 'America/New_York'
+  timeZone: 'America/New_York',
 })
 
 db.authenticate()
