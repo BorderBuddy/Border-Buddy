@@ -93,7 +93,7 @@ export const formStyle = {
     margin: '5em auto',
   },
   input: {
-    width: '80%',
+    width: '100%',
     color: 'black',
     marginTop: '1em',
     paddingTop: '1em',
@@ -117,10 +117,12 @@ export const formStyle = {
   adminButton: {
     marginBottom: '2em',
     width: '50%',
+    backgroundColor: '#2d6ea8',
   },
   submitButton: {
     marginBottom: '2em',
     width: '100%',
+    backgroundColor: '#2d6ea8',
   },
   header: {
     textAlign: 'center' as const,
