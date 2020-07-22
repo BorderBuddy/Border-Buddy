@@ -14,8 +14,8 @@ const baseConfig = {
 }
 
 let sequelize
-if (dbConfig.use_env_variable) {
-  sequelize = new Sequelize(dbConfig.use_env_variable, baseConfig)
+if (dbConfig.url) {
+  sequelize = new Sequelize(dbConfig.url, baseConfig)
 } else {
   sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, Object.assign({}, baseConfig, dbConfig))
 }
