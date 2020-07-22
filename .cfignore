@@ -4,5 +4,5 @@
 .DS_Store
 *.log.*
 README.md
-node_modules/
 dist/
+node_modules/

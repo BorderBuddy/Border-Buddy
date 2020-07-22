@@ -14,7 +14,7 @@ applications:
   instances: 1
   memory: 2GB
   disk_quota: 2048M
-  command: npm run lerna:bootstrap && npm run worker
+  command: npm run lerna:bootstrap && npm run build-api && npm run worker
   no-route: true
   health-check-type: none
   buildpack: nodejs_buildpack
