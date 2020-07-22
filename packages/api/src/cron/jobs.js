@@ -92,7 +92,7 @@ module.exports = {
         return Promise.map(travelers, (traveler) => {
           return Promise.all([
             alertAssignedAtRisk(process.env.NAZ_NUM, traveler),
-            a,lertAssignedAtRisk(process.env.TAREK_NUM, traveler)
+            alertAssignedAtRisk(process.env.TAREK_NUM, traveler),
           ])
             .catch(err => console.error(err))
         })
@@ -123,12 +123,12 @@ module.exports = {
       .then(messages => {
         if (messages && messages.length) {
           console.log(`Sent messages to ${messages.length} travelers`)
-       , } else {
+        } else {
           console.log('No messages sent!')
         }
       })
       .catch(err => console.error(err))
-  }
+  },
 }
 
 // From FlightStats API

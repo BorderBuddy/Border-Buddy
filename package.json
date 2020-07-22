@@ -21,9 +21,6 @@
     "todo": "lerna run todo",
     "todo-ci": "lerna run todo-ci"
   },
-  "engines": {
-    "node": "14.2.0"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm test",
