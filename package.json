@@ -7,7 +7,7 @@
     "lerna:bootstrap": "lerna bootstrap",
     "migrate": "lerna run --scope api migrate",
     "seed": "lerna run --scope api seed",
-    "worker": "lerna run --scope api worker",
+    "worker": "lerna run --scope api worker --stream",
     "push:staging": "rm -rf node_modules && cf target -s staging && cf push -f manifest.staging.yml",
     "push:production": "rm -rf node_modules && cf target -s production && cf push -f manifest.production.yml",
     "build-client": "lerna run --scope client build",
@@ -17,7 +17,7 @@
     "dev": "lerna run dev --stream --parallel",
     "test": "lerna run test && npm run test:jest",
     "test:jest": "lerna run --scope client test:jest",
-    "start": "lerna run --scope api start",
+    "start": "lerna run --scope api start --stream",
     "todo": "lerna run todo",
     "todo-ci": "lerna run todo-ci"
   },
