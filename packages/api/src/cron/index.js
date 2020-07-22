@@ -36,6 +36,7 @@ const setUnconfirmedToAtRisk = new CronJob({
 
 db.authenticate()
   .then(() => {
+    console.log('starting cron jobs...')
     landFlightsAndTextTravelers.start()
     setUnconfirmedToAtRisk.start()
   })
