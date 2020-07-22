@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button } from '@material-ui/core'
+import { Card, CardContent, Button, Typography } from '@material-ui/core'
 import { signupLoginStyle, formStyle } from './Admin/styles'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
@@ -33,45 +33,47 @@ export const LoginForm = ({
               .required(),
           })}
     >
-      <Card style={style.card} >
-        <h3 style={style.title}>Admin Login</h3>
-        <Form>
-          <Field
-            name="email"
-            label="Email"
-            component={TextField}
-            type='email'
-            style={formStyle.input}
-          />
-          <Field
-            name="password"
-            label="Password"
-            component={TextField}
-            type='password'
-            style={formStyle.input}
-          />
-          {
-            auth.fetching &&
-            <p
-              style={style.loader}
-            >Logging In...
-            </p>
-          }
-          {
-            auth.error &&
-            <p
-              style={style.error}
-            >{auth.error.message}
-            </p>
-          }
-          <Button
-            type="submit"
-            disabled={pristine || submitting}
-            variant='contained'
-            color='primary'
-            style={formStyle.input}
-          > Login </Button>
-        </Form>
+      <Card>
+        <CardContent>
+          <Typography variant='h5' style={style.title}>Admin Login</Typography>
+          <Form>
+            <Field
+              name="email"
+              label="Email"
+              component={TextField}
+              type='email'
+              style={formStyle.input}
+            />
+            <Field
+              name="password"
+              label="Password"
+              component={TextField}
+              type='password'
+              style={formStyle.input}
+            />
+            {
+              auth.fetching &&
+              <p
+                style={style.loader}
+              >Logging In...
+              </p>
+            }
+            {
+              auth.error &&
+              <p
+                style={style.error}
+              >{auth.error.message}
+              </p>
+            }
+            <Button
+              type="submit"
+              disabled={pristine || submitting}
+              variant='contained'
+              color='primary'
+              style={formStyle.submitButton}
+            > Login </Button>
+          </Form>
+        </CardContent>
       </Card>
     </Formik>
   )
