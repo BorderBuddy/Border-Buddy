@@ -12,26 +12,26 @@ export class AddTraveler extends React.Component {
       form: {
         display: 'block',
         width: '80%',
-        margin: '1em auto'
+        margin: '1em auto',
       },
       input: {
         width: '80%',
         margin: '1%',
-        color: 'black'
+        color: 'black',
       },
       error: {
-        color: '#bd1c11'
+        color: '#bd1c11',
       },
       label: {
-        color: '#526B5C'
+        color: '#526B5C',
       },
       underline: {
-        color: '#526B5C'
+        color: '#526B5C',
       },
       button: {
         display: 'block',
-        margin: '1em auto'
-      }
+        margin: '1em auto',
+      },
     }
 
     const menuItems = (representatives) => {
@@ -291,7 +291,6 @@ export class AddTraveler extends React.Component {
                 type="submit"
                 label="Submit"
                 disabled={!valid}
-                color='primary'
                 variant='contained'
                 style={style.button}
                 className="add-new-traveler"
@@ -308,5 +307,5 @@ export class AddTraveler extends React.Component {
 export default reduxForm({
   form: 'adminAddTraveler',
   asyncValidate: validateCode,
-  asyncBlurFields: ['airlineCode']
+  asyncBlurFields: ['airlineCode'],
 })(AddTraveler)
