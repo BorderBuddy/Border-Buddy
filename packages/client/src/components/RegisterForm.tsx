@@ -261,7 +261,7 @@ const RegisterForm = (props:any) => {
                   </Grid>
                 </Grid>
                 {/* <DisplayFormikState {...props} /> */}
-                <Grid>
+                <Grid container>
                   <Button
                     variant='contained'
                     className="submit-traveler-registration"
@@ -275,7 +275,7 @@ const RegisterForm = (props:any) => {
                 </Grid>
                 {
                   showAdditionalButtons &&
-                  <Grid>
+                  <Grid container>
                     <Button
                       variant='contained'
                       onClick={sendText}

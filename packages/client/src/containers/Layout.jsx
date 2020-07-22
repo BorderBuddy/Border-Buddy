@@ -52,7 +52,7 @@ export const Layout = () => {
           </Toolbar>
         </LoggedOut>
       </AppBar>
-      <Grid container={true} style={styles.container}>
+      <Grid container style={styles.container} justify='space-around'>
         {getRoutes()}
       </Grid>
       <Footer />
