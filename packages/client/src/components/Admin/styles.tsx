@@ -115,12 +115,12 @@ export const formStyle = {
     color: '#526B5C',
   },
   adminButton: {
-    marginBottom: '2em',
+    marginTop: '2em',
     width: '50%',
     backgroundColor: '#2d6ea8',
   },
   submitButton: {
-    marginBottom: '2em',
+    marginTop: '2em',
     width: '100%',
     backgroundColor: '#2d6ea8',
   },

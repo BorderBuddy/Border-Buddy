@@ -1,5 +1,5 @@
 import React from 'react'
-import { Toolbar, IconButton, Button, AppBar, Container } from '@material-ui/core'
+import { Toolbar, IconButton, Button, AppBar, Container, Grid } from '@material-ui/core'
 import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
 import { RenderAppBar } from '../components/Admin/AppBar'
@@ -52,9 +52,9 @@ export const Layout = () => {
           </Toolbar>
         </LoggedOut>
       </AppBar>
-      <Container style={styles.container}>
+      <Grid container style={styles.container} justify='space-around'>
         {getRoutes()}
-      </Container>
+      </Grid>
       <Footer />
     </div>
   )
