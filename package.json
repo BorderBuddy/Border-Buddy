@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lerna:bootstrap": "lerna bootstrap",
-    "migrate": "lerna run --scope api migrate",
+    "migrate": "lerna run --scope api migrate --stream",
     "seed": "lerna run --scope api seed",
     "worker": "lerna run --scope api worker --stream",
     "push:staging": "rm -rf node_modules && cf target -s staging && cf push -f manifest.staging.yml",
