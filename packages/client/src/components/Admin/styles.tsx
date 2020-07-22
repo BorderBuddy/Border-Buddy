@@ -25,6 +25,7 @@ export const signupLoginStyle = {
     padding: '2em',
   },
   button: {
+    backgroundColor: '#2d6ea8',
     margin: '2em auto',
     display: 'block',
     width: '50%',
@@ -49,6 +50,7 @@ export const adminSignUp = {
     padding: '2em',
   },
   button: {
+    backgroundColor: '#2d6ea8',
     margin: '2em auto',
     display: 'block',
     width: '50%',
