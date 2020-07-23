@@ -61,8 +61,8 @@ jobs:
     needs: build
     
     steps:
-    - name: Remove node_modules
-      run: rm -rf node_modules
+    - name: Check out Repository Code
+      uses: actions/checkout@v2
 
     - name: CF CLI Action Deploy to Staging
       uses: citizen-of-planet-earth/cf-cli-action@v1
