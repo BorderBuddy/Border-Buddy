@@ -113,7 +113,7 @@ const RegisterForm = (props:any) => {
                 <Typography variant='h5' display='block'>Personal and Contact Details</Typography>
                 <Typography variant='caption' paragraph><em>Tell us about yourself, so our lawyers can can best assist you.</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
-                  <Grid item xs={11} sm={5} md={3}>
+                  <Grid item xs={11} sm={5}>
                     <Field
                       name="name"
                       component={TextField}
@@ -121,7 +121,7 @@ const RegisterForm = (props:any) => {
                       label="Name"
                     />
                   </Grid>
-                  <Grid item xs={11} sm={5} md={3}>
+                  <Grid item xs={11} sm={5}>
                     <Field
                       name="nationality"
                       label="Nationality"
@@ -129,7 +129,7 @@ const RegisterForm = (props:any) => {
                       style={formStyle.input}
                     />
                   </Grid>
-                  <Grid item xs={11} sm={5} md={3}>
+                  <Grid item xs={11} sm={5}>
                     <Field
                       name='requireInterpreter'
                       label='Are you comfortable speaking English?'
@@ -145,7 +145,7 @@ const RegisterForm = (props:any) => {
                       <MenuItem value="false">Yes</MenuItem>
                     </Field>
                   </Grid>
-                  <Grid item xs={11} sm={5} md={3}>
+                  <Grid item xs={11} sm={5}>
                     <Field
                       name="preferredLanguage"
                       label="Preferred language(s)"
@@ -153,7 +153,7 @@ const RegisterForm = (props:any) => {
                       style={formStyle.input}
                     />
                   </Grid>
-                  <Grid item xs={11} sm={5} md={3}>
+                  <Grid item xs={11} sm={5}>
                     <Field
                       name="email"
                       label="Email"
@@ -161,7 +161,7 @@ const RegisterForm = (props:any) => {
                       style={formStyle.input}
                     />
                   </Grid>
-                  <Grid item xs={11} sm={5} md={3}>
+                  <Grid item xs={11} sm={5}>
                     <Field
                       name="countryCode"
                       component={Autocomplete}
@@ -182,7 +182,7 @@ const RegisterForm = (props:any) => {
                       }
                     />
                   </Grid>
-                  <Grid item xs={11} sm={5} md={3}>
+                  <Grid item xs={11} sm={5}>
                     <Field
                       name="phone"
                       label="Phone Number"
@@ -190,7 +190,7 @@ const RegisterForm = (props:any) => {
                       style={formStyle.input}
                     />
                   </Grid>
-                  <Grid item xs={11} sm={5} md={3}>
+                  <Grid item xs={11} sm={5}>
                     <Field
                       name="connectivity"
                       label="Do you have a smartphone?"
