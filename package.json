@@ -19,7 +19,8 @@
     "test:jest": "lerna run --scope client test:jest",
     "start": "lerna run --scope api start",
     "todo": "lerna run todo",
-    "todo-ci": "lerna run todo-ci"
+    "todo-ci": "lerna run todo-ci",
+    "clean": "lerna run clean && rm -rf node_modules"
   },
   "husky": {
     "hooks": {
