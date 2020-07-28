@@ -5,9 +5,10 @@
   "scripts": {
     "dev:worker": "ts-node ./src/cron",
     "worker": "node ./dist/cron",
-    "build": "npm run clean && tsc && mkdir -p ./dist/public && mkdir -p ./src/public",
+    "build": "npm run clean:dist && tsc && mkdir -p ./dist/public && mkdir -p ./src/public",
     "test": "mocha -r ts-node/register 'test/**/*'",
-    "clean": "rm -rf dist && rm -rf ./src/public",
+    "clean:dist": "rm -rf dist && rm -rf ./src/public",
+    "clean": "rm -rf node_modules && npm run clean:dist",
     "dev": "nodemon",
     "start": "node ./dist/index.js",
     "migrate": "sequelize db:migrate",
