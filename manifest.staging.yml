@@ -1,19 +1,20 @@
 applications:
 - name: border-buddy
   instances: 1
-  memory: 512M
+  memory: 2GB
   disk_quota: 2048M
-  command: npm run build && npm run migrate && npm run start
+  command: npm run lerna:bootstrap && npm run build && npm run migrate && npm run start
   routes:
   - route: border-buddy.cfapps.io
   buildpack: nodejs_buildpack
+  health-check-type: none
   services:
   - border-buddy-db
 - name: border-buddy-worker
   instances: 1
-  memory: 512M
+  memory: 2GB
   disk_quota: 2048M
-  command: npm run worker
+  command: npm run lerna:bootstrap && npm run build-api && npm run worker
   no-route: true
   health-check-type: none
   buildpack: nodejs_buildpack

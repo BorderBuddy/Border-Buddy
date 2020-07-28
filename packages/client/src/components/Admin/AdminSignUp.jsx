@@ -11,7 +11,7 @@ class AdminSignUp extends Component {
     const style = adminSignUp
     const {
       handleSubmit, pristine, submitting,
-      handleEmailChange, handlePasswordChange, handlePhoneChange, valid
+      handleEmailChange, handlePasswordChange, handlePhoneChange, valid,
     } = this.props
 
     return (
@@ -48,7 +48,6 @@ class AdminSignUp extends Component {
             <Button
               type="submit"
               disabled={pristine || submitting || !valid}
-              color='primary'
               variant='contained'
               style={style.button}
             >Sign Up</Button>
@@ -60,7 +59,7 @@ class AdminSignUp extends Component {
 }
 
 AdminSignUp = reduxForm({
-  form: 'adminSignup'
+  form: 'adminSignup',
 })(AdminSignUp)
 
 const mapStateToProps = (state) => ({})
