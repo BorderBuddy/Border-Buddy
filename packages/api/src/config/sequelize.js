@@ -5,7 +5,7 @@ module.exports = {
     username: 'postgres',
     password: DB_PASSWORD,
     database: 'BorderBuddy',
-    dialect: 'postgres'
+    dialect: 'postgres',
   },
   test: {
     host: 'localhost',
@@ -13,9 +13,9 @@ module.exports = {
     username: 'postgres',
     password: 'postgres',
     database: 'BorderBuddy_test',
-    dialect: 'postgres'
+    dialect: 'postgres',
   },
   production: {
-    use_env_variable: DATABASE_URL
-  }
+    url: DATABASE_URL,
+  },
 }

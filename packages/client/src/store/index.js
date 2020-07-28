@@ -11,7 +11,7 @@ export const history = createBrowserHistory()
 const reactRouteMiddleware = routerMiddleware(history)
 const middleware = [
   thunkMiddleware,
-  reactRouteMiddleware
+  reactRouteMiddleware,
 ]
 
 if (process.env.NODE_ENV === 'development') {
@@ -25,11 +25,11 @@ export default function configureStore (initialState) {
     initialState,
     composeWithDevTools(
       applyMiddleware(
-        ...middleware
-      )
-    )
+        ...middleware,
+      ),
+    ),
   )
-  console.log('configureStore called')
+  // console.log('configureStore called')
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

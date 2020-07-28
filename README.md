@@ -1,10 +1,10 @@
 # Border Buddy
 
-![](https://github.com/arntzy/border-buddy-development/workflows/Border%20Buddy%20CI/badge.svg)
+![](https://github.com/BorderBuddy/Border-Buddy/workflows/Border%20Buddy%20CI/badge.svg)
 
 ## Getting Started
 
-Initial setup: 
+Initial setup:
 
 ### Database setup:
 
@@ -44,7 +44,7 @@ $ npm run migrate
 ```
 
 **To rollback the last migration, run:**
- 
+
 ```
 $ npm run migrate:undo
 ```

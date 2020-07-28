@@ -25,7 +25,7 @@ interface AppState {
 class App extends Component {
   state: AppState = {
     ready: false,
-    user: loggedInUser()
+    user: loggedInUser(),
   }
 
   constructor (props: any, context: any) {

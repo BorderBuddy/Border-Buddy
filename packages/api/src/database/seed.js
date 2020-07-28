@@ -1,6 +1,5 @@
 const db = require('./index')
 const chalk = require('chalk')
-const Promise = require('bluebird')
 
 const today = new Date()
 const tomorrow = new Date()
@@ -12,7 +11,7 @@ const users = [
   { email: 'andrew@borderbuddy.us', password: '12345678', phone: '1234567890' },
   { email: 'dillon@borderbuddy.us', password: '12345678', phone: '1234567890' },
   { email: 'aaron@borderbuddy.us', password: '12345678', phone: '1234567890' },
-  { email: 'admin@borderbuddy.us', password: '12345678', phone: '1234567890' }
+  { email: 'admin@borderbuddy.us', password: '12345678', phone: '1234567890' },
 ]
 
 /*
@@ -22,20 +21,20 @@ const dummyFlights = [{
   flightNum: '88',
   airlineCode: 'UA',
   status: 'scheduled',
-  scheduledArrivalTime: today
+  scheduledArrivalTime: today,
 },
 {
   flightNum: '88',
   airlineCode: 'UA',
   status: 'scheduled',
-  scheduledArrivalTime: tomorrow
+  scheduledArrivalTime: tomorrow,
 },
 {
   flightNum: '6020',
   airlineCode: 'KL',
   status: 'scheduled',
-  scheduledArrivalTime: fiveDaysAgo
-}
+  scheduledArrivalTime: fiveDaysAgo,
+},
 ]
 
 const dummyTravelers = [
@@ -48,7 +47,7 @@ const dummyTravelers = [
   { email: 'tatiiii@abc.com', countryCode: '93', phone: '1234567890', name: 'Tatiana Alex', status: 'transit', connectivity: true, nationality: 'Yemen', flightId: 1 },
   { email: 'clemm@abc.com', countryCode: '92', phone: '1234567890', name: 'Wat Uwotmate', status: 'transit', connectivity: true, nationality: 'Nigeria', flightId: 1 },
   { email: 'anthony@abc.com', countryCode: '966', phone: '1234567890', name: 'DT Jacksern', status: 'unconfirmed', connectivity: true, nationality: 'Sudan', flightId: 1 },
-  { email: 'melbrux@abc.com', countryCode: '1', phone: '1234567890', name: 'Fraulein Hhauserr', status: 'unconfirmed', connectivity: true, nationality: 'Sudan', flightId: 1 }
+  { email: 'melbrux@abc.com', countryCode: '1', phone: '1234567890', name: 'Fraulein Hhauserr', status: 'unconfirmed', connectivity: true, nationality: 'Sudan', flightId: 1 },
 ]
 
 const seedFlights = () => Promise.each(dummyFlights, flight => db.model('flight').create(flight))

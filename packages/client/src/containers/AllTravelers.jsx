@@ -8,7 +8,7 @@ class AllTravelersContainer extends Component {
     super(props)
     this.state = {
       view: null,
-      width: window.innerWidth
+      width: window.innerWidth,
     }
   }
 
@@ -20,21 +20,21 @@ class AllTravelersContainer extends Component {
   }
 
   mobileOrDesktop (travelers) {
-    if (this.state.width > 1100) {
+    if (this.state.width > 800) {
       return <RenderAllTravelers travelers={travelers} history={this.props.history}/>
     } else {
       return <AllTravelersMobile travelers={travelers} history={this.props.history}/>
     }
   }
 
-  render() {
-		const { travelers } = this.props
+  render () {
+    const { travelers } = this.props
     return <div>{this.mobileOrDesktop(travelers)}</div>
   }
 }
 
 const mapStateToProps = ({ travelers }) => ({
-  travelers
+  travelers,
 })
 
 export default connect(mapStateToProps)(AllTravelersContainer)

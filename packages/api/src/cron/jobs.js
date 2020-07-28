@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Twilio } from '../twilio/twilio.controller'
 import { config } from '../config'
 import { statusByCodeAndDate } from '../flight/flight.query'
-// import { Promise } from 'bluebird'
+import { Promise } from 'bluebird'
 
 const askIfTravelerOk = traveler => {
   return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ const askIfTravelerOk = traveler => {
       .create({
         to: `+${traveler.countryCode}${traveler.phone}`,
         from: config.twilio.adminPhone,
-        body: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`
+        body: `Hi ${traveler.name}, we have not heard from you yet. Please respond with 'ok' if you are through customs and immigration.`,
       }, (err, result) => {
         if (err) reject(err)
         else resolve(result)
@@ -25,7 +25,7 @@ const alertAssignedAtRisk = (number, traveler) => {
       .create({
         to: number,
         from: config.twilio.adminPhone,
-        body: `ALERT! ${traveler.name} has not checked in and has been marked AT RISK.`
+        body: `ALERT! ${traveler.name} has not checked in and has been marked AT RISK.`,
       }, (err, result) => {
         if (err) reject(err)
         else {
@@ -86,12 +86,13 @@ const recursiveFlatten = (arr, start) => {
 module.exports = {
 
   setToAtRisk: function () {
+    console.log('setToAtRisk cron job started...')
     Traveler.setToAtRisk()
       .then((travelers) => {
         return Promise.map(travelers, (traveler) => {
           return Promise.all([
             alertAssignedAtRisk(process.env.NAZ_NUM, traveler),
-            alertAssignedAtRisk(process.env.TAREK_NUM, traveler)
+            alertAssignedAtRisk(process.env.TAREK_NUM, traveler),
           ])
             .catch(err => console.error(err))
         })
@@ -99,6 +100,7 @@ module.exports = {
   },
 
   landFlightsAndTextTravelers: function () {
+    console.log('landFlightsAndTextTravelers cron job started...')
     Flight.findFlightsToLand()
       .then(flights => {
         console.log('Flights Found:', flights)
@@ -126,7 +128,7 @@ module.exports = {
         }
       })
       .catch(err => console.error(err))
-  }
+  },
 }
 
 // From FlightStats API
