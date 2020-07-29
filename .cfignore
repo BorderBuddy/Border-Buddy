@@ -4,11 +4,5 @@
 .DS_Store
 *.log.*
 README.md
-<<<<<<< HEAD
 dist/
 node_modules/
-=======
-node_modules
-./packages/*/node_modules
-./packages/*/dist
->>>>>>> e459556... move dev dependencies to dependencies for porduction
