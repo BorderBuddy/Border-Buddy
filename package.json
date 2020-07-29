@@ -8,8 +8,8 @@
     "migrate": "lerna run --scope api migrate --stream",
     "seed": "lerna run --scope api seed",
     "worker": "lerna run --scope api worker --stream",
-    "push:staging": "rm -rf node_modules && cf target -s staging && cf push -f manifest.staging.yml",
-    "push:production": "rm -rf node_modules && cf target -s production && cf push -f manifest.production.yml",
+    "push:staging": "cf target -s staging && cf push -f manifest.staging.yml -v",
+    "push:production": "cf target -s production && cf push -f manifest.production.yml -v",
     "build-client": "lerna run --scope client build",
     "build-api": "lerna run --scope api build",
     "copy-assets": "cp -R ./packages/client/dist/* ./packages/api/dist/public && cp -R ./packages/client/dist/* ./packages/api/src/public",
@@ -21,9 +21,6 @@
     "todo": "lerna run todo",
     "todo-ci": "lerna run todo-ci",
     "clean": "lerna run clean && rm -rf node_modules"
-  },
-  "engines": {
-    "node": "14.2.0"
   },
   "husky": {
     "hooks": {
