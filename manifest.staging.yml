@@ -3,7 +3,7 @@ applications:
   instances: 1
   memory: 2GB
   disk_quota: 2048M
-  command: npm run lerna:bootstrap && npm run build && npm run migrate && npm run start
+  command: npm run lerna:bootstrap && npm run build && npm run migrate && npm run seed:deployment && npm run start
   routes:
   - route: border-buddy.cfapps.io
   buildpack: nodejs_buildpack

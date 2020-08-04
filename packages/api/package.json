@@ -14,7 +14,7 @@
     "migrate": "sequelize db:migrate",
     "migrate:undo": "sequelize db:migrate:undo",
     "seed": "ts-node ./src/database/seed.js",
-    "deploy-seed": "node dist/database/deploymentSeed.js",
+    "seed:deployment": "node ./dist/database/deploymentSeed.js",
     "todo": "leasot -x 'src/**/*.[j|t]s'",
     "todo-ci": "leasot -x --reporter markdown 'src/**/*.[j|t]s' > TODO.md"
   },

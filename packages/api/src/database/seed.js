@@ -1,5 +1,6 @@
 const db = require('./index')
 const chalk = require('chalk')
+import {Promise} from 'bluebird'
 
 const today = new Date()
 const tomorrow = new Date()
