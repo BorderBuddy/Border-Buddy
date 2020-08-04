@@ -6,7 +6,8 @@
   "scripts": {
     "lerna:bootstrap": "lerna bootstrap",
     "migrate": "lerna run --scope api migrate --stream",
-    "seed": "lerna run --scope api seed",
+    "seed": "lerna run --scope api seed --stream",
+    "seed:deployment": "lerna run --scope api seed:deployment --stream",
     "worker": "lerna run --scope api worker --stream",
     "push:staging": "cf target -s staging && cf push -f manifest.staging.yml -v",
     "push:production": "cf target -s production && cf push -f manifest.production.yml -v",
