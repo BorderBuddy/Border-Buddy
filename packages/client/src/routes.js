@@ -30,7 +30,7 @@ export const getRoutes = () => (
     <Route exact path="/login"><Login/></Route>
     <Route exact path='/success'><Success/></Route>
     <LoggedIn>
-      <Route exact path="/traveler/add"><AddTravelerContainer /></Route>
+      <Route exact path="/traveler/add"><RegisterForm/></Route>
       <Route exact path="/travelers/:id" render={(props) => {
         onSingleTravelerEnter(props)
         return <SingleTravelerContainer {...props} />

@@ -34,7 +34,7 @@ export const Layout = () => {
               style={styles.button}
               id="add-new-traveler"
               varitant='text'
-              onClick={() => history.push('/travelers/add')}>
+              onClick={() => history.push('/traveler/add')}>
                 Add Traveler
             </Button>
             <RenderAppBar onSignoutClick={() => onSignoutClick()} />
