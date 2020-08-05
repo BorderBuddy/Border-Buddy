@@ -9,8 +9,8 @@
     "test:jest": "jest --passWithNoTests",
     "todo": "leasot -x 'src/**/*'",
     "todo-ci": "leasot -x --reporter markdown 'src/**/*' > TODO.md",
-    "clean:dist" : "rm -rf dist",
-    "clean" : "rm -rf node_modules && npm run clean:dist"
+    "clean:dist": "rm -rf dist",
+    "clean": "rm -rf node_modules && npm run clean:dist"
   },
   "license": "Apache-2.0",
   "dependencies": {
