@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { yupValidationSchema } from '../utils/validations'
 import countryCodes from '../utils/countryCodes'
@@ -10,7 +10,6 @@ import MuiTextField from '@material-ui/core/TextField'
 import { Autocomplete, AutocompleteRenderInputParams } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import { DisplayFormikState } from './DisplayFormikState'
 import { SubmissionConfirmation } from './SubmissionConfirmation'
 import { signUpTraveler } from '../actions/signUp'
 import { checkFlight } from '../actions/flight'
@@ -28,12 +27,12 @@ const RegisterForm = (props:any) => {
     sendText,
     deleteTraveler,
     flight,
+    isAdmin,
+    formTitle,
+    children,
+    initialValues,
   } = props
-
-  // TODO: isAdmin will be set by user context in props eventually
-  const isAdmin = false
-  const formTitle = 'Traveler Registration'
-
+  console.log(initialValues)
   const handleClose = () => {
     setState({ open: false })
   }
@@ -74,26 +73,30 @@ const RegisterForm = (props:any) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Formik
-        initialValues={{
-          name: '',
-          nationality: '',
-          requireInterpreter: 'false',
-          preferredLanguage: 'English',
-          email: '',
-          countryCode: {
-            code: 1,
-            label: 'USA or Canada - +1',
-          },
-          phone: '',
-          connectivity: 'true',
-          flightNum: '',
-          secondaryContactName: '',
-          secondaryContactPhone: '',
-          secondaryContactRelation: '',
-          scheduledArrivalTime: new Date(),
-          airlineCode: '',
-
-        }}
+        enableReinitialize
+        initialValues={
+          isAdmin
+            ? {...initialValues}
+            : {
+              name: '',
+              nationality: '',
+              requireInterpreter: 'false',
+              preferredLanguage: 'English',
+              email: '',
+              countryCode: {
+                code: 1,
+                label: 'USA or Canada - +1',
+              },
+              phone: '',
+              connectivity: 'true',
+              flightNum: '',
+              secondaryContactName: '',
+              secondaryContactPhone: '',
+              secondaryContactRelation: '',
+              scheduledArrivalTime: new Date(),
+              airlineCode: '',
+            }
+        }
         onSubmit={handleSubmit}
         validateOnChange={false}
         validationSchema={yupValidationSchema(isAdmin)}
@@ -260,7 +263,9 @@ const RegisterForm = (props:any) => {
                     />
                   </Grid>
                 </Grid>
-                {/* <DisplayFormikState {...props} /> */}
+                {/* {isAdmin &&
+                  <Fragment>{children}</Fragment>
+                } */}
                 <Grid container>
                   <Button
                     variant='contained'

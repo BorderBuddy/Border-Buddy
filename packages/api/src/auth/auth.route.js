@@ -5,7 +5,6 @@ import { User } from '../database/models/user'
 import sequelize from '../database/db'
 import ExpressBrute from 'express-brute'
 import SequelizeStore from 'express-brute-sequelize'
-// import ExpressBruteStore from 'express-brute-store-sequelize'
 
 const base = '/api/auth'
 
@@ -32,16 +31,3 @@ export default (app) => {
     app.post(base + '/local', login)
   }
 }
-
-//   const bruteOptions = {
-//     freeRetries: 3,
-//     minWait: 5000,
-//     attachResetToRequest: false,
-//     refreshTimeoutOnRequest: false,
-//   }
-
-//   const bruteStoreOptions = {
-//     tableName: 'bruteStore', // this is a default name
-//   }
-// const bruteStore = new ExpressBruteStore(sequelize, bruteStoreOptions)
-// const brute = new ExpressBrute(bruteStore, bruteOptions)

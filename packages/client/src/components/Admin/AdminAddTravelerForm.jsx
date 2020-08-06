@@ -1,9 +1,12 @@
-import React from 'react';
-import Form from '../FormContainer';
-import AdminFormExtension from '../AdminFormExtension';
+import React from 'react'
+import AdminFormExtension from '../AdminFormExtension'
+import RegisterForm from '../RegisterForm'
 
-export default (props) =>  (
-  <Form {...props} formTitle={props.title} isAdmin={true} >
-    <AdminFormExtension {...props} />
-  </Form>
-)
+export const EditForm = (props) => {
+  return (
+    <RegisterForm formTitle={props.title} isAdmin={true} initialValues={props.initialValues}>
+      <AdminFormExtension {...props} />
+    </RegisterForm>
+  )
+}
+
