@@ -8,7 +8,6 @@ import Login from './containers/Login'
 import AdminSignUp from './containers/AdminSignUpContainer'
 import UpdateUserContainer from './containers/UpdateUserContainer'
 import { Success } from './components/Success'
-import AddTravelerContainer from './containers/AddTravelerContainer'
 import { About } from './components/About'
 import { WhyBorderBuddy } from './components/WhyBorderBuddy'
 import { LoggedIn } from './auth/authService'
@@ -25,12 +24,12 @@ export const getRoutes = () => (
     {/* TODO: add actual homepage */}
     <Route exact path="/" ><WhyBorderBuddy /></Route>
     <Route exact path="/why" ><WhyBorderBuddy /></Route>
-    <Route exact path="/register"><RegisterForm/></Route>
+    <Route exact path="/register"><RegisterForm formTitle='Traveler Registration' isAdmin={false}/></Route>
     <Route exact path="/about" ><About /></Route>
     <Route exact path="/login"><Login/></Route>
     <Route exact path='/success'><Success/></Route>
     <LoggedIn>
-      <Route exact path="/traveler/add"><RegisterForm/></Route>
+      <Route exact path="/traveler/add"><RegisterForm formTitle='Traveler Registration' isAdmin={true}/></Route>
       <Route exact path="/travelers/:id" render={(props) => {
         onSingleTravelerEnter(props)
         return <SingleTravelerContainer {...props} />

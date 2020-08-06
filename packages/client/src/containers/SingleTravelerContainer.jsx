@@ -16,7 +16,7 @@ class SingleTravelerContainer extends Component {
       open: false,
       sentTextOpen: false,
       textSentSuccess: null,
-      deleteTravelerOpen: false
+      deleteTravelerOpen: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClose = this.handleClose.bind(this)
@@ -118,7 +118,7 @@ const mapDispatchToProps = dispatch => ({
   updateTraveler: (traveler, id) => dispatch(updateTraveler(traveler, id)),
   checkFlight: (code, flightNum, year, month, day) => dispatch(checkFlight(code, flightNum, year, month, day)),
   sendText: (traveler) => dispatch(sendText(traveler)),
-  deleteTraveler: (id) => dispatch(deleteTraveler(id))
+  deleteTraveler: (id) => dispatch(deleteTraveler(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTravelerContainer)

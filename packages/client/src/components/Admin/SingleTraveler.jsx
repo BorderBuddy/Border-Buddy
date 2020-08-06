@@ -1,14 +1,8 @@
 import React from 'react'
-import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
-import { Button, MenuItem } from '@material-uicore'
-import { TextField, DatePicker, SelectField } from 'redux-form-material-ui'
-import AirlinePicker from '../AirlinePicker'
-import CountryCodePicker from '../CountryCodePicker'
 import { fetchSelectedTraveler } from '../../actions/selectedTraveler'
-import { required, phone, email, uppercase } from '../../utils/validations'
 import countryCodes from '../../utils/countryCodes'
-import AdminAddTravelerForm from './AdminAddTravelerForm'
+import { EditForm } from './AdminAddTravelerForm'
 
 class SingleTraveler extends React.Component {
   componentDidMount () {
@@ -17,7 +11,7 @@ class SingleTraveler extends React.Component {
 
   render () {
     return (
-      <AdminAddTravelerForm
+      <EditForm
         {...this.props}
         title={'Edit Traveler'}
         showAdditionalButtons={true}
@@ -40,7 +34,7 @@ const mapStateToProps = ({ selectedTraveler }) => {
     secondaryContactRelation,
     status: passengerStatus,
     representative,
-    countryCode
+    countryCode,
   } = selectedTraveler
   const { airlineCode, flightNum, scheduledArrivalTime, status: flightStatus } =
     selectedTraveler.flight || {}
@@ -63,14 +57,14 @@ const mapStateToProps = ({ selectedTraveler }) => {
       flightNum,
       flightStatus,
       representative,
-      countryCode: countryCodes[countryCode]
-    }
+      countryCode: countryCodes[countryCode],
+    },
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSelectedTraveler: (id) => dispatch(fetchSelectedTraveler(id))
+    fetchSelectedTraveler: (id) => dispatch(fetchSelectedTraveler(id)),
   }
 }
 
