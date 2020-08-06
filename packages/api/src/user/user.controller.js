@@ -21,8 +21,8 @@ export function index (req, res) {
   return User.findAll({
     attributes: [
       'id',
-      'email'
-    ]
+      'email',
+    ],
   })
     .then(users => {
       res.status(200).json(users)
@@ -34,7 +34,7 @@ export function create (req, res) {
   return User.create(req.body)
     .then(function (user) {
       const token = jwt.sign({ id: user.id }, config.secrets.session, {
-        expiresIn: 60 * 60 * 5
+        expiresIn: 60 * 60 * 5,
       })
       res.json({ token })
     })
@@ -49,8 +49,8 @@ export function show (req, res, next) {
   var userId = req.params.id
   return User.findOne({
     where: {
-      id: userId
-    }
+      id: userId,
+    },
   })
     .then(user => {
       if (!user) {
@@ -90,7 +90,7 @@ export const changePassword = (req, res, next) => {
 }
 
 export const update = (req, res, next) => {
-  const userId = req.body.id
+  const userId = req.params.id
   const oldPass = req.body.oldPassword
   const newPass = req.body.newPassword
   const phone = req.body.phone
@@ -102,12 +102,12 @@ export const update = (req, res, next) => {
       if (oldPassMatches) {
         user.update({
           phone: phone || user.phone,
-          email: email || user.email
+          email: email || user.email,
         })
           .then((user) => {
             if (newPass) {
               user.update({
-                password: newPass
+                password: newPass,
               })
                 .then((user) => {
                   res.status(200).json(user)
@@ -127,8 +127,8 @@ export const me = (req, res, next) => {
   const jwtPayload = parseJwt(req.headers.authorization)
   User.findByPk((jwtPayload.id), {
     attributes: {
-      exclude: ['salt', 'password']
-    }
+      exclude: ['salt', 'password'],
+    },
   })
     .then(user => {
       if (!user) {
