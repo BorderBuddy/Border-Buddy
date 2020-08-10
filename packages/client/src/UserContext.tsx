@@ -14,7 +14,8 @@ type UserProviderProps = {
 export const UserProvider = ({children} : UserProviderProps) => {
   const [user, setUser] = useState<User>()
 
-  const setCurrUser = (user: User) => {
+  const setCurrUser = async (user: User) => {
+    // console.log(`The user passed in is: ${user}`)
     setUser(user)
   }
 
