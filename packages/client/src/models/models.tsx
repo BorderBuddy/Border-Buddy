@@ -3,7 +3,7 @@ export interface flight {
 }
 
 export interface User {
-    id: string,
+    id: number,
     email: string,
     phone: string,
 }
