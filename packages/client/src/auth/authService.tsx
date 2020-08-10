@@ -19,7 +19,6 @@ function requireAuth (nextState: any, replace: any) {
     replace({ pathname: '/login' })
   }
 }
-
 type LoginCallback = (userID: any | null) => void
 
 let loginCallback: LoginCallback | null = null
@@ -40,7 +39,6 @@ function setLoginTokens (tokens: any) {
 
 function setBearer () {
   const bearer = getToken()
-  // console.log(bearer)
 
   if (bearer) {
     axios.defaults.headers.common.Authorization = bearer
@@ -103,16 +101,16 @@ function isTokenExpired (token: any) {
   */
 }
 
-class LoggedIn extends React.Component {
-  render () {
-    return isLoggedIn() ? this.props.children : null
-  }
+type ChildLikeProps = {
+  children?: React.ReactNode
 }
 
-class LoggedOut extends React.Component {
-  render () {
-    return !isLoggedIn() ? this.props.children : null
-  }
+export const LoggedIn = ({children}: ChildLikeProps) => {
+  return isLoggedIn() ? children : null
+}
+
+export const LoggedOut = ({children}: ChildLikeProps) => {
+  return !isLoggedIn() ? children : null
 }
 
 function setup () {
@@ -136,6 +134,4 @@ export {
   requireAuth,
   loggedInUser,
   loginCallback,
-  LoggedIn,
-  LoggedOut
 }
