@@ -7,34 +7,34 @@ export const User = db.define('user', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   email: {
     type: Sequelize.STRING,
     unique: {
-      msg: 'The specified email address is already in use.'
+      msg: 'The specified email address is already in use.',
     },
     validate: {
-      isEmail: true
+      isEmail: true,
     },
-    allowNull: false
+    allowNull: false,
   },
   password: {
     type: Sequelize.STRING,
     validate: {
       len: {
         args: [8, 1024],
-        msg: 'Must be at least 8 characters long'
-      }
+        msg: 'Must be at least 8 characters long',
+      },
     },
-    allowNull: false
+    allowNull: false,
   },
   salt: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   phone: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+  },
 })
 
 User.beforeBulkCreate(async (users, options) => {
@@ -73,7 +73,7 @@ User.prototype.encryptPassword = async (salt, password) => {
     saltBuf,
     defaultIterations,
     defaultKeyLength,
-    digest
+    digest,
   ).toString('base64')
 }
 

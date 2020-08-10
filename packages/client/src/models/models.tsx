@@ -1,7 +1,3 @@
-export interface flight {
-
-}
-
 export interface User {
     id: number,
     email: string,
