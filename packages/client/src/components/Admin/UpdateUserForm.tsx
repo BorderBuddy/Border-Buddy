@@ -1,11 +1,7 @@
 import React from 'react'
-// import { reduxForm, Field } from 'redux-form'
-import {Button, Card, Typography} from '@material-ui/core'
-// import { RenderTextField } from '../Field'
-import { connect } from 'react-redux'
+import {Button, Card} from '@material-ui/core'
 import { adminSignUp } from './styles'
 import { phoneRegExp } from '../../utils/validations'
-import { whoAmI } from '../../actions/auth'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { TextField } from 'formik-material-ui'
@@ -14,11 +10,6 @@ export const UpdateUserForm = ({
   handleSubmit,
   pristine,
   submitting,
-  handleEmailChange,
-  handleOldPasswordChange,
-  handleNewPasswordChange,
-  handlePhoneChange,
-  valid,
 }: any) => {
   const style = adminSignUp
   return (
@@ -93,19 +84,3 @@ export const UpdateUserForm = ({
     </Formik>
   )
 }
-
-// UpdateUser = reduxForm({
-//   form: 'updateUser',
-// })(UpdateUser)
-
-// const mapStateToProps = ({ auth }) => {
-//   return {
-//     initialValues: Object.assign({}, auth, { oldPassword: '', newPassword: '' }),
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => ({
-//   whoAmI: (id) => dispatch(whoAmI(id)),
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(UpdateUser)

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { connect } from 'react-redux'
 import {UpdateUserForm} from '../components/Admin/UpdateUserForm'
 import api from '../api/api'
 import {
@@ -9,22 +8,21 @@ import {
   DialogTitle,
   DialogContent,
 } from '@material-ui/core'
-import UserContext from '../userContext'
+import {UserContext} from '../UserContext'
+import { useHistory } from 'react-router-dom'
 
-const UpdateUser = (props: any) => {
-  // TODO: get userId of active user, from UserContext
-  const userId = useContext(UserContext)
-  // const userId = 0
+export const UpdateUser = (props: any) => {
+  const { user } = useContext(UserContext)
   const [open, setOpen] = useState(false)
   const [createdSuccess, setCreatedSuccess] = useState(false)
+  const history = useHistory()
 
   const handleSubmit = async (values: any) => {
-    // const {email, oldPassword, newPassword, phone} = values
+    const id = user ? user.id : undefined
     try {
-      await api.updateUser(userId, values)
+      await api.updateUser(id, values)
       setOpen(true)
       setCreatedSuccess(true)
-      // props.setAuth(res.data)
     } catch (err) {
       setOpen(true)
       setCreatedSuccess(false)
@@ -33,6 +31,8 @@ const UpdateUser = (props: any) => {
   }
   const handleClose = () => {
     setOpen(false)
+    // should we logout the user after updating profile?
+    history.push('./travelers')
   }
 
   return (
@@ -40,7 +40,7 @@ const UpdateUser = (props: any) => {
       <UpdateUserForm
         handleSubmit={handleSubmit}
       />
-      {/* <Dialog open={open} modal={true}>
+      <Dialog open={open}>
         <DialogTitle>Updating Admin...</DialogTitle>
         <DialogContent>
           {createdSuccess ? (
@@ -58,15 +58,7 @@ const UpdateUser = (props: any) => {
               OK
           </Button>
         </DialogActions>
-      </Dialog> */}
+      </Dialog>
     </div>
   )
 }
-
-const mapStateToProps = ({ auth }: any) => ({ auth })
-
-// const mapDispatchToProps = (dispatch: any) => ({
-//   updateUser: (user) => dispatch(updateUser(user)),
-// })
-// export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserContainer)
-export default connect(mapStateToProps)(UpdateUser)

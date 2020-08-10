@@ -6,14 +6,12 @@ import AllTravelers from './containers/AllTravelers'
 import SingleTravelerContainer from './containers/SingleTravelerContainer'
 import Login from './containers/Login'
 import AdminSignUp from './containers/AdminSignUpContainer'
-// import UpdateUserContainer from './containers/UpdateUserContainer'
 import { Success } from './components/Success'
-import AddTravelerContainer from './containers/AddTravelerContainer'
 import { About } from './components/About'
 import { WhyBorderBuddy } from './components/WhyBorderBuddy'
 import { LoggedIn } from './auth/authService'
 import RegisterForm from './components/RegisterForm'
-import UpdateUser from './containers/UpdateUser'
+import { UpdateUser } from './containers/UpdateUser'
 
 // Router Hooks
 import {

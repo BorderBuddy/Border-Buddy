@@ -41,7 +41,6 @@ export function create (req, res) {
     .catch(validationError(res))
 }
 
-// TODO: don't return password or salt
 export function show (req, res, next) {
   if (!req.params) {
     return

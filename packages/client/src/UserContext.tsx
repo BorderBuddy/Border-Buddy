@@ -1,8 +1,9 @@
 import React, { createContext, useState } from 'react'
+// eslint-disable-next-line no-unused-vars
 import { User } from './models/models'
 
 export interface UserContextProps {
-    user: User | {}
+    user: User | undefined
     setCurrUser: (user: User) => void
 }
 
@@ -15,14 +16,13 @@ export const UserProvider = ({children} : UserProviderProps) => {
   const [user, setUser] = useState<User>()
 
   const setCurrUser = async (user: User) => {
-    // console.log(`The user passed in is: ${user}`)
     setUser(user)
   }
 
   return (
     <UserContext.Provider
       value={{
-        user: user || {},
+        user,
         setCurrUser,
       }}
     >
