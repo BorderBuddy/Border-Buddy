@@ -4,7 +4,7 @@ import { User } from './models/models'
 
 export interface UserContextProps {
     user: User | undefined
-    setCurrUser: (user: User) => void
+    setCurrUser: (user: User | undefined) => void
 }
 
 export const UserContext = createContext<UserContextProps>({} as UserContextProps)
@@ -15,7 +15,7 @@ type UserProviderProps = {
 export const UserProvider = ({children} : UserProviderProps) => {
   const [user, setUser] = useState<User>()
 
-  const setCurrUser = async (user: User) => {
+  const setCurrUser = async (user: User | undefined) => {
     setUser(user)
   }
 

@@ -9,22 +9,12 @@ function saveUser (userID: any) {
 
 function logout () {
   clearTokens()
-  if (loginCallback) {
-    loginCallback(null)
-  }
 }
 
 function requireAuth (nextState: any, replace: any) {
   if (!isLoggedIn()) {
     replace({ pathname: '/login' })
   }
-}
-type LoginCallback = (userID: any | null) => void
-
-let loginCallback: LoginCallback | null = null
-
-function setLoginCallback (callback: LoginCallback) {
-  loginCallback = callback
 }
 
 function clearTokens () {
@@ -39,7 +29,6 @@ function setLoginTokens (tokens: any) {
 
 function setBearer () {
   const bearer = getToken()
-
   if (bearer) {
     axios.defaults.headers.common.Authorization = bearer
   }
@@ -50,14 +39,12 @@ function getToken () {
   if (!json) {
     return null
   }
-
   let token
   try {
     token = JSON.parse(json)
   } catch (err) {
     return null
   }
-
   return token
 }
 
@@ -70,14 +57,13 @@ function loggedInUser () {
   if (!isLoggedIn()) {
     return null
   }
-
   const user = localStorage.getItem('User')
   if (user) {
     return user
   }
-
   return null
 }
+
 // TODO: add expiration handling for Bearer token
 function isTokenValid (token: any) {
   return !!token && !isTokenExpired(token)
@@ -128,10 +114,8 @@ setup()
 export {
   logout,
   setLoginTokens,
-  setLoginCallback,
   isLoggedIn,
   saveUser,
   requireAuth,
   loggedInUser,
-  loginCallback,
 }
