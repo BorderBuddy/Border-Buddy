@@ -97,8 +97,6 @@ export const formStyle = {
   input: {
     width: '100%',
     color: 'black',
-    marginTop: '1em',
-    paddingTop: '1em',
     marginBottom: '1em',
   },
   select: {

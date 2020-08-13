@@ -1,11 +1,11 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { yupValidationSchema } from '../utils/validations'
 import countryCodes from '../utils/countryCodes'
 import { formStyle } from './Admin/styles'
-import { TextField } from 'formik-material-ui'
+import { TextField, Select } from 'formik-material-ui'
 import { DatePicker } from 'formik-material-ui-pickers'
-import { MenuItem, Divider, Button, Grid, Typography } from '@material-ui/core'
+import { MenuItem, Divider, Button, Grid, Typography, InputLabel } from '@material-ui/core'
 import MuiTextField from '@material-ui/core/TextField'
 import { Autocomplete, AutocompleteRenderInputParams } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
@@ -16,6 +16,7 @@ import { checkFlight } from '../actions/flight'
 import { connect } from 'react-redux'
 import api from '../api/api'
 import { useHistory } from 'react-router-dom'
+import { AdminFormExtension } from './AdminFormExtension'
 
 const RegisterForm = (props:any) => {
   const [state, setState] = useState({
@@ -29,10 +30,11 @@ const RegisterForm = (props:any) => {
     flight,
     isAdmin,
     formTitle,
-    children,
     initialValues,
+    isEdit,
+    users,
   } = props
-  console.log(initialValues)
+
   const handleClose = () => {
     setState({ open: false })
   }
@@ -44,7 +46,9 @@ const RegisterForm = (props:any) => {
       countryCode: values.countryCode.code,
     })
     try {
-      const res = await api.createTraveler(travelerInfo)
+      let res
+      if (isEdit) res = await api.updateTraveler(travelerInfo)
+      else res = await api.createTraveler(travelerInfo)
       props.signUpTraveler(res)
       handleClose()
       if (!props.user) history.push('/success', { res: res })
@@ -76,7 +80,12 @@ const RegisterForm = (props:any) => {
         enableReinitialize
         initialValues={
           isAdmin
-            ? {...initialValues}
+            ? {
+              ...initialValues,
+              flightStatus: '',
+              passengerStatus: '',
+              representative: '',
+            }
             : {
               name: '',
               nationality: '',
@@ -117,49 +126,52 @@ const RegisterForm = (props:any) => {
                 <Typography variant='caption' paragraph><em>Tell us about yourself, so our lawyers can can best assist you.</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
                   <Grid item xs={11} sm={5}>
+                    <InputLabel htmlFor="name">Name</InputLabel>
                     <Field
                       name="name"
+                      id='name'
                       component={TextField}
                       style={formStyle.input}
-                      label="Name"
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
+                    <InputLabel htmlFor="nationality">Nationality</InputLabel>
                     <Field
                       name="nationality"
-                      label="Nationality"
+                      id="nationality"
                       component={TextField}
                       style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
+                    <InputLabel htmlFor="requireInterpreter">Are you comfortable speaking English?</InputLabel>
                     <Field
                       name='requireInterpreter'
                       label='Are you comfortable speaking English?'
-                      component={TextField}
-                      select
-                      type='text'
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
+                      component={Select}
                       style={formStyle.input}
+                      inputProps={{
+                        id: 'requireInterpreter',
+                      }}
                     >
                       <MenuItem value="true">No</MenuItem>
                       <MenuItem value="false">Yes</MenuItem>
                     </Field>
                   </Grid>
                   <Grid item xs={11} sm={5}>
+                    <InputLabel htmlFor='preferredLanguage'>Preferred Language(s)</InputLabel>
                     <Field
                       name="preferredLanguage"
-                      label="Preferred language(s)"
+                      id="preferredLanguage"
                       component={TextField}
                       style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
+                    <InputLabel htmlFor="email">Email</InputLabel>
                     <Field
                       name="email"
-                      label="Email"
+                      id='"email"'
                       component={TextField}
                       style={formStyle.input}
                     />
@@ -173,10 +185,8 @@ const RegisterForm = (props:any) => {
                       getOptionSelected={(option: { label: string }, value: { label: string }) => value.label === option.label}
                       renderInput={(params: AutocompleteRenderInputParams) => {
                         return (
-                          <MuiTextField
+                          <TextField
                             {...params}
-                            error={touched.countryCode && !!errors.countryCode}
-                            helperText={touched.countryCode && errors.countryCode}
                             label="Country Phone Code"
                             style={formStyle.input}
                           />
@@ -194,12 +204,14 @@ const RegisterForm = (props:any) => {
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
+                    <InputLabel htmlFor="connectivity">Do you have a smartphone?</InputLabel>
                     <Field
                       name="connectivity"
-                      label="Do you have a smartphone?"
-                      component={TextField}
-                      select
+                      component={Select}
                       style={formStyle.input}
+                      inputProps={{
+                        id: 'connectivity',
+                      }}
                     >
                       <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
                       <MenuItem className="traveler-has-no-phone-option" value="false">No</MenuItem>
@@ -263,9 +275,9 @@ const RegisterForm = (props:any) => {
                     />
                   </Grid>
                 </Grid>
-                {/* {isAdmin &&
-                  <Fragment>{children}</Fragment>
-                } */}
+                {isAdmin &&
+                  <AdminFormExtension users={users} {...props}/>
+                }
                 <Grid container>
                   <Button
                     variant='contained'
