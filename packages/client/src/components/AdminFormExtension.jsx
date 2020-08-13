@@ -1,10 +1,10 @@
-import React from 'react'
-import { SelectField } from 'redux-form-material-ui'
-import { MenuItem } from '@material-ui/core'
-import { Field } from 'redux-form'
+import React, { Fragment } from 'react'
+import { Field } from 'formik'
+import { MenuItem, Grid, InputLabel } from '@material-ui/core'
+import { Select } from 'formik-material-ui'
 import { adminFormExtensionStyle } from './styles'
 
-export default (props) => {
+export const AdminFormExtension = (props) => {
   const menuItems = (representatives) => {
     return (
       representatives &&
@@ -26,58 +26,59 @@ export default (props) => {
   }
 
   return (
-    <div>
+    <Fragment>
       <h3>Additional Administrative Fields</h3>
       <p>
         <em>Additional fields for administrative purposes.</em>
       </p>
-      <div className="field-container col-12 md-col md-col-6">
-        <Field
-          name="flightStatus"
-          component={SelectField}
-          hintText="Flight Status"
-          style={adminFormExtensionStyle.input}
-          errorStyle={adminFormExtensionStyle.error}
-          hintStyle={adminFormExtensionStyle.label}
-          underlineFocusStyle={adminFormExtensionStyle.underline}
-          disabled={true}
-        >
-          <MenuItem value={'scheduled'} primaryText="Scheduled" />
-          <MenuItem value={'delayed'} primaryText="Delayed" />
-          <MenuItem value={'arrived'} primaryText="Arrived" />
-        </Field>
-      </div>
-      <div className="field-container col-12 md-col md-col-6">
-        <Field
-          name="passengerStatus"
-          component={SelectField}
-          hintText="Passenger Status"
-          style={adminFormExtensionStyle.input}
-          errorStyle={adminFormExtensionStyle.error}
-          hintStyle={adminFormExtensionStyle.label}
-          underlineFocusStyle={adminFormExtensionStyle.underline}
-        >
-          <MenuItem value={'transit'} primaryText="In Transit" />
-          <MenuItem value={'unconfirmed'} primaryText="Unconfirmed" />
-          <MenuItem value={'detained'} primaryText="Detained" />
-          <MenuItem value={'at risk'} primaryText="At Risk" />
-          <MenuItem value={'cleared'} primaryText="Cleared" />
-        </Field>
-      </div>
-      <div className="field-container col-12 md-col md-col-6">
-        <Field
-          name="representative"
-          component={SelectField}
-          hintText="Assign To"
-          style={adminFormExtensionStyle.input}
-          errorStyle={adminFormExtensionStyle.error}
-          hintStyle={adminFormExtensionStyle.label}
-          underlineFocusStyle={adminFormExtensionStyle.underline}
-          className="traveler-assign-to"
-        >
-          {menuItems(props.users)}
-        </Field>
-      </div>
-    </div>
+      <Grid container direction='row' alignItems='center' justify='space-around'>
+        <Grid item xs={11} sm={3}>
+          <InputLabel htmlFor="flightStatus">Flight Status</InputLabel>
+          <Field
+            name="flightStatus"
+            component={Select}
+            style={adminFormExtensionStyle.input}
+            inputProps={{
+              id: 'flightStatus',
+            }}
+          >
+            <MenuItem value={'scheduled'} >Scheduled</MenuItem>
+            <MenuItem value={'delayed'} >Delayed</MenuItem>
+            <MenuItem value={'arrived'} >Arrived</MenuItem>
+          </Field>
+        </Grid>
+        <Grid item xs={11} sm={3}>
+          <InputLabel htmlFor="passengerStatus">Passenger Status</InputLabel>
+          <Field
+            name="passengerStatus"
+            component={Select}
+            style={adminFormExtensionStyle.input}
+            inputProps={{
+              id: 'passengerStatus',
+            }}
+          >
+            <MenuItem value={'transit'} >In Transit</MenuItem>
+            <MenuItem value={'unconfirmed'} >Unconfirmed</MenuItem>
+            <MenuItem value={'detained'} >Detained</MenuItem>
+            <MenuItem value={'at risk'} >At Risk</MenuItem>
+            <MenuItem value={'cleared'} >Cleared</MenuItem>
+          </Field>
+        </Grid>
+        <Grid item xs={11} sm={3}>
+          <InputLabel htmlFor="representative">Assign To</InputLabel>
+          <Field
+            name="representative"
+            component={Select}
+            style={adminFormExtensionStyle.input}
+            inputProps={{
+              id: 'representative',
+            }}
+          >
+            <MenuItem value=''></MenuItem>
+            {menuItems(props.users)}
+          </Field>
+        </Grid>
+      </Grid>
+    </Fragment>
   )
 }
