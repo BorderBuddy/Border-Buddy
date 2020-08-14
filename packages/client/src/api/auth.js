@@ -25,9 +25,6 @@ const api = {
       }
       return res.data
     } catch (err) {
-      // TODO: not sure if this is the best way to handle this,
-      // but simply returning the err means you would have to check the object
-      // on the other end. This way will trigger the try/catch...
       throw new LoginError('Unsuccessful login')
     }
   },

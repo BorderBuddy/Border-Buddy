@@ -9,26 +9,26 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
           primaryKey: true,
-          autoIncrement: true
+          autoIncrement: true,
         },
         email: {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: false,
         },
         password: {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: false,
         },
         salt: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
         },
         createdAt: {
-          type: Sequelize.DATE
+          type: Sequelize.DATE,
         },
         updatedAt: {
-          type: Sequelize.DATE
-        }
-      }
+          type: Sequelize.DATE,
+        },
+      },
     )
       .then(() => {
         return queryInterface.createTable(
@@ -37,32 +37,32 @@ module.exports = {
               type: Sequelize.INTEGER,
               allowNull: false,
               primaryKey: true,
-              autoIncrement: true
+              autoIncrement: true,
             },
             flightNum: {
               type: Sequelize.STRING,
-              allowNull: false
+              allowNull: false,
             },
             airlineCode: {
               type: Sequelize.STRING,
-              allowNull: false
+              allowNull: false,
             },
             status: {
               type: Sequelize.ENUM,
               values: ['arrived', 'delayed', 'scheduled'],
-              defaultValue: 'scheduled'
+              defaultValue: 'scheduled',
             },
             arrivalTime: {
               type: Sequelize.DATE,
-              allowNull: false
+              allowNull: false,
             },
             createdAt: {
-              type: Sequelize.DATE
+              type: Sequelize.DATE,
             },
             updatedAt: {
-              type: Sequelize.DATE
-            }
-          }
+              type: Sequelize.DATE,
+            },
+          },
         )
       })
       .then(() => {
@@ -72,61 +72,61 @@ module.exports = {
               type: Sequelize.INTEGER,
               allowNull: false,
               primaryKey: true,
-              autoIncrement: true
+              autoIncrement: true,
             },
             name: {
               type: Sequelize.STRING,
-              allowNull: false
+              allowNull: false,
             },
             nationality: {
-              type: Sequelize.STRING
+              type: Sequelize.STRING,
             },
             email: {
-              type: Sequelize.STRING
+              type: Sequelize.STRING,
             },
             phone: {
               type: Sequelize.STRING,
-              allowNull: false
+              allowNull: false,
             },
             connectivity: {
-              type: Sequelize.BOOLEAN
+              type: Sequelize.BOOLEAN,
             },
             secondaryContactPhone: {
-              type: Sequelize.STRING
+              type: Sequelize.STRING,
             },
             secondaryContactName: {
-              type: Sequelize.STRING
+              type: Sequelize.STRING,
             },
             secondaryContactRelation: {
-              type: Sequelize.STRING
+              type: Sequelize.STRING,
             },
             requireInterpreter: {
-              type: Sequelize.BOOLEAN
+              type: Sequelize.BOOLEAN,
             },
             preferredLanguage: {
-              type: Sequelize.STRING
+              type: Sequelize.STRING,
             },
             status: {
               type: Sequelize.ENUM,
               values: ['transit', 'unconfirmed', 'detained', 'at risk', 'cleared'],
-              defaultValue: 'transit'
+              defaultValue: 'transit',
             },
             createdAt: {
-              type: Sequelize.DATE
+              type: Sequelize.DATE,
             },
             updatedAt: {
-              type: Sequelize.DATE
+              type: Sequelize.DATE,
             },
             flightId: {
               type: Sequelize.INTEGER,
               references: {
                 model: 'flight',
-                key: 'id'
+                key: 'id',
               },
               onUpdate: 'cascade',
-              onDelete: 'set null'
-            }
-          }
+              onDelete: 'set null',
+            },
+          },
         )
       })
   },
@@ -139,5 +139,5 @@ module.exports = {
       .then(() => {
         return queryInterface.dropTable('user')
       })
-  }
+  },
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Toolbar, IconButton, Button, AppBar, Container, Grid } from '@material-ui/core'
+import React, { useContext } from 'react'
+import { Toolbar, IconButton, Button, AppBar, Grid } from '@material-ui/core'
 import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
 import { RenderAppBar } from '../components/Admin/AppBar'
@@ -7,13 +7,16 @@ import api from '../api/api'
 import { useHistory } from 'react-router-dom'
 import { LoggedIn, LoggedOut } from '../auth/authService'
 import { getRoutes } from '../routes'
+import { UserContext } from '../UserContext'
 
 export const Layout = () => {
   const history = useHistory()
+  const {setCurrUser} = useContext(UserContext)
 
   const onSignoutClick = async () => {
     try {
       await api.logout()
+      setCurrUser(undefined)
       history.push('/')
     } catch (err) {
       console.error(err)
