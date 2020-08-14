@@ -8,6 +8,7 @@ import {App} from './App'
 import {UserProvider} from './UserContext'
 
 export const store = configureStore()
+require('./style/index.scss')
 export const Root = () => {
   return (
     <MuiThemeProvider theme={customTheme}>
