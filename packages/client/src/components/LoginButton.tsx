@@ -1,24 +1,35 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Button } from '@material-ui/core'
+import { Button, Tooltip, withStyles } from '@material-ui/core'
+
+const LightTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+  },
+}))(Tooltip)
 
 export const LoginButton = () => {
   const history = useHistory()
 
   return (
-    <Button
-      style={styles.button}
-      variant='text'
-      onClick={() => history.push('/login')}
-    >
+    <LightTooltip title="new travelers should use the register form">
+      <Button
+        style={styles.button}
+        variant='text'
+        onClick={() => history.push('/login')}
+      >
         Login
-    </Button>
+      </Button>
+    </LightTooltip>
   )
 }
 
 const styles = {
   button: {
-    backgroundColor: '#2d6ea8',
+    backgroundColor: '#2d6ec0',
     margin: '2em auto',
     display: 'block',
     width: '50%',
