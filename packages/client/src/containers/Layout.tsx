@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom'
 import { LoggedIn, LoggedOut } from '../auth/authService'
 import { getRoutes } from '../routes'
 import { UserContext } from '../UserContext'
+import { LoginButton } from '../components/LoginButton'
 
 export const Layout = () => {
   const history = useHistory()
@@ -36,7 +37,7 @@ export const Layout = () => {
             <Button
               style={styles.button}
               id="add-new-traveler"
-              varitant='text'
+              variant='text'
               onClick={() => history.push('/traveler/add')}>
                 Add Traveler
             </Button>
@@ -44,12 +45,25 @@ export const Layout = () => {
           </Toolbar>
         </LoggedIn>
         <LoggedOut>
-          <div id="banner" className="col-12">
-            <img
-              style={styles.image}
-              src="images/logos-png/BB_Logo-Type-White.png"
-            />
-          </div>
+          <Grid
+            container
+            direction='row'
+            justify='center'
+            style={{
+              backgroundColor: '#2d6ea8',
+            }}
+          >
+            <Grid item style={{width: '10%'}}/>
+            <Grid item style={styles.banner}>
+              <img
+                style={styles.image}
+                src="images/logos-png/BB_Logo-Type-White.png"
+              />
+            </Grid>
+            <Grid item style={styles.loginCon}>
+              <LoginButton/>
+            </Grid>
+          </Grid>
           <Toolbar style={styles.toolbar}>
             <Navbar />
           </Toolbar>
@@ -84,5 +98,16 @@ const styles = {
     margin: 'auto',
     width: '50%',
     maxHeight: '2em',
+    backgroundColor: '#2d6ea8',
+
+  },
+  banner: {
+    backgroundColor: '#2d6ea8',
+    paddingTop: '2em',
+    paddingBottom: '2em',
+    width: '80%',
+  },
+  loginCon: {
+    width: '10%',
   },
 }
