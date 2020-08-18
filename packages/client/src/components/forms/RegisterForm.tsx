@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
-import { yupValidationSchema } from '../utils/validations'
-import countryCodes from '../utils/countryCodes'
-import { formStyle } from './Admin/styles'
+import { yupValidationSchema } from '../../utils/validations'
+import countryCodes from '../../utils/countryCodes'
+import { formStyle } from '../Admin/styles'
 import { TextField, Select } from 'formik-material-ui'
 import { DatePicker } from 'formik-material-ui-pickers'
 import { MenuItem, Divider, Button, Grid, Typography, InputLabel } from '@material-ui/core'
-import MuiTextField from '@material-ui/core/TextField'
-import { Autocomplete, AutocompleteRenderInputParams } from 'formik-material-ui-lab'
+import { Autocomplete } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import { SubmissionConfirmation } from './SubmissionConfirmation'
-import { signUpTraveler } from '../actions/signUp'
-import { checkFlight } from '../actions/flight'
+import { SubmissionConfirmation } from '../SubmissionConfirmation'
+import { signUpTraveler } from '../../actions/signUp'
+import { checkFlight } from '../../actions/flight'
 import { connect } from 'react-redux'
-import api from '../api/api'
+import api from '../../api/api'
 import { useHistory } from 'react-router-dom'
-import { AdminFormExtension } from './AdminFormExtension'
+import { AdminFormExtension } from './AdminExtensionForm'
 
 const RegisterForm = (props:any) => {
   const [state, setState] = useState({
@@ -112,8 +111,6 @@ const RegisterForm = (props:any) => {
       >
         {props => {
           const {
-            touched,
-            errors,
             isSubmitting,
             submitForm,
           } = props
@@ -177,22 +174,21 @@ const RegisterForm = (props:any) => {
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
+                    <InputLabel htmlFor="countryCode">Country Phone Code</InputLabel>
                     <Field
                       name="countryCode"
+                      id='countryCode'
+                      style={formStyle.input}
                       component={Autocomplete}
                       options={countryCodes}
                       getOptionLabel={(option: any) => option.label}
                       getOptionSelected={(option: { label: string }, value: { label: string }) => value.label === option.label}
-                      renderInput={(params: AutocompleteRenderInputParams) => {
-                        return (
-                          <TextField
-                            {...params}
-                            label="Country Phone Code"
-                            style={formStyle.input}
-                          />
-                        )
-                      }
-                      }
+                      renderInput={(params: any) => (
+                        <TextField
+                          name="countryCode"
+                          {...params}
+                        />
+                      )}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>

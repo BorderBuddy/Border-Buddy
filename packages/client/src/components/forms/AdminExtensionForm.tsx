@@ -2,26 +2,27 @@ import React, { Fragment } from 'react'
 import { Field } from 'formik'
 import { MenuItem, Grid, InputLabel } from '@material-ui/core'
 import { Select } from 'formik-material-ui'
-import { adminFormExtensionStyle } from './styles'
+import { adminFormExtensionStyle } from '../styles'
 
-export const AdminFormExtension = (props) => {
-  const menuItems = (representatives) => {
+export const AdminFormExtension = (props: any) => {
+  const menuItems = (representatives: any) => {
     return (
       representatives &&
-      representatives.map((rep, index) => {
+      representatives.map((rep: any, index: any) => {
         return (
           <MenuItem
             key={index}
             value={rep.id}
-            primaryText={first3Chars(rep.email)}
             className="traveler-assign-to-option"
-          />
+          >
+            {first3Chars(rep.email)}
+          </MenuItem>
         )
       })
     )
   }
 
-  const first3Chars = (text) => {
+  const first3Chars = (text: any) => {
     return text.substring(0, 3).toUpperCase()
   }
 

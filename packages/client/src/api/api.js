@@ -1,12 +1,13 @@
 import Auth from './auth'
 import Travelers from './travelers'
 import User from './user'
+import Messaging from './messaging'
 
-// TODO: review all routes to make cleaner consistent api routes moving forward
 const api = {
   ...User,
   ...Travelers,
-  ...Auth
+  ...Auth,
+  ...Messaging,
 }
 
 export default api
