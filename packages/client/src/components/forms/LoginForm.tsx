@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardContent, Button, Typography } from '@material-ui/core'
-import { signupLoginStyle, formStyle } from './Admin/styles'
+import { signupLoginStyle, formStyle } from '../Admin/styles'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { TextField } from 'formik-material-ui'
@@ -9,8 +9,6 @@ export const LoginForm = ({
   handleSubmit,
   pristine,
   submitting,
-  handleEmailChange,
-  handlePasswordChange,
   auth,
 } : any) => {
   const style = signupLoginStyle
