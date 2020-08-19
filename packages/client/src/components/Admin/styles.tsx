@@ -45,7 +45,7 @@ export const signupLoginStyle = {
 export const adminSignUp = {
   card: {
     margin: '2em auto',
-    textAlign: 'center',
+    // textAlign: 'center',
     width: '80%',
     padding: '2em',
   },
@@ -56,7 +56,7 @@ export const adminSignUp = {
     width: '50%',
   },
   title: {
-    textAlign: 'center',
+    // textAlign: 'center',
   },
   error: {
     textAlign: 'center',
