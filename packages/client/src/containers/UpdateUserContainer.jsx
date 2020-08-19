@@ -1,24 +1,24 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import UpdateUser from "../components/Admin/UpdateUser"
-import { updateUser } from "../actions/auth"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import UpdateUser from '../components/Admin/UpdateUser'
+import { updateUser } from '../actions/auth'
 import {
   Dialog,
   Button,
   DialogActions,
   DialogTitle,
   DialogContent,
-} from "@material-ui/core"
+} from '@material-ui/core'
 
 class UpdateUserContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
-      email: "",
-      oldPassword: "",
-      newPassword: "",
-      phone: "",
+      email: '',
+      oldPassword: '',
+      newPassword: '',
+      phone: '',
       id: 0,
       open: false,
     }
@@ -30,7 +30,7 @@ class UpdateUserContainer extends Component {
     this.handleClose = this.handleClose.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     this.setState({
       id: this.props.auth.id,
       email: this.props.auth.email,
@@ -38,23 +38,23 @@ class UpdateUserContainer extends Component {
     })
   }
 
-  handleEmailChange(e) {
+  handleEmailChange (e) {
     this.setState({ email: e.target.value })
   }
 
-  handleOldPasswordChange(e) {
+  handleOldPasswordChange (e) {
     this.setState({ oldPassword: e.target.value })
   }
 
-  handleNewPasswordChange(e) {
+  handleNewPasswordChange (e) {
     this.setState({ newPassword: e.target.value })
   }
 
-  handlePhoneChange(e) {
+  handlePhoneChange (e) {
     this.setState({ phone: e.target.value })
   }
 
-  handleSubmit(e) {
+  handleSubmit (e) {
     e.preventDefault()
     this.props
       .updateUser({
@@ -72,11 +72,11 @@ class UpdateUserContainer extends Component {
       })
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({ open: false })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <UpdateUser

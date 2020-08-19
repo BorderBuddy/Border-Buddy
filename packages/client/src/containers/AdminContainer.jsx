@@ -1,21 +1,21 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Toolbar, Container, IconButton, Button, AppBar} from '@material-ui/core'
-import RenderAppBarMenu from './AppBarMenu'
+import {AppBarMenu} from './AppBarMenu'
 
 const style = {
   button: {
     margin: '2em auto',
     display: 'block',
     width: '50%',
-    color: 'white'
+    color: 'white',
   },
   icon: {
-    maxHeight: '1.5em'
+    maxHeight: '1.5em',
   },
-  container:{
-    marginTop:'125px'
-  }
+  container: {
+    marginTop: '125 px',
+  },
 }
 
 class AdminContainer extends Component {
@@ -36,7 +36,7 @@ class AdminContainer extends Component {
               onClick={() => this.props.history.push('/travelers/add')}>
                 Add Traveler
             </Button>
-            <RenderAppBarMenu/>
+            <AppBarMenu/>
           </Toolbar>
         </AppBar>
         <Container style={style.container}>
