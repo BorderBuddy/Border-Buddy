@@ -11,7 +11,7 @@ import { Success } from './components/Success'
 import { About } from './components/static/About'
 import { WhyBorderBuddy } from './components/static/WhyBorderBuddy'
 import { LoggedIn } from './auth/authService'
-import RegisterForm from './components/forms/RegisterForm'
+import { RegisterForm } from './components/forms/RegisterForm'
 
 export const getRoutes = () => (
   <Switch>
@@ -23,7 +23,7 @@ export const getRoutes = () => (
     <Route exact path='/success'><Success/></Route>
     <LoggedIn>
       <Route exact path="/traveler/add"><RegisterForm formTitle='Traveler Registration' isAdmin={true}/></Route>
-      <Route exact path="/travelers/:id"><SingleTravelerContainer/></Route>
+      <Route path="/travelers/:id"><SingleTravelerContainer/></Route>
       <Route exact path="/travelers"><AllTravelers/></Route>
       <Route exact path="/createuser"><AdminSignUp /></Route>
       <Route exact path="/updateprofile"><UpdateUserContainer /></Route>

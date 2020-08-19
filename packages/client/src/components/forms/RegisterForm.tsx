@@ -5,22 +5,17 @@ import countryCodes from '../../utils/countryCodes'
 import { formStyle } from '../Admin/styles'
 import { TextField, Select } from 'formik-material-ui'
 import { DatePicker } from 'formik-material-ui-pickers'
-import { MenuItem, Divider, Button, Grid, Typography, InputLabel } from '@material-ui/core'
+import { MenuItem, Divider, Button, Grid, Typography, InputLabel, TextFieldProps, TextField as MuiTextField } from '@material-ui/core'
 import { Autocomplete } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import { SubmissionConfirmation } from '../SubmissionConfirmation'
-import { signUpTraveler } from '../../actions/signUp'
-import { checkFlight } from '../../actions/flight'
-import { connect } from 'react-redux'
 import api from '../../api/api'
 import { useHistory } from 'react-router-dom'
 import { AdminFormExtension } from './AdminExtensionForm'
 
-const RegisterForm = (props:any) => {
-  const [state, setState] = useState({
-    open: false,
-  })
+export const RegisterForm = (props:any) => {
+  const [ open, setOpen ] = useState(false)
   const history = useHistory()
   const {
     showAdditionalButtons,
@@ -35,7 +30,7 @@ const RegisterForm = (props:any) => {
   } = props
 
   const handleClose = () => {
-    setState({ open: false })
+    setOpen(false)
   }
 
   const confirmSubmit = async (values: any) => {
@@ -48,7 +43,6 @@ const RegisterForm = (props:any) => {
       let res
       if (isEdit) res = await api.updateTraveler(travelerInfo)
       else res = await api.createTraveler(travelerInfo)
-      props.signUpTraveler(res)
       handleClose()
       if (!props.user) history.push('/success', { res: res })
       else history.push('/travelers')
@@ -57,20 +51,17 @@ const RegisterForm = (props:any) => {
     }
   }
 
-  const handleSubmit = (values: any, {setSubmitting} : any) => {
+  const handleSubmit = async (values: any) => {
     const { flightNum, airlineCode, scheduledArrivalTime } = values
     const day = scheduledArrivalTime.getDate()
     const year = scheduledArrivalTime.getYear() + 1900
     const month = scheduledArrivalTime.getMonth() + 1
-    props.checkFlight(airlineCode, flightNum, year, month, day)
-      .then(() => {
-        setState({ open: true })
-        setSubmitting(false)
-      })
-      .catch(() => {
-        setState({ open: false })
-        setSubmitting(false)
-      })
+    try {
+      await api.checkFlight(airlineCode, flightNum, year, month, day)
+      setOpen(true)
+    } catch (err) {
+      setOpen(false)
+    }
   }
 
   return (
@@ -111,7 +102,8 @@ const RegisterForm = (props:any) => {
       >
         {props => {
           const {
-            isSubmitting,
+            touched,
+            errors,
             submitForm,
           } = props
           return (
@@ -183,8 +175,8 @@ const RegisterForm = (props:any) => {
                       options={countryCodes}
                       getOptionLabel={(option: any) => option.label}
                       getOptionSelected={(option: { label: string }, value: { label: string }) => value.label === option.label}
-                      renderInput={(params: any) => (
-                        <TextField
+                      renderInput={(params: TextFieldProps) => (
+                        <MuiTextField
                           name="countryCode"
                           {...params}
                         />
@@ -278,7 +270,6 @@ const RegisterForm = (props:any) => {
                   <Button
                     variant='contained'
                     className="submit-traveler-registration"
-                    disabled={isSubmitting}
                     color='primary'
                     style={formStyle.submitButton}
                     onClick={submitForm}
@@ -306,7 +297,7 @@ const RegisterForm = (props:any) => {
                 }
               </Form>
               <SubmissionConfirmation
-                open={state.open}
+                open={open}
                 flight={flight}
                 handleClose={handleClose}
                 confirmSubmit={confirmSubmit}
@@ -318,17 +309,3 @@ const RegisterForm = (props:any) => {
     </MuiPickersUtilsProvider>
   )
 }
-
-/* ---------------------------REDUX CONTAINER--------------------------- */
-
-const mapStateToProps = ({ flight } : any) => ({ flight })
-
-const mapDispatchToProps = (dispatch: any) => ({
-  signUpTraveler: (traveler: any) => dispatch(signUpTraveler(traveler)),
-  checkFlight: (code: any, flightNum: any, year: any, month: any, day: any) => dispatch(checkFlight(code, flightNum, year, month, day)),
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(RegisterForm)
