@@ -3,7 +3,7 @@ import { LoginForm } from '../components/forms/LoginForm'
 import api from '../api/api'
 import { useHistory } from 'react-router-dom'
 
-export const Login = (props:any) => {
+export const Login = () => {
   const history = useHistory()
 
   const handleSubmit = async (values: any) => {
@@ -20,7 +20,6 @@ export const Login = (props:any) => {
     <div>
       <LoginForm
         handleSubmit={handleSubmit}
-        auth={props.auth}
       />
     </div>
   )

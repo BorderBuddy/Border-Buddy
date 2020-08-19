@@ -1,6 +1,5 @@
-import React, { Component } from "react"
-import TravelerRow from "./TravelerRow"
-import { Link } from 'react-router-dom'
+import React from 'react'
+import TravelerRow from './TravelerRow'
 
 import {
   Table,
@@ -10,7 +9,7 @@ import {
   TableCell,
   TableRow,
   Paper,
-} from "@material-ui/core"
+} from '@material-ui/core'
 
 import {
   nameStyle,
@@ -24,9 +23,9 @@ import {
   flightStatusStyle,
   arrivalTimeStyle,
   travelerStatusStyle,
-} from "./styles"
+} from './styles'
 
-export default ({ travelers }) => (
+export const AllTravelers = ({ travelers }) => (
   <TableContainer component={Paper}>
     <Table aria-label="traveler table">
       <TableHead>

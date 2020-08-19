@@ -9,7 +9,6 @@ export const LoginForm = ({
   handleSubmit,
   pristine,
   submitting,
-  auth,
 } : any) => {
   const style = signupLoginStyle
 
@@ -49,20 +48,6 @@ export const LoginForm = ({
               type='password'
               style={formStyle.input}
             />
-            {
-              auth.fetching &&
-              <p
-                style={style.loader}
-              >Logging In...
-              </p>
-            }
-            {
-              auth.error &&
-              <p
-                style={style.error}
-              >{auth.error.message}
-              </p>
-            }
             <Button
               type="submit"
               disabled={pristine || submitting}

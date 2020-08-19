@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import RenderAllTravelers from '../components/Admin/AllTravelers'
+import { AllTravelers as RenderAllTravelers } from '../components/Admin/AllTravelers'
 import AllTravelersMobile from '../components/Admin/AllTravelersMobile'
 import api from '../api/api'
 
