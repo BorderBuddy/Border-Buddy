@@ -34,26 +34,29 @@ export const SingleTravelerContainer = () => {
   const [ deleteTravelerOpen, setDeleteTravelerOpen ] = useState(false)
   const [ traveler, setTraveler ] = useState<Traveler | null>(null)
   const [ users, setUsers ] = useState([])
+  const [ ready, setReady ] = useState(false)
 
   useEffect(() => {
-    async () => {
-      try {
-        const selectedTraveler = await api.getTraveler(params.id)
-        setTraveler(selectedTraveler)
-      } catch (err) {
-        alert('Error fetching traveler')
-      }
-    }
-    async () => {
-      try {
-        const admins = await api.getUsers()
-        setUsers(admins)
-      } catch (err) {
-        alert('Error getting users')
-      }
-    }
+    getTraveler()
+    getAdmins()
   }, [])
-
+  const getAdmins = async () => {
+    try {
+      const admins = await api.getUsers()
+      setUsers(admins)
+    } catch (err) {
+      alert('Error getting users')
+    }
+  }
+  const getTraveler = async () => {
+    try {
+      const selectedTraveler = await api.getTraveler(params.id)
+      setTraveler(selectedTraveler)
+      setReady(true)
+    } catch (err) {
+      alert('Error fetching traveler')
+    }
+  }
   const handleSentTextClose = () => {
     setSentTextOpen(false)
   }
@@ -87,17 +90,19 @@ export const SingleTravelerContainer = () => {
       alert('Error deleting traveler')
     }
   }
-
-  return (
-    <div>
-      <Traveler
-        traveler={traveler}
-        sendText={sendText}
-        representatives={users}
-        deleteTraveler={openDeleteTravelerModal}/>
-      <SendTextModal open={sentTextOpen} handleClose={handleSentTextClose} success={textSentSuccess} />
-      <DeleteTravelerConfirmation open={deleteTravelerOpen} handleClose={handleDeleteTravelerClose} traveler={traveler !== null ? traveler.name : ''} confirmDelete={deleteTravelerConfirm}/>
-    </div>
-  )
+  if (ready) {
+    console.log(traveler)
+    return (
+      <div>
+        <Traveler
+          traveler={traveler}
+          sendText={sendText}
+          representatives={users}
+          deleteTraveler={openDeleteTravelerModal}/>
+        <SendTextModal open={sentTextOpen} handleClose={handleSentTextClose} success={textSentSuccess} />
+        <DeleteTravelerConfirmation open={deleteTravelerOpen} handleClose={handleDeleteTravelerClose} traveler={traveler !== null ? traveler.name : ''} confirmDelete={deleteTravelerConfirm}/>
+      </div>
+    )
+  } else return <div>loading...</div>
 }
 

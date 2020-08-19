@@ -53,6 +53,7 @@ export const Traveler = (props: any) => {
       representatives={props.representatives}
       deleteTraveler={props.deleteTraveler}
       showAdditionalButtons={true}
+      sendText={props.sendText}
     />
   )
 }

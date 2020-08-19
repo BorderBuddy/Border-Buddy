@@ -37,11 +37,12 @@ const api = {
     }
   },
   getTravelers: async () => {
+    console.log('getting travelers...')
     try {
       const res = await axios.get('/api/traveler')
       return res.data
-    } catch ({ res }) {
-      return res.data
+    } catch (err) {
+      console.error(err.response.data)
     }
   },
   getTravelersByLawyer: async (id) => {

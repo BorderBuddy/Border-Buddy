@@ -12,18 +12,17 @@ export const AllTravelers = () => {
       const width = window.innerWidth
       setWidth(width)
     })
+    fetchTravelers()
   }, [])
 
-  useEffect(() => {
-    async () => {
-      try {
-        const res = await api.getTravelers()
-        setTravelers(res)
-      } catch (err) {
-        alert('Error fetching travelers')
-      }
+  const fetchTravelers = async () => {
+    try {
+      const res = await api.getTravelers()
+      setTravelers(res)
+    } catch (err) {
+      alert('Error fetching travelers')
     }
-  }, [])
+  }
 
   const mobileOrDesktop = (travelers: any) => {
     if (width > 800) {
