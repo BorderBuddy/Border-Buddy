@@ -1,16 +1,16 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Menu, IconButton, MenuItem } from '@material-ui/core'
 import { MoreVert } from '@material-ui/icons'
 
 const style = {
   icon: {
-    color: 'white'
-  }
+    color: 'white',
+  },
 }
 
 export const RenderAppBar = ({ onSignoutClick }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
   const history = useHistory()
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
