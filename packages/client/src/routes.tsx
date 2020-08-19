@@ -6,12 +6,12 @@ import { AllTravelers } from './containers/AllTravelers'
 import { SingleTravelerContainer } from './containers/SingleTravelerContainer'
 import { Login } from './containers/Login'
 import AdminSignUp from './containers/AdminSignUpContainer'
-import UpdateUserContainer from './containers/UpdateUserContainer'
 import { Success } from './components/Success'
 import { About } from './components/static/About'
 import { WhyBorderBuddy } from './components/static/WhyBorderBuddy'
 import { LoggedIn } from './auth/authService'
 import { RegisterForm } from './components/forms/RegisterForm'
+import { UpdateUser } from './containers/UpdateUser'
 
 export const getRoutes = () => (
   <Switch>
@@ -26,7 +26,7 @@ export const getRoutes = () => (
       <Route path="/travelers/:id"><SingleTravelerContainer/></Route>
       <Route exact path="/travelers"><AllTravelers/></Route>
       <Route exact path="/createuser"><AdminSignUp /></Route>
-      <Route exact path="/updateprofile"><UpdateUserContainer /></Route>
+      <Route exact path="/updateprofile"><UpdateUser/></Route>
     </LoggedIn>
     <Route component={WhyBorderBuddy} />
   </Switch>
