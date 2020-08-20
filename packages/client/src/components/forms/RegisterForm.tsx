@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { yupValidationSchema } from '../../utils/validations'
@@ -5,6 +6,7 @@ import countryCodes from '../../utils/countryCodes'
 import { formStyle } from '../Admin/styles'
 import { TextField, Select } from 'formik-material-ui'
 import { DatePicker } from 'formik-material-ui-pickers'
+// eslint-disable-next-line no-unused-vars
 import { MenuItem, Divider, Button, Grid, Typography, InputLabel, TextFieldProps, TextField as MuiTextField } from '@material-ui/core'
 import { Autocomplete } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
@@ -102,8 +104,6 @@ export const RegisterForm = (props:any) => {
       >
         {props => {
           const {
-            touched,
-            errors,
             submitForm,
           } = props
           return (

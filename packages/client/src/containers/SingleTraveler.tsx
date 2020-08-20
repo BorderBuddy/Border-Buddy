@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Traveler } from '../components/Admin/SingleTraveler'
-import { SendTextModal } from '../components/Admin/SendTextModal'
-import { DeleteTravelerConfirmation } from '../components/Admin/DeleteTravelerConfirmation'
+import { SendTextModal } from '../components/partials/SendTextModal'
+import { DeleteTravelerConfirmation } from '../components/partials/DeleteTravelerConfirmation'
 import { useHistory, useParams } from 'react-router-dom'
 import api from '../api/api'
 
