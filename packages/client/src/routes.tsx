@@ -3,9 +3,9 @@ import { Route, Switch } from 'react-router-dom'
 
 // Components
 import { AllTravelers } from './containers/AllTravelers'
-import { SingleTravelerContainer } from './containers/SingleTravelerContainer'
+import { SingleTravelerContainer } from './containers/SingleTraveler'
 import { Login } from './containers/Login'
-import AdminSignUp from './containers/AdminSignUpContainer'
+import { CreateUser } from './containers/CreateUser'
 import { Success } from './components/Success'
 import { About } from './components/static/About'
 import { WhyBorderBuddy } from './components/static/WhyBorderBuddy'
@@ -25,7 +25,7 @@ export const getRoutes = () => (
       <Route exact path="/traveler/add"><RegisterForm formTitle='Traveler Registration' isAdmin={true}/></Route>
       <Route path="/travelers/:id"><SingleTravelerContainer/></Route>
       <Route exact path="/travelers"><AllTravelers/></Route>
-      <Route exact path="/createuser"><AdminSignUp /></Route>
+      <Route exact path="/createuser"><CreateUser/></Route>
       <Route exact path="/updateprofile"><UpdateUser/></Route>
     </LoggedIn>
     <Route component={WhyBorderBuddy} />
