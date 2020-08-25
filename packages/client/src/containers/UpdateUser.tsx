@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import {UpdateUserForm} from '../components/Admin/UpdateUserForm'
+import {UpdateUserForm} from '../components/forms/UpdateUserForm'
 import api from '../api/api'
 import {
   Dialog,
@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogContent,
 } from '@material-ui/core'
-import {UserContext} from '../UserContext'
+import { UserContext } from '../UserContext'
 import { useHistory } from 'react-router-dom'
 
 export const UpdateUser = (props: any) => {

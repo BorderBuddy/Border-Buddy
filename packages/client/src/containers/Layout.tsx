@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Toolbar, IconButton, Button, AppBar, Grid } from '@material-ui/core'
-import { Footer } from '../components/Footer'
-import { Navbar } from '../components/Navbar'
-import { RenderAppBar } from '../components/Admin/AppBar'
+import { Footer } from '../components/partials/Footer'
+import { Navbar } from '../components/partials/Navbar'
+import { RenderAppBar } from '../components/partials/AppBar'
 import api from '../api/api'
 import { useHistory } from 'react-router-dom'
 import { LoggedIn, LoggedOut } from '../auth/authService'
@@ -38,7 +38,8 @@ export const Layout = () => {
               style={styles.button}
               id="add-new-traveler"
               variant='text'
-              onClick={() => history.push('/traveler/add')}>
+              onClick={() => history.push('/traveler/add')}
+            >
                 Add Traveler
             </Button>
             <RenderAppBar onSignoutClick={() => onSignoutClick()} />
