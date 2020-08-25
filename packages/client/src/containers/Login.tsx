@@ -6,7 +6,7 @@ import { UserContext } from '../UserContext'
 
 export const Login = () => {
   const history = useHistory()
-  const {setCurrUser} = useContext(UserContext)
+  const { setCurrUser } = useContext(UserContext)
 
   const handleSubmit = async (values: any) => {
     const { email, password } = values
@@ -22,7 +22,7 @@ export const Login = () => {
   return (
     <div>
       <LoginForm
-        handleSubmit={handleSubmit}
+        handleSubmit={ handleSubmit }
       />
     </div>
   )

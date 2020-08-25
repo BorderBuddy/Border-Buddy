@@ -49,13 +49,13 @@ export const AdminFormExtension = (props: any) => {
           </Field>
         </Grid>
         <Grid item xs={11} sm={3}>
-          <InputLabel htmlFor="passengerStatus">Passenger Status</InputLabel>
+          <InputLabel htmlFor="status">Passenger Status</InputLabel>
           <Field
-            name="passengerStatus"
+            name="status"
             component={Select}
             style={adminFormExtensionStyle.input}
             inputProps={{
-              id: 'passengerStatus',
+              id: 'status',
             }}
           >
             <MenuItem value={'transit'} >In Transit</MenuItem>

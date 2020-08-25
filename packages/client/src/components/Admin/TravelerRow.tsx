@@ -11,12 +11,11 @@ import {
   flightCodeStyle,
   flightNumStyle,
   flightStatusStyle,
-  scheduledArrivalTimeStyle,
   travelerStatusStyle,
-  setStatusColor
+  setStatusColor,
 } from './styles'
 
-export default ({ traveler }) => {
+export default (traveler: any) => {
   const history = useHistory()
   const {
     id,
@@ -25,7 +24,7 @@ export default ({ traveler }) => {
     email,
     nationality,
     status: travelerStatus,
-    countryCode
+    countryCode,
   } = traveler
   const { airlineCode, flightNum, scheduledArrivalTime, status: flightStatus } =
     traveler.flight || {}
@@ -43,7 +42,7 @@ export default ({ traveler }) => {
       <TableCell style={nationalityStyle}>{nationality}</TableCell>
       <TableCell style={flightCodeStyle}>{airlineCode}</TableCell>
       <TableCell style={flightNumStyle}>{flightNum}</TableCell>
-      <TableCell style={scheduledArrivalTimeStyle}>{timeString}</TableCell>
+      <TableCell >{timeString}</TableCell>
       <TableCell style={flightStatusStyle}>{flightStatus}</TableCell>
       <TableCell style={Object.assign({}, travelerStatusStyle, { color })}>
         {travelerStatus}
