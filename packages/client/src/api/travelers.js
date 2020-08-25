@@ -28,16 +28,23 @@ const api = {
       return err
     }
   },
+  deleteTraveler: async (id) => {
+    try {
+      const res = await axios.delete(`/api/traveler/${id}`)
+      return res.data
+    } catch (err) {
+      return err
+    }
+  },
   getTravelers: async () => {
+    console.log('getting travelers...')
     try {
       const res = await axios.get('/api/traveler')
       return res.data
-    } catch ({ res }) {
-      return res.data
+    } catch (err) {
+      console.error(err.response.data)
     }
   },
-  // NOTE: I think GET /api/traveler?lawyerId={id} is better
-  // to keep the base url the same (api/traveler) -- we want travelers filtered by lawyerId
   getTravelersByLawyer: async (id) => {
     try {
       const res = await axios.get(`/api/traveler?lawyerId=${id}`)
