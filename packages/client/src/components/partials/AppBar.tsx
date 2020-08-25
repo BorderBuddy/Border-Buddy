@@ -9,7 +9,7 @@ const style = {
   },
 }
 
-export const RenderAppBar = (onSignoutClick: any) => {
+export const RenderAppBar = ({onSignoutClick}: {onSignoutClick: () => void}) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const history = useHistory()
   const handleClick = (event: any) => {

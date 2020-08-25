@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { TableRow, TableCell } from '@material-ui/core'
+import { Traveler } from '../../models/models'
 import {
   nameStyle,
   countryCodeStyle,
@@ -15,7 +16,7 @@ import {
   setStatusColor,
 } from './styles'
 
-export default (traveler: any) => {
+export default ({traveler} : {traveler: Traveler}) => {
   const history = useHistory()
   const {
     id,
