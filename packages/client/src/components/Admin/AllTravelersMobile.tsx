@@ -9,8 +9,9 @@ import {
 } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { setStatusColor } from './styles'
+import {Traveler} from '../../models/models'
 
-export const AllTravelersMobile = (travelers: any) => {
+export const AllTravelersMobile = ({travelers}: {travelers: Traveler[]}) => {
   const history = useHistory()
   return (
     <div>
@@ -31,7 +32,7 @@ export const AllTravelersMobile = (travelers: any) => {
         const style = {
           passengerStatus: {
             color,
-            fontWeight: 'bold',
+            // fontWeight: 'bold',
           },
         }
         return (
@@ -41,7 +42,7 @@ export const AllTravelersMobile = (travelers: any) => {
               <Grid container direction='row'><Typography variant="subtitle1">Traveler ID: {id}</Typography></Grid>
               <Grid container style={{marginTop: '1em'}}>
                 <Grid container direction='row'><Typography display='block' variant="h6">Traveler Information</Typography></Grid>
-                <Grid container direction='row'><Typography display='block'variant="body2" style={style.passengerStatus}>
+                <Grid container direction='row'><Typography display='block' variant="body2" style={style.passengerStatus}>
                   Traveler Status: {travelerStatus}
                 </Typography></Grid>
                 <Grid container direction='row'><Typography display='block' variant="body2">
