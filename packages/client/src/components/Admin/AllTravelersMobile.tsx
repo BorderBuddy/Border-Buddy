@@ -10,11 +10,11 @@ import {
 import { useHistory } from 'react-router-dom'
 import { setStatusColor } from './styles'
 
-const AllTravelersMobile = ({ travelers }) => {
+export const AllTravelersMobile = (travelers: any) => {
   const history = useHistory()
   return (
     <div>
-      {travelers.map((traveler, i) => {
+      {travelers.map((traveler: any, i: number) => {
         const {
           id,
           name,
@@ -67,7 +67,7 @@ const AllTravelersMobile = ({ travelers }) => {
                 </Typography></Grid>
               </Grid>
             </CardContent>
-            <CardActions justify='space-around'>
+            <CardActions>
               <Button
                 style={{color: '#2d6ea8'}}
                 variant="text"
@@ -85,4 +85,3 @@ const AllTravelersMobile = ({ travelers }) => {
   )
 }
 
-export default AllTravelersMobile

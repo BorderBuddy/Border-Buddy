@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { AllTravelers as RenderAllTravelers } from '../components/Admin/AllTravelers'
-import AllTravelersMobile from '../components/Admin/AllTravelersMobile'
+import { AllTravelersMobile } from '../components/Admin/AllTravelersMobile'
 import api from '../api/api'
 
 export const AllTravelers = () => {

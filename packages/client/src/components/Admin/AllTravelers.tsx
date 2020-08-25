@@ -25,7 +25,7 @@ import {
   travelerStatusStyle,
 } from './styles'
 
-export const AllTravelers = ({ travelers }) => (
+export const AllTravelers = (travelers: any) => (
   <TableContainer component={Paper}>
     <Table aria-label="traveler table">
       <TableHead>
@@ -45,7 +45,7 @@ export const AllTravelers = ({ travelers }) => (
       </TableHead>
       <TableBody className="all-travelers">
         {travelers &&
-          travelers.map((traveler) => (
+          travelers.map((traveler: any) => (
             <TravelerRow traveler={traveler} key={traveler.id} />
           ))}
       </TableBody>

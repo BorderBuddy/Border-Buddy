@@ -9,14 +9,14 @@ const style = {
   },
 }
 
-export const RenderAppBar = ({ onSignoutClick }) => {
+export const RenderAppBar = (onSignoutClick: any) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const history = useHistory()
-  const handleClick = (event) => {
+  const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = (url) => {
+  const handleClose = (url: string) => {
     setAnchorEl(null)
     if (url === 'onSignoutClick') {
       onSignoutClick()

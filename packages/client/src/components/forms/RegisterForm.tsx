@@ -75,8 +75,6 @@ export const RegisterForm = (props:any) => {
             ? {
               ...initialValues,
               flightStatus: '',
-              passengerStatus: '',
-              representative: '',
             }
             : {
               name: '',
@@ -264,7 +262,7 @@ export const RegisterForm = (props:any) => {
                   </Grid>
                 </Grid>
                 {isAdmin &&
-                  <AdminFormExtension users={users} {...props}/>
+                  <AdminFormExtension users={users} {...props} />
                 }
                 <Grid container>
                   <Button
