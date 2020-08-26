@@ -2,7 +2,6 @@
   "name": "BorderBuddy",
   "version": "0.0.1",
   "description": "Your Border Buddy",
-  "main": "index.js",
   "scripts": {
     "lerna:bootstrap": "lerna bootstrap",
     "migrate": "lerna run --scope api migrate --stream",
@@ -28,6 +27,9 @@
       "pre-commit": "npm test",
       "pre-push": "npm test"
     }
+  },
+  "engines": {
+    "node": "14.x.x"
   },
   "repository": {
     "type": "git",
