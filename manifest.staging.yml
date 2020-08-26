@@ -6,7 +6,6 @@ applications:
   command: npm run migrate && npm run seed:deployment && npm run start
   routes:
   - route: border-buddy.cfapps.io
-  buildpack: nodejs_buildpack
   health-check-type: none
   services:
   - border-buddy-db
@@ -17,6 +16,5 @@ applications:
   command: npm run worker
   no-route: true
   health-check-type: none
-  buildpack: nodejs_buildpack
   services:
   - border-buddy-db
