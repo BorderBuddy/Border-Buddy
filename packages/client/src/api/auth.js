@@ -64,6 +64,7 @@ const api = {
       return res.data
     } catch (err) {
       window.localStorage.clear()
+      loginCallback(null)
       return err
     }
   },
