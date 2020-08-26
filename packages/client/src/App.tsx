@@ -1,10 +1,11 @@
-import React, {useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import api from './api/api'
 import { Layout } from './containers/Layout'
-import {UserContext} from './UserContext'
+import { UserContext } from './UserContext'
+
 export const App = () => {
-  const {setCurrUser} = useContext(UserContext)
+  const { setCurrUser } = useContext(UserContext)
 
   useEffect(() => {
     const checkToken = async () => {

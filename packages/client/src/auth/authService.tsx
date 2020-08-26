@@ -92,11 +92,19 @@ type ChildLikeProps = {
 }
 
 export const LoggedIn = ({children}: ChildLikeProps) => {
-  return isLoggedIn() ? children : null
+  return isLoggedIn()
+    ? <>
+      {children}
+    </>
+    : null
 }
 
 export const LoggedOut = ({children}: ChildLikeProps) => {
-  return !isLoggedIn() ? children : null
+  return !isLoggedIn()
+    ? <>
+      {children}
+    </>
+    : null
 }
 
 function setup () {
