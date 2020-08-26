@@ -75,6 +75,9 @@ jobs:
 
     - name: Build packages
       run: npm run build --if-present
+    
+    - name: Remove node_modules
+      run: npm run clean
 
     - name: CF CLI Action Deploy to Staging
       uses: citizen-of-planet-earth/cf-cli-action@v1

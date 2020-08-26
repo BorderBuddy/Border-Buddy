@@ -6,7 +6,7 @@
     "dev:worker": "ts-node ./src/cron",
     "build": "npm run clean:dist && tsc && mkdir -p ./dist/public && mkdir -p ./src/public",
     "clean:dist": "rm -rf dist && rm -rf ./src/public",
-    "clean": "rm -rf node_modules && npm run clean:dist",
+    "clean": "rm -rf node_modules",
     "worker": "node ./dist/cron/index.js",
     "test": "mocha -r ts-node/register 'test/**/*'",
     "dev": "nodemon",

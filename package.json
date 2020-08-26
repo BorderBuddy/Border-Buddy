@@ -28,9 +28,6 @@
       "pre-push": "npm test"
     }
   },
-  "engines": {
-    "node": "14.x.x"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/EmilyDev/Hack-The-Ban.git"
