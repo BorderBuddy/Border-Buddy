@@ -5,7 +5,7 @@ import customTheme from './utils/muiTheme'
 import { App } from './App'
 import { UserProvider } from './UserContext'
 
-// require('./style/index.scss')
+require('./style/index.scss')
 export const Root = () => {
   return (
     <MuiThemeProvider theme={customTheme}>

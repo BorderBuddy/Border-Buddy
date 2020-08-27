@@ -9,6 +9,7 @@ export const LoginForm = ({
   handleSubmit,
   pristine,
   submitting,
+  auth,
 } : any) => {
   const style = signupLoginStyle
 
@@ -34,7 +35,6 @@ export const LoginForm = ({
         <CardContent>
           <Typography variant='h5' style={style.title}>Admin Login</Typography>
           <Form>
-            {/* <Box style={{width: '100%', height: '4em'}}> */}
             <Field
               name="email"
               component={TextField}
@@ -43,8 +43,6 @@ export const LoginForm = ({
               style={formStyle.textField}
               label='Email'
             />
-            {/* </Box> */}
-            {/* <Box style={{width: '100%', height: '4em'}}> */}
             <Field
               name="password"
               component={TextField}
@@ -53,7 +51,20 @@ export const LoginForm = ({
               label='Password'
               style={formStyle.textField}
             />
-            {/* </Box> */}
+            {
+              auth.fetching &&
+              <p
+                style={style.loader}
+              >Logging In...
+              </p>
+            }
+            {
+              auth.error &&
+              <p
+                style={style.error}
+              >{auth.error}
+              </p>
+            }
             <Button
               type="submit"
               disabled={pristine || submitting}
