@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Card} from '@material-ui/core'
+import {Button, Card, InputLabel} from '@material-ui/core'
 import { adminSignUp } from '../Admin/styles'
 import { phoneRegExp } from '../../utils/validations'
 import { Formik, Form, Field } from 'formik'
@@ -34,23 +34,23 @@ export const CreateUserForm = (handleSubmit: any) => {
         <div>
           <h3 style={style.title}>Update Profile</h3>
           <Form>
+            <InputLabel htmlFor='email'>Email</InputLabel>
             <Field
               name="email"
-              label="Email"
               component={TextField}
               type='email'
               style={style.input}
             />
+            <InputLabel htmlFor='newPassword'>New Password</InputLabel>
             <Field
               name="newPassword"
-              label="New Password"
               component={TextField}
               type="password"
               style={style.input}
             />
+            <InputLabel htmlFor='phone'>Phone Number</InputLabel>
             <Field
               name="phone"
-              label="Phone Number"
               component={TextField}
               style={style.input}
             />
