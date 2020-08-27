@@ -92,12 +92,14 @@ export const formStyle = {
   form: {
     display: 'block',
     width: '80%',
-    margin: '5em auto',
   },
   input: {
     width: '100%',
-    color: 'black',
-    marginBottom: '1em',
+    height: '2em',
+  },
+  textField: {
+    width: '100%',
+    height: '4em',
   },
   select: {
     width: '100%',
