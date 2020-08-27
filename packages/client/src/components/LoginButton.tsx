@@ -29,7 +29,6 @@ export const LoginButton = () => {
 
 const styles = {
   button: {
-    backgroundColor: '#2d6ec0',
     margin: '2em auto',
     display: 'block',
     width: '50%',

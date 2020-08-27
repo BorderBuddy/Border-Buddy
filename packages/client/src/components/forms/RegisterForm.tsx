@@ -134,7 +134,6 @@ export const RegisterForm = (props:any) => {
                     <InputLabel htmlFor="requireInterpreter">Are you comfortable speaking English?</InputLabel>
                     <Field
                       name='requireInterpreter'
-                      label='Are you comfortable speaking English?'
                       component={Select}
                       style={formStyle.input}
                       inputProps={{
@@ -182,9 +181,9 @@ export const RegisterForm = (props:any) => {
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
+                    <InputLabel htmlFor="phone">Phone Number</InputLabel>
                     <Field
                       name="phone"
-                      label="Phone Number"
                       component={TextField}
                       style={formStyle.input}
                     />
@@ -208,26 +207,26 @@ export const RegisterForm = (props:any) => {
                 <Typography variant='caption' paragraph><em>Tell us when your flight arrives, so we know when to check in with you.</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
                   <Grid item xs={11} sm={3}>
+                    <InputLabel htmlFor='scheduledArrivalTime'>What day do you arrive?</InputLabel>
                     <Field
                       name="scheduledArrivalTime"
-                      label="What day do you arrive?"
                       component={DatePicker}
                       format="MM/dd/yyyy"
                       style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
+                    <InputLabel htmlFor='airlineCode'>Airline code</InputLabel>
                     <Field
                       name="airlineCode"
-                      label="Airline code"
                       component={TextField}
                       style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
+                    <InputLabel htmlFor='flightNum'>Flight number</InputLabel>
                     <Field
                       name="flightNum"
-                      label="Flight number"
                       component={TextField}
                       style={formStyle.input}
                     />
@@ -237,25 +236,25 @@ export const RegisterForm = (props:any) => {
                 <Typography variant='caption' paragraph><em>Who can we contact if we can't get in touch with you?</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
                   <Grid item xs={11} sm={3}>
+                    <InputLabel htmlFor='secondaryContactNam'>Name</InputLabel>
                     <Field
                       name="secondaryContactName"
-                      label="Name"
                       component={TextField}
                       style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
+                    <InputLabel htmlFor='secondaryContactPhone'>Phone Number</InputLabel>
                     <Field
                       name="secondaryContactPhone"
-                      label="Phone Number"
                       component={TextField}
                       style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
+                    <InputLabel htmlFor='secondaryContactRelation'>Relationship to you</InputLabel>
                     <Field
                       name="secondaryContactRelation"
-                      label="Relationship to you"
                       component={TextField}
                       style={formStyle.input}
                     />
