@@ -3,10 +3,9 @@ applications:
   instances: 1
   memory: 1GB
   disk_quota: 2048M
-  command: npm run migrate && npm run seed:deployment && npm run start
+  command: npm run lerna:bootstrap && npm run migrate && npm run seed:deployment && npm run start
   routes:
   - route: border-buddy-prod.cfapps.io
-  buildpack: nodejs_buildpack
   health-check-type: none
   services:
   - border-buddy-prod-db
@@ -14,9 +13,8 @@ applications:
   instances: 1
   memory: 1GB
   disk_quota: 2048M
-  command: npm run worker
+  command: npm run lerna:bootstrap && npm run worker
   no-route: true
   health-check-type: none
-  buildpack: nodejs_buildpack
   services:
   - border-buddy-prod-db

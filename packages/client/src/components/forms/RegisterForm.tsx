@@ -6,7 +6,6 @@ import countryCodes from '../../utils/countryCodes'
 import { formStyle } from '../Admin/styles'
 import { TextField, Select } from 'formik-material-ui'
 import { DatePicker } from 'formik-material-ui-pickers'
-// eslint-disable-next-line no-unused-vars
 import { MenuItem, Divider, Button, Grid, Typography, InputLabel, TextFieldProps, TextField as MuiTextField } from '@material-ui/core'
 import { Autocomplete } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
@@ -15,15 +14,16 @@ import { SubmissionConfirmation } from '../SubmissionConfirmation'
 import api from '../../api/api'
 import { useHistory } from 'react-router-dom'
 import { AdminFormExtension } from './AdminExtensionForm'
+import { Flight } from '../../models/models'
 
 export const RegisterForm = (props:any) => {
   const [ open, setOpen ] = useState(false)
+  const [flight, setFlight] = useState({} as Flight)
   const history = useHistory()
   const {
     showAdditionalButtons,
     sendText,
     deleteTraveler,
-    flight,
     isAdmin,
     formTitle,
     initialValues,
@@ -59,7 +59,7 @@ export const RegisterForm = (props:any) => {
     const year = scheduledArrivalTime.getYear() + 1900
     const month = scheduledArrivalTime.getMonth() + 1
     try {
-      await api.checkFlight(airlineCode, flightNum, year, month, day)
+      setFlight(await api.checkFlight(airlineCode, flightNum, year, month, day))
       setOpen(true)
     } catch (err) {
       setOpen(false)
@@ -105,7 +105,7 @@ export const RegisterForm = (props:any) => {
             submitForm,
           } = props
           return (
-            <Grid container >
+            <Grid container style={{justifyContent: 'center'}}>
               <Form style={formStyle.form}>
                 <h1 style={formStyle.header}>{formTitle}</h1>
                 <Divider />
@@ -113,31 +113,36 @@ export const RegisterForm = (props:any) => {
                 <Typography variant='caption' paragraph><em>Tell us about yourself, so our lawyers can can best assist you.</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
                   <Grid item xs={11} sm={5}>
-                    <InputLabel htmlFor="name">Name</InputLabel>
                     <Field
                       name="name"
                       id='name'
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
+                      label='Name'
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
-                    <InputLabel htmlFor="nationality">Nationality</InputLabel>
+
                     <Field
                       name="nationality"
                       id="nationality"
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
+                      label='Nationality'
                     />
+
                   </Grid>
                   <Grid item xs={11} sm={5}>
-                    <InputLabel htmlFor="requireInterpreter">Are you comfortable speaking English?</InputLabel>
+                    <InputLabel shrink htmlFor="requireInterpreter">Are you comfortable speaking English?</InputLabel>
                     <Field
                       name='requireInterpreter'
                       component={Select}
-                      style={formStyle.input}
+                      style={formStyle.select}
                       inputProps={{
                         id: 'requireInterpreter',
+                        style: formStyle.input,
                       }}
                     >
                       <MenuItem value="true">No</MenuItem>
@@ -145,29 +150,31 @@ export const RegisterForm = (props:any) => {
                     </Field>
                   </Grid>
                   <Grid item xs={11} sm={5}>
-                    <InputLabel htmlFor='preferredLanguage'>Preferred Language(s)</InputLabel>
                     <Field
                       name="preferredLanguage"
                       id="preferredLanguage"
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
+                      label='Preferred Language'
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
-                    <InputLabel htmlFor="email">Email</InputLabel>
                     <Field
                       name="email"
-                      id='"email"'
+                      id="email"
+                      label='Email'
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
-                    <InputLabel htmlFor="countryCode">Country Phone Code</InputLabel>
+                    <InputLabel shrink htmlFor="countryCode">Country Phone Code</InputLabel>
                     <Field
                       name="countryCode"
                       id='countryCode'
-                      style={formStyle.input}
+                      style={formStyle.select}
                       component={Autocomplete}
                       options={countryCodes}
                       getOptionLabel={(option: any) => option.label}
@@ -181,21 +188,23 @@ export const RegisterForm = (props:any) => {
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
-                    <InputLabel htmlFor="phone">Phone Number</InputLabel>
                     <Field
                       name="phone"
+                      label='Phone Number'
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
-                    <InputLabel htmlFor="connectivity">Do you have a smartphone?</InputLabel>
+                    <InputLabel shrink htmlFor="connectivity">Do you have a smartphone?</InputLabel>
                     <Field
                       name="connectivity"
                       component={Select}
-                      style={formStyle.input}
+                      style={formStyle.select}
                       inputProps={{
                         id: 'connectivity',
+                        style: formStyle.input,
                       }}
                     >
                       <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
@@ -207,28 +216,30 @@ export const RegisterForm = (props:any) => {
                 <Typography variant='caption' paragraph><em>Tell us when your flight arrives, so we know when to check in with you.</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
                   <Grid item xs={11} sm={3}>
-                    <InputLabel htmlFor='scheduledArrivalTime'>What day do you arrive?</InputLabel>
+                    <InputLabel shrink htmlFor='scheduledArrivalTime'>What day do you arrive?</InputLabel>
                     <Field
                       name="scheduledArrivalTime"
                       component={DatePicker}
                       format="MM/dd/yyyy"
-                      style={formStyle.input}
+                      style={formStyle.select}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
-                    <InputLabel htmlFor='airlineCode'>Airline code</InputLabel>
                     <Field
                       name="airlineCode"
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
+                      label='Airline Code'
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
-                    <InputLabel htmlFor='flightNum'>Flight number</InputLabel>
                     <Field
                       name="flightNum"
+                      label='Flight number'
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
                     />
                   </Grid>
                 </Grid>
@@ -236,27 +247,30 @@ export const RegisterForm = (props:any) => {
                 <Typography variant='caption' paragraph><em>Who can we contact if we can't get in touch with you?</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
                   <Grid item xs={11} sm={3}>
-                    <InputLabel htmlFor='secondaryContactNam'>Name</InputLabel>
                     <Field
                       name="secondaryContactName"
+                      label='Secondary Contact Name'
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
-                    <InputLabel htmlFor='secondaryContactPhone'>Phone Number</InputLabel>
                     <Field
                       name="secondaryContactPhone"
+                      label='Phone Number'
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
-                    <InputLabel htmlFor='secondaryContactRelation'>Relationship to you</InputLabel>
                     <Field
                       name="secondaryContactRelation"
+                      label='Relationship to you'
                       component={TextField}
-                      style={formStyle.input}
+                      InputProps={{style: formStyle.input}}
+                      style={formStyle.textField}
                     />
                   </Grid>
                 </Grid>

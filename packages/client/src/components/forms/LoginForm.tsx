@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, Button, Typography, InputLabel } from '@material-ui/core'
+import { Card, CardContent, Button, Typography, InputLabel, Box } from '@material-ui/core'
 import { signupLoginStyle, formStyle } from '../Admin/styles'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
@@ -34,20 +34,26 @@ export const LoginForm = ({
         <CardContent>
           <Typography variant='h5' style={style.title}>Admin Login</Typography>
           <Form>
-            <InputLabel htmlFor='email'>Email</InputLabel>
+            {/* <Box style={{width: '100%', height: '4em'}}> */}
             <Field
               name="email"
               component={TextField}
               type='email'
-              style={formStyle.input}
+              InputProps={{style: formStyle.input}}
+              style={formStyle.textField}
+              label='Email'
             />
-            <InputLabel htmlFor='password'>Password</InputLabel>
+            {/* </Box> */}
+            {/* <Box style={{width: '100%', height: '4em'}}> */}
             <Field
               name="password"
               component={TextField}
               type='password'
-              style={formStyle.input}
+              InputProps={{style: formStyle.input}}
+              label='Password'
+              style={formStyle.textField}
             />
+            {/* </Box> */}
             <Button
               type="submit"
               disabled={pristine || submitting}
