@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, Button, Typography, InputLabel, Box } from '@material-ui/core'
+import { Card, CardContent, Button, Typography } from '@material-ui/core'
 import { signupLoginStyle, formStyle } from '../Admin/styles'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
@@ -11,8 +11,6 @@ export const LoginForm = ({
   submitting,
   auth,
 } : any) => {
-  const style = signupLoginStyle
-
   return (
     <Formik
       initialValues={{
@@ -33,38 +31,38 @@ export const LoginForm = ({
     >
       <Card>
         <CardContent>
-          <Typography variant='h5' style={style.title}>Admin Login</Typography>
+          <Typography variant='h5'>Admin Login</Typography>
           <Form>
-            <Field
-              name="email"
-              component={TextField}
-              type='email'
-              // InputProps={{style: formStyle.input}}
-              style={formStyle.textField}
-              label='Email'
-            />
-            <Field
-              name="password"
-              component={TextField}
-              type='password'
-              // InputProps={{style: formStyle.input}}
-              label='Password'
-              style={formStyle.textField}
-            />
-            {
-              auth.fetching &&
+            <div style={formStyle.textField}>
+              <Field
+                name="email"
+                component={TextField}
+                type='email'
+                label='Email'
+              />
+            </div>
+            <div style={formStyle.textField}>
+              <Field
+                name="password"
+                component={TextField}
+                type='password'
+                label='Password'
+              />
+            </div>
+            <div>
+              {
+                auth.fetching &&
+              <p>Logging In...</p>
+              }
+              {
+                auth.error &&
               <p
-                style={style.loader}
-              >Logging In...
+                style={signupLoginStyle.error}
+              >
+                {auth.error}
               </p>
-            }
-            {
-              auth.error &&
-              <p
-                style={style.error}
-              >{auth.error}
-              </p>
-            }
+              }
+            </div>
             <Button
               type="submit"
               disabled={pristine || submitting}

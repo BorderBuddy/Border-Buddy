@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { yupValidationSchema } from '../../utils/validations'
@@ -111,14 +110,13 @@ export const RegisterForm = (props:any) => {
                 <Divider />
                 <Typography variant='h5' display='block'>Personal and Contact Details</Typography>
                 <Typography variant='caption' paragraph><em>Tell us about yourself, so our lawyers can can best assist you.</em></Typography>
-                <Grid container direction='row' alignItems='center' justify='space-around'>
+                <Grid container direction='row' alignItems='center' justify='space-around' spacing={3}>
                   <Grid item xs={11} sm={5}>
                     <Field
                       name="name"
                       id='name'
                       component={TextField}
-                      // InputProps={{style: formStyle.input}}
-                      // style={formStyle.textField}
+                      style={formStyle.input}
                       label='Name'
                     />
                   </Grid>
@@ -128,8 +126,7 @@ export const RegisterForm = (props:any) => {
                       name="nationality"
                       id="nationality"
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      style={formStyle.input}
                       label='Nationality'
                     />
 
@@ -142,7 +139,6 @@ export const RegisterForm = (props:any) => {
                       style={formStyle.select}
                       inputProps={{
                         id: 'requireInterpreter',
-                        style: formStyle.input,
                       }}
                     >
                       <MenuItem value="true">No</MenuItem>
@@ -154,8 +150,7 @@ export const RegisterForm = (props:any) => {
                       name="preferredLanguage"
                       id="preferredLanguage"
                       component={TextField}
-                      // InputProps={{style: formStyle.input}}
-                      // style={formStyle.textField}
+                      style={formStyle.input}
                       label='Preferred Language'
                     />
                   </Grid>
@@ -165,8 +160,7 @@ export const RegisterForm = (props:any) => {
                       id="email"
                       label='Email'
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
@@ -192,8 +186,7 @@ export const RegisterForm = (props:any) => {
                       name="phone"
                       label='Phone Number'
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
@@ -204,7 +197,6 @@ export const RegisterForm = (props:any) => {
                       style={formStyle.select}
                       inputProps={{
                         id: 'connectivity',
-                        style: formStyle.input,
                       }}
                     >
                       <MenuItem className="traveler-has-phone-option" value="true">Yes</MenuItem>
@@ -228,8 +220,7 @@ export const RegisterForm = (props:any) => {
                     <Field
                       name="airlineCode"
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      style={formStyle.input}
                       label='Airline Code'
                     />
                   </Grid>
@@ -238,8 +229,7 @@ export const RegisterForm = (props:any) => {
                       name="flightNum"
                       label='Flight number'
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      style={formStyle.input}
                     />
                   </Grid>
                 </Grid>
@@ -251,8 +241,7 @@ export const RegisterForm = (props:any) => {
                       name="secondaryContactName"
                       label='Secondary Contact Name'
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
@@ -260,8 +249,7 @@ export const RegisterForm = (props:any) => {
                       name="secondaryContactPhone"
                       label='Phone Number'
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      style={formStyle.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
@@ -269,8 +257,7 @@ export const RegisterForm = (props:any) => {
                       name="secondaryContactRelation"
                       label='Relationship to you'
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      style={formStyle.input}
                     />
                   </Grid>
                 </Grid>

@@ -14,13 +14,11 @@ export const travelerStatusStyle = {
   width: '8vw',
   align: 'left',
   color,
-  // fontWeight: 'bold',
 }
 
 export const signupLoginStyle = {
   card: {
     margin: '5em auto',
-    // textAlign: 'center',
     width: '50%',
     padding: '2em',
   },
@@ -30,15 +28,8 @@ export const signupLoginStyle = {
     display: 'block',
     width: '50%',
   },
-  title: {
-    // textAlign: 'center'
-  },
   error: {
-    // textAlign: 'center',
     color: 'red',
-  },
-  loader: {
-    // textAlign: 'center'
   },
 }
 
@@ -95,11 +86,11 @@ export const formStyle = {
   },
   input: {
     width: '100%',
-    height: '2em',
+    height: '4em',
   },
   textField: {
-    width: '100%',
     height: '4em',
+    padding: 5,
   },
   select: {
     width: '100%',

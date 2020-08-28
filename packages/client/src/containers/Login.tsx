@@ -21,7 +21,7 @@ export const Login = () => {
       setAuth({...auth, fetching: false})
       history.push('/travelers')
     } catch (err) {
-      setAuth({fetching: false, error: 'Login Not Successful'})
+      setAuth({fetching: false, error: 'Login Unsuccessful...'})
       console.error(err)
     }
   }
