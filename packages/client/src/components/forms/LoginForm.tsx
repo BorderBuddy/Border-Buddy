@@ -39,7 +39,7 @@ export const LoginForm = ({
               name="email"
               component={TextField}
               type='email'
-              InputProps={{style: formStyle.input}}
+              // InputProps={{style: formStyle.input}}
               style={formStyle.textField}
               label='Email'
             />
@@ -47,7 +47,7 @@ export const LoginForm = ({
               name="password"
               component={TextField}
               type='password'
-              InputProps={{style: formStyle.input}}
+              // InputProps={{style: formStyle.input}}
               label='Password'
               style={formStyle.textField}
             />

@@ -117,8 +117,8 @@ export const RegisterForm = (props:any) => {
                       name="name"
                       id='name'
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      // InputProps={{style: formStyle.input}}
+                      // style={formStyle.textField}
                       label='Name'
                     />
                   </Grid>
@@ -154,8 +154,8 @@ export const RegisterForm = (props:any) => {
                       name="preferredLanguage"
                       id="preferredLanguage"
                       component={TextField}
-                      InputProps={{style: formStyle.input}}
-                      style={formStyle.textField}
+                      // InputProps={{style: formStyle.input}}
+                      // style={formStyle.textField}
                       label='Preferred Language'
                     />
                   </Grid>
