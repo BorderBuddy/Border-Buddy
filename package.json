@@ -20,7 +20,8 @@
     "start": "lerna run --scope api start --stream",
     "todo": "lerna run todo",
     "todo-ci": "lerna run todo-ci",
-    "clean": "lerna run clean && rm -rf node_modules"
+    "clean": "lerna run clean && rm -rf node_modules",
+    "clean:dist" : "lerna run clean:dist"
   },
   "husky": {
     "hooks": {
