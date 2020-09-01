@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import { yupValidationSchema } from '../../utils/validations'
-import countryCodes from '../../utils/countryCodes'
+import { countryCodes } from '../../utils/countryCodes'
 import { formStyle } from '../Admin/styles'
 import { TextField, Select } from 'formik-material-ui'
 import { DatePicker } from 'formik-material-ui-pickers'
@@ -27,7 +27,7 @@ export const RegisterForm = (props:any) => {
     formTitle,
     initialValues,
     isEdit,
-    users,
+    representatives,
   } = props
 
   const handleClose = () => {
@@ -35,15 +35,19 @@ export const RegisterForm = (props:any) => {
   }
 
   const confirmSubmit = async (values: any) => {
-    const { flight } = props
+    console.log(values)
     const travelerInfo = Object.assign({}, values, {
-      scheduledArrivalTime: flight.arrivalTimeUtc,
       countryCode: values.countryCode.code,
     })
     try {
       let res
-      if (isEdit) res = await api.updateTraveler(travelerInfo)
-      else res = await api.createTraveler(travelerInfo)
+      if (isEdit) {
+        console.log('isEdit fired')
+        res = await api.updateTraveler(initialValues.id, travelerInfo)
+      } else {
+        console.log('isEdit not flagged')
+        res = await api.createTraveler(travelerInfo)
+      }
       handleClose()
       if (!props.user) history.push('/success', { res: res })
       else history.push('/travelers')
@@ -54,26 +58,35 @@ export const RegisterForm = (props:any) => {
 
   const handleSubmit = async (values: any) => {
     const { flightNum, airlineCode, scheduledArrivalTime } = values
-    const day = scheduledArrivalTime.getDate()
-    const year = scheduledArrivalTime.getYear() + 1900
-    const month = scheduledArrivalTime.getMonth() + 1
+    const flightDate = new Date(scheduledArrivalTime)
+    const day = flightDate.getDate()
+    const year = flightDate.getFullYear()
+    const month = flightDate.getMonth() + 1
     try {
-      setFlight(await api.checkFlight(airlineCode, flightNum, year, month, day))
-      setOpen(true)
+      const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day)
+      console.log(currentFlight)
+      setFlight(currentFlight)
+      console.log(flight)
+      // setOpen(true)
     } catch (err) {
       setOpen(false)
     }
   }
 
+  const getCountryCodeObj = (code: string) => {
+    const countryCodeObj = countryCodes.filter((codes) => codes.code.toString() === code)[0]
+    console.log(countryCodeObj)
+    return countryCodeObj
+  }
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Formik
-        enableReinitialize
         initialValues={
           isAdmin
             ? {
               ...initialValues,
-              flightStatus: '',
+              countryCode: getCountryCodeObj(initialValues.countryCode),
             }
             : {
               name: '',
@@ -81,10 +94,7 @@ export const RegisterForm = (props:any) => {
               requireInterpreter: 'false',
               preferredLanguage: 'English',
               email: '',
-              countryCode: {
-                code: 1,
-                label: 'USA or Canada - +1',
-              },
+              countryCode: getCountryCodeObj('1'),
               phone: '',
               connectivity: 'true',
               flightNum: '',
@@ -262,7 +272,7 @@ export const RegisterForm = (props:any) => {
                   </Grid>
                 </Grid>
                 {isAdmin &&
-                  <AdminFormExtension users={users} {...props} />
+                  <AdminFormExtension representatives={representatives} {...props} />
                 }
                 <Grid container>
                   <Button

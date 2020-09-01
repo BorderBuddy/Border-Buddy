@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Traveler } from '../components/Admin/SingleTraveler'
+import { SingleTraveler } from '../components/Admin/SingleTraveler'
+import {Traveler} from '../models/models'
 import { SendTextModal } from '../components/partials/SendTextModal'
 import { DeleteTravelerConfirmation } from '../components/partials/DeleteTravelerConfirmation'
 import { useHistory, useParams } from 'react-router-dom'
@@ -8,24 +9,6 @@ import api from '../api/api'
 interface RouteParams {
   id: string
 }
-
-interface Traveler {
-  name: string
-  nationality: string
-  requireInterpreter: boolean
-  preferredLanguage: string
-  email: string
-  phone: string
-  connectivity: boolean
-  secondaryContactPhone: string
-  secondaryContactName: string
-  secondaryContactRelation: string
-  status: object
-  representative: object
-  countryCode: string
-  flight: object
-}
-
 export const SingleTravelerContainer = () => {
   const history = useHistory()
   const params = useParams<RouteParams>()
@@ -43,6 +26,7 @@ export const SingleTravelerContainer = () => {
   const getAdmins = async () => {
     try {
       const admins = await api.getUsers()
+      // console.log(admins)
       setUsers(admins)
     } catch (err) {
       alert('Error getting users')
@@ -94,7 +78,7 @@ export const SingleTravelerContainer = () => {
     console.log(traveler)
     return (
       <div>
-        <Traveler
+        <SingleTraveler
           traveler={traveler}
           sendText={sendText}
           representatives={users}

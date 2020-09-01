@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { EditForm } from '../forms/AdminAddTravelerForm'
+import { EditForm } from '../forms/EditForm'
 
-export const Traveler = (props: any) => {
+export const SingleTraveler = (props: any) => {
+  console.log(JSON.stringify(props))
   const {
     name,
     nationality,
@@ -13,17 +14,19 @@ export const Traveler = (props: any) => {
     secondaryContactPhone,
     secondaryContactName,
     secondaryContactRelation,
+    flight,
     status: passengerStatus,
     representative,
     countryCode,
+    id,
   } = props.traveler
-  const { airlineCode, flightNum, scheduledArrivalTime, status: flightStatus } = props.traveler.flight || {}
-  const [flightDate, setFlightDate] = useState<Date | null>(null)
 
-  useEffect(() => {
-    const flight = scheduledArrivalTime ? new Date(scheduledArrivalTime) : null
-    setFlightDate(flight)
-  }, [])
+  const {
+    airlineCode,
+    flightNum,
+    scheduledArrivalTime,
+    status: flightStatus,
+  } = flight
 
   const initialValues = {
     name,
@@ -36,14 +39,15 @@ export const Traveler = (props: any) => {
     secondaryContactPhone,
     secondaryContactName,
     secondaryContactRelation,
-    passengerStatus,
-    scheduledArrivalTime: flightDate,
+    status,
+    scheduledArrivalTime,
     airlineCode,
     flightNum,
     flightStatus,
     representative,
     countryCode,
-    flightDate,
+    passengerStatus,
+    id,
   }
 
   return (
