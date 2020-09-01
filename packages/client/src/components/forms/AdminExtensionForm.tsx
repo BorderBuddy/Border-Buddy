@@ -49,13 +49,13 @@ export const AdminFormExtension = (props: any) => {
           </Field>
         </Grid>
         <Grid item xs={11} sm={3}>
-          <InputLabel htmlFor="status">Passenger Status</InputLabel>
+          <InputLabel htmlFor="passengerStatus">Passenger Status</InputLabel>
           <Field
-            name="status"
+            name="passengerStatus"
             component={Select}
             style={adminFormExtensionStyle.input}
             inputProps={{
-              id: 'status',
+              id: 'passengerStatus',
             }}
           >
             <MenuItem value={'transit'} >In Transit</MenuItem>
@@ -75,8 +75,8 @@ export const AdminFormExtension = (props: any) => {
               id: 'representative',
             }}
           >
-            <MenuItem value=''></MenuItem>
-            {menuItems(props.users)}
+            {/* <MenuItem value=''></MenuItem> */}
+            {menuItems(props.representatives)}
           </Field>
         </Grid>
       </Grid>
