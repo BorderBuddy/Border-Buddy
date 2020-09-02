@@ -81,7 +81,7 @@ export const SingleTravelerContainer = () => {
         <SingleTraveler
           traveler={traveler}
           sendText={sendText}
-          representatives={users}
+          // representatives={users}
           deleteTraveler={openDeleteTravelerModal}/>
         <SendTextModal open={sentTextOpen} handleClose={handleSentTextClose} success={textSentSuccess} />
         <DeleteTravelerConfirmation open={deleteTravelerOpen} handleClose={handleDeleteTravelerClose} traveler={traveler !== null ? traveler.name : ''} confirmDelete={deleteTravelerConfirm}/>

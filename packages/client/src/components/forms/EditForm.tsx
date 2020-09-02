@@ -7,7 +7,7 @@ export const EditForm = (props: any) => {
       formTitle={props.title}
       isAdmin={true}
       initialValues={props.initialValues}
-      representatives={props.representatives}
+      // representatives={props.representatives}
       isEdit={true}
     />
   )

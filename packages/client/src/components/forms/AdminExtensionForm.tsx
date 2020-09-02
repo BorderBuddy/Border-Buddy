@@ -1,14 +1,31 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Field } from 'formik'
 import { MenuItem, Grid, InputLabel } from '@material-ui/core'
 import { Select } from 'formik-material-ui'
 import { adminFormExtensionStyle } from '../styles'
+import { User } from '../../models/models'
+import api from '../../api/user'
 
-export const AdminFormExtension = (props: any) => {
-  const menuItems = (representatives: any) => {
+export const AdminFormExtension = () => {
+  const [reps, setReps] = useState([] as User[])
+
+  useEffect(() => {
+    getAdmins()
+  }, [])
+
+  const getAdmins = async () => {
+    try {
+      const admins = await api.getUsers()
+      setReps(admins)
+    } catch (err) {
+      alert('Error getting users')
+    }
+  }
+
+  const menuItems = (representatives: User[]) => {
     return (
       representatives &&
-      representatives.map((rep: any, index: any) => {
+      representatives.map((rep: User, index: number) => {
         return (
           <MenuItem
             key={index}
@@ -21,7 +38,6 @@ export const AdminFormExtension = (props: any) => {
       })
     )
   }
-
   const first3Chars = (text: any) => {
     return text.substring(0, 3).toUpperCase()
   }
@@ -75,8 +91,7 @@ export const AdminFormExtension = (props: any) => {
               id: 'representative',
             }}
           >
-            {/* <MenuItem value=''></MenuItem> */}
-            {menuItems(props.representatives)}
+            {menuItems(reps)}
           </Field>
         </Grid>
       </Grid>

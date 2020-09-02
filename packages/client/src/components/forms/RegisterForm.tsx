@@ -27,7 +27,6 @@ export const RegisterForm = (props:any) => {
     formTitle,
     initialValues,
     isEdit,
-    representatives,
   } = props
 
   const handleClose = () => {
@@ -42,10 +41,11 @@ export const RegisterForm = (props:any) => {
     try {
       let res
       if (isEdit) {
-        console.log('isEdit fired')
+        console.log('isEdit true')
+        // TODO: This has to propagate to the flight object if it modifies the flightstatus
         res = await api.updateTraveler(initialValues.id, travelerInfo)
       } else {
-        console.log('isEdit not flagged')
+        console.log('isEdit false')
         res = await api.createTraveler(travelerInfo)
       }
       handleClose()
@@ -64,10 +64,10 @@ export const RegisterForm = (props:any) => {
     const month = flightDate.getMonth() + 1
     try {
       const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day)
-      console.log(currentFlight)
+      console.log(`currentFlight: ${JSON.stringify(currentFlight)}`)
       setFlight(currentFlight)
-      console.log(flight)
-      // setOpen(true)
+      console.log(`flight in state: ${JSON.stringify(flight)}`)
+      setOpen(true)
     } catch (err) {
       setOpen(false)
     }
@@ -75,7 +75,7 @@ export const RegisterForm = (props:any) => {
 
   const getCountryCodeObj = (code: string) => {
     const countryCodeObj = countryCodes.filter((codes) => codes.code.toString() === code)[0]
-    console.log(countryCodeObj)
+    // console.log(countryCodeObj)
     return countryCodeObj
   }
 
@@ -83,7 +83,7 @@ export const RegisterForm = (props:any) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Formik
         initialValues={
-          isAdmin
+          isAdmin && initialValues
             ? {
               ...initialValues,
               countryCode: getCountryCodeObj(initialValues.countryCode),
@@ -103,6 +103,9 @@ export const RegisterForm = (props:any) => {
               secondaryContactRelation: '',
               scheduledArrivalTime: new Date(),
               airlineCode: '',
+              flightStatus: 'scheduled',
+              passengerStatus: 'transit',
+              representative: 1,
             }
         }
         onSubmit={handleSubmit}
@@ -272,7 +275,7 @@ export const RegisterForm = (props:any) => {
                   </Grid>
                 </Grid>
                 {isAdmin &&
-                  <AdminFormExtension representatives={representatives} {...props} />
+                  <AdminFormExtension/>
                 }
                 <Grid container>
                   <Button
