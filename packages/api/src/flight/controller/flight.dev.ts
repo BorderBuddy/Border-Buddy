@@ -1,5 +1,6 @@
 import { airlineInfoMapper } from '../../utils/mappers'
 import { Flight } from '../../database/models/flights'
+import { RequestHandler } from 'express'
 
 /*
 * All data in this file is dummy test data either from the DB
@@ -11,12 +12,12 @@ import { Flight } from '../../database/models/flights'
 * This file needs to stay in sync with the dummy data in database/seed.js
 */
 
-const getCode = (req, res, next) => {
+const getCode : RequestHandler = (req, res) => {
   const { code } = req.query
 
   const acceptedCodes = [
     'UA',
-    'KL'
+    'KL',
   ]
 
   const acceptedRes = {
@@ -27,7 +28,7 @@ const getCode = (req, res, next) => {
         icao: 'UAL',
         name: 'United Airlines',
         phoneNumber: '1-800-864-8331',
-        active: true
+        active: true,
       },
       {
         fs: 'KL',
@@ -35,12 +36,11 @@ const getCode = (req, res, next) => {
         icao: 'KLM',
         name: 'KLM',
         phoneNumber: '1-800-447-4747',
-        active: true
-      }
-    ]
+        active: true,
+      },
+    ],
   }
-
-  if (acceptedCodes.includes(code)) {
+  if (typeof code === 'string' && acceptedCodes.includes(code)) {
     const mappedAirlineInfo = airlineInfoMapper(acceptedRes.airlines, code)
     res.status(200).json(mappedAirlineInfo)
   } else {
@@ -48,22 +48,23 @@ const getCode = (req, res, next) => {
   }
 }
 
-const verifyFlight = (req, res, next) => {
-  const { code, flightNum, year, month, day } = req.query
+const verifyFlight : RequestHandler = (req, res, next) => {
+  console.log('verify flight from dev called')
+  const { code, flightNum } = req.query
 
-  const maybeFlight = Flight.findOne({
+  Flight.findOne({
     where: {
       airlineCode: code,
-      flightNum: flightNum
-    }
+      flightNum: flightNum,
+    },
   })
-    .then(flight => {
+    .then((flight: { dataValues: any }) => {
       // TODO fetch values from DB tables
       const stubbedValues = {
         departureTimeLocal: new Date().toISOString(),
         departureTimeUtc: new Date().toISOString(),
         arrivalTimeLocal: new Date().toISOString(),
-        arrivalTimeUtc: new Date().toISOString()
+        arrivalTimeUtc: new Date().toISOString(),
       }
 
       const dummyFlight = Object.assign({}, flight.dataValues, stubbedValues)

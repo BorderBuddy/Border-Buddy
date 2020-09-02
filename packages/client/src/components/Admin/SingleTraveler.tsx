@@ -54,7 +54,7 @@ export const SingleTraveler = (props: any) => {
     <EditForm
       initialValues={initialValues}
       title={'Edit Traveler'}
-      representatives={props.representatives}
+      // representatives={props.representatives}
       deleteTraveler={props.deleteTraveler}
       showAdditionalButtons={true}
       sendText={props.sendText}
