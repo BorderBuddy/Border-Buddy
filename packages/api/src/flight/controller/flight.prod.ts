@@ -26,7 +26,6 @@ const verifyFlight : RequestHandler = (req, res, next) => {
       if (flight.data.error || !flight.data.scheduledFlights.length) {
         res.status(404).json('flight not found')
       } else {
-        // TODO: This is real ugly
         const mappedFlightInfo = flightInfoMapper(flight.data)
         res.status(200).json(mappedFlightInfo)
       }

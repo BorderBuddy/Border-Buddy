@@ -34,18 +34,16 @@ export const RegisterForm = (props:any) => {
   }
 
   const confirmSubmit = async (values: any) => {
-    console.log(values)
+    console.log(values, flight)
     const travelerInfo = Object.assign({}, values, {
       countryCode: values.countryCode.code,
     })
     try {
       let res
       if (isEdit) {
-        console.log('isEdit true')
         // TODO: This has to propagate to the flight object if it modifies the flightstatus
         res = await api.updateTraveler(initialValues.id, travelerInfo)
       } else {
-        console.log('isEdit false')
         res = await api.createTraveler(travelerInfo)
       }
       handleClose()
@@ -66,7 +64,6 @@ export const RegisterForm = (props:any) => {
       const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day)
       console.log(`currentFlight: ${JSON.stringify(currentFlight)}`)
       setFlight(currentFlight)
-      console.log(`flight in state: ${JSON.stringify(flight)}`)
       setOpen(true)
     } catch (err) {
       setOpen(false)
@@ -75,7 +72,6 @@ export const RegisterForm = (props:any) => {
 
   const getCountryCodeObj = (code: string) => {
     const countryCodeObj = countryCodes.filter((codes) => codes.code.toString() === code)[0]
-    // console.log(countryCodeObj)
     return countryCodeObj
   }
 

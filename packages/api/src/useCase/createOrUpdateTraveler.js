@@ -13,8 +13,8 @@ export default function createOrUpdateTraveler ({ repository, travelerDetails, c
       where: {
         flightNum: travelerDetails.flightNum,
         airlineCode: travelerDetails.airlineCode,
-        scheduledArrivalTime: travelerDetails.scheduledArrivalTime
-      }
+        scheduledArrivalTime: travelerDetails.scheduledArrivalTime,
+      },
     })
   } else {
     findOrCreateFlight = Promise.resolve([{}])
