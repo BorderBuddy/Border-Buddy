@@ -16,6 +16,7 @@ import { AdminFormExtension } from './AdminExtensionForm'
 import { Flight } from '../../models/models'
 
 export const RegisterForm = (props:any) => {
+  const style = formStyle
   const [ open, setOpen ] = useState(false)
   const [flight, setFlight] = useState({} as Flight)
   const history = useHistory()
@@ -120,8 +121,8 @@ export const RegisterForm = (props:any) => {
           } = props
           return (
             <Grid container style={{justifyContent: 'center'}}>
-              <Form style={formStyle.form}>
-                <h1 style={formStyle.header}>{formTitle}</h1>
+              <Form style={style.form}>
+                <h1 style={style.header}>{formTitle}</h1>
                 <Divider />
                 <Typography variant='h5' display='block'>Personal and Contact Details</Typography>
                 <Typography variant='caption' paragraph><em>Tell us about yourself, so our lawyers can can best assist you.</em></Typography>
@@ -131,7 +132,7 @@ export const RegisterForm = (props:any) => {
                       name="name"
                       id='name'
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                       label='Name'
                     />
                   </Grid>
@@ -141,7 +142,7 @@ export const RegisterForm = (props:any) => {
                       name="nationality"
                       id="nationality"
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                       label='Nationality'
                     />
 
@@ -151,7 +152,7 @@ export const RegisterForm = (props:any) => {
                     <Field
                       name='requireInterpreter'
                       component={Select}
-                      style={formStyle.select}
+                      style={style.select}
                       inputProps={{
                         id: 'requireInterpreter',
                       }}
@@ -165,7 +166,7 @@ export const RegisterForm = (props:any) => {
                       name="preferredLanguage"
                       id="preferredLanguage"
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                       label='Preferred Language'
                     />
                   </Grid>
@@ -175,7 +176,7 @@ export const RegisterForm = (props:any) => {
                       id="email"
                       label='Email'
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
@@ -183,7 +184,7 @@ export const RegisterForm = (props:any) => {
                     <Field
                       name="countryCode"
                       id='countryCode'
-                      style={formStyle.select}
+                      style={style.select}
                       component={Autocomplete}
                       options={countryCodes}
                       getOptionLabel={(option: any) => option.label}
@@ -201,7 +202,7 @@ export const RegisterForm = (props:any) => {
                       name="phone"
                       label='Phone Number'
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
@@ -209,7 +210,7 @@ export const RegisterForm = (props:any) => {
                     <Field
                       name="connectivity"
                       component={Select}
-                      style={formStyle.select}
+                      style={style.select}
                       inputProps={{
                         id: 'connectivity',
                       }}
@@ -228,14 +229,14 @@ export const RegisterForm = (props:any) => {
                       name="scheduledArrivalTime"
                       component={DatePicker}
                       format="MM/dd/yyyy"
-                      style={formStyle.select}
+                      style={style.select}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
                     <Field
                       name="airlineCode"
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                       label='Airline Code'
                     />
                   </Grid>
@@ -244,7 +245,7 @@ export const RegisterForm = (props:any) => {
                       name="flightNum"
                       label='Flight number'
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                     />
                   </Grid>
                 </Grid>
@@ -256,7 +257,7 @@ export const RegisterForm = (props:any) => {
                       name="secondaryContactName"
                       label='Secondary Contact Name'
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
@@ -264,7 +265,7 @@ export const RegisterForm = (props:any) => {
                       name="secondaryContactPhone"
                       label='Phone Number'
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                     />
                   </Grid>
                   <Grid item xs={11} sm={3}>
@@ -272,7 +273,7 @@ export const RegisterForm = (props:any) => {
                       name="secondaryContactRelation"
                       label='Relationship to you'
                       component={TextField}
-                      style={formStyle.input}
+                      style={style.input}
                     />
                   </Grid>
                 </Grid>
@@ -284,7 +285,7 @@ export const RegisterForm = (props:any) => {
                     variant='contained'
                     className="submit-traveler-registration"
                     color='primary'
-                    style={formStyle.submitButton}
+                    style={style.submitButton}
                     onClick={submitForm}
                   >
                     {isEdit ? 'Save' : 'Register'}
@@ -296,14 +297,14 @@ export const RegisterForm = (props:any) => {
                     <Button
                       variant='contained'
                       onClick={sendText}
-                      style={formStyle.adminButton}
+                      style={style.adminButton}
                     > Text Traveler
                     </Button>
 
                     <Button
                       variant='contained'
                       onClick={deleteTraveler}
-                      style={formStyle.adminButton}
+                      style={style.adminButton}
                     >Delete Traveler
                     </Button>
                   </Grid>
