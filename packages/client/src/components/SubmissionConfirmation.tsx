@@ -12,7 +12,7 @@ export const SubmissionConfirmation = (props : any) => {
     handleClose,
     confirmSubmit,
   } = props
-  console.log(`flight at submission props: ${JSON.stringify(flight)}`)
+  // console.log(`flight at submission props: ${JSON.stringify(flight)}`)
   return (
     <Dialog
       title="Confirm Submission"

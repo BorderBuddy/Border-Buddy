@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { CreateUserForm } from '../components/forms/CreateUserForm'
 import { Dialog, Button, DialogActions, DialogTitle, DialogContent } from '@material-ui/core'
+import { User } from '../models/models'
 import api from '../api/api'
 
 export const CreateUser = () => {
   const [ open, setOpen ] = useState(false)
   const [ createdSuccess, setCreatedSuccess ] = useState(false)
 
-  const handleSubmit = async (user: any) => {
+  const handleSubmit = async (values: User) => {
+    console.log(values)
     try {
-      await api.createUser(user)
+      await api.createUser(values)
       setOpen(true)
       setCreatedSuccess(true)
     } catch (err) {

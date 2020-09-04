@@ -34,20 +34,24 @@ export const RegisterForm = (props:any) => {
   }
 
   const confirmSubmit = async (values: any) => {
-    console.log(values, flight)
+    // console.log(`values: ${JSON.stringify(values)}, flight: ${JSON.stringify(flight)}`)
     const travelerInfo = Object.assign({}, values, {
       countryCode: values.countryCode.code,
+      scheduledArrivalTime: new Date(flight.scheduledArrivalTime),
     })
     try {
       let res
       if (isEdit) {
-        // TODO: This has to propagate to the flight object if it modifies the flightstatus
+        /**
+         * TODO: This has to propagate to the flight object
+         * if it modifies the flightStatus, for example.
+         **/
         res = await api.updateTraveler(initialValues.id, travelerInfo)
       } else {
         res = await api.createTraveler(travelerInfo)
       }
       handleClose()
-      if (!props.user) history.push('/success', { res: res })
+      if (!isEdit) history.push('/success', { res: res })
       else history.push('/travelers')
     } catch (err) {
       console.error(err)
@@ -62,10 +66,12 @@ export const RegisterForm = (props:any) => {
     const month = flightDate.getMonth() + 1
     try {
       const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day)
-      console.log(`currentFlight: ${JSON.stringify(currentFlight)}`)
+      // console.log(`currentFlight: ${JSON.stringify(currentFlight)}`)
       setFlight(currentFlight)
       setOpen(true)
     } catch (err) {
+      // TODO: could replace this with a 'better' alert component/modal if we want
+      alert('No flight found with those details...')
       setOpen(false)
     }
   }
@@ -281,7 +287,7 @@ export const RegisterForm = (props:any) => {
                     style={formStyle.submitButton}
                     onClick={submitForm}
                   >
-                  Register
+                    {isEdit ? 'Save' : 'Register'}
                   </Button>
                 </Grid>
                 {

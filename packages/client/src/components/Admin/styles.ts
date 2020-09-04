@@ -59,8 +59,9 @@ export const adminSignUp = {
   input: {
     width: '100%',
     color: 'black',
-    margin: '1em, 2em, 1em, 2em',
-    paddingTop: '1em',
+    height: '4em',
+    // margin: '1em, 2em, 1em, 2em',
+    // paddingTop: '1em',
   },
 }
 

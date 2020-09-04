@@ -6,13 +6,13 @@ import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { TextField } from 'formik-material-ui'
 
-export const CreateUserForm = (handleSubmit: any) => {
+export const CreateUserForm = ({handleSubmit}: any) => {
   const style = adminSignUp
   return (
     <Formik
       initialValues={{
         email: '',
-        newPassword: '',
+        password: '',
         phone: '',
       }}
       onSubmit={handleSubmit}
@@ -22,35 +22,38 @@ export const CreateUserForm = (handleSubmit: any) => {
           {
             email: Yup.string()
               .email()
-              .required(),
-            newPassword: Yup.string()
-              .required(),
+              .required('Email is a required field'),
+            password: Yup.string()
+              .required('Password is a required field'),
             phone: Yup.string()
-              .required()
+              .required('Phone Number is a required field')
               .matches(phoneRegExp, 'Invalid phone, please enter as 5552224444'),
           })}
     >
       <Card style={style.card}>
         <div>
-          <h3 style={style.title}>Update Profile</h3>
+          <h3 style={style.title}>Create New User</h3>
           <Form>
-            <InputLabel htmlFor='email'>Email</InputLabel>
+            {/* <InputLabel htmlFor='email'>Email</InputLabel> */}
             <Field
               name="email"
+              label='Email'
               component={TextField}
               type='email'
               style={style.input}
             />
-            <InputLabel htmlFor='newPassword'>New Password</InputLabel>
+            {/* <InputLabel htmlFor='newPassword'>New Password</InputLabel> */}
             <Field
-              name="newPassword"
+              name="password"
+              label='Password'
               component={TextField}
               type="password"
               style={style.input}
             />
-            <InputLabel htmlFor='phone'>Phone Number</InputLabel>
+            {/* <InputLabel htmlFor='phone'>Phone Number</InputLabel> */}
             <Field
               name="phone"
+              label='Phone Number'
               component={TextField}
               style={style.input}
             />
