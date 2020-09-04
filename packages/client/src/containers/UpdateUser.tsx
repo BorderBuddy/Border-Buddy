@@ -11,8 +11,8 @@ import {
 import { UserContext } from '../UserContext'
 import { useHistory } from 'react-router-dom'
 
-export const UpdateUser = (props: any) => {
-  const { user } = useContext(UserContext)
+export const UpdateUser = () => {
+  const { user, setCurrUser } = useContext(UserContext)
   const [open, setOpen] = useState(false)
   const [createdSuccess, setCreatedSuccess] = useState(false)
   const history = useHistory()
@@ -29,22 +29,33 @@ export const UpdateUser = (props: any) => {
       console.log(err)
     }
   }
-  const handleClose = () => {
-    setOpen(false)
-    // should we logout the user after updating profile?
-    history.push('./travelers')
+  const handleClose = async () => {
+    console.log(createdSuccess)
+    if (createdSuccess) {
+      try {
+        await api.logout()
+        setCurrUser(undefined)
+        history.push('/')
+      } catch (err) {
+        console.error(err)
+      }
+      setOpen(false)
+    } else {
+      setOpen(false)
+    }
   }
 
   return (
     <div>
       <UpdateUserForm
+        user={user}
         handleSubmit={handleSubmit}
       />
       <Dialog open={open}>
         <DialogTitle>Updating Admin...</DialogTitle>
         <DialogContent>
           {createdSuccess ? (
-            <h4>Admin Updated successfully!</h4>
+            <h4>Admin Updated successfully! Log in again to see changes...</h4>
           ) : (
             <h4>There was a problem trying to update admin</h4>
           )}
@@ -62,3 +73,4 @@ export const UpdateUser = (props: any) => {
     </div>
   )
 }
+

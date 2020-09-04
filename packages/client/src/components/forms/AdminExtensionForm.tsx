@@ -7,6 +7,7 @@ import { User } from '../../models/models'
 import api from '../../api/user'
 
 export const AdminFormExtension = () => {
+  const style = adminFormExtensionStyle
   const [reps, setReps] = useState([] as User[])
 
   useEffect(() => {
@@ -50,11 +51,11 @@ export const AdminFormExtension = () => {
       </p>
       <Grid container direction='row' alignItems='center' justify='space-around'>
         <Grid item xs={11} sm={3}>
-          <InputLabel htmlFor="flightStatus">Flight Status</InputLabel>
+          <InputLabel shrink htmlFor="flightStatus">Flight Status</InputLabel>
           <Field
             name="flightStatus"
             component={Select}
-            style={adminFormExtensionStyle.input}
+            style={style.input}
             inputProps={{
               id: 'flightStatus',
             }}
@@ -65,11 +66,11 @@ export const AdminFormExtension = () => {
           </Field>
         </Grid>
         <Grid item xs={11} sm={3}>
-          <InputLabel htmlFor="passengerStatus">Passenger Status</InputLabel>
+          <InputLabel shrink htmlFor="passengerStatus">Passenger Status</InputLabel>
           <Field
             name="passengerStatus"
             component={Select}
-            style={adminFormExtensionStyle.input}
+            style={style.input}
             inputProps={{
               id: 'passengerStatus',
             }}
@@ -82,11 +83,11 @@ export const AdminFormExtension = () => {
           </Field>
         </Grid>
         <Grid item xs={11} sm={3}>
-          <InputLabel htmlFor="representative">Assign To</InputLabel>
+          <InputLabel shrink htmlFor="representative">Assign To</InputLabel>
           <Field
             name="representative"
             component={Select}
-            style={adminFormExtensionStyle.input}
+            style={style.input}
             inputProps={{
               id: 'representative',
             }}
