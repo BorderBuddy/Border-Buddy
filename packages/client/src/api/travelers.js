@@ -37,7 +37,7 @@ const api = {
     }
   },
   getTravelers: async () => {
-    console.log('getting travelers...')
+    // console.log('getting travelers...')
     try {
       const res = await axios.get('/api/traveler')
       return res.data

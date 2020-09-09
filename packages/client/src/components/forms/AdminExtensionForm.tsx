@@ -49,23 +49,7 @@ export const AdminFormExtension = () => {
       <p>
         <em>Additional fields for administrative purposes.</em>
       </p>
-      {/* TODO: Potentially we should kill this field, because ostensibly it is handled by the cron? */}
       <Grid container direction='row' alignItems='center' justify='space-around'>
-        <Grid item xs={11} sm={3}>
-          <InputLabel shrink htmlFor="flightStatus">Flight Status</InputLabel>
-          <Field
-            name="flightStatus"
-            component={Select}
-            style={style.input}
-            inputProps={{
-              id: 'flightStatus',
-            }}
-          >
-            <MenuItem value={'scheduled'} >Scheduled</MenuItem>
-            <MenuItem value={'delayed'} >Delayed</MenuItem>
-            <MenuItem value={'arrived'} >Arrived</MenuItem>
-          </Field>
-        </Grid>
         <Grid item xs={11} sm={3}>
           <InputLabel shrink htmlFor="passengerStatus">Passenger Status</InputLabel>
           <Field

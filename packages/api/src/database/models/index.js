@@ -13,7 +13,7 @@ User.hasOne(Traveler, { foreignKey: 'representative' })
 const Repository = {
   travelers: Traveler,
   flights: Flight,
-  users: User
+  users: User,
 }
 
 module.exports = { Traveler, Flight, User, Repository }

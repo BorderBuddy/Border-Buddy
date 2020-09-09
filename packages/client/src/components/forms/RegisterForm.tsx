@@ -43,10 +43,6 @@ export const RegisterForm = (props:any) => {
     try {
       let res
       if (isEdit) {
-        /**
-         * TODO: This has to propagate to the flight object
-         * if it modifies the flightStatus, for example.
-         **/
         res = await api.updateTraveler(initialValues.id, travelerInfo)
       } else {
         res = await api.createTraveler(travelerInfo)
