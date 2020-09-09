@@ -29,5 +29,7 @@ export interface Traveler {
     secondaryContactName: string,
     secondaryContactPhone: string,
     secondaryContactRelation: string,
-    status: string,
+    status: passengerStatus,
 }
+
+export type passengerStatus = 'transit' | 'unconfirmed' | 'detained' | 'at risk' | 'cleared'

@@ -7,28 +7,28 @@ export const Flight = db.define('flight', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   airlineCode: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   status: {
     type: Sequelize.ENUM,
     values: ['arrived', 'delayed', 'scheduled'],
-    defaultValue: 'scheduled'
+    defaultValue: 'scheduled',
   },
   scheduledArrivalTime: {
     type: Sequelize.DATE,
-    allowNull: false
+    allowNull: false,
   },
   actualArrivalTime: {
-    type: Sequelize.DATE
-  }
+    type: Sequelize.DATE,
+  },
 })
 
 Flight.findFlightsToLand = () => {
@@ -37,10 +37,10 @@ Flight.findFlightsToLand = () => {
   return Flight.findAll({
     where: {
       scheduledArrivalTime: {
-        $lt: now
+        $lt: now,
       },
-      status: 'scheduled'
-    }
+      status: 'scheduled',
+    },
   })
     .then(flights => flights)
     .catch(err => console.error(err))
