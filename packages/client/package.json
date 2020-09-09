@@ -8,7 +8,7 @@
     "test": "mocha -r ts-node/register 'test/**/*_test.js'",
     "test:jest": "jest --passWithNoTests",
     "todo": "leasot -x 'src/**/*'",
-    "todo-ci": "leasot -x --reporter markdown 'src/**/*' > TODO.md",
+    "todo-ci": "leasot -x --reporter markdown 'src/**/*.[j|t]s[x]' > TODO.md",
     "clean:dist": "rm -rf dist",
     "clean": "rm -rf node_modules"
   },
