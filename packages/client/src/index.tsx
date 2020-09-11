@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { MuiThemeProvider } from '@material-ui/core/styles'
+import { MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import customTheme from './utils/muiTheme'
 import { App } from './App'
 import { UserProvider } from './UserContext'
@@ -9,6 +9,7 @@ require('./style/index.scss')
 export const Root = () => {
   return (
     <MuiThemeProvider theme={customTheme}>
+      <CssBaseline/>
       <UserProvider>
         <App />
       </UserProvider>
