@@ -5,7 +5,7 @@ import { countryCodes } from '../../utils/countryCodes'
 import { formStyle } from '../Admin/styles'
 import { TextField, Select } from 'formik-material-ui'
 import { DatePicker } from 'formik-material-ui-pickers'
-import { MenuItem, Divider, Button, Grid, Typography, InputLabel, TextFieldProps, TextField as MuiTextField } from '@material-ui/core'
+import { MenuItem, Button, Grid, Typography, InputLabel, TextFieldProps, TextField as MuiTextField } from '@material-ui/core'
 import { Autocomplete } from 'formik-material-ui-lab'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
@@ -119,7 +119,6 @@ export const RegisterForm = (props:any) => {
             <Grid container style={{justifyContent: 'center'}}>
               <Form style={style.form}>
                 <h1 style={style.header}>{formTitle}</h1>
-                <Divider />
                 <Typography variant='h5' display='block'>Personal and Contact Details</Typography>
                 <Typography variant='caption' paragraph><em>Tell us about yourself, so our lawyers can can best assist you.</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around' spacing={3}>
@@ -133,7 +132,6 @@ export const RegisterForm = (props:any) => {
                     />
                   </Grid>
                   <Grid item xs={11} sm={5}>
-
                     <Field
                       name="nationality"
                       id="nationality"
@@ -141,7 +139,6 @@ export const RegisterForm = (props:any) => {
                       style={style.input}
                       label='Nationality'
                     />
-
                   </Grid>
                   <Grid item xs={11} sm={5}>
                     <InputLabel shrink htmlFor="requireInterpreter">Are you comfortable speaking English?</InputLabel>
@@ -216,7 +213,7 @@ export const RegisterForm = (props:any) => {
                     </Field>
                   </Grid>
                 </Grid>
-                <Typography variant='h5' display='block'>Travel details</Typography>
+                <Typography variant='h5' display='block' style={style.heading}>Travel details</Typography>
                 <Typography variant='caption' paragraph><em>Tell us when your flight arrives, so we know when to check in with you.</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
                   <Grid item xs={11} sm={3}>
@@ -245,7 +242,7 @@ export const RegisterForm = (props:any) => {
                     />
                   </Grid>
                 </Grid>
-                <Typography variant='h5' display='block'>Emergency contact</Typography>
+                <Typography variant='h5' display='block' style={style.heading}>Emergency contact</Typography>
                 <Typography variant='caption' paragraph><em>Who can we contact if we can't get in touch with you?</em></Typography>
                 <Grid container direction='row' alignItems='center' justify='space-around'>
                   <Grid item xs={11} sm={3}>

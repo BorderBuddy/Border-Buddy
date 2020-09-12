@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
-
+// TODO: make accessable for screen readers
 export const About = () => (
   <Grid container direction='row' justify='space-around'>
     <Grid xs={12} justify='space-around'>
