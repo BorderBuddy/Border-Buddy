@@ -121,4 +121,7 @@ export const formStyle = {
   header: {
     textAlign: 'center' as const,
   },
+  heading: {
+    marginTop: '1em',
+  },
 }
