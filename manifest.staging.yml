@@ -11,7 +11,7 @@ applications:
   - border-buddy-db
 - name: border-buddy-worker
   instances: 1
-  memory: 1GB
+  memory: 512MB
   disk_quota: 2048M
   command: npm run lerna:bootstrap && npm run worker
   no-route: true
