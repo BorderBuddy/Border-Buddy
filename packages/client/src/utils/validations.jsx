@@ -59,30 +59,30 @@ export const yupValidationSchema = isAdmin => Yup.object().shape(
         .email(),
     countryCode: Yup
       .object()
-      .required(),
+      .required('country phone code is a required field'),
     phone: Yup.string()
       .required()
-      .matches(phoneRegExp, 'Invalid phone, please enter as 5552224444'),
+      .matches(phoneRegExp, 'invalid phone number, please enter as 5552224444'),
     connectivity: !isAdmin
       ? Yup.string()
-        .required()
+        .required('smartphone connectivity is a required field')
       : null,
     flightNum: !isAdmin
       ? Yup.string()
-        .required()
+        .required('flight number is a required field')
       : null,
     secondaryContactPhone: Yup.string()
-      .matches(phoneRegExp, 'Invalid phone, please enter as 5552224444'),
+      .matches(phoneRegExp, 'invalid phone number, please enter as 5552224444'),
     scheduledArrivalTime: !isAdmin
       ? Yup.date().required()
       : null,
     airlineCode: !isAdmin
       ? Yup.string()
-        .required()
+        .required('airline code is a required field')
         .uppercase()
         .test(
           'isValidAirlineCode',
-          'Airline code not found!',
+          'airline code not found!',
           validateAirlineCode,
         )
       : Yup.string()
