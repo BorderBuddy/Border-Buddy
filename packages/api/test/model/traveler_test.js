@@ -8,9 +8,9 @@ describe('Model: Traveler', () => {
     return new Promise((resolve, reject) => {
       Traveler.truncate().then(() => {
         resolve(Promise.all([
-          createTravelerWithFlight('Andrew G', new Date() - oneDay()),
-          createTravelerWithFlight('Emily Ho', new Date()),
-          createTravelerWithFlight('Dillon P', new Date() - 4 * oneDay())
+          createTravelerWithFlight('Andrew G', new Date() - oneDay(), 'transit'),
+          createTravelerWithFlight('Emily Ho', new Date(), 'transit'),
+          createTravelerWithFlight('Dillon P', new Date() - 4 * oneDay(), 'cleared'),
         ]))
       })
     })
@@ -25,14 +25,27 @@ describe('Model: Traveler', () => {
       })
     })
   })
+
+  describe('redactPersonalInfo', () => {
+    it('redacts the personal info of a cleared traveler', () => {
+      return Traveler.redactPersonalInfo().then(redactedTravelers => {
+        expect(redactedTravelers[0].name).to.equal('XXXXX')
+        expect(redactedTravelers[0].phone).to.equal('XXXXX')
+        expect(redactedTravelers[0].email).to.equal('XXXXX')
+        expect(redactedTravelers[0].secondaryContactName).to.equal('XXXXX')
+        expect(redactedTravelers[0].secondaryContactPhone).to.equal('XXXXX')
+        expect(redactedTravelers[0].secondaryContactRelation).to.equal('XXXXX')
+      })
+    })
+  })
 })
 
-function createTravelerWithFlight (travelerName, scheduledArrivalTime) {
+function createTravelerWithFlight (travelerName, scheduledArrivalTime, status) {
   return Flight.create({
     flightNum: 1884,
     airlineCode: 'B6',
     status: 'scheduled',
-    scheduledArrivalTime: scheduledArrivalTime
+    scheduledArrivalTime: scheduledArrivalTime,
   }).then((flight) => {
     Traveler.create({
       name: travelerName,
@@ -45,8 +58,8 @@ function createTravelerWithFlight (travelerName, scheduledArrivalTime) {
       secondaryContactRelation: 'secondaryContactRelation',
       requireInterpreter: false,
       preferredLanguage: 'English',
-      status: 'transit',
-      flightId: flight.id
+      status: status,
+      flightId: flight.id,
     })
   })
 }
