@@ -34,9 +34,17 @@ const setUnconfirmedToAtRisk = new CronJob({
   timeZone: 'America/New_York',
 })
 
+// TODO: uncomment this and the start method below, to turn this on.
+// const redactClearedTravelerInfo = new CronJob({
+//   cronTime: '0 10,24,40,55 * * * *',
+//   onTick: jobs.redactTravelerInfo,
+//   timeZone: 'America/New_York',
+// })
+
 db.authenticate()
   .then(() => {
     console.log('starting cron jobs...')
     landFlightsAndTextTravelers.start()
     setUnconfirmedToAtRisk.start()
+    // redactClearedTravelerInfo.start()
   })

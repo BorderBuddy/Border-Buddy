@@ -85,6 +85,16 @@ const recursiveFlatten = (arr, start) => {
 
 module.exports = {
 
+  redactTravelerInfo: () => {
+    console.log('redactTravelerInfo cron job started')
+    // redact and update the fields
+    Traveler.redactTravelerInfo()
+      .then((travelers) => {
+        // do something with this list
+        console.log(travelers)
+      })
+  },
+
   setToAtRisk: function () {
     console.log('setToAtRisk cron job started...')
     Traveler.setToAtRisk()
