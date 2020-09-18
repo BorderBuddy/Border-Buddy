@@ -29,26 +29,24 @@ export const LoginForm = ({
               .required(),
           })}
     >
-      <Card>
+      <Card style={signupLoginStyle.card}>
         <CardContent>
           <Typography variant='h5'>Admin Login</Typography>
           <Form>
-            <div style={formStyle.textField}>
-              <Field
-                name="email"
-                component={TextField}
-                type='email'
-                label='Email'
-              />
-            </div>
-            <div style={formStyle.textField}>
-              <Field
-                name="password"
-                component={TextField}
-                type='password'
-                label='Password'
-              />
-            </div>
+            <Field
+              style={signupLoginStyle.input}
+              name="email"
+              component={TextField}
+              type='email'
+              label='Email'
+            />
+            <Field
+              style={signupLoginStyle.input}
+              name="password"
+              component={TextField}
+              type='password'
+              label='Password'
+            />
             <div>
               {
                 auth.fetching &&

@@ -48,21 +48,20 @@ export const Layout = () => {
         <LoggedOut>
           <Grid
             container
-            direction='row'
-            justify='center'
+            direction='row-reverse'
+            justify='flex-start'
             style={{
               backgroundColor: '#2d6ea8',
             }}
           >
-            <Grid item style={{width: '10%'}}/>
-            <Grid item style={styles.banner}>
+            <Grid item md={1} xs={2}>
+              <LoginButton/>
+            </Grid>
+            <Grid item style={styles.banner} md={10} xs={8}>
               <img
                 style={styles.image}
                 src="images/logos-png/BB_Logo-Type-White.png"
               />
-            </Grid>
-            <Grid item style={styles.loginCon}>
-              <LoginButton/>
             </Grid>
           </Grid>
           <Toolbar style={styles.toolbar}>
@@ -97,18 +96,12 @@ const styles = {
   image: {
     display: 'block',
     margin: 'auto',
-    width: '50%',
-    maxHeight: '2em',
+    width: '40%',
     backgroundColor: '#2d6ea8',
-
   },
   banner: {
     backgroundColor: '#2d6ea8',
     paddingTop: '2em',
-    paddingBottom: '2em',
-    width: '80%',
-  },
-  loginCon: {
-    width: '10%',
+    width: '60%',
   },
 }

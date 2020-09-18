@@ -18,15 +18,22 @@ export const travelerStatusStyle = {
 
 export const signupLoginStyle = {
   card: {
-    margin: '5em auto',
-    width: '50%',
-    padding: '2em',
+    margin: '2em auto',
+    width: '100%',
+    padding: '1em',
+  },
+  input: {
+    width: '100%',
+    height: '5em',
   },
   button: {
     backgroundColor: '#2d6ea8',
     margin: '2em auto',
     display: 'block',
     width: '50%',
+  },
+  title: {
+    textAlign: 'center',
   },
   error: {
     color: 'red',
@@ -36,7 +43,6 @@ export const signupLoginStyle = {
 export const adminSignUp = {
   card: {
     margin: '2em auto',
-    // textAlign: 'center',
     width: '80%',
     padding: '2em',
   },
@@ -60,8 +66,6 @@ export const adminSignUp = {
     width: '100%',
     color: 'black',
     height: '4em',
-    // margin: '1em, 2em, 1em, 2em',
-    // paddingTop: '1em',
   },
 }
 
