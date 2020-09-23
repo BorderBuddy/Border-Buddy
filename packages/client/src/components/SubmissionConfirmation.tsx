@@ -5,14 +5,14 @@ import { useFormikContext } from 'formik'
 
 export const SubmissionConfirmation = (props : any) => {
   const { values } = useFormikContext()
-  // console.log(`values in confirmation: ${JSON.stringify(values)}`)
+  console.log(`values in confirmation: ${JSON.stringify(values)}`)
   const {
     flight,
     open,
     handleClose,
     confirmSubmit,
   } = props
-  // console.log(`flight at submission props: ${JSON.stringify(flight)}`)
+  console.log(`flight at submission props: ${JSON.stringify(flight)}`)
   return (
     <Dialog
       title="Confirm Submission"

@@ -42,6 +42,7 @@ const didFlightLandTwoHoursAgo = flight => {
   const year = scheduledArrivalTime.getYear() + 1900
   const month = scheduledArrivalTime.getMonth() + 1
 
+  console.log(`cron didflightland date:${date}, year:${year}, month:${month}`)
   const twoHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 2)
 
   return axios.get(statusByCodeAndDate(airlineCode, flightNum, year, month, date))

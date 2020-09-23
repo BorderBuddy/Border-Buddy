@@ -13,6 +13,23 @@ export interface Flight {
     status: string,
 }
 
+export interface FSFlight {
+    departureCityName: string
+    departureAirportName: string
+    departureCountryName: string
+    departureAirportFsCode: string
+    arrivalCityName: string
+    arrivalAirportName: string
+    arrivalCountryName: string
+    arrivalAirportFsCode: string
+    departureTimeLocal: Date
+    departureTimeUtc: Date
+    arrivalTimeLocal: Date
+    arrivalTimeUtc: Date
+    airlineName: string
+    flightNumber: string
+    carrierFsCode: string
+}
 export interface Traveler {
     connectivity: boolean,
     countryCode: string,
