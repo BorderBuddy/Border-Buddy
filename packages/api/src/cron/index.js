@@ -2,7 +2,6 @@ const { CronJob } = require('cron')
 const jobs = require('./jobs')
 const db = require('../database')
 
-// TODO: implement this jobs structure
 /* SCHEDULED JOBS:
 	LAND FLIGHTS
 	1. -get all flights from database that were scheduled to land before now with status 'scheduled'

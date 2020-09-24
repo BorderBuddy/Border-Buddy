@@ -8,6 +8,7 @@
     "seed": "lerna run --scope api seed --stream",
     "seed:deployment": "lerna run --scope api seed:deployment --stream",
     "worker": "lerna run --scope api worker --stream",
+    "test:worker": "lerna run --scope api test:worker --stream",
     "push:staging": "npm run build && npm run clean && cf target -s staging && cf push -f manifest.staging.yml -v",
     "push:production": "npm run build && npm run clean && cf target -s production && cf push -f manifest.production.yml -v",
     "build-client": "lerna run --scope client build",
