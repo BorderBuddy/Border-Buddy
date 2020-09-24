@@ -40,9 +40,8 @@ export const RegisterForm = (props:any) => {
     const travelerInfo = Object.assign({}, values, {
       countryCode: values.countryCode.code,
       scheduledArrivalTime: flight.arrivalTimeLocal,
-      // flight: flight
     })
-    console.log(travelerInfo)
+    // console.log(travelerInfo)
     try {
       let res
       if (isEdit) {

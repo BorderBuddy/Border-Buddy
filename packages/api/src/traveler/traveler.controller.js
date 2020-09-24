@@ -16,13 +16,14 @@ export const createNewTraveler = (req, res, next) => {
     callbacks: {
       onSuccess: (traveler) => {
         return traveler
-      }
+      },
     },
-    travelerNotifier
+    travelerNotifier,
   })
-    .then((traveler) => {
-      return notifyAdminOfNewTravelerSignUp(traveler)
-    })
+    // FIXME: uncomment this to add admin notifications back into the production deployment
+    // .then((traveler) => {
+    //   return notifyAdminOfNewTravelerSignUp(traveler)
+    // })
     .then((traveler) => {
       return res.status(201).json(traveler)
     })
@@ -57,8 +58,8 @@ export function updateOne (req, res, next) {
     callbacks: {
       onSuccess: (traveler) => {
         res.status(201).json(traveler)
-      }
-    }
+      },
+    },
   })
     .catch(next)
 }

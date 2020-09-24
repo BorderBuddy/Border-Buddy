@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { EditForm } from '../forms/EditForm'
 
 export const SingleTraveler = (props: any) => {
-  console.log(JSON.stringify(props))
+  // console.log(JSON.stringify(props))
   const {
     name,
     nationality,

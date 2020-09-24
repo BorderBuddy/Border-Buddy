@@ -24,7 +24,7 @@ const verifyFlight : RequestHandler = (req, res, next) => {
   const { code, flightNum, year, month, day } = req.query
   return axios.get(statusByCodeAndDate(code, flightNum, year, month, day))
     .then(flight => {
-      console.log(flight.data)
+      // console.log(flight.data)
       if (!flight.data.flightStatuses.length) {
       // if (flight.data.error || !flight.data.scheduledFlights.length) {
         res.status(404).json('flight not found')
