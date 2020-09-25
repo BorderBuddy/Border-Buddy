@@ -75,7 +75,7 @@ export const SingleTravelerContainer = () => {
     }
   }
   if (ready) {
-    console.log(traveler)
+    // console.log(traveler)
     return (
       <div>
         <SingleTraveler
