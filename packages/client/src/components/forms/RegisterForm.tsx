@@ -14,10 +14,13 @@ import api from '../../api/api'
 import { useHistory } from 'react-router-dom'
 import { AdminFormExtension } from './AdminExtensionForm'
 import { FSFlight } from '../../models/models'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 export const RegisterForm = (props:any) => {
+  // console.log(process.env.RECAPTCHA_SITE_KEY)
   const style = formStyle
   const [ open, setOpen ] = useState(false)
+  const [token, setToken] = useState('')
   const [flight, setFlight] = useState({} as FSFlight)
   const history = useHistory()
   const {
@@ -58,17 +61,19 @@ export const RegisterForm = (props:any) => {
   }
 
   const handleSubmit = async (values: any) => {
+    console.log(`token: ${token}`)
     const { flightNum, airlineCode, scheduledArrivalTime } = values
     const flightDate = new Date(scheduledArrivalTime)
     const day = flightDate.getDate()
     const year = flightDate.getFullYear()
     const month = flightDate.getMonth() + 1
     try {
-      const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day)
-      // console.log(`currentFlight: ${JSON.stringify(currentFlight)}`)
+      const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day, token)
+      console.log(`currentFlight: ${JSON.stringify(currentFlight)}`)
       setFlight(currentFlight)
       setOpen(true)
     } catch (err) {
+      console.log(err)
       // TODO: could replace this with a 'better' alert component/modal if we want
       alert('No flight found with those details...')
       setOpen(false)
@@ -78,6 +83,11 @@ export const RegisterForm = (props:any) => {
   const getCountryCodeObj = (code: string) => {
     const countryCodeObj = countryCodes.filter((codes) => codes.code.toString() === code)[0]
     return countryCodeObj
+  }
+
+  const onCaptchaChange = (value: any) => {
+    console.log(`Captcha Value: ${value}`)
+    setToken(value)
   }
 
   return (
@@ -275,6 +285,13 @@ export const RegisterForm = (props:any) => {
                 {isAdmin &&
                   <AdminFormExtension/>
                 }
+                <Grid container>
+                  <ReCAPTCHA
+                    // sitekey={process.env.RECAPTCHA_SITE_KEY}
+                    sitekey="6Lf1Y9EZAAAAAMbB3DZ7UcOU0jNDv8jieSrTWeIA"
+                    onChange={onCaptchaChange}
+                  />
+                </Grid>
                 <Grid container>
                   <Button
                     variant='contained'
