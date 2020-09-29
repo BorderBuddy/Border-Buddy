@@ -8,6 +8,7 @@
     "clean:dist": "rm -rf dist && rm -rf ./src/public",
     "clean": "rm -rf node_modules",
     "worker": "node ./dist/cron/index.js",
+    "test:worker": "node ./dist/cron/cron_tests.js",
     "test": "mocha -r ts-node/register 'test/**/*'",
     "dev": "nodemon",
     "start": "node ./dist/index.js",

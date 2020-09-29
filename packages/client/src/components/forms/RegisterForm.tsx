@@ -13,12 +13,12 @@ import { SubmissionConfirmation } from '../SubmissionConfirmation'
 import api from '../../api/api'
 import { useHistory } from 'react-router-dom'
 import { AdminFormExtension } from './AdminExtensionForm'
-import { Flight } from '../../models/models'
+import { FSFlight } from '../../models/models'
 
 export const RegisterForm = (props:any) => {
   const style = formStyle
   const [ open, setOpen ] = useState(false)
-  const [flight, setFlight] = useState({} as Flight)
+  const [flight, setFlight] = useState({} as FSFlight)
   const history = useHistory()
   const {
     showAdditionalButtons,
@@ -34,12 +34,14 @@ export const RegisterForm = (props:any) => {
     setOpen(false)
   }
 
+  // TODO: pass the whole Flight Stats flight result to parse, so if it is in the past, don't create it
   const confirmSubmit = async (values: any) => {
     // console.log(`values: ${JSON.stringify(values)}, flight: ${JSON.stringify(flight)}`)
     const travelerInfo = Object.assign({}, values, {
       countryCode: values.countryCode.code,
-      scheduledArrivalTime: new Date(flight.scheduledArrivalTime),
+      scheduledArrivalTime: flight.arrivalTimeLocal,
     })
+    // console.log(travelerInfo)
     try {
       let res
       if (isEdit) {

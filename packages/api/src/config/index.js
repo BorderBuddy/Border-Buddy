@@ -13,6 +13,7 @@ const envs = [
   'TWILIO_AUTH_TOKEN',
   'FLIGHT_STATS_KEY',
   'FLIGHT_STATS_ID',
+  'FLIGHT_STATS_DEV',
   'NAZ_NUM',
   'TAREK_NUM',
 ]
@@ -32,6 +33,7 @@ const {
   TWILIO_AUTH_TOKEN,
   FLIGHT_STATS_KEY,
   FLIGHT_STATS_ID,
+  FLIGHT_STATS_DEV,
   NAZ_NUM,
   TAREK_NUM,
 } = process.env
@@ -50,6 +52,7 @@ export const config = {
   },
   FLIGHT_STATS_KEY,
   FLIGHT_STATS_ID,
+  FLIGHT_STATS_DEV,
   NAZ_NUM,
   TAREK_NUM,
   // config used by sequelize at sequelize.js
