@@ -17,7 +17,6 @@ import { FSFlight } from '../../models/models'
 import ReCAPTCHA from 'react-google-recaptcha'
 
 export const RegisterForm = (props:any) => {
-  // console.log(process.env.RECAPTCHA_SITE_KEY)
   const style = formStyle
   const [ open, setOpen ] = useState(false)
   const [token, setToken] = useState('')
@@ -39,12 +38,10 @@ export const RegisterForm = (props:any) => {
 
   // TODO: pass the whole Flight Stats flight result to parse, so if it is in the past, don't create it
   const confirmSubmit = async (values: any) => {
-    // console.log(`values: ${JSON.stringify(values)}, flight: ${JSON.stringify(flight)}`)
     const travelerInfo = Object.assign({}, values, {
       countryCode: values.countryCode.code,
       scheduledArrivalTime: flight.arrivalTimeLocal,
     })
-    // console.log(travelerInfo)
     try {
       let res
       if (isEdit) {
@@ -61,7 +58,6 @@ export const RegisterForm = (props:any) => {
   }
 
   const handleSubmit = async (values: any) => {
-    console.log(`token: ${token}`)
     const { flightNum, airlineCode, scheduledArrivalTime } = values
     const flightDate = new Date(scheduledArrivalTime)
     const day = flightDate.getDate()
@@ -69,7 +65,6 @@ export const RegisterForm = (props:any) => {
     const month = flightDate.getMonth() + 1
     try {
       const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day, token)
-      console.log(`currentFlight: ${JSON.stringify(currentFlight)}`)
       setFlight(currentFlight)
       setOpen(true)
     } catch (err) {
@@ -86,7 +81,6 @@ export const RegisterForm = (props:any) => {
   }
 
   const onCaptchaChange = (value: any) => {
-    console.log(`Captcha Value: ${value}`)
     setToken(value)
   }
 
@@ -287,7 +281,6 @@ export const RegisterForm = (props:any) => {
                 }
                 <Grid container>
                   <ReCAPTCHA
-                    // sitekey={process.env.RECAPTCHA_SITE_KEY}
                     sitekey="6Lf1Y9EZAAAAAMbB3DZ7UcOU0jNDv8jieSrTWeIA"
                     onChange={onCaptchaChange}
                   />
