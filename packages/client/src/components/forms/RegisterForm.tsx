@@ -110,7 +110,7 @@ export const RegisterForm = (props:any) => {
               airlineCode: '',
               flightStatus: 'scheduled',
               passengerStatus: 'transit',
-              representative: 1,
+              // representative: 1, // set this to the first admin by default
             }
         }
         onSubmit={handleSubmit}
