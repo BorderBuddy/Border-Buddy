@@ -278,7 +278,7 @@ export const RegisterForm = (props:any) => {
                 {isAdmin &&
                   <AdminFormExtension/>
                 }
-                <Grid container>
+                <Grid container justify='space-around' style={style.recaptcha}>
                   <ReCAPTCHA
                     sitekey="6Lf1Y9EZAAAAAMbB3DZ7UcOU0jNDv8jieSrTWeIA"
                     onChange={onCaptchaChange}

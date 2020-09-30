@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dialog, Button, DialogActions } from '@material-ui/core'
+import { Dialog, Button, DialogActions, Grid } from '@material-ui/core'
 import FlightConfirmation from './FlightConfirmation'
 
 export interface SignUpConfirmationProps {
@@ -10,22 +10,24 @@ export interface SignUpConfirmationProps {
 }
 
 export const SignUpConfirmation = ({ confirmSubmit, handleClose, open, flight }: SignUpConfirmationProps) => (
-  <div>
-    <Dialog
-      open={open}
-      title='Traveler submitted'
-    >
+  <Dialog
+    open={open}
+    title='Traveler submitted'
+  >
+    <Grid container>
       {
         flight && Object.keys(flight).length
           ? <FlightConfirmation flight={flight}/>
           : <h4>Sorry, we could not find your flight or it has already landed.</h4>
       }
-      <DialogActions>
-        <Button onClick={confirmSubmit} color='primary'>
-        Ok
-        </Button>
-        <Button onClick={handleClose} color='primary'> x </Button>
-      </DialogActions>
-    </Dialog>
-  </div>
+      <Grid container direction='row'>
+        <DialogActions>
+          <Button onClick={confirmSubmit} color='primary'>
+          Ok
+          </Button>
+          <Button onClick={handleClose} color='primary'> x </Button>
+        </DialogActions>
+      </Grid>
+    </Grid>
+  </Dialog>
 )
