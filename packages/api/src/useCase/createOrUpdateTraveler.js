@@ -26,10 +26,14 @@ export default function createOrUpdateTraveler ({ repository, travelerDetails, c
     if (travelerDetails.id) {
       return repository.travelers.update(travelerDetailsWithFlight, { where: { id: travelerDetailsWithFlight.id } })
     } else {
-      // TODO: assign this with logic other than the first entry
-      const user = await repository.users.findOne()
-      const travelerDetailsWithRepresentative = Object.assign({}, travelerDetailsWithFlight, { representative: user.id })
-      return repository.travelers.create(travelerDetailsWithRepresentative)
+      if (travelerDetailsWithFlight.representative) {
+        return repository.travelers.create(travelerDetailsWithFlight)
+      } else {
+        // TODO: assign this with logic other than the first entry
+        const user = await repository.users.findOne()
+        const travelerDetailsWithRepresentative = Object.assign({}, travelerDetailsWithFlight, { representative: user.id })
+        return repository.travelers.create(travelerDetailsWithRepresentative)
+      }
     }
   }).then((traveler) => {
     if (shouldSendTextMessage(traveler, travelerNotifier)) {
