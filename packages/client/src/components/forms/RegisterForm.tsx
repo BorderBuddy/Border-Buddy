@@ -110,7 +110,6 @@ export const RegisterForm = (props:any) => {
               airlineCode: '',
               flightStatus: 'scheduled',
               passengerStatus: 'transit',
-              representative: 1,
             }
         }
         onSubmit={handleSubmit}

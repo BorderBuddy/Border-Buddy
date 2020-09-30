@@ -8,9 +8,11 @@ describe('createOrUpdateTraveler', () => {
   let repository
   let createdFlights
   let createdTraveler
+  let foundUser
   let callbacks
   let findOrCreatePromise
   let createTravelerPromise
+  let findOnePromise
 
   beforeEach(() => {
     travelerDetails = {
@@ -24,17 +26,18 @@ describe('createOrUpdateTraveler', () => {
       secondaryContactRelation: 'Mother',
       secondaryContactPhone: '0987654321',
       requireInterpreter: true,
-      preferredLanguage: 'Chinese'
+      preferredLanguage: 'Chinese',
     }
     flightDetails = {
       flightNum: '1234',
       airlineCode: 'TEST',
-      scheduledArrivalTime: '1970-01-01'
+      scheduledArrivalTime: '1970-01-01',
     }
 
     repository = {
       flights: { findOrCreate: sinon.stub() },
-      travelers: { create: sinon.stub() }
+      travelers: { create: sinon.stub() },
+      users: { findOne: sinon.stub() },
     }
 
     callbacks = { onSuccess: sinon.spy(), onFailure: sinon.spy() }
@@ -46,8 +49,12 @@ describe('createOrUpdateTraveler', () => {
       createdTraveler = { a: 'traveler', phone: '1231231234' }
       createTravelerPromise = Promise.resolve(createdTraveler)
 
+      foundUser = { id: 1 }
+      findOnePromise = Promise.resolve(foundUser)
+
       repository.flights.findOrCreate.returns(findOrCreatePromise)
       repository.travelers.create.returns(createTravelerPromise)
+      repository.users.findOne.returns(findOnePromise)
     })
 
     it('creates a traveler', () => {
@@ -63,7 +70,8 @@ describe('createOrUpdateTraveler', () => {
           preferredLanguage: 'Chinese',
           secondaryContactName: 'Jane Citizen',
           secondaryContactRelation: 'Mother',
-          secondaryContactPhone: '0987654321'
+          secondaryContactPhone: '0987654321',
+          representative: 1,
         })
       })
     })
@@ -97,8 +105,12 @@ describe('createOrUpdateTraveler', () => {
       createdFlights = [{ a: 'flight', id: 123 }]
       findOrCreatePromise = Promise.resolve(createdFlights)
 
+      foundUser = { id: 1 }
+      findOnePromise = Promise.resolve(foundUser)
+
       repository.flights.findOrCreate.returns(findOrCreatePromise)
       repository.travelers.create.returns(createTravelerPromise)
+      repository.users.findOne.returns(findOnePromise)
     })
 
     it('assigns the flight to the traveler', () => {
