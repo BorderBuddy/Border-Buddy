@@ -7,7 +7,5 @@ flow-typed
 .DS_Store
 node_modules/
 /packages/api/src/public
-<<<<<<< HEAD
-=======
 notes/
->>>>>>> flightstats
+*.log
