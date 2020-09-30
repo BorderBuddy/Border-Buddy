@@ -18,6 +18,7 @@ export const SubmissionConfirmation = (props : any) => {
       title="Confirm Submission"
       open={open}
     >
+      <FlightConfirmation flight={flight} />
       <DialogActions>
         {flight
           ? <Fragment>
@@ -40,7 +41,6 @@ export const SubmissionConfirmation = (props : any) => {
           >OK</Button>
         }
       </DialogActions>
-      <FlightConfirmation flight={flight} />
     </Dialog>
   )
 }

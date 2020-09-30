@@ -5,9 +5,7 @@ npm-debug.log*
 .npmrc
 flow-typed
 .DS_Store
+*.log
 node_modules/
 /packages/api/src/public
-<<<<<<< HEAD
-=======
 notes/
->>>>>>> flightstats
