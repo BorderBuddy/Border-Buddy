@@ -14,10 +14,12 @@ import api from '../../api/api'
 import { useHistory } from 'react-router-dom'
 import { AdminFormExtension } from './AdminExtensionForm'
 import { FSFlight } from '../../models/models'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 export const RegisterForm = (props:any) => {
   const style = formStyle
   const [ open, setOpen ] = useState(false)
+  const [token, setToken] = useState('')
   const [flight, setFlight] = useState({} as FSFlight)
   const history = useHistory()
   const {
@@ -36,12 +38,10 @@ export const RegisterForm = (props:any) => {
 
   // TODO: pass the whole Flight Stats flight result to parse, so if it is in the past, don't create it
   const confirmSubmit = async (values: any) => {
-    // console.log(`values: ${JSON.stringify(values)}, flight: ${JSON.stringify(flight)}`)
     const travelerInfo = Object.assign({}, values, {
       countryCode: values.countryCode.code,
       scheduledArrivalTime: flight.arrivalTimeLocal,
     })
-    // console.log(travelerInfo)
     try {
       let res
       if (isEdit) {
@@ -64,11 +64,11 @@ export const RegisterForm = (props:any) => {
     const year = flightDate.getFullYear()
     const month = flightDate.getMonth() + 1
     try {
-      const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day)
-      // console.log(`currentFlight: ${JSON.stringify(currentFlight)}`)
+      const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day, token)
       setFlight(currentFlight)
       setOpen(true)
     } catch (err) {
+      console.log(err)
       // TODO: could replace this with a 'better' alert component/modal if we want
       alert('No flight found with those details...')
       setOpen(false)
@@ -78,6 +78,10 @@ export const RegisterForm = (props:any) => {
   const getCountryCodeObj = (code: string) => {
     const countryCodeObj = countryCodes.filter((codes) => codes.code.toString() === code)[0]
     return countryCodeObj
+  }
+
+  const onCaptchaChange = (value: any) => {
+    setToken(value)
   }
 
   return (
@@ -275,6 +279,12 @@ export const RegisterForm = (props:any) => {
                 {isAdmin &&
                   <AdminFormExtension/>
                 }
+                <Grid container>
+                  <ReCAPTCHA
+                    sitekey="6Lf1Y9EZAAAAAMbB3DZ7UcOU0jNDv8jieSrTWeIA"
+                    onChange={onCaptchaChange}
+                  />
+                </Grid>
                 <Grid container>
                   <Button
                     variant='contained'
