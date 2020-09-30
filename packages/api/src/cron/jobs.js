@@ -63,8 +63,8 @@ const didFlightLandTwoHoursAgo = flight => {
           // TODO: this is currently dateLocal because of only serving JFK,
           // need to change whole application to dateUtc when we roll out more airports
           const realArrival = operationalTimes.actualGateArrival
-            ? new Date(operationalTimes.actualGateArrival.dateLocal)
-            : new Date(operationalTimes.actualRunwayArrival.dateLocal)
+            ? new Date(operationalTimes.actualGateArrival.dateUtc)
+            : new Date(operationalTimes.actualRunwayArrival.dateUtc)
 
           // console.log(`realArrival time from Flight stats: ${realArrival}`)
           await Flight.update(

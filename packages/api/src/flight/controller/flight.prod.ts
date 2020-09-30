@@ -22,16 +22,13 @@ const getCode : RequestHandler = (req, res, next) => {
 
 const verifyFlight : RequestHandler = async (req, res, next) => {
   console.log('verify flight from prod called')
-  // const { code, flightNum, year, month, day } = req.query
   const { code, flightNum, year, month, day, token } = req.body
 
   if (verifyRecaptchaToken(token)) {
     console.log('FlightStats API called')
     return axios.get(statusByCodeAndDate(code, flightNum, year, month, day))
       .then(flight => {
-        // console.log(flight.data)
         if (!flight.data.flightStatuses.length) {
-        // if (flight.data.error || !flight.data.scheduledFlights.length) {
           res.status(404).json('flight not found')
         } else {
           const mappedFlightInfo = flightInfoMapper(flight.data)

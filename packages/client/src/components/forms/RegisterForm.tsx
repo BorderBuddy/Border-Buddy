@@ -40,7 +40,7 @@ export const RegisterForm = (props:any) => {
   const confirmSubmit = async (values: any) => {
     const travelerInfo = Object.assign({}, values, {
       countryCode: values.countryCode.code,
-      scheduledArrivalTime: flight.arrivalTimeLocal,
+      scheduledArrivalTime: flight.arrivalTimeUtc,
     })
     try {
       let res
