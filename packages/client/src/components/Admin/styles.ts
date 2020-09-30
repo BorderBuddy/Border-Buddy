@@ -128,4 +128,7 @@ export const formStyle = {
   heading: {
     marginTop: '1em',
   },
+  recaptcha: {
+    marginTop: '3em',
+  },
 }
