@@ -9,7 +9,7 @@ export const airlineByCode = code =>
 
 // TODO: JFK is currently hardcoded until we add the arrival airport to the form
 export const statusByCodeAndDate = (code, flightNum, year, month, day) =>
-  baseline + `/flightstatus/rest/v2/json/flight/status/${code}/${flightNum}/arr/${year}/${month}/${day}${keys}&utc=false&airport=LAX`
+  baseline + `/flightstatus/rest/v2/json/flight/status/${code}/${flightNum}/arr/${year}/${month}/${day}${keys}&utc=false&airport=JFK`
 
 // alternative query using flightStats unique flightId
 export const statusByFlightStatsFlightId = (flightId) =>
