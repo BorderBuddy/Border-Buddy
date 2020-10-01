@@ -24,20 +24,42 @@ const verifyFlight : RequestHandler = async (req, res, next) => {
   console.log('verify flight from prod called')
   const { code, flightNum, year, month, day, token } = req.body
 
-  if (verifyRecaptchaToken(token)) {
-    console.log('FlightStats API called')
-    return axios.get(statusByCodeAndDate(code, flightNum, year, month, day))
-      .then(flight => {
-        if (!flight.data.flightStatuses.length) {
-          res.status(404).json('flight not found')
-        } else {
-          const mappedFlightInfo = flightInfoMapper(flight.data)
-          res.status(200).json(mappedFlightInfo)
-        }
+  try {
+    const verified = await verifyRecaptchaToken(token)
+    // console.log(verified)
+    if (verified === true) {
+      console.log('FlightStats API called')
+      return axios.get(statusByCodeAndDate(code, flightNum, year, month, day))
+        .then(flight => {
+          if (!flight.data.flightStatuses.length) {
+            // res.status(200).json('flight not found')
+            res.status(200).json({
+              success: false,
+              message: 'flight not found...',
+            })
+          } else {
+            const mappedFlightInfo = flightInfoMapper(flight.data)
+            res.status(200).json(
+              {
+                success: true,
+                data: mappedFlightInfo,
+              })
+          }
+        })
+        .catch(next)
+    } else {
+      res.status(200).json(
+        {
+          success: false,
+          message: 'catpcha not verified',
+        })
+    }
+  } catch (err) {
+    res.status(200).json(
+      {
+        success: false,
+        message: err,
       })
-      .catch(next)
-  } else {
-    res.status(403)
   }
 }
 

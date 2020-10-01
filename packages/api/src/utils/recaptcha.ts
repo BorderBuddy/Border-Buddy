@@ -3,6 +3,7 @@ const querystring = require('querystring')
 
 const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY
 export const verifyRecaptchaToken = async (token: string) => {
+  // console.log(token)
   const isHuman = await axios.post(`https://www.google.com/recaptcha/api/siteverify`,
     querystring.stringify({
       secret: RECAPTCHA_SECRET_KEY,
@@ -14,9 +15,7 @@ export const verifyRecaptchaToken = async (token: string) => {
         'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
       },
     })
-    .then(res => {
-      return res.data
-    })
+    .then(res => res.data)
     .then(data => data.success)
     .catch(err => {
       throw new Error(`Error in Google Siteverify API. ${err.message}`)

@@ -64,13 +64,17 @@ export const RegisterForm = (props:any) => {
     const year = flightDate.getFullYear()
     const month = flightDate.getMonth() + 1
     try {
-      const currentFlight = await api.checkFlight(airlineCode, flightNum, year, month, day, token)
-      setFlight(currentFlight)
-      setOpen(true)
+      const verifiedFlight = await api.checkFlight(airlineCode, flightNum, year, month, day, token)
+      // console.log(verifiedFlight)
+      if (verifiedFlight.success === true) {
+        setFlight(verifiedFlight.data)
+        setOpen(true)
+      } else {
+        alert(verifiedFlight.message)
+        setOpen(false)
+      }
     } catch (err) {
-      console.log(err)
-      // TODO: could replace this with a 'better' alert component/modal if we want
-      alert('No flight found with those details...')
+      alert('Something went wrong...')
       setOpen(false)
     }
   }
