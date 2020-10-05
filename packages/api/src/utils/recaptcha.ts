@@ -15,7 +15,10 @@ export const verifyRecaptchaToken = async (token: string) => {
         'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
       },
     })
-    .then(res => res.data)
+    .then(res => {
+      console.log(res)
+      return res.data
+    })
     .then(data => data.success)
     .catch(err => {
       throw new Error(`Error in Google Siteverify API. ${err.message}`)

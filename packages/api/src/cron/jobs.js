@@ -42,10 +42,10 @@ const didFlightLandTwoHoursAgo = flight => {
   const day = scheduledArrivalTime.getDate()
   const year = scheduledArrivalTime.getFullYear()
   const month = scheduledArrivalTime.getMonth() + 1
-  // console.log(`cron scheduledArrrival day:${day}, year:${year}, month:${month}`)
+  console.log(`cron scheduledArrrival day:${day}, year:${year}, month:${month}`)
 
   const twoHoursAgo = new Date(new Date() - 1000 * 60 * 60 * 2)
-  // console.log(`cron twohours ago date: ${twoHoursAgo}`)
+  console.log(`cron twohours ago date: ${twoHoursAgo}`)
 
   return axios.get(statusByCodeAndDate(airlineCode, flightNum, year, month, day))
     .then(async response => {
@@ -119,7 +119,7 @@ module.exports = {
     console.log('landFlightsAndTextTravelers cron job started...')
     Flight.findFlightsToLand()
       .then(flights => {
-        // console.log(`Flights Found: ${JSON.stringify(flights)}`)
+        console.log(`Flights Found: ${JSON.stringify(flights)}`)
         console.log(`Flights Found: ${flights.length}`)
         if (!flights || !flights.length) return new Promise((resolve, reject) => {})
         return Promise.filter(flights, didFlightLandTwoHoursAgo)

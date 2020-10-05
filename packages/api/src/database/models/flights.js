@@ -34,6 +34,7 @@ export const Flight = db.define('flight', {
 
 Flight.findFlightsToLand = () => {
   const now = new Date()
+  console.log(`now is ${now} to findFlightsToLand`)
   return Flight.findAll({
     where: {
       scheduledArrivalTime: {
