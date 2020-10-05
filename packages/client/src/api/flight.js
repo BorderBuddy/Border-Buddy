@@ -14,8 +14,9 @@ const api = {
         },
       )
       return res.data
-    } catch ({ res }) {
-      return res.data
+    } catch (err) {
+      console.log(JSON.stringify(err))
+      return err
     }
   },
 }

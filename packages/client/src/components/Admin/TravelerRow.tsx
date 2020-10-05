@@ -29,7 +29,9 @@ export default ({traveler} : {traveler: Traveler}) => {
   } = traveler
   const { airlineCode, flightNum, scheduledArrivalTime, status: flightStatus } =
     traveler.flight || {}
-  const timeString = new Date(scheduledArrivalTime).toLocaleString()
+  console.log(`toLocaleString: ${new Date(scheduledArrivalTime).toLocaleString()}, toISOString: ${new Date(scheduledArrivalTime).toISOString()}`)
+  // const timeString = new Date(scheduledArrivalTime).toLocaleString()
+  const timeString = new Date(scheduledArrivalTime).toISOString()
   const color = setStatusColor(travelerStatus)
   return (
     <TableRow
