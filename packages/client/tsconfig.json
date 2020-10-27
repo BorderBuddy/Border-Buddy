@@ -1,0 +1,17 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "commonjs",
+        "allowJs": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+        "baseUrl": "./src",
+        "typeRoots": ["node_modules/@types", "src/types"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}

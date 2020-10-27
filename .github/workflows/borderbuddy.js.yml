@@ -1,0 +1,98 @@
+name: Border Buddy CI/CD
+
+on:
+  push:
+    branches: [ develop ]
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [14.x]
+    
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres 
+          POSTGRES_DB: BorderBuddy_test
+        ports:
+          - 5432:5432 
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+    - name: Check out Repository Code
+      uses: actions/checkout@v2
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Bootstrap Lerna
+      run: npm run lerna:bootstrap
+    
+    - name: Run migrations 
+      run: npm run migrate
+     
+    - name: Seed the database
+      run: npm run seed
+
+    - name: Build packages
+      run: npm run build --if-present
+
+    - name: Run all tests
+      run: npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: Check out Repository Code
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Bootstrap Lerna
+      run: npm run lerna:bootstrap
+
+    - name: Build packages
+      run: npm run build --if-present
+    
+    - name: Remove node_modules
+      run: npm run clean
+
+    - name: CF CLI Action Deploy to Staging
+      uses: citizen-of-planet-earth/cf-cli-action@v1
+      with:
+        cf_api: https://api.run.pivotal.io/
+        cf_username: ${{ secrets.CF_USER }}
+        cf_password: ${{ secrets.CF_PASSWORD }}
+        cf_org: border-buddy
+        cf_space: staging 
+        command: push -f manifest.staging.yml
+
+env:
+  NODE_ENV: test
+  SESSION_SECRET: ${{secrets.SESSION_SECRET}}
+  TWILIO_ACCOUNT_SID: ${{secrets.TWILIO_ACCOUNT_SID}}
+  TWILIO_AUTH_TOKEN: ${{secrets.TWILIO_AUTH_TOKEN}}
+  TWILIO_MESSAGING_SID: ${{secrets.TWILIO_MESSAGING_SID}}
+  TWILIO_PHONE_NUM: ${{secrets.TWILIO_PHONE_NUM}}

@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "target": "es6",
+        "jsx": "react"
+    },
+    "exclude": [
+        "./tests/",
+        "./node_modules/",
+        "./dist/"
+      ],
+}
