@@ -22,7 +22,8 @@
     "todo": "lerna run todo",
     "todo-ci": "lerna run todo-ci",
     "clean": "lerna run clean && rm -rf node_modules",
-    "clean:dist": "lerna run clean:dist"
+    "clean:dist": "lerna run clean:dist",
+    "postinstall": "npm run lerna:bootstrap && npm run build && npm run migrate && npm run seed:deployment"
   },
   "husky": {
     "hooks": {
