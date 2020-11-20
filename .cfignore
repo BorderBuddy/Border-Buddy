@@ -1,6 +1,0 @@
-.cfignore
-.gitignore
-.git
-.DS_Store
-*.log.*
-README.md
