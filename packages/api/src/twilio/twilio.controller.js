@@ -16,7 +16,7 @@ export const sendText = (req, res, next) => {
     .create({
       to: req.body.to,
       from: config.twilio.adminPhone,
-      body: req.body.message
+      body: req.body.message,
     }, (err, result) => {
       if (err) console.error(err)
       return res.status(200).json(result)
@@ -39,8 +39,9 @@ export const respondToText = (req, res, next) => {
 
   Traveler.findOne({
     where: {
-      phone: travelerPhone
-    }
+      phone: travelerPhone,
+      status: 'at risk' || 'transit' || 'unconfirmed' || 'detained',
+    },
   })
     .then(traveler => {
       if (!traveler) {
@@ -70,7 +71,7 @@ export const notifyAdminOfNewTravelerSignUp = (traveler) => {
             to: user.phone,
             from: config.twilio.adminPhone,
             body: `New Traveler: ${traveler.name} has just registered on Border Buddy.` +
-      'Check https://border-buddy.com/admin for more details.'
+      'Check https://border-buddy.com/admin for more details.',
           }, (err, result) => {
             if (err) console.error(err)
             return { result, traveler }
