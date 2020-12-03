@@ -3,6 +3,7 @@ import { Traveler } from '../database/models/travelers'
 import { User } from '../database/models/user'
 import { isEmpty } from 'lodash'
 import Promise from 'bluebird'
+const { Op } = require('sequelize')
 
 export const Twilio = require('twilio')(config.twilio.accountSid, config.twilio.authToken)
 
@@ -26,6 +27,7 @@ export const sendText = (req, res, next) => {
 // webhook from twilio will hit this route
 export const respondToText = (req, res, next) => {
   const msgBody = req.body.Body
+  // TODO: If this is a foreign number, this slice will not work
   const travelerPhone = req.body.From.slice(2, req.body.From.length) // remove +1
 
   if (req.body.AccountSid !== config.twilio.accountSid) {
@@ -39,8 +41,15 @@ export const respondToText = (req, res, next) => {
 
   Traveler.findOne({
     where: {
-      phone: travelerPhone,
-      status: 'at risk' || 'transit' || 'unconfirmed' || 'detained',
+      [Op.and]: [
+        {
+          phone: travelerPhone,
+        },
+        {
+          status: {
+            [Op.or]: ['at risk', 'transit', 'unconfirmed', 'detained'],
+          },
+        }],
     },
   })
     .then(traveler => {
